@@ -1,0 +1,326 @@
+%%%%%%%%%%%%%%%%%%don't forget if needed %%%%%%%%%%%%%%%%%%%%%
+%\section[toc version]{title version%
+%              \sectionmark{head version}}
+%\sectionmark{head version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\titcourt{Finite element method for the Navier-Stokes-Boussinesq equations using Newton algorithm}
+\def\titlong{Finite element method for the Navier-Stokes-Boussinesq equations using Newton algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[\titlong]{\titlong%
+              \chaptermark{\titcourt}}
+\chaptermark{\titcourt}
+\label{chap-FEM}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Numerical method}\label{sec: num meth}
+
+To solve the system of equations (\ref{eq-qmvt})-(\ref{eq-energ}) we use a finite-element method that was implemented using the open-source software FreeFem++ \citep{freefem,hecht-2012-JNM}, using a large variety of triangular finite elements  to solve partial differential equations. FreeFem++  is an integrated product with its own high level programming language and a syntax close to mathematical formulations, making the implementation of numerical algorithms very easy. Among the numerous numerical tools offered by FreeFem++, the use of the powerful mesh adaptivity function proved mandatory in this study to obtain accurate results within reasonable computational time.
+The numerical code was optimized to afford the mesh refinement every time step:  the mesh density was increased around  the phase change interfaces,  offering an optimal resolution of the large gradients of all regularized functions ($S, K, C, L_F$), while  the mesh was de-refined (larger triangles) in the solid part, where a coarser mesh could be used. A simulation using a globally refined mesh would require a prohibitive computational time for an equivalent accuracy of the melting front resolution. Similar algorithms based on FreeFem++  were successfully used for solving different systems of equations with locally sharp variation of the solution, such as Gross-Pitaevskii equation \citep{dan-2010-JCP,dan-2016-CPC} or  Laplace equations with nonlinear source terms \citep{dan-2013-AMM}. 
+
+The space discretization is based on Taylor-Hood finite elements, approximating  the velocity with $P_{2}$ Lagrange finite elements (piecewise quadratic), and the
+the pressure with the $P_{1}$ finite elements (piecewise linear). The temperature and the enthalpy are discretized using $P_1$ finite elements.  
+The weak formulation of (\ref{eq-qmvt})-(\ref{eq-energ}), necessary for the finite-element implementation is described in detail in \cite{dan-2014-JCP}.  There are two novelties in the present numerical approach, when compared to  \cite{dan-2014-JCP}: 
+{\em (i)} we use an approach based on the Carman-Kozeny model to bring the velocity to zero inside the solid phase, as described in the previous section, instead of the  viscosity penalty method (imposing a large value of the viscosity in the solid);
+{\em (ii)} we increase  the time accuracy of the algorithm by replacing the first-order Euler scheme with the second-order Gear (BDF2) scheme (see also \cite{Belhamadia2012}),
+\begin{equation}	
+\label{eq-Gear}
+	\frac{d\phi}{dt} \simeq \frac{3\phi^{n+1} - 4\phi^{n}+ \phi^{n-1}}{2\delta t},
+\end{equation}
+computing the solution $\phi^{n+1}$ at time  $t_{n+1}=(n+1) \delta t$ by using two previous states ($\phi^{n}, \phi^{n-1}$). We use this scheme to advance in time both velocity ($\phi=\vec{u}$) and temperature fields  ($\phi=\theta$).  The other terms in equations (\ref{eq-qmvt})-(\ref{eq-energ}) are treated implicitly (\ie taken at time $t_{n+1}$). The resulting non-linear equations are solved using a Newton algorithm. 
+
+\subsection{Finite element algorithm} \label{sec-FE-algo}
+
+Finite-element methods for solving Navier-Stokes type systems of equations  are generally based on a separate discretization of the temporal derivative (using finite difference, splitting or characteristics methods) and the generalization of the Stokes problem for the resulting system \citep{Temam,GRaviart,Quarteroni}. We use the second-order implicit finite-difference discretization (\ref{eq-Gear}) of the temporal derivative and obtain the time semi-discretization of the single-domain model (\ref{eq-qmvt})-(\ref{eq-energ}):
+\begin{eqnarray} \label{eq-time-disc1}
+\nabla\cdot \vec{u}^{n+1} + {\gamma} p^{n+1} &=& 0, \\ \nonumber
+\frac{3}{2} \frac{\vec{u}^{n+1}}{\delta t} +(\vec{u}^{n+1}\cdot\nabla) \vec{u}^{n+1} +\nabla p^{n+1} 
+- {\frac{1}{Re} \nabla^2 \vec u^{n+1}}  & & \\ \nonumber 
+- A(\theta^{n+1})\vec u^{n+1}- f_B(\theta^{n+1}) \, \vec{e}_y &=&  \\
+2 \frac{\vec{u}^{n}}{\delta t}-\frac{\vec{u}^{n-1}}{2\delta t},\\ \nonumber
+\frac{3}{2} \frac{\theta^{n+1} + S(\theta^{n+1})}{\delta t} +
+\nabla\cdot\left(\vec{u}^{n+1} \theta^{n+1}\right)
+- \nabla \cdot\left( \frac{K}{RePr} \nabla \theta^{n+1} \right) &=& \\ \label{eq-time-disc3}
+2\frac{ \theta^{n} + S(\theta^{n})}{\delta t}-\frac{ \theta^{n-1} + S(\theta^{n-1}) }{2\delta t}.
+\end{eqnarray}
+This system of non-linear equations is solved at time  $t_{n+1}=(n+1) \delta t$, using two  previous states at $t_{n}$ and $t_{n-1}$.  We denoted by $f_B(\theta)$ the Boussinesq force that can be non-linear in the general case (\eg natural convection or freezing of water). The penalty parameter $\gamma$ 
+takes very low values ($\gamma=10^{-7}$)  to ensure a pressure field with zero average and, at the algebraic level, fulfil the diagonal of the pressure term.  
+
+
+The space discretization of variables over the domain $\Omega=[0,1]^2$ use a finite-element method based on a weak formulation of the system (\ref{eq-time-disc1})-(\ref{eq-time-disc3}). 
+We consider homogeneous Dirichlet boundary conditions for the velocity, \ie $\vec{u}=0$ on $\pl \Omega$, and set the classical Hilbert spaces for the velocity and pressure:
+\begin{equation}
+\vec{V}=V\times V, \, V=H^1_0(\Omega), \quad Q=\left\{q\in L^2(\Omega)\left|\; \int_{\Omega}q=0\right.\right\}
+\end{equation}
+Following the generalization of the Stokes problem \citep{Temam,GRaviart,Quarteroni}, the variational formulation of the system  (\ref{eq-time-disc1})-(\ref{eq-time-disc3}) can be written as: find $(\vec{u}^{n+1}, p^{n+1}, \theta^{n+1}) \in \vec{V}\times Q\times V$, such that:
+\begin{eqnarray}
+\label{eq-weak-all}
+b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& \\ \nonumber
+0, \, \forall \, q \in Q \\ \nonumber
+\frac{3}{2 \delta t} \left(\vec{u}^{n+1},\vec{v}\right) + c\left(\vec{u}^{n+1} ; \vec{u}^{n+1}, \vec{v} \right) +
+{a\left(\vec{u}^{n+1}, \vec{v}\right)} & &\\ \nonumber
+- (A(\theta^{n+1}) \, \vec u^{n+1},\vec v)+ b\left(\vec{v}, p^{n+1}\right)
+- {\left(f_B(\theta^{n+1}) \, \vec{e}_y,\vec{v}\right)}
+&=& \\ \nonumber
+\frac{2}{\delta t} \left(\vec{u}^{n},\vec{v}\right) 
+- \frac{1}{2 \delta t} \left(\vec{u}^{n-1},\vec{v}\right), \, \forall \, \vec{v} \in \vec{V}\\  \nonumber
+\frac{3}{2 \delta t} \left(\theta^{n+1} + S(\theta^{n+1}), \phi\right)
++\left(\vec{u}^{n+1} \cdot \nabla \theta^{n+1} , \phi
+\right) +
+\left( \frac{K}{Re Pr} \nabla \theta^{n+1}, \nabla \phi \right) &=& \\  \nonumber
+\frac{2}{\delta t} \left( \theta^{n}+S(\theta^n), \phi\right)
+- \frac{1}{2 \delta t} \left( \theta^{n-1}+S(\theta^{n-1}), \phi\right),\, \forall \, \phi \in V,
+\end{eqnarray}
+where {$(u , v)=\int_{\Omega} u\cdot v$} denotes the scalar product in $L^2(\Omega)$ or $\left(L^2(\Omega)\right)^2$; the bilinear forms $a, b$ and trilinear form $c$ are defined as \cite{GRaviart,Quarteroni}:
+\begingroup \small{
+	\begin{eqnarray*}\nonumber
+		a: \vec{V} \times \vec{V} \rightarrow \R, & & {a(\vec{u},\vec{v})= \int_{\Omega}  
+			 \vec{D}(\vec{u}) : \vec{D}(\vec{v}) = \int_{\Omega}   \sum_{i,j=1}^2{D}_{ij}(\vec{u}) {D}_{ij}(\vec{v})},\\ 
+		b: \vec{V} \times Q \rightarrow \R, & & b(\vec{u},q) = -\int_{\Omega}\nabla \cdot\vec{u}\, q =
+		-\sum_{i=1}^2\int_{\Omega}\pl_i u_i\cdot q, \\ \nonumber
+		c: \vec{V} \times \vec{V} \times \vec{V} \rightarrow \R, & & c(\vec{w}; \vec{z}, \vec{v})=\int_{\Omega} \left[\left(\vec{w} \cdot \nabla\right) \vec{z}\right] \cdot\vec{v}
+		=\sum_{i,j=1}^2\int_{\Omega} w_j (\pl_j z_i) v_i,
+		\label{eq-biforms}
+	\end{eqnarray*}
+}
+$\vec D(\vec u) = (1/2)\left( \nabla \vec u + \nabla \vec u^T \right)$ is the rate of strain symmetric tensor with components
+$D_{ij}(\vec u) = (1/2) \left( \partial u_i/ \partial x_j + \partial u_j/ \partial x_i \right) $.
+
+The system of non-linear equations (\ref{eq-weak-all}) is solved using a Newton method. To advance the solution from time $t_n$ to $t_{n+1}$, we start from an initial guess $w_0 = (\vec{u}^{n}, p^{n}, \theta^{n})$ (which is the solution at $t_n$), and construct the Newton sequence $w_k = (u_k, p_k, \theta_k)$ by solving for each inner iteration $k$:
+\begingroup \small{
+	\begin{eqnarray} \label{eq-newton-C1}
+	b\left(\vec{u}_{k+1}, q\right) - \gamma (p_{k+1},q) &=& 0, \\ \nonumber
+	\frac{3}{2 \delta t} \left(\vec{u}_{k+1},\vec{v}\right)
+	+ c\left(\vec{u}_{k+1} ; \vec{u}_{k}, \vec{v} \right)
+	&+& c\left(\vec{u}_{k} ; \vec{u}_{k+1}, \vec{v} \right)\\ \nonumber
+	+ 
+	a\left( \vec{u}_{k+1}, \vec{v}\right)
+	- \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{u}_k, \vec{v}\right)
+	&-& \left(A(\theta_k) \, \vec{u}_{k+1}, \vec{v}\right) + b\left(\vec{v}, p_{k+1}\right)  \\ \nonumber
+	- {\left(\frac{df_B}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{e}_y, \vec{v}\right)} &=&  
+	\frac{1}{\delta t} \left( 2 \vec{u}^n - \frac{1}{2} \vec{u}^{n-1},\vec{v}\right) \\ \nonumber
+	+ c\left(\vec{u}_k ; \vec{u}_{k}, \vec{v} \right) 
+	&-& \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k} \, \vec{u}_k, \vec{v}\right), \,\,\, \\  \nonumber
+	\frac{3}{2\delta t} \left(\theta_{k+1} + \frac{dS}{d\theta}(\theta_k)\, \theta_{k+1}, \phi\right)
+	+\left(\vec{u}_{k} \cdot \nabla \theta_{k+1} , \phi  \right)
+	&+& \left( \vec{u}_{k+1} \cdot \nabla  \theta_k , \phi \right) \\ \nonumber
+	+ \left( \frac{K}{Re Pr} \nabla \theta_{k+1}, \nabla \phi \right) 
+	&=&
+	\frac{2}{\delta t} \left(\theta^n + S(\theta^n) , \phi\right)  \\ \nonumber
+	+\left(\vec{u}_{k} \cdot \nabla  \theta_k, \phi \right)
+	+ \frac{3}{2 \delta t} \left(\frac{dS}{d\theta}(\theta_k)\, \theta_{k}  - S(\theta^n) ,\, \phi\right) 
+	&-& \frac{1}{2 \delta t} \left(\theta^{n-1} + S(\theta^{n-1}),\, \phi\right).\,\,\,
+	\end{eqnarray}
+} \endgroup
+We underline the fact that the Newton loop (following $k$) has to be iterated until convergence for each time step $\delta t$ following the algorithm:
+
+\begin{equation} \label{eq-Newton-algo}
+\begin{tabular}{||ll}
+\multicolumn{2}{||l}{Navier-Stokes time loop following $n$}\\
+\multicolumn{2}{||l}{set  $w_0=(\vec{u}^{n}, p^{n}, \theta^{n})$}\\
+& \begin{tabular}[t]{||ll}
+\multicolumn{2}{||l}{Newton iterations  following $k$}\\
+&solve (\ref{eq-newton-C1}) to get $ \vec w_{k+1} $\\
+\multicolumn{2}{||l}{stop when  $\| \vec w_{k+1} - \vec w_k \| < \xi_N$}
+\end{tabular}\\
+\multicolumn{2}{||l}{actualize $(\vec{u}^{n+1}, p^{n+1}, \theta^{n+1}) = w_{k+1}$}
+\end{tabular}
+\end{equation}
+It is interesting to note that the previous system of equations depends only on $\vec{u}^n$, $\vec{u}^{n-1}$, $\theta^n$ and $\theta^{n-1}$ and is independent of $p^n$, the pressure being in this approach a Lagrange multiplier for the divergence free constraint. 
+
+\subsection{Characteristics method for the convective terms}
+
+An alternative for the treatment of non-linear terms in the momentum equation is offered by the characteristics Galerkin method \cite{Pironneau92}. Defining the characteristic flow (passing at time $t$ through the point $\vec{x}$)
+\begin{equation}
+\left\{
+\begin{array}{l}\vspace{0.2cm}
+\ds\frac{\partial \vec{X} }{\partial \tau}(\tau, t, \vec{x})=\vec{u} (\tau,\vec{X} (\tau,t, \vec{x})), \quad \tau\in (0,t_{max})\\
+\vec{X} (t, t, \vec{x}) = \vec{x},
+\end{array}
+\right.
+\label{eq-charactD}
+\end{equation}
+one can express the substantial (total) derivative of any function $\Phi(t,\vec{x})$ as
+\begin{equation}
+\frac{D\Phi}{Dt}(t,\vec{x})=\left( \frac{\partial \Phi}{\partial
+	t}+\vec{u}\cdot\nabla \Phi \right)(t,\vec{x})=\frac{\partial}{\partial
+	t}\left(\Phi(\tau, \vec{X}(\tau,t, \vec{x}))\right)|_{\tau=t},
+\end{equation}
+and finally use the time discretization:
+\begin{equation}
+\left(\frac{D\Phi}{Dt}\right)^{n+1}(\vec{x})\approx\frac{\Phi^{n+1}(\vec{x})-\Phi^{n}\circ \vec{X}^n(\vec{x})}{\delta t},
+\end{equation}
+with $\vec{X}^n(\vec{x})$ a suitable approximation of $\vec{X}(t_n,t_{n+1},\vec{x})$, obtained by an integration back in time of (\ref{eq-charact}) from $t_{n+1}$ to $t_n$ for each grid point $\vec{x}$. The Galerkin characteristic method is implemented in Freefem++ as an operator computing $\Phi \circ \vec{X}^n$ for given mesh, convection velocity field and time step.
+
+The weak formulation  (\ref{eq-weak-all}) becomes after using the characteristics method:
+\begin{eqnarray}
+\label{eq-charact}
+b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& \\ \nonumber
+0, \, \forall \, q \in Q \\ \nonumber
+\frac{3}{2 \delta t} \left(\vec{u}^{n+1},\vec{v}\right) +
+a\left(\vec{u}^{n+1}, \vec{v}\right) 
++ b\left(\vec{v}, p^{n+1}\right) 
+- f_B(\theta^{n+1}) \left(\vec{e}_y,\vec{v}\right)
+&=& \\ \nonumber
+\frac{2}{\delta t} \left(\vec{u}^{n}\circ \vec{X}^n,\vec{v}\right) - \frac{1}{2 \delta t} \left(\vec{u}^{n-1}\circ \vec{X}^{n-1},\vec{v}\right), \, \forall \, \vec{v} \in \vec{V}\\  \nonumber
+\frac{3}{2 \delta t} \left(\theta^{n+1}, \phi\right)  
++
+\left( \frac{K}{\Prd} \nabla \theta^{n+1}, \nabla \phi \right) &=& \\ \nonumber
+ \frac{2}{\delta t} \left(\theta^{n}\circ \vec{X}^n, \phi\right) -  \frac{1}{2 \delta t} \left(\theta^{n-1}\circ \vec{X}^{n-1}, \phi\right), \, \forall \, \phi \in V,
+\end{eqnarray}
+The system (\ref{eq-charact}) is then solved to advance the solution from $t_n$ to $t_{n+1}$ in one step. The drawback of the method is that it requires small time steps for accurately computing of the convection terms. 
+
+ \subsection{Mesh adaptivity} \label{subs:FEadapt}
+
+Mesh adaptivity by metric control is a standard function offered by FreeFem++ \citep{hecht-2012-JNM}. The key idea for the mesh adaptivity (see also \cite{hecht-2000-ijnmf,hecht-1997-aiaa,george-1998}) is to modify the scalar product used in an automatic mesh generator to evaluate distance and volume, in order to  construct equilateral elements according to a new adequate metric.  The scalar
+product is based on the evaluation of the Hessian $\mathcal{H}$ of the variables of the problem. Indeed, for a $P_1$ discretization of a
+variable $\chi$, the interpolation error is bounded by:
+\begin{equation}
+{\cal E } = |\chi - \Pi_h \chi |_0 \leq c \sup_{T\in \mathcal{T}_{h}} \sup_{x,y,z\in T}   |\mathcal{H}(x)|(y-z , y-z)
+\label{eq1}
+\end{equation}
+where $\Pi_h \chi $ is the $P_1$ interpolate  of $\chi$, $ |\mathcal{H}(x)|$ is the  Hessian of $\chi$ at point $x$ after being made positive definite.
+We can infer that, if we generate, using  a Delaunay procedure (e.g. \cite{george-1998}), a  mesh with edges close to the unit length  in the metric  $\mathcal{M} ={|\mathcal{H}| \over (c {\cal{E}})}$, the interpolation error ${\cal E}$ will be equally distributed over the edges $a_i$ of the mesh. More precisely, we have
+\begin{equation}
+{1 \over c {\cal E}} a_i^T {\cal M } a_i \le 1.
+\end{equation}
+
+The previous approach could be generalized for a vector variable $\chi=[\chi_1, \chi_2]$.
+After computing the metrics $\mathcal{M}_{1}$ and $\mathcal{M}_{2}$ for each variable, we define a metric intersection  $\mathcal{M} = \mathcal{M}_{1} \cap \mathcal{M}_{2}$,
+such that the unit ball of $\mathcal{M}$ is included in  the intersection of the two  unit balls  of metrics $\mathcal{M}_{2}$ and $\mathcal{M}_{1}$ (for details, see the  procedure defined in \cite{frey-george-1999}). 
+
+For the cases considered in this study, we used five metrics intersection to adapt the mesh, based on $S^{n+1}, S^{n}, T^{n+1}, T^{n}, \vec{u}^{n+1}$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider the metrics computed from actual (at $t_{n+1}$) and  previous (at $t_{n}$) values, for the same variable used for adaptivity (see also \cite{Belhamadia2004_S}).
+The anisotropy of the mesh is a parameter of the algorithm and it was set to values close to 1. This is an inevitable limitation since we also impose the minimum edge-length of triangles to avoid generating too large number of nodes.
+
+Some examples of the adapted mesh generated during the computation of the solidification phase are given in section \ref{sec-solidification}.
+The method is able to accurately capture the liquid-solid interface during the melting process and the two solidification fronts appearing during the solidification of the PCM. 
+Mesh adaptivity is performed at each time step and offers a refined discretization of the regularization region where sharp gradients have to be accurately captured.  The number of triangles for the melting case is $N_t=12,000$ and $N_t=17,000$ for the solidification phase. Non-adapted grids offering the same spatial resolution everywhere inside the computational domain would have resulted for the two cases in $N_t=9.94 \cdot 10^{10}$ and $N_t=10 \cdot 10^{10}$ triangles, respectively. Consequently, mesh adaptivity greatly helps in reducing the computational time. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Domain decomposition method}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Accuracy and convergence} \label{subsec-conv}
+We test the accuracy of our numerical method in this section.
+Both space and time convergence orders are demonstrated by using the Burggraf flow and a manufactured solution defined by \cite{nourgaliev2016fully} for the incompressible Navier-Stokes equations.
+The global error $ \| \varepsilon_h \|$ is defined as follows:
+
+\begin{equation}
+  \| \varepsilon_h \| = \| \Phi_e - \phi_h \|,
+\end{equation}
+where $\Phi_e$ is the exact solution and $\phi_h$ is the numerical solution.
+Thus, by computing $\| \varepsilon_h \|$ for either different grids or different time steps, one can evaluate the convergence order $p$, since it is represented by the slope of the corresponding curve in logarithmic coordinates.
+
+Computations are done for the convection of air, with a Rayleigh number $Ra = 10^6$ and a Prandtl number $Pr = 0.71$.
+
+\subsubsection{Burggraf flow} \label{subsub-conv-burg}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.98\textwidth]{Fig_cap_2/Convergence_BURGGRAF} 
+	\end{center}
+	\caption{Burggraf flow. Evolution of the global error $\| \varepsilon_h \|$ for both $\mathcal{L}_2$-norm and $\mathcal{L}_\infty$-norm, with different grid size. A Taylor-Hood finite element (P$_2$ for velocity and P$_1$ for pressure) is used for space discretization by taking either P$_1$ finite element (a) or P$_2$ finite element (b) for the temperature field.}
+	\label{fig-conv-burggraf}
+\end{figure}
+
+To demonstrate the space accuracy of our method, we compute the well-known analytical solution called the Burggraf flow.
+It consists of a steady recirculating flow in a square cavity $[ 0 , 1] \times [ 0 , 1]$, with a moving wall at the top boundary and non-slip wall conditions at the others :
+
+\begin{eqnarray}
+   u(x,0) &=& u(0,y) = u(1,y) = 0, \\
+   u(x,1) &=& \sigma (x^4 - 2x^3 + x^2).
+\end{eqnarray}
+Besides, constant temperatures are imposed at the top and the bottom walls, while others are assumed to be adiabatic.
+The exact solution of the flow is:
+\begin{eqnarray}
+   u1(x,y) &=& \sigma g'(x) h'(y), \\\nonumber
+   u2(x,y) &=& - \sigma g''(x) h(y), \\\nonumber
+   p(x,y)   &=& \frac{\sigma}{Re} \left( h^{(3)}(y) g(x) + g''(x)h'(y) \right) + \frac{\sigma}{2} g'(x)^2 \left( h(y)h''(y)-h'(y)^2 \right),\\ \nonumber
+   T(x,y) &=& T_{c} + (T_{h} - T_{c}) y + a(x) b(y), \\ \nonumber
+\end{eqnarray}
+with,
+\begin{eqnarray}
+   g(x) &=& \frac{x^5}{5} - \frac{x^4}{2} - \frac{x^3}{3}, \\ \nonumber
+   h(y) &=& y^4 - y^2, \\ \nonumber
+   a(x) &=& \cos (\pi x), \\ \nonumber
+   b(x) &=& y(1-y).
+\end{eqnarray}
+Hence, forcing term are defined as follows:
+
+\begin{eqnarray}
+   f_{u1} &=& 0 \\ \nonumber
+   f_{u2} &=& \sigma^2 h(y) h'(y) \left( g''(x)^2 - g'(x)g^{(3)}(x) \right) \\ \nonumber
+   &+& \frac{\sigma}{Re}\left( g^{(4)}(x) h(y) + 2 g''(x)h''(y) + g(x) h^{(4)}(y) \right) \\ \nonumber
+   &+& \frac{\sigma^2}{2} g'(x)^2 \left( h(y) h^{(3)}(y) - h'(y)h''(y) \right) - \frac{Ra}{Pr Re^2} T(x,y),\\ \nonumber
+   f_T &=& u1(x,y) a'(x) b(y) + u2(x,y) \left( T_h - T_c + a(x) b'(y) \right) \\ \nonumber
+   &-& \frac{K}{Re Pr} \left( a''(x)b(y) + a(x) b''(y) \right).
+\end{eqnarray}
+We use the Taylor-Hood finite element (P$_2$ for velocity and P$_1$ for pressure) for the space discretization with either P$_1$ or P$_2$ finite element for the temperature field.
+Figure \ref{fig-conv-burggraf} plots the decrease of the global discretization error $\| \varepsilon_h \|$ for both $\mathcal{L}_2$-norm and $\mathcal{L}_\infty$-norm function of the grid size.
+The expected second order convergence is obtained with a P$_1$ finite element for the temperature (Figure \ref{fig-conv-burggraf}a), and even a nearly third order is noticed with a P$_2$ finite element on the temperature (Figure \ref{fig-conv-burggraf}b).
+
+\subsubsection{Manufactured solution} \label{subsub-conv-nourg}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.98\textwidth]{Fig_cap_2/Convergence_BDF2} 
+	\end{center}
+	\caption{Manufactured solution of \cite{nourgaliev2016fully} for unsteady incompressible Navier-Stokes equation at dimensionless time $t = \pi$. Evolution of the global error $\| \varepsilon_h \|$ for both $\mathcal{L}_2$-norm and $\mathcal{L}_\infty$-norm, with different time steps, with a P$_1$ finite element (a) and a P$_2$ finite element (b) for the temperature.}
+	\label{fig-conv-bdf2}
+\end{figure}
+
+The time integration is based on the implicit second order scheme BDF2.
+We use the manufactured solution of \cite{nourgaliev2016fully} to measure the temporal convergence order.
+\begin{eqnarray}
+	u_1(x,y,t) &=& \left( \delta U_0 + \alpha_u \, \sin(t) \right) \, \cos(x+ \gamma_1 t) \, \sin(y+ \gamma_2 t), \\ \nonumber
+	u_2(x,y,t) &=& - \left( \delta U_0 + \alpha_u \sin(t) \right) \, \sin(x+ \gamma_1 t) \, \cos(y+ \gamma_2 t), \\ \nonumber
+	T(x,y,t) &=& \bar{T} + \left( \delta T_0 + \alpha_t \sin(t) \right) \, \cos(x+ \gamma_1 t) \, \sin(y+ \gamma_2 t), \\ \nonumber
+	p(x,y,t) &=& \bar{P} + \left(\delta P_0 + \alpha_p \sin(t) \right) \, \sin(x+ \gamma_1 t) \, \cos(y+ \gamma_2 t), 
+\end{eqnarray}
+The value of the constants are reported on Table \ref{tab-constant}.
+\begin{table}[!h]
+\centering
+\begin{tabular}{*{10}{c}}
+ % \toprule
+  $\gamma_1$ & $\gamma_2$ & $\bar{P}$ & $\bar{T}$ & $\delta P_0$ & $\delta T_0$ & $\delta U_0$ & $\alpha_p$ & $\alpha_u$ & $\alpha_t$\\
+   \midrule
+  $0.1$ & $0.1$ & $0$ & $1.0$ &  $0.1$ & $1.0$ & $1.0$ & $0.05$ & $0.4$ & $0.1$ \\
+ % \bottomrule
+
+ \end{tabular}
+\caption{Parameter for the manufactured solution.}
+\label{tab-constant}
+\end{table}
+
+\noindent Thus, forcing terms are:
+
+\begin{eqnarray}
+	f_x &=& \alpha_u \, \cos(t) \, \cos(a) \sin(b) - U_c \, \gamma_1 \, \sin(a) \sin(b) + U_c \, \gamma_2  \, \cos(a)\cos(b) \\ \nonumber
+	  & & - U_c \,  u_1(x,y,t) \, \sin(a) \sin(b) + U_c \,  u_2(x,y,t) \, \cos(a) \cos(b)
+	  + P_c \, \cos(a) \cos(b)\\ \nonumber
+	  & & + \frac{1}{Re} \, u(x,y,t), \\	  \nonumber
+	f_y &=& - \alpha_u \,  \cos(t)  \, \sin(a) \cos(b) - U_c \,  \gamma_1  \,  \cos(a) \cos(b) + U_c \,  \gamma_2 \,  \sin(a)\sin(b) \\ \nonumber
+		  & & - U_c \,  u_1(x,y,t)  \,  \cos(a) \cos(b) + U_c  \, u_2(x,y,t)  \,  \sin(a) \sin(b)
+		  -  P_c  \,  \sin(a)  \,  \sin(b)\\ \nonumber
+		  & & -\frac{1}{Re} \,  v(x,y,t)
+		  - \frac{Ra}{Pr Re^2} \,  T(x,y,t), \\  \nonumber
+	f_{\theta} &=& \alpha_t \,  \cos(t) \,  \cos(a) \sin(b) -  T_c  \,  \gamma_1 \,  \sin(a) \sin(b) + T_c \,   \gamma_2  \,  \cos(a)\cos(b) \\ \nonumber
+		  & &-  T_c \,  u_1(x,y,t)  \,  \sin(a) \sin(b)  
+		  +   T_c  \,  u_2(x,y,t)  \, \cos(a) \cos(b) 
+		  + \frac{K}{Re Pr} \,  T_c  \, \cos(a) \sin(b), \\ \nonumber
+\end{eqnarray}
+
+with: 
+$	U_c = (\delta U_0 + \alpha_u \sin(t)), \,
+	T_c = (\delta T_0 + \alpha_u \sin(t)), \,
+	P_c = (\delta P_0 + \alpha_u \sin(t)), $ \\
+and $	a = (x+ \gamma_1 t), \,
+	b = (y+ \gamma_2 t). \\$
+
+Since the space convergence rate was evaluated in \S \ref{subsub-conv-burg}, we fixe the grid size to $dx = 0.01$ to ensure a small spatial discretization errors, and we vary decreasingly the time step.
+Time convergence is displayed in Figure \ref{fig-conv-bdf2}. 
+The evolution of the global error with different time steps is plotted for both  $\mathcal{L}_2$-norm (red line) and $\mathcal{L}_\infty$-norm (green line), and the expected second order convergence is exposed for both P$_1$ (Figure \ref{fig-conv-bdf2}a) and P$_2$ (Figure \ref{fig-conv-bdf2}b) finite element for the temperature.
+
+
