@@ -7,6 +7,7 @@
 \newcommand*\figpath{\dsk/A_figs}
 \newcommand*\bibpath{\dsk/A_bib}
 \newcommand*\stypath{\dsk/A_style}
+\newcommand*\chaptpath{\dsk/Chapt_v1}
 \newcommand*\incpath{.}
 %========================================================================
 
@@ -298,14 +299,16 @@ Nous proposons dans cette étude une nouvelle approche ...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\graphicspath{{\figpath/CARMAN-COZENY}}
-\include{chap_intro}
-\include{chap_01}
+\include{\chaptpath/chap_intro}
+\include{\chaptpath/chap_GOV_EQ}
 \graphicspath{{\figpath/Fig_cap_2}}
-\include{chap_02}
-%\graphicspath{{\figpath/CARMAN-COZENY}}
-%\include{chap01_CK_2017}
-%\graphicspath{{\figpath/CARMAN-COZENY}}
-%\include{chap02_CK_2017}
+\include{\chaptpath/chap_METH_NUM}
+\graphicspath{{\figpath/Fig_cap_natconv}}
+\include{\chaptpath/chap_NATCONV}
+\graphicspath{{\figpath/Fig_cap_melting}}
+\include{\chaptpath/chap_MELTING}
+%\graphicspath{{\figpath/Fig_cap_solidif}}
+%\include{\chaptpath/chap_SOLIDIFICATION}
 %\include{appendix}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
