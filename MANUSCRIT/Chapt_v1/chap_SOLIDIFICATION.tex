@@ -4,7 +4,7 @@
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\titcourt{Melting-solidification cycle of a PCM with complete or parial melting}
-\def\titlong{Melting solidification cycle of a PCM with complete or parial melting}
+\def\titlong{Melting-solidification cycle of a PCM with complete or parial melting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -13,12 +13,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Solidification of the PCM}\label{sec: solidification-2D}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_solidif/fig01_2}
+	\end{center}
+	\caption{Sketch of the computational domain and boundary conditions. General configuration (panel a) with isothermal ($\theta=cst.$) vertical ($x=0$ and $x=1$) walls and  adiabatic ($\partial \theta/\partial n = 0$) top and bottom walls. Configuration for the melting phase (panel b) with a hot left wall ($\theta=\theta_h > 0$) and a cold right wall ($\theta=\theta_c < 0$), followed by a solidification phase (panel c), when the temperature of the left wall is cooled to $\theta=\theta_{co} < 0$.}
+	\label{fig: pcm-case}
+\end{figure}
+%\section{Solidification of the PCM}\label{sec: solidification-2D}
 After the melting of the PCM, we simulate the solidification process. We consider two cases: \\ 
 -- case CM: solidification after a Complete Melting of the material ($L_f=0.95$, Figure \ref{fig:melt-field}f) and \\
 -- case PM: solidification after a Partial Melting ($L_f=0.5$, Figure \ref{fig:melt-field}d). \\
 \Blue{
-As emphasized previously,  the natural convection occurring in the melting PCM is driven by the temperature difference $\delta T = T_h - T_f$. The dimensionless number that depicts the ratio between the forces creating and those refraining motion, is the Rayleigh number, which appears in the dimensionless form of the Navier-Stokes equations with Boussinesq approximation (section \ref{sec-gov-eq}). The higher is its value, the more intense is the heat transfer.
+As emphasized previously,  the natural convection occurring in the melting PCM is driven by the temperature difference $\delta T = T_h - T_f$. The dimensionless number that depicts the ratio between the forces creating and those refraining motion, is the Rayleigh number, which appears in the dimensionless form of the Navier-Stokes equations with Boussinesq approximation (sec. \ref{chap-NSB}, eq. \ref{eq-Rayleigh}). The higher is its value, the more intense is the heat transfer.
 Conversely, during the solidification, the phase-change is handled by the discharged temperature $T_{co}$, where the subscript 'co' stands for 'cooling'. In the geometry discussed in this paper, this represents the temperature of the left wall. Thus, the relevant temperature difference in the solid phase of the PCM is $\delta T_{co} = T_f-T_{co}$ and the dimensionless temperature in the solid phase should be defined with respect to this $\delta T_{co}$. It is then obvious, for Eqs. (\ref{eq-Rayleigh}) and (\ref{eq-RePr}),  that the Rayleigh number should be defined using the same temperature difference.  However, because the Rayleigh number, as emphasized earlier, amounts for the motion created by hot temperature difference, we choose to keep the same definition for the Rayleigh number as for the melting case, still relevant for the melted core of the flow, where the persisting motion acts as a boundary condition for the solidification process.    
 Under these conditions, in regard with the solidification process, we introduce  a new parameter,  $r_{\delta} = \delta T_{co}/(T_h-T_f)$, the normalised temperature is with respect to 
 $T_f-T_{co}$ and the relevant Rayleigh number will then  $\Ray_{co}= r_{\delta} \times \Ray$, where $\Ray_{co}$ is the pseudo-Rayleigh number for solidification with a melted boundary. 
@@ -38,7 +46,7 @@ The simulation of the solidification process starts by imposing at the left-wall
 two solidification fronts identified by the iso-line $\theta=0$.  
 In the discussion below,  the solidification process starts at physical time $t_{\varphi} = 185 $ min (corresponding to $\tau=0.2$) for case CM and at $t_{\varphi} = 59$ min ($\tau=0.06$) for case PM. 
 
-\subsubsection{Solidification after a complete melting. Case CM.} \label{sec_solid_full} 
+\section{Solidification after a complete melting. Case CM.} \label{sec_solid_full} 
 
 \begin{figure}
 	\begin{center}
@@ -64,7 +72,7 @@ At $t_{\varphi} = 510$ min (Figure \ref{fig:evolution}e) the liquid region start
 The adapted mesh, refined along the two solidification fronts, at $t_{\varphi} = 300$ min is reported in Figure \ref{fig:evolution}f, illustrating the efficiency of the adaptive mesh tool.
 
 
-\subsubsection{Solidification after a partial melting. Case PM.} \label{sec_solid_partial} 
+\section{Solidification after a partial melting. Case PM.} \label{sec_solid_partial} 
 
 In this case, the solidification starts from the state corresponding to Figure \ref{fig:evolution_t80}a at $t_{\varphi} = 59$ min ($\tau=0.032$), when the liquid fraction is $L_f = 0.5$. 
 The temperature of the left wall is suddenly lower at $\theta_{co}=-1$ as in the previous solidification simulation.  
@@ -82,7 +90,7 @@ It is interesting to  note that, as in the previous solidification case, the lef
 	\caption{Solidification of the PCM after a partial melting. Temperature iso-lines in the liquid phase. The solid part is represented in blue and corresponds to the region of temperature $\theta_{co} \leq \theta_f=0$. Time instants (panels  a to e): $t_{\varphi} = 59$ min, $t_{\varphi} = 70$ min, $t_{\varphi} = 90$ min, $t_{\varphi} = 131$ min and $t_{\varphi} = 200$ min. The adapted mesh corresponding to $t_{\varphi} = 90$ min is plotted in panel (f).  $ \Ray_{co}=3.27 \cdot 10^5$.}\label{fig:evolution_t80}
 \end{figure}
 
-\subsection{Analysis of the solidification cycle from two different initial conditions: complete and partial melting. Cases CM and PM. } \label{sec_freezing_full} 
+\section{Analysis of the solidification cycle from two different initial conditions: complete and partial melting. Cases CM and PM. } \label{sec_freezing_full} 
 
 The aim of this subsection is to investigate the temporal evolution of some physical properties of the solidification process, from two different initial conditions: i) completely melted volume (case CM) and ii) partially melted volume ($50\%$ of the fluid is melted, case PM).  
  

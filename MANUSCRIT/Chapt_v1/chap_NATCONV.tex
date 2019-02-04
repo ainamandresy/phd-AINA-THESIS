@@ -33,8 +33,8 @@ After the validation of the two dimensional configurations, numerical simulation
 Simulation are done with ffddm and are presented as follows: \newline{}
 (i) Natural convection of air in a cube: the temperature field is qualitatively compared with numerical results of \cite{Wakashima-2004} and a comparison between ffddm and the sequential algorithm is given in 
 sec. \ref{sec: natconv-air-3D}, \newline{}
-(ii) Strong scalability experiments in three dimensional natural convection with ffddm is shown in sec. \ref{sub-scal-ffddm}, \newline{}
-(iii) Natural convection of air in a cube with a cubic heated obstacle is presented in sec. \ref{sub-OBSTACLE-3D}.
+%(ii) Strong scalability experiments in three dimensional natural convection with ffddm is shown in sec. \ref{sub-scal-ffddm}, \newline{}
+(ii) Natural convection of air in a cube with a cubic heated obstacle is presented in sec. \ref{sub-OBSTACLE-3D}.
 
 Finally, once the accuracy and the robustness of our code are proven for two and three dimensional cases, more complexe configuration are carried out by simulating three dimensional set up involving obstacles and input and output circulation of air:\newline{}
 (i) Convection of air with in a cube cavity involving heated obstacle with input and output air fluxes, \newline{}
@@ -47,8 +47,8 @@ For the simulation of the natural convection, we use the following choice for th
    \quad \Longrightarrow \quad t_{ref} = \frac{\nu_l}{H^2} \sqrt{\frac{Pr}{Ra}} 
    \quad \Longrightarrow \quad \Rey = \sqrt{\frac{Ra}{Pr}}.
 \end{equation} 
-We note that by choosing $T_{ref} = (T_h + T_c)/2$ and $\delta T = T_h - T_c$, we have non-dimensional temperatures $\theta_c = -0.5$ and $\theta_h = 0.5$,
-and with $T_{ref} = (T_h - T_c)$, $\theta_c = 0$ and $\theta_h = 1$
+%We note that by choosing $T_{ref} = (T_h + T_c)/2$ and $\delta T = T_h - T_c$, we have non-dimensional temperatures $\theta_c = -0.5$ and $\theta_h = 0.5$,
+%and with $T_{ref} = (T_h - T_c)$, $\theta_c = 0$ and $\theta_h = 1$
 
 
 \section{Natural convection of air in a two dimensional square cavity}\label{sec: natconv-air-2D}
@@ -90,7 +90,7 @@ A very good agreement can  be noticed for each of the three Rayleigh numbers.
 Table \ref{tab-T1} offers a quantitative assessment of the accuracy of the present Newton method. The values of $u_{max}$  and its location $Y$ are compared to reference values from \cite{LeQuere91}. The Newton method gives results very identical to reference values, with a difference less than $0.01 \%$. 
 The characteristics-Galerkin method is less accurate, but still offers reasonable agreement with reference values, within 2$\%$ relative error. We also recall that the characteristics method needs a very small time step for refined meshes ($\delta t = 8\cdot 10^{-5}$ for $M=80$), while the Newton method allows larger time steps ($\delta t = 0.5$ for $M=80$) and, consequently, converges faster to a steady state.
 It is worth noting, that the steady and the unsteady codes provide quasi-identical results.
-\begin{table}[!h]
+\begin{table}%[!h]
 	\begin{center}
 		\begin{tabular}{|l|c|l|l|}
 			\hline
@@ -111,23 +111,28 @@ It is worth noting, that the steady and the unsteady codes provide quasi-identic
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.98\textwidth]{\figpath/Fig_cap_natconv/OBSTACLE_2D_natconv} 
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_natconv/STA_validation_obstacle_2} 
 	\end{center}
 	\caption{Natural convection of air in a differentially heated cavity with inner heated square for $Ra = 10^6$. Temperature field (a) and transversal velocity profile along the  horizontal symmetry lines (b). Results obtained using the present Newton method (red solid line), with mesh resolution $M=80$; comparison with the finite difference code of \cite{Raluca2013}.}
 	\label{fig-obst-2D}
 \end{figure}
 
-We consider the same configuration presented in \S \ref{subsub-diff-heated} and a heated square is included between the initial set up.
+We consider the same configuration presented in sec \ref{sub-diff-heated} and a heated square is included between the initial set up.
 The obstacle is maintained at a dimensionless hot temperature $\theta_h = 0.8$ with a no-slip boundary condition for the velocity.
-The solution for $Ra = 10^6$ and $Pr = 0.71$ is compared with the result obtained by \cite{Raluca2013}.
+The solutions for $Ra = 10^4$, $Ra = 10^5$, $Ra = 10^6$ and $Pr = 0.71$ are compared with the result obtained by \cite{Raluca2013}.
 
-The temperature distribution in the cavity is shown in Figure \ref{fig-obst-2D}a, and the transversal velocity profile along x-axis is plotted in Figure \ref{fig-obst-2D}b. 
-A comparison of the velocity profile with numerical data of  \cite{Raluca2013}, who have used finite difference code, exhibits a very good agreement.
+The temperature distribution in the cavity for each Rayleigh number are shown in Figs \ref{fig-obst-2D}a,b,c.
+The higher the Rayleigh number is the more the hot temperature in the center of the domain is advected by the natural convection flow into the cold part of the cavity. 
+The transversal velocity profile along x-axis are plotted in Figs \ref{fig-obst-2D}d,e,f and compared with the numerical data of   \cite{Raluca2013}, who have used finite difference code.
+A good agreement can be observed.
+%A comparison of the velocity profile with numerical data of  \cite{Raluca2013}, who have used finite difference code, exhibits a very good agreement.
 
-We can conclude from this section that the proposed Newton method offers an efficient way to solve the Navier-Stokes-Boussinesq system of equations for natural convection. After this validation, we test in the following section the capability of the method to deal with phase-change, introducing nonlinearity in the momentum and the energy equations.
+We have demonstrated in this part that the proposed Newton method offers an efficient way to solve the Navier-Stokes-Boussinesq system of equations for natural convection of air with a linear expression of the buoyancy force.
+A further difficulty will be introduced in the next part where a non-linear expression of the buoyancy force is inserted for the natural convection of water.
+%We can conclude from this section that the proposed Newton method offers an efficient way to solve the Navier-Stokes-Boussinesq system of equations for natural convection. After this validation, we test in the following section the capability of the method to deal with phase-change, introducing nonlinearity in the momentum and the energy equations.
 
 \section{Natural convection of water in a two dimensional square cavity}\label{sec: natconv-water}
-We carry out in this section the natural convection of water and water freezing cases. These cases are very challenging cases since they insert additional non-linear term in the buoyancy force.
+We carry out in this section the natural convection of water case. This case is a very challenging case since it insert additional non-linear term in the buoyancy force.
 Pure water exhibits indeed non-linear density variation for $T< \celsm{10.2}$ with a maximum at $T_m= \celsm{4.0293}$. We use below the following density-temperature relationship  proposed in \cite{Gebhart1977}:
 \begin{equation}
 \rho(T)=\rho_m \left(1 - w \left|T - T_m\right|^q\right),
@@ -166,24 +171,24 @@ The temperature profile $\theta(x)$ along the horizontal symmetry line of the ca
 \subsection{Natural convection in a differentially heated cube cavity}
 We present in this section some 3D simulations using ffddm.
 
-A schematic model of the problem is displayed in figure \ref{fig-3Dmesh} a).
-The Prandtl number is $0.71$ and three Rayleigh numbers are considered:  $\Ray=10^4$, $\Ray=10^5$, $\Ray=10^6$. The walls are rigid and impermeable. The vertical walls at $x=0$ and $x=1$ are isothermal and have different temperatures $T_h=0.5$ and $T_c=-0.5$ respectively. The remaining walls are considered adiabatic.  Figure \ref{fig-3Dmesh} b) shows the present three dimensional grid.
-\begin{figure}%[!htbp]
-\begin{minipage}{0.45\linewidth}
-\begin{center}
- {\includegraphics[width=1.\textwidth]{\figpath/Fig_cap_natconv/3D_scema.jpg}}\\
- a)
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}{0.45\linewidth}
-\begin{center}
- {\includegraphics[width=1.\textwidth]{\figpath/Fig_cap_natconv/mesh3D.jpg}}\\
- b)
-\end{center}
-\end{minipage}
-\caption{(a) Schematic model for the natural convection in a cubic cavity; (b) present 3D uniform mesh.}
-\label{fig-3Dmesh}
-\end{figure}
+%A schematic model of the problem is displayed in figure \ref{fig-3Dmesh} a).
+The Prandtl number is $0.71$ and three Rayleigh numbers are considered:  $\Ray=10^4$, $\Ray=10^5$, $\Ray=10^6$. The walls are rigid and impermeable. The vertical walls at $x=0$ and $x=1$ are isothermal and have different temperatures $T_h=0.5$ and $T_c=-0.5$ respectively. The remaining walls are considered adiabatic. % Figure \ref{fig-3Dmesh} b) shows the present three dimensional grid.
+%\begin{figure}%[!htbp]
+%\begin{minipage}{0.45\linewidth}
+%\begin{center}
+% {\includegraphics[width=1.\textwidth]{\figpath/Fig_cap_natconv/3D_scema.jpg}}\\
+% a)
+%\end{center}
+%\end{minipage}\hfill
+%\begin{minipage}{0.45\linewidth}
+%\begin{center}
+% {\includegraphics[width=1.\textwidth]{\figpath/Fig_cap_natconv/mesh3D.jpg}}\\
+% b)
+%\end{center}
+%\end{minipage}
+%\caption{(a) Schematic model for the natural convection in a cubic cavity; (b) present 3D uniform mesh.}
+%\label{fig-3Dmesh}
+%\end{figure}
  
 Our result were obtained for uniform grids of $  40 \times 40 \times 40$ and is compared with \cite{Wakashima-2004} who used a forth order finite difference method, with a vorticity-stream function formulation with different uniform meshes of  $120 \times 120 \times 120 \times 10$ grid nodes. 
 This result obtained with sequential algorithm is also used to validate the 3D simulations using ffddm.
@@ -192,8 +197,11 @@ Fig. \ref{fig-3DT} shows the temperature field for each of the three Rayleigh nu
 On the left we display the numerical results of \cite{Wakashima-2004} and on the right ou results.
 The comparison with the benchmark solution exhibits a fairly good agreement.
 
-Besides, $\mathcal{L}_2$-norm and $\mathcal{L}_\infty$-norm of the velocity and the temperature are computed and reported in Tab. \ref{tab-T1} for Rayleigh number varying from $10^4$ to $10^6$.
-Thus, the difference between ffddm and the sequential algorithm is of order of $10^{-6}$.
+The parallel algorithm used with ffddm is compared with the sequential algorithm.
+$\mathcal{L}_2$-norm and $\mathcal{L}_\infty$-norm of the velocity and the temperature are computed and reported in Tab. \ref{tab-T1} for Rayleigh number varying from $10^4$ to $10^6$.
+The difference between both algorithm is of order of $10^{-6}$.
+Moreover, we do not observe a large variation of the error when the number of subdomains is increased.
+The number of subdomain vary from $28$ to $70$ for $1.8$ millions of unknown.
 
 \begin{table}[!h]
 	\begin{center}
@@ -232,46 +240,6 @@ Thus, the difference between ffddm and the sequential algorithm is of order of $
 \label{fig-3DT} 
 \end{figure}
 
-\subsection{Strong scalability experiments with ffddm} \label{sub-scal-ffddm}
-We assess here the strong scalability of the ORAS preconditioner on the 3D differentially heated cube cavity.
-We vary the number of subdomains while the global system size is fixed.
-With a P$_2$ finite element for the temperature, we solve $7.2$ million of unknowns (d.o.f).
-The subdomain is decomposed into subdomains with METIS, ranging from $48$ to $400$ subdomains.
-Fig. \ref{fig-scalability} illustrate the evolution of the total wall clock time for different subdomains, in which a good speed up is observed.
-From $48$ to $320$ we observe a linear speed up. 
-The total runtime passes from $2$ hours for $48$ subdomains to $15$ minutes for $320$ subdomains.
-The linear speed up is then slightly lost for $400$ subdomains but remains reasonable.
-In Tab. \ref{tab-scalability} we detail the timing relative to this test.
-The column "Factorization" denotes the time spent in the factorization of the local submatrices and "GMRES" gives the time taken by GMRES to solve the global linear system
-by the domain decomposition algorithm.
-
-\begin{figure}%[!htbp]
-\begin{minipage}{\linewidth}
-\begin{center}
- {\includegraphics[width=.6\textwidth]{\figpath/Fig_cap_natconv/Scal_ffddm_2level}}
-\end{center}
-\end{minipage}
-\caption{Strong scalability of the ORAS preconditioner: $7.2$ millions of d.o.f and subdomains ranging from $48$ to $400$.}
-\label{fig-scalability} 
-\end{figure}
-
-\begin{table}[!h]
-	\begin{center}
-		\begin{tabular}{cccc}
-			 $\mathcal{N}$ & Factorization (s)  & GMRES (s)  & Total Step (s) \\ \hline \hline
-			 48 & 6186.33  & 473.66  &  6659.99 \\
-			 96 & 2468.68  & 283.099 &  2751.779 \\
-			 128 & 1814.26 &  237.853 &   2052.113\\
-			 192 & 1111.5  &   169.174 &  1280.674 \\
-			 240 & 889.422  & 146.539 &  1035.961\\
-			 320 & 674.204   &  114.346 & 788.55 \\
-			 400 & 614.418  &  107.422 &  721.84\\ \hline
-		\end{tabular}
-	\end{center}
-	\caption {Strong scaling experiment in 3D differentially heated cavity. $7.2$ millions of d.o.f and subdomains ranging from $48$ to $400$. }
-	\label{tab-scalability}
-\end{table}
-
 
 %  1 proc    MatLoc  MatCS   PREC    GMRES   CSolve
 %  2 48      6186.33 108.385 61.0397 473.66  2.97339
@@ -290,11 +258,11 @@ Sequential and parallel computation using ffddm are carried out and compared tog
 Different Rayleigh numbers varying in the range of $10^4 -10^6$ are considered. The temperature field for $Ra = 10^4$ is reported in Figure \ref{fig-obstacle-Ra1e4} and the Table \ref{tab-T2} shows the error between the sequential and the parallel computation.
 
 \begin{figure}%[!htbp]
-\begin{minipage}{\linewidth}
 \begin{center}
+\begin{minipage}{\linewidth}
  {\includegraphics[width=0.98\textwidth]{\figpath/Fig_cap_natconv/3D_OBSTACLE_field}}
-\end{center}
 \end{minipage}
+\end{center}
 \caption{3D convection in a cube with an inner heated cube. Temperature fields for $Ra = 10^4$.}
 \label{fig-obstacle-Ra1e4} 
 \end{figure}

@@ -13,7 +13,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Numerical method}\label{sec: num meth}
+%\section{Numerical method}\label{sec: num meth}
 
 To solve the system of equations (\ref{eq-qmvt})-(\ref{eq-energ}) we use a finite-element method that was implemented using the open-source software FreeFem++ \citep{freefem,hecht-2012-JNM}, using a large variety of triangular finite elements  to solve partial differential equations. FreeFem++  is an integrated product with its own high level programming language and a syntax close to mathematical formulations, making the implementation of numerical algorithms very easy. Among the numerous numerical tools offered by FreeFem++, the use of the powerful mesh adaptivity function proved mandatory in this study to obtain accurate results within reasonable computational time.
 The numerical code was optimized to afford the mesh refinement every time step:  the mesh density was increased around  the phase change interfaces,  offering an optimal resolution of the large gradients of all regularized functions ($S, K, C, \varphi$), while  the mesh was de-refined (larger triangles) in the solid part, where a coarser mesh could be used. A simulation using a globally refined mesh would require a prohibitive computational time for an equivalent accuracy of the melting front resolution. Similar algorithms based on FreeFem++  were successfully used for solving different systems of equations with locally sharp variation of the solution, such as Gross-Pitaevskii equation \citep{dan-2010-JCP,dan-2016-CPC} or  Laplace equations with nonlinear source terms \citep{dan-2013-AMM}. 
@@ -30,7 +30,7 @@ There are two novelties in the present numerical approach, when compared to  \ci
 \end{equation}
 computing the solution $\phi^{n+1}$ at time  $t_{n+1}=(n+1) \delta t$ by using two previous states ($\phi^{n}, \phi^{n-1}$). We use this scheme to advance in time both velocity ($\phi=\vec{u}$) and temperature fields  ($\phi=\theta$).  The other terms in equations (\ref{eq-qmvt})-(\ref{eq-energ}) are treated implicitly (\ie taken at time $t_{n+1}$). The resulting non-linear equations are solved using a Newton algorithm. 
 
-\subsection{Finite element algorithm} \label{sec-FE-algo}
+\section{Finite element algorithm} \label{sec-FE-algo}
 
 Finite-element methods for solving Navier-Stokes type systems of equations  are generally based on a separate discretization of the temporal derivative (using finite difference, splitting or characteristics methods) and the generalization of the Stokes problem for the resulting system \citep{Temam,GRaviart,Quarteroni}. We use the second-order implicit finite-difference discretization (\ref{eq-Gear}) of the temporal derivative and obtain the time semi-discretization of the single-domain model (\ref{eq-qmvt})-(\ref{eq-energ}):
 \begin{eqnarray} \label{eq-time-disc1}
@@ -129,7 +129,7 @@ We underline the fact that the Newton loop (following $k$) has to be iterated un
 \end{equation}
 It is interesting to note that the previous system of equations depends only on $\vec{u}^n$, $\vec{u}^{n-1}$, $\theta^n$ and $\theta^{n-1}$ and is independent of $p^n$, the pressure being in this approach a Lagrange multiplier for the divergence free constraint. 
 
-\subsection{Characteristics method for the convective terms}
+\section{Characteristics method for the convective terms}
 
 An alternative for the treatment of non-linear terms in the momentum equation is offered by the characteristics Galerkin method \cite{Pironneau92}. Defining the characteristic flow (passing at time $t$ through the point $\vec{x}$)
 \begin{equation}
@@ -171,7 +171,7 @@ a\left(\vec{u}^{n+1}, \vec{v}\right)
 \end{eqnarray}
 The system (\ref{eq-charact}) is then solved to advance the solution from $t_n$ to $t_{n+1}$ in one step. The drawback of the method is that it requires small time steps for accurately computing of the convection terms. 
 
- \subsection{Mesh adaptivity} \label{subs:FEadapt}
+ \section{Mesh adaptivity} \label{subs:FEadapt}
 
 Mesh adaptivity by metric control is a standard function offered by FreeFem++ \citep{hecht-2012-JNM}. The key idea for the mesh adaptivity (see also \cite{hecht-2000-ijnmf,hecht-1997-aiaa,george-1998}) is to modify the scalar product used in an automatic mesh generator to evaluate distance and volume, in order to  construct equilateral elements according to a new adequate metric.  The scalar
 product is based on the evaluation of the Hessian $\mathcal{H}$ of the variables of the problem. Indeed, for a $P_1$ discretization of a
@@ -190,16 +190,6 @@ The previous approach could be generalized for a vector variable $\chi=[\chi_1, 
 After computing the metrics $\mathcal{M}_{1}$ and $\mathcal{M}_{2}$ for each variable, we define a metric intersection  $\mathcal{M} = \mathcal{M}_{1} \cap \mathcal{M}_{2}$,
 such that the unit ball of $\mathcal{M}$ is included in  the intersection of the two  unit balls  of metrics $\mathcal{M}_{2}$ and $\mathcal{M}_{1}$ (for details, see the  procedure defined in \cite{frey-george-1999}). 
 
-For the cases considered in this study, we used five metrics intersection to adapt the mesh, based on $S^{n+1}, S^{n}, T^{n+1}, T^{n}, \vec{u}^{n+1}$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider the metrics computed from actual (at $t_{n+1}$) and  previous (at $t_{n}$) values, for the same variable used for adaptivity (see also \cite{Belhamadia2004_S}).
-The anisotropy of the mesh is a parameter of the algorithm and it was set to values close to 1. This is an inevitable limitation since we also impose the minimum edge-length of triangles to avoid generating too large number of nodes.
-
-Some examples of the adapted mesh generated during the computation of the solidification phase are given in section \ref{sec-solidification}.
-The method is able to accurately capture the liquid-solid interface during the melting process and the two solidification fronts appearing during the solidification of the PCM. 
-Mesh adaptivity is performed at each time step and offers a refined discretization of the regularization region where sharp gradients have to be accurately captured.  The number of triangles for the melting case is $N_t=12,000$ and $N_t=17,000$ for the solidification phase. Non-adapted grids offering the same spatial resolution everywhere inside the computational domain would have resulted for the two cases in $N_t=9.94 \cdot 10^{10}$ and $N_t=10 \cdot 10^{10}$ triangles, respectively. Consequently, mesh adaptivity greatly helps in reducing the computational time. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Domain decomposition method}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -452,4 +442,80 @@ It contains a set of Tecplot files whose name includes the prefix (defined by th
 The solutions can be read by either Tecplot software or any other CFD Visualization tools (Paraview, Visit, etc.).
 Moreover, {\em .gmsh}  and {\em RST} files necessary for restarts are also generated in the output directory.
 This directory will additionally contain an {\em .echo} file with a summary of the main parameters, informations on the run and the names of the output files and a copy of the input parameters allowing an easy reproducibility of each runs.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Numerical resolution for large scale simulation}
+
+\subsection{Domain decomposition method with FreeFem++: FFDDM}
+Solving the Navier-Stokes-Boussinesq equation in a three dimensional configuration can generate a large problem size.
+The natural convection of air in a cube of dimensions $[0,1]^3$ with $40 \times 40 \times 40$ grids involve $3$ millions of unknowns in the linear system.
+For such a large size of problem, memory lack issue can rapidly arise with sequential algorithms.
+It is thus essential to distribute date among several processors.
+A natural approach is the domain decomposition method.
+
+FFDDM (FreeFem++ Domain Decomposition Method) is a parallel part of FreeFem++ allowing to use parallel solver in FreeFem++.
+The data distribution among the processor is done via an overlapping domain decomposition and a related linear algebra.
+The linear system is then solved by using the domain decomposition method as preconditioners to the GMRES Krylov method.
+
+We use in our simulations the Optimized Restricted Additive Schwarz (ORAS) preconditionner.
+To solve the linear equation $A x = rhs$, the ORAS preconditionner reads:
+\begin{equation}
+   M_{RAS}^{-1} = \sum_{j=1}^{\mathcal{N}} R^T_j D_j (R_j A R^T_j)^{-1} R_j,
+\end{equation}
+$R_j$ denote the restriction operators and $D_j$ are square diagonal matrices.
+Local matrices are defined as:
+\begin{equation}
+   A_j = R_i A R_i^T.
+\end{equation}
+The duplicated unknowns due to the overlap between subdomains are coupled via a partition of unity:
+\begin{equation}
+   I = \sum_{i=1}^{\mathcal{N}} R_i^T D_i R_i
+\end{equation}
+Thus, the global solutions $U$ is defined as:
+\begin{equation}
+  U = \sum_{i=1}^{\mathcal{N}} R_i^T D_i R_i U =  \sum_{i=1}^{\mathcal{N}} R_i^T D_i U_i
+\end{equation}
+
+\subsection{Strong scalability experiment with ffddm} \label{sub-scal-ffddm}
+We assess here the strong scalability of the ORAS preconditioner on the 3D differentially heated cube cavity.
+We vary the number of subdomains while the global system size is fixed.
+With a P$_2$ finite element for the temperature, we solve $7.2$ million of unknowns (d.o.f).
+The subdomain is decomposed into subdomains with METIS, ranging from $48$ to $400$ subdomains.
+Fig. \ref{fig-scalability} illustrate the evolution of the total wall clock time for different subdomains, in which a good speed up is observed.
+From $48$ to $320$ we observe a linear speed up. 
+The total runtime passes from $2$ hours for $48$ subdomains to $15$ minutes for $320$ subdomains.
+The linear speed up is then slightly lost for $400$ subdomains but remains reasonable.
+In Tab. \ref{tab-scalability} we detail the timing relative to this test.
+The column "Factorization" denotes the time spent in the factorization of the local submatrices and "GMRES" gives the time taken by GMRES to solve the global linear system
+by the domain decomposition algorithm.
+
+\begin{figure}%[!htbp]
+\begin{minipage}{\linewidth}
+\begin{center}
+ {\includegraphics[width=.45\textwidth]{\figpath/Fig_cap_natconv/Scal_ffddm_2level}}
+ {\includegraphics[width=.5\textwidth]{\figpath/Fig_cap_2/scal_ffddm_P2}}
+\end{center}
+\end{minipage}
+\caption{Strong scalability of the ORAS preconditioner: $7.2$ millions of d.o.f and subdomains ranging from $48$ to $400$.}
+\label{fig-scalability} 
+\end{figure}
+
+\begin{table}[!h]
+	\begin{center}
+		\begin{tabular}{cccc}
+			 $\mathcal{N}$ & Factorization (s)  & GMRES (s)  & Total Step (s) \\ \hline \hline
+			 48 & 6186.33  & 473.66  &  6659.99 \\
+			 96 & 2468.68  & 283.099 &  2751.779 \\
+			 128 & 1814.26 &  237.853 &   2052.113\\
+			 192 & 1111.5  &   169.174 &  1280.674 \\
+			 240 & 889.422  & 146.539 &  1035.961\\
+			 320 & 674.204   &  114.346 & 788.55 \\
+			 400 & 614.418  &  107.422 &  721.84\\ \hline
+		\end{tabular}
+	\end{center}
+	\caption {Strong scaling experiment in 3D differentially heated cavity. $7.2$ millions of d.o.f and subdomains ranging from $48$ to $400$. }
+	\label{tab-scalability}
+\end{table}
+
 

@@ -39,6 +39,7 @@
 %\usepackage[french]{minitoc}   % mini-sommaires pour chaque chapitre
 \usepackage{multimedia}       %% pour les films
 \usepackage{array,multirow,makecell}  % pour fusionner les cellules dans un tableau
+\usepackage{tabularx}
 %========================================================================
 %\usepackage[english]{babel}
 %\usepackage[frenchb]{babel}    %% style french
@@ -72,8 +73,8 @@
 
 \def\textRed{\color{red}}
 \def\textBlack{\color{black}}
-\def\textBlue{\color{blue}}
-\def\Blue#1{{\color{blue}{#1}}}
+\def\textBlue{\color{black}}
+\def\Blue#1{{\color{black}{#1}}}
 \def\Red#1{{\color{red}{#1}}}
 \def\Darkred#1{{\color{red}{#1}}}
 \def\Green#1{{\color{green}{#1}}}
@@ -307,8 +308,8 @@ Nous proposons dans cette étude une nouvelle approche ...
 \include{\chaptpath/chap_NATCONV}
 \graphicspath{{\figpath/Fig_cap_melting}}
 \include{\chaptpath/chap_MELTING}
-%\graphicspath{{\figpath/Fig_cap_solidif}}
-%\include{\chaptpath/chap_SOLIDIFICATION}
+\graphicspath{{\figpath/Fig_cap_solidif}}
+\include{\chaptpath/chap_SOLIDIFICATION}
 %\include{appendix}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

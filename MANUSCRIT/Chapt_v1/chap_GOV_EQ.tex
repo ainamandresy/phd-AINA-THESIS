@@ -48,8 +48,8 @@ Consequently, the final expression of the energy equation is obtained by combini
 \frac{\partial \left(c T\right)}{\partial t_{\varphi}} + \nabla \cdot\left( c T \vec{\tilde{u}}\right) -
 \nabla \cdot\left( \frac{k}{\rho} \nabla T \right) +  \frac{\partial \left(c s\right)}{\partial t_{\varphi}}  = 0.
 \end{equation}
-Furthermore, the essential feature of the current approach is that the phase change front is not tracked explicitly but is instead recovered a posteriori from the computed temperature field.
-Indeed, the phase-change occurs over a temperature interval $  T \in [T_f - T_{\varepsilon1}, T_f + T_{\varepsilon2}] $ around the temperature of fusion $T_f$.
+The essential feature of the current approach is that the phase change front is not tracked explicitly but is instead recovered a posteriori from the computed temperature field.
+The phase-change occurs over a temperature interval $  T \in [T_f - T_{\varepsilon1}, T_f + T_{\varepsilon2}] $ around the temperature of fusion $T_f$.
 For non-isothermal phase-change PCM, $T_{\varepsilon1}$ and $T_{\varepsilon2}$ correspond to the solidus and the liquidus temperature of the material.
 However, for a pure material involving a unique phase-change temperature, $T_{\varepsilon1}$ and $T_{\varepsilon2}$ represent an artificial mushy zone used to regularize discontinuous parameters and should be set as small as possible.
 
@@ -97,14 +97,16 @@ Temperatures $T_h$ (hot) and $T_c$ (cold) will be used to set isothermal walls o
 is considered as the representative temperature scale  for the natural convection onset in the liquid region. 
 For the natural convection problem without phase-change, $\delta T$ could be defined as $\delta T=T_{h}-T_{c}$ since the flow in the fluid is driven by the temperature difference between the "hot" and the "cold" temperature.
 However, for the melting PCM, the convection is driven by the temperature difference $\delta T=T_{h}-T_{f}$, with $T_f$ the temperature of fusion.
-As far as the solidification process is concerned, a distinct discussion will be provided in section \ref{sec-solidification}. % during the melting,  and $\delta T = T_f - T_c$ during the solidification. }
+As far as the solidification process is concerned, a distinct discussion will be provided in section \ref{chap-SOLIDIFICATION}. % during the melting,  and $\delta T = T_f - T_c$ during the solidification. }
 Thus $\delta T$ is used to define the Rayleigh number of the flow:
 \begin{equation}
 \label{eq-Rayleigh}
 \Ray = \frac{g \beta H^3 \delta T}{\nu_l \alpha_l},
 \end{equation}
 where $\alpha = k/(\rho c)$ is the thermal diffusivity and  $\beta$ the thermal expansion coefficient. 
-Note that the reference temperature for the phase-change problem is   $T_f$, resulting in  $\theta_f = 0$. This simplifies the identification of the regularization zone, defined for  $  -\varepsilon \, \leq \theta \leq \,\varepsilon $.
+Note that the reference temperature for the phase-change problem is   $T_f$, resulting in  $\theta_f = 0$.
+Since the mushy zone is defined for  $  \theta_f - \varepsilon1 \, \leq \theta \leq \, \theta_f + \varepsilon2 $, this choice of the reference temperature 
+simplifies the identification of the latter to  $  -\varepsilon \, \leq \theta \leq \,\varepsilon $.
 
 Finally, the dimensionless system of equations to be solved in both liquid and solid regions can be written as:
 \begin{eqnarray}
@@ -138,15 +140,28 @@ S_{l} = \frac{h_{sl}/c_l}{\delta T} = \frac{1}{\Ste},
 \end{equation} 
 where $Ste$ is the Stefan number. Regularizations similar to (\ref{eq-Stanh}) are used to model the variation inside the regularization region of functions (\ref{eq-adimKC}) defining material properties.
 
-Finally, the penalty term in the momentum equation (\ref{eq-qmvt-2}) takes the form \citep{Belhamadia2012,kheirabadi2015effect}:
+Finally, the penalty term in the momentum equation (\ref{eq-qmvt-2}) is derived from the Darcy's law, by modeling the fluid flow within the mushy region as a flow through a porous medium.
+In fact, the Darcy's law states that the velocity of flow in porous medium is proportional to the pressure gradient:
+
+\begin{equation}
+	\vec u = - \frac{\zeta^*}{\mu} \vec \nabla p.
+\end{equation}
+where $\zeta^*$ is the permeability, which is a function of the porosity.
+As the porosity decreases, the permeability (and the velocity) also decreases, down to the limiting value of zero when the mush becomes completely solid.
+This behavior can be accounted in a numerical model by adding a source term $A \vec u$ in the momentum equation.
+The well-known equation derived from the Darcy law, the Carman-Kozeny equation \ref{ck eq}, could be a suitable form for the function $A$:
+
+\begin{equation} \label{ck eq}
+	\nabla p = - \frac{\CKC (1 - \lambda)^2}{\lambda^3} \vec u.
+\end{equation}
+
+Finally $A$ takes the form \citep{Belhamadia2012,kheirabadi2015effect}:
 
 \begin{equation}\label{eq-CK}
 A(\theta) = -\frac{\CKC (1 - \varphi(\theta))^2}{\varphi(\theta)^3 + b},
 \end{equation}
 where $\varphi(\theta)$ is the phase-change variable, which is  $1$ in the fluid region and $0$ in the solid. Inside the regularization region,  $\varphi(\theta)$ is regularized using a hyperbolic-tangent function similar to (\ref{eq-Stanh}).
 The constant $\CKC$ is set to a  large value (as discussed below) and  the constant $b=10^{-6}$ is introduced to avoid division by zero.
-
-
 
 %This chapter sets the mathematical and physical basis of the numerical system used to simulate the flow inside a cavity. To start with, we present the incompressible Navier-Stokes system of equations and introduce the Boussinesq approximation for buoyancy effects. The system of equations is then written in a non-dimensional form appropriate for numerical simulations. The numerical algorithm for solving this system of equations is described in detail (integration scheme,  finite-difference discretization, projection method and Poisson solver, boundary conditions). Finally, we present some basic theoretical tests to assess for the accuracy of the high-order finite-difference scheme used for the spatial discretization.
 %
