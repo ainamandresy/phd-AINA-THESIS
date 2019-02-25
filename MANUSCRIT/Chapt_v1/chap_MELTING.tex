@@ -32,7 +32,7 @@ Finally, the influence of the Rayleigh number on the melting process is develope
 Different geometries and materials are presented in a second part of this section to illustrate the capability of our method to deal with complexe configurations:
 melting of cylindrical PCM with inner heated tubes, solid crust formation in a highly distorted mesh and melting of Gallium.
 
-For the simulation of the melting process, we use the following choice for the scaling introduced in \S \ref{sec-eq-scaling}, equations (\ref{eq-adim}) and  (\ref{eq-RePr}):
+For the simulation of the melting process, we use the following choice for the scaling introduced in Sec. \ref{sec-eq-scaling}, eqs. (\ref{eq-adim}) and  (\ref{eq-RePr}):
 \begin{equation}\label{ref-adimPCM}
 V_{ref}=\frac{\nu_l}{H}  \, \Rightarrow  \, t = t_{\varphi}\frac{\nu_l}{H^2} \, \Rightarrow  \, \Rey  = 1. \\
 \end{equation}
@@ -75,7 +75,7 @@ Nevertheless, imposing  a too large value $\CKC=10^{10}$ results  in artificiall
 	\label{fig:pcm-CK}
 \end{figure}
 
-\subsection{Mesh adaptativity for melting}
+\subsection{Mesh adaptativity}
 The use of mesh adaptation proved mandatory in the simulation of the melting of a PCM to obtain accurate results within reasonable computational time.
 For the melting case, we used five metrics intersection to adapt the mesh, based on $S^{n+1}, S^{n}, T^{n+1}, T^{n}, \vec{u}^{n+1}$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider the metrics computed from actual (at $t_{n+1}$) and  previous (at $t_{n}$) values, for the same variable used for adaptivity (see also \cite{Belhamadia2004_S}).
 The anisotropy of the mesh is a parameter of the algorithm and it was set to values close to 1. This is an inevitable limitation since we also impose the minimum edge-length of triangles to avoid generating too large number of nodes.
@@ -95,9 +95,36 @@ The mesh is refined around the melting front (Fig \ref{fig:pcm-mesh}b), localize
 The number of triangles for the melting case is $N_t=12,000$. Non-adapted grids offering the same spatial resolution everywhere inside the computational domain would have resulted for the two cases in $N_t=9.94 \cdot 10^{10}$ triangles, respectively. Consequently, mesh adaptivity greatly helps in reducing the computational time. 
 
 The minimum and the maximum edge-length of triangles are imposed to avoid too large meshes.
-At the same time, the minimum size of triangles should allow to capture the artificial mushy zone where discontinuous variables are smoothly regularized.
-A minimum of 4 triangles should be included in the mushy zone to ensure an accurate location of the melting interface and a correct resolution of gradients.
-For all subsequent simulations, the size of mushy zone is set to $\varepsilon = 0.02$, the minimum edge-length to $h_{min} = 10^{-3}$ and the maximum edge-lenght to $h_{max} = 0.1$.
+At the same time, the minimum size of triangles should allow to capture the boundary layers and the artificial mushy zone where discontinuous variables are smoothly regularized.
+As far as the boundary layers are concerned, Fig. \ref{fig:min-size-bnd} draws the thermal ($\delta_T$) and the viscous ($\delta_\nu$) boundary layers, function of Prandtl number.
+The scale for the thermal boundary layer in natural convection flow along a vertical wall is indeed given by \citep{bejan2013convection}:
+\begin{equation} \label{eq-bnd-layer-T}
+   \delta_T \sim \left\{
+   \begin{array}{ll}
+   H Ra^{-1/4} &	 \mbox{if }  Pr \gg 1,\\
+   H Pr^{-1/4} Ra^{-1/4} &   \mbox{if } Pr \ll 1,
+   \end{array}
+   \right.
+\end{equation}
+and the scale for the thickness of the viscous boundary layer near the wall is:
+\begin{equation} \label{eq-bnd-layer-nu}
+   \delta_\nu \sim Pr^{1/2} \delta_T.
+\end{equation}
+Thus, for high-Prandtl simulations the thickness of the thermal boundary layer is thinner than the velocity and the viscous boundary layers. 
+For Rayleigh numbers in the range of $10^6$ to $10^8$ and a Prandtl number of order of $50$, we have a dimensionless thickness of the thermal boundary layer of $\delta_\theta \sim 0.01$.
+Conversely, for low-Prandtl simulations the viscous boundary layer is thinner than the thermal boundary layer.
+For the same range of Rayleigh numbers ($10^6$ to $10^8$) and Prandtl number of order of $0.1$, we have a dimensionless thickness of the viscous boundary layer of $\delta_\nu \sim 0.015$.
+Therefore the minimum edge-length must be lower than $0.01$.
+Moreover, a minimum of 8 triangles should be included in the mushy zone to ensure an accurate location of the melting interface and a correct resolution of gradients.
+Consequently, for all subsequent simulations the minimum edge-length is set to $h_{min} = 10^{-3}$ and the maximum edge-lenght to $h_{max} = 0.1$.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=.8\textwidth]{\figpath/Fig_cap_melting/thermal_bnd}
+	\end{center}
+	\caption{Thermal and viscous boundary layer thickness function of the Prandtl number \citep{bejan2013convection}.}
+	\label{fig:min-size-bnd}
+\end{figure}
 
 \subsection{Initialization}
 The initialization is critical task in the Newton algorithm.
@@ -324,12 +351,14 @@ As expected, an increase of the Rayleigh number and the Stefan number is followe
 \section{Melting of PCM included in different geometries: cylindrical evolving inclusions, distorted mesh and rectangular}
 \subsection{Melting of cylindrical PCM with inner heated tubes} \label{subsec-luo}
 
-We have simulated previously, for both case $\#1$ and case $\#2$, phase change problems evolving in a square cavity.
-A more complex geometry is studied in this section, by reproducing the configuration proposed by \cite{luo2015lattice}.
+We have simulated previously phase-change problems evolving in a square cavity.
+A more complex system is studied in this section, by simulating the melting of pure PCM on multitube thermal energy storage systems.
+Similar configurations were studied by \cite{luo2015lattice}. Hence we could compare our numerical results to those of \cite{luo2015lattice}.
 The interest is twofold: the geometry is challenging since is it complex and \cite{luo2015lattice} uses Lattice Boltzmann method, a microscopic model, which is different from previous validation cases.
 
 Cylindrical PCM of dimensionless radius $R=1$ with tube inclusions are studied.
-In fact, \cite{agyenim2010review} pointed out, in a critical review of materials used for heat storage, that more than $70\%$ of the PCM container are using the shell and the tube system.
+Shell and tube PCM are indeed most intensely used in latent heat energy storage systems.
+\cite{agyenim2010review} pointed out, in a critical review of materials used for heat storage, that more than $70\%$ of the PCM container are using the shell and the tube system.
 We simulate three cases taking into account one heated tube, four heated tubes, and nine heated tubes with the same contact area.
 For the one heated tube case, the radius $R_i$ of the inner tube is one-quarter of the outer tube ($R_i = R/4$), for four heated tubes $R_i = R/8$ and for nine heated tubes $R_i = R/12$.
 A Dirichlet boundary condition is applied to inner tubes $\theta = \theta_h$,
@@ -337,7 +366,8 @@ and a Neumann boundary condition $\frac{\partial \theta}{\partial n} = 0 $ is us
 An homogenous Dirichlet boundary condition ($\vec u = 0$) is applied everywhere for the velocity.
 Only the half of the domain is simulated since the problem is symmetric.
 The mesh is refined initially around inner tubes, and is dynamically adapted at each time step around the melting front and the thermal boundary layer area.
-The same metrics presented in \ref{sec-case1} are used for the mesh adaptation process.
+The physical parameters of the simulation are:  $\Ray = 5 \cdot 10^4$, $\Pr =0.2$ and $\Ste = 0.02$.
+%The same metrics presented in \ref{sec-case1} are used for the mesh adaptation process.
 
 The melting front (black line), the temporal evolution of the temperature field, and the time evolution of the liquid fraction, showing the effect of the configuration, are shown in Figures \ref{fig-Luo-Field} and \ref{fig-Lf-Luo}.
 The configuration of the obstacles in the liquid phase, influences directly the fluid motion and the shape of melting front.
@@ -353,9 +383,9 @@ The evolution of the liquid fraction is compared with the numerical result of \c
 			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/MELT_Luo_Field}
 		\end{minipage}
 	\end{center}
-	\caption{Case $\#3$ Temperature field for the melting of cylindrical PCM, in the half of the domain, with one (a), four (b), and nine (c) heated tubes.  
+	\caption{Temperature field for the melting of cylindrical PCM, in the half of the domain, with one (a), four (b), and nine (c) heated tubes.  
 	$R_i = R/4$ for one heated tube, $R_i = R/8$ for four tubes and $R_i = R/12$ for nine tubes.
-	Melting  front are localized with black lines.} \label{fig-Luo-Field}
+	Melting  front are localized with black lines.  $\Ray = 5 \cdot 10^4$, $\Pr =0.2$ and $\Ste = 0.02$.} \label{fig-Luo-Field}
 \end{figure}
 
 \begin{figure}
@@ -364,7 +394,7 @@ The evolution of the liquid fraction is compared with the numerical result of \c
 			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/Lf_Luo}
 		\end{minipage}
 	\end{center}
-	\caption{Case $\#3$ Time evolution of the liquid fraction for one, four, and nine heated tubes. Comparison with numerical results of \cite{luo2015lattice}.} \label{fig-Lf-Luo}
+	\caption{Time evolution of the liquid fraction for one, four, and nine heated tubes. Comparison with numerical results of \cite{luo2015lattice}. $\Ray = 5 \cdot 10^4$, $\Pr =0.2$ and $\Ste = 0.02$.} \label{fig-Lf-Luo}
 \end{figure}
 
 \subsection{Solid crust formation in a highly distorted mesh}
@@ -385,7 +415,7 @@ The cold temperature at the left wall is then dropped down to $\theta_c = 1$, be
 			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/Nourgaliev-Valid_2}
 		\end{minipage}
 	\end{center}
-	\caption{Case $\#5$ Solid crust formation in a distorted mesh. Temperature field and streamlines of our simulation (a) and \cite{nourgaliev2016fully}  (b). } \label{fig-Nourgaliev}
+	\caption{Solid crust formation in a distorted mesh. Temperature field and streamlines of our simulation (a) and \cite{nourgaliev2016fully}  (b). } \label{fig-Nourgaliev}
 \end{figure}
 
 The temperature field and the streamlines are reported in Figure \ref{fig-Nourgaliev}.
@@ -411,7 +441,7 @@ However, a maximum of $6 000$ triangles are necessary with our adaptive method t
 			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/evol_Gallium_FIELD}
 		\end{minipage}
 	\end{center}
-	\caption{Case $\#4$ Melting of gallium: temperature field, streamlines, and melting front. 
+	\caption{Melting of gallium: temperature field, streamlines, and melting front. 
 	Physical time instants (panels a to g): $20 s$, $32s$, $36s$, $42s$, $85s$, $155s$, and $280s$.} \label{fig-Gallium}
 \end{figure}
 

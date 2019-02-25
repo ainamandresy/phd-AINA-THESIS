@@ -21,13 +21,19 @@
 	\caption{Sketch of the computational domain and boundary conditions. General configuration (panel a) with isothermal ($\theta=cst.$) vertical ($x=0$ and $x=1$) walls and  adiabatic ($\partial \theta/\partial n = 0$) top and bottom walls. Configuration for the melting phase (panel b) with a hot left wall ($\theta=\theta_h > 0$) and a cold right wall ($\theta=\theta_c < 0$), followed by a solidification phase (panel c), when the temperature of the left wall is cooled to $\theta=\theta_{co} < 0$.}
 	\label{fig: pcm-case}
 \end{figure}
+
 %\section{Solidification of the PCM}\label{sec: solidification-2D}
-After the melting of the PCM, we simulate the solidification process. We consider two cases: \\ 
--- case CM: solidification after a Complete Melting of the material ($L_f=0.95$, Figure \ref{fig:melt-field}f) and \\
--- case PM: solidification after a Partial Melting ($L_f=0.5$, Figure \ref{fig:melt-field}d). \\
-\Blue{
+The fundamental operational mode of latent thermal energy storage (LTES) systems based on phase-change materials (PCM) is made of alternate melting and solidification cycles that  are not necessarily periodic. Partial melting and/or solidification of the PCM are often observed in applications and, in particular, in applications for buildings \citep{zhu2009dynamic,ascione2014energy}. 
+The modern numerical approaches were mostly applied to simulate separately melting or solidification problems and only recently for alternate melting and solidification cycles \citep{wang2010numerical}. However, cyclic or periodic, melting and solidification problems have attracted considerable attention in the literature. \cite{ho1993periodic} and \cite{voller1996cyclic} studied numerically periodic melting in a square enclosure. Recently, \cite{hosseini2014experimental} presented experimental studies for the melting and the solidification of a cylindrical PCM during a charging and discharging process and \cite{chabot2017solid} studied analytically the effect of an alternate heating and cooling in a cylindrical PCM, with periodic boundary conditions. 
+The present contribution is scoped  to offer an accurate numerical description of the alternate melting and solidification of a PCM.
+
+
+After the melting of the PCM in Sec. \ref{chap-MELTING}, we present in this chapter the simulation of the solidification process.
+The solidification of an octadecane PCM in a square cavity is considered.
+
+\section{Numerical configuration and Non-dimensional parameter setting}
 As emphasized previously,  the natural convection occurring in the melting PCM is driven by the temperature difference $\delta T = T_h - T_f$. The dimensionless number that depicts the ratio between the forces creating and those refraining motion, is the Rayleigh number, which appears in the dimensionless form of the Navier-Stokes equations with Boussinesq approximation (sec. \ref{chap-NSB}, eq. \ref{eq-Rayleigh}). The higher is its value, the more intense is the heat transfer.
-Conversely, during the solidification, the phase-change is handled by the discharged temperature $T_{co}$, where the subscript 'co' stands for 'cooling'. In the geometry discussed in this paper, this represents the temperature of the left wall. Thus, the relevant temperature difference in the solid phase of the PCM is $\delta T_{co} = T_f-T_{co}$ and the dimensionless temperature in the solid phase should be defined with respect to this $\delta T_{co}$. It is then obvious, for Eqs. (\ref{eq-Rayleigh}) and (\ref{eq-RePr}),  that the Rayleigh number should be defined using the same temperature difference.  However, because the Rayleigh number, as emphasized earlier, amounts for the motion created by hot temperature difference, we choose to keep the same definition for the Rayleigh number as for the melting case, still relevant for the melted core of the flow, where the persisting motion acts as a boundary condition for the solidification process.    
+Conversely, during the solidification, the phase-change is handled by the discharged temperature $T_{co}$, where the subscript 'co' stands for 'cooling'. In the geometry discussed in this chapter, this represents the temperature of the left wall. Thus, the relevant temperature difference in the solid phase of the PCM is $\delta T_{co} = T_f-T_{co}$ and the dimensionless temperature in the solid phase should be defined with respect to this $\delta T_{co}$. It is then obvious, for Eqs. (\ref{eq-Rayleigh}) and (\ref{eq-RePr}),  that the Rayleigh number should be defined using the same temperature difference.  However, because the Rayleigh number, as emphasized earlier, amounts for the motion created by hot temperature difference, we choose to keep the same definition for the Rayleigh number as for the melting case, still relevant for the melted core of the flow, where the persisting motion acts as a boundary condition for the solidification process.    
 Under these conditions, in regard with the solidification process, we introduce  a new parameter,  $r_{\delta} = \delta T_{co}/(T_h-T_f)$, the normalised temperature is with respect to 
 $T_f-T_{co}$ and the relevant Rayleigh number will then  $\Ray_{co}= r_{\delta} \times \Ray$, where $\Ray_{co}$ is the pseudo-Rayleigh number for solidification with a melted boundary. 
 In the following, we will  describe  the process of solidification using three different values of $r_{\delta}$. 
@@ -37,12 +43,13 @@ V_{ref}&=&\frac{\alpha_l}{H}  \, \Rightarrow  \, t = t_{\varphi} \frac{\, \nu_l 
 \end{eqnarray}
 The solidification stage is indeed a slower process compared to the melting, therefore the use of an adapted scaling is more relevant.
 This leads to a different time scaling for each cycle.
-}
 
-
-The simulation of the solidification process starts by imposing at the left-wall a constant (cold)  temperature.
-
- The solid phase will propagate into the cavity from both left and right sides, which makes this case computationally challenging. The mesh adaptivity capabilities of our numerical code made possible to accurately track the 
+The sketch of the computational domain and boundary conditions are illustrated in Fig. \ref{fig: pcm-case}a, corresponding to the melting of octadecane PCM presented in Sec. \ref{sec: melting-2D}.
+Starting from a melting PCM (Fig. \ref{fig: pcm-case}b), the simulation of the solidification process starts by imposing at the left-wall a constant (cold) temperature $\theta_{co}$ as it is shown in Fig. \ref{fig: pcm-case}c.
+We consider two cases: \\ 
+-- case CM: solidification after a Complete Melting of the material ($L_f=0.95$, Figure \ref{fig:melt-field}f) and \\
+-- case PM: solidification after a Partial Melting ($L_f=0.5$, Figure \ref{fig:melt-field}d). \\
+ The solid phase will propagate into the cavity from both left and right sides  (Fig. \ref{fig: pcm-case}c), which makes this case computationally challenging. The mesh adaptivity capabilities of our numerical code made possible to accurately track the 
 two solidification fronts identified by the iso-line $\theta=0$.  
 In the discussion below,  the solidification process starts at physical time $t_{\varphi} = 185 $ min (corresponding to $\tau=0.2$) for case CM and at $t_{\varphi} = 59$ min ($\tau=0.06$) for case PM. 
 

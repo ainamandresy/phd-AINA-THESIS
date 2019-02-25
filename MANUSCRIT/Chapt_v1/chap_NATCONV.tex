@@ -13,34 +13,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We first focus on the capability of our code to deal with the buoyancy part $f_B(T)$ in the Boussinesq approximation from eq. (\ref{eq-energie-enth-model}).
-Linear and non-linear expressions of $f_B(T)$ will be treated as a first validation of the accuracy of our algorithm by simulating a differentially heated square cavity.
-Natural convection induced by temperature differences inside enclosures was extensively studied and a large number of benchmark solutions exists in the literature.
-We consider in this case the differentially heated cavity from the vertical walls. A constant hot temperature is applied to one of the vertical wall and a constant cold temperature
-is applied to the second.
-The upper and the lower walls are adiabatic.
+We first focus on the capability of our code to deal with the buoyancy force $f_B(T)$ in the Boussinesq approximation (\ref{eq-energie-enth-model}).
+Linear and non-linear expressions of $f_B(T)$ will be addressed as a first validation of the accuracy of our algorithm by simulating a differentially heated square cavity.
+Natural convection induced by temperature difference inside enclosures was extensively studied and a large number of benchmark solutions exists in the literature.
+Isothermal boundary conditions are applied to the vertical walls and adiabatic boundary condition to the upper and lower walls.
+%We consider in this case the differentially heated cavity from the vertical walls. A constant hot temperature is applied to one of the vertical wall and a constant cold temperature
+%is applied to the second.
+%The upper and the lower walls are adiabatic.
 Along the heated wall, the fluid temperature rises and its density decreases. 
 Due to the density decrease, the fluid rises up to the point where it reaches the cold wall, where the reverse process occurs. 
 This two simultaneous opposing effects create a recirculation cell. In the center of the cell, a stationary zone can be observed.
-The natural convection of air and water are presented in sections \ref{sec: natconv-air-2D} and \ref{sec: natconv-water}.
-Quantitative and qualitative validations are carried out for both cases as follows: \newline{}
-(i) Natural convection of air in a two dimensional square cavity: velocity profile along symmetry lines, the maximum value of $u_{max}$ at mid-domain($x=0.5$) and location $Y$ of this maximum  are compared with the spectral-accurate simulations by \cite{LeQuere91} in sec. \ref{sub-diff-heated}, \newline{}
-(ii) Natural convection of air in a 2D square cavity with inner heated square obstacle: transversal velocity profile along the  horizontal symmetry lines is compared with numerical results of \cite{Raluca2013} 
+%The natural convection of air and water are presented in sections \ref{sec: natconv-air-2D} and \ref{sec: natconv-water}.
+Quantitative and qualitative validations are carried out for both natural convection of air and water in two and three-dimensional configurations as follows: \newline{}
+{\bf(i)} Natural convection of air in a two dimensional square cavity: velocity profile along symmetry lines, the maximum value of $u_{max}$ at mid-domain($x=0.5$) and location $Y$ of this maximum  are compared with the spectral-accurate simulations by \cite{LeQuere91} in sec. \ref{sub-diff-heated}, \newline{}
+{\bf(ii)} Natural convection of air in a 2D square cavity with inner heated square obstacle: transversal velocity profile along the  horizontal symmetry lines is compared with numerical results of \cite{Raluca2013} 
 in sec. \ref{sub-2D-OBSTACLE}, \newline{}
-(iii) Natural convection of water if a 2D square cavity: Temperature profile along the horizontal symmetry line is compared with the numerical results of \cite{Kowalewski-2003} in sec. \ref{sec: natconv-water}.
-
-After the validation of the two dimensional configurations, numerical simulation of the three dimensional configuration of the natural convection of air is presented. 
-Simulation are done with ffddm and are presented as follows: \newline{}
-(i) Natural convection of air in a cube: the temperature field is qualitatively compared with numerical results of \cite{Wakashima-2004} and a comparison between ffddm and the sequential algorithm is given in 
+{\bf(iii)} Natural convection of water if a 2D square cavity: Temperature profile along the horizontal symmetry line is compared with the numerical results of \cite{Kowalewski-2003} in sec. \ref{sec: natconv-water}.
+{\bf(iv)} Natural convection of air in a cube: the temperature field is qualitatively compared with numerical results of \cite{Wakashima-2004} and a comparison between ffddm and the sequential algorithm is given in 
 sec. \ref{sec: natconv-air-3D}, \newline{}
+{\bf(v)} Natural convection of air in a cube with a cubic heated obstacle is presented in sec. \ref{sub-OBSTACLE-3D}.
+%After the validation of the two dimensional configurations, numerical simulation of the three dimensional configuration of the natural convection of air is presented. 
+%Simulation are done with ffddm and are presented as follows: \newline{}
+%(i) Natural convection of air in a cube: the temperature field is qualitatively compared with numerical results of \cite{Wakashima-2004} and a comparison between ffddm and the sequential algorithm is given in 
+%sec. \ref{sec: natconv-air-3D}, \newline{}
 %(ii) Strong scalability experiments in three dimensional natural convection with ffddm is shown in sec. \ref{sub-scal-ffddm}, \newline{}
-(ii) Natural convection of air in a cube with a cubic heated obstacle is presented in sec. \ref{sub-OBSTACLE-3D}.
+%(ii) Natural convection of air in a cube with a cubic heated obstacle is presented in sec. \ref{sub-OBSTACLE-3D}.
 
-Finally, once the accuracy and the robustness of our code are proven for two and three dimensional cases, more complexe configuration are carried out by simulating three dimensional set up involving obstacles and input and output circulation of air:\newline{}
-(i) Convection of air with in a cube cavity involving heated obstacle with input and output air fluxes, \newline{}
-(ii) Air flow in a computer room.
-
-For the simulation of the natural convection, we use the following choice for the scaling introduced in chap. \ref{chap-NSB}, eq. (\ref{eq-RePr}):
+As far as natural convection without phase-change is simulated, we use the following choice for the scaling introduced in chap. \ref{chap-NSB}, eq. (\ref{eq-RePr}):
 
 \begin{equation}
    V_{ref} = \frac{\nu_l}{H} \sqrt{\frac{Ra}{Pr}} 
@@ -53,7 +52,7 @@ For the simulation of the natural convection, we use the following choice for th
 
 \section{Natural convection of air in a two dimensional square cavity}\label{sec: natconv-air-2D}
 %\section{Natural convection of air in a differentially heated cavity (horizontal $\nabla T$)}
-We start by testing the Newton algorithm (\ref{eq-newton-C1}) for the Navier-Stokes-Boussinesq  equations presented in \S \ref{sec-FE-algo}.
+We start by testing the Newton algorithm (\ref{eq-newton-C1}) for the Navier-Stokes-Boussinesq  equations presented in Sec. \ref{sec-FE-algo}.
 The classical problem of the thermally driven square cavity with adiabatic top and bottom walls is considered.
 Three Rayleigh numbers are taken into account: $Ra = 10^4, 10^5, 10^6$, and the Prandtl number is set to $Pr = 0.71$, which corresponds to a cavity of dimensions $[ 0 , 1] \times [ 0 , 1]$, filled with air.
 For air, the Boussinesq term $f_B(\theta)$ is linear and takes the form (\ref{eq-RePr}).

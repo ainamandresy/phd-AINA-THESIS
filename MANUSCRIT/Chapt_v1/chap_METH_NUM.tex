@@ -15,6 +15,17 @@
 
 %\section{Numerical method}\label{sec: num meth}
 
+This chapter sets the numerical algorithm for solving the system of equation described previously in chapter \ref{chap-NSB} for both two and three-dimensional configurations.
+The finite element method and the Newton algorithm are presented first in detail.
+The accuracy of the developed method is then assessed with some basic theoretical test for two-dimensional configurations.
+Finally, the domain decomposition method for the three-dimensional configuration is presented with a strong scalability analysis.
+
+\section{Motivation for the choice of the numerical method}
+Many in-house or commercial codes (ANSYS CFX, Fluent, etc.) are nowadays used to simulate phase-change problems.
+Most of them uses finite difference (FD) or finite volume (FV) methods on a fixed mesh.
+Accurate simulations are thus carried out by increasing considerably the mesh resolution in the whole domain, increasing therefore dramatically the computational time.
+Yet, finite element (FE) methods offer the possibility to apply dynamically finer mesh on region of interests, mainly where sharp phenomena takes place (solid-liquid interfaces, boundary layers, recirculation zones, ...), and to apply coarser mesh elsewhere.
+
 To solve the system of equations (\ref{eq-qmvt})-(\ref{eq-energ}) we use a finite-element method that was implemented using the open-source software FreeFem++ \citep{freefem,hecht-2012-JNM}, using a large variety of triangular finite elements  to solve partial differential equations. FreeFem++  is an integrated product with its own high level programming language and a syntax close to mathematical formulations, making the implementation of numerical algorithms very easy. Among the numerous numerical tools offered by FreeFem++, the use of the powerful mesh adaptivity function proved mandatory in this study to obtain accurate results within reasonable computational time.
 The numerical code was optimized to afford the mesh refinement every time step:  the mesh density was increased around  the phase change interfaces,  offering an optimal resolution of the large gradients of all regularized functions ($S, K, C, \varphi$), while  the mesh was de-refined (larger triangles) in the solid part, where a coarser mesh could be used. A simulation using a globally refined mesh would require a prohibitive computational time for an equivalent accuracy of the melting front resolution. Similar algorithms based on FreeFem++  were successfully used for solving different systems of equations with locally sharp variation of the solution, such as Gross-Pitaevskii equation \citep{dan-2010-JCP,dan-2016-CPC} or  Laplace equations with nonlinear source terms \citep{dan-2013-AMM}. 
 
