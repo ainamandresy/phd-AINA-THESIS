@@ -132,11 +132,29 @@ At $\Ray_e = 4 \times 10^5$ the interface loses periodicity and becomes smoother
 \section{Scaling analysis} \label{sec-RB-scal-analysis}
 
 The previous observation can be assessed more quantitatively by evaluating the heat transfert rate during the melting.
-Fig. \ref{fig:NU-LF-evol} plots the temporal evolution of $N\!u_e$ when the melting evolve, i.e. when the $\Ray_e$ increases.
+Fig. \ref{fig:NU-LF-evol}(a) plots the temporal evolution of the heat flux represented by the Nusselt number and the strength of buoyancy represented by the Rayleigh number when the melting evolve.
 The onset of the convection arises at $\Ray_e = 3 \times 10^3$ when a sudden jump in $N\!u_e$ is observed.
 \cite{vasil2011dynamic} have investigated a weakly non-linear stability analysis and have highlighted a superexponentional amplitude growth when the Rayleigh number becomes close to the traditional critical value in the limit of vanishing Stefan number.
-This superexponential growth is followed by a rapid pattern readjustment.
+This superexponential growth is moreover followed by a rapid pattern readjustment.
 The trend of $N\!u_e$ at the onset of convection is in total accordance with the foregoing prediction of \cite{vasil2011dynamic}.
+The results of \citep{esfahani2018basal,madruga2018dynamic,favier2019rayleigh} exhibit the same behaviour despite the different conditions (periodic lateral boundary conditions, adiabatic boundary conditions at the top of the cavity and low value of $\Pr$ for \cite{esfahani2018basal} and \cite{favier2019rayleigh}.
+The rapid growth of $N\!u_e$ is followed by a power law with averaged smaller exponent $N\!u \sim \Ray^{0.28}$.
+Within the framework of natural convection, the Grossmann-Lohse theory \citep{grossmann2000scaling} predicts a scaling exponent of $2/7$ for $10^5 \leq \Ray \leq 10^{14}$.
+Our results match remarkably well with this power-law evolution of $N\!u \sim \Ray^{2/7}$.
+The transition from steady pattern of the convective rolls to oscillating patterns followed by cell merging, as it is clearly shown in Figs. \ref{fig:T-evol-Ra-3.27e6}(d-f) and \ref{fig:T-evol-Ra-6.54e6}(c-f), 
+is also illustrated by a decrease of $N\!u$ at $\Ray \sim 10^5$ followed by high oscillation in the temporal evolution of the heat transfert.
+The power-law relation Nu-Ra is bounded in this stage by the average exponent of $1/3$.
+
+One can introduce the following scaling for the time evolution of the liquid fraction.
+\begin{equation}\label{eq:scal-Lf-RB}
+	L_f(t) = \left[ \sqrt{2 \tau}^{(2-3 \beta)}+ c \Ray^\beta \tau \right]^{1/(2-3 \beta)},
+\end{equation}
+ with $\beta$ the exponent in the Nu-Ra power law, $c = \frac{(2-3 \beta) \gamma}{2 + \Ste}$ and $\gamma$ a constant fitted from numerical data.
+The time evolution of the liquid fraction is illustrated in Fig. \ref{fig:NU-LF-evol}(b).
+As expected, the purely diffusive stage displays the scaling $Lf \sim t^{1/2}$.
+By replacing $\beta$ by the exponent value $2/7$ in eq. (\ref{eq:scal-Lf-RB}), we obtain $Lf \sim t^{7/8}$.
+
+
 
 \begin{figure}
 	\begin{center}
