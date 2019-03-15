@@ -1,0 +1,328 @@
+%========================================================================
+%\newcommand*\dsk{/home/danaila/A_COMMON/RECHERCHE}
+%\newcommand*\dsk{D:/A_COMMON/RECHERCHE}
+
+\newcommand*\dsk{./}
+
+\newcommand*\figpath{\dsk/A_figs}
+\newcommand*\bibpath{\dsk/A_bib}
+\newcommand*\stypath{\dsk/A_style}
+\newcommand*\chaptpath{\dsk/Chapt_v2}
+\newcommand*\incpath{.}
+%========================================================================
+
+%========================================================================
+%\documentclass[twoside,fontsize=11pt,headsepline,french]{scrbook}
+\documentclass[twoside,fontsize=12pt,headsepline,english]{scrbook}
+%========================================================================
+
+%========================================================================
+
+\usepackage{graphicx}   %% envir graphique pour latex ou pdflatex
+%\usepackage[T1]{fontenc}     %% pour la cesure avec les accents
+\usepackage[latin1]{inputenc} %% problemes d'accents
+\usepackage[colorlinks=true, linkcolor=myred, citecolor=myred]{hyperref}         %% links dans le dvi
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{pdfpages}	% % introduire plusieurs pages pdf
+\usepackage{booktabs}	% % Tableau style
+
+%\usepackage[sectionbib,gather]{chapterbib}       %%  pour la biblio locale (projet)
+\usepackage{times}            %% pour pdf avec de jolie police
+\usepackage{colordvi}        %% couleurs dans le dvi
+%\usepackage[monochrome]{color}
+\usepackage{color}
+\usepackage{xcolor}
+%\usepackage{amssymb,epic}
+%\usepackage[french]{minitoc}   % mini-sommaires pour chaque chapitre
+\usepackage{multimedia}       %% pour les films
+\usepackage{array,multirow,makecell}  % pour fusionner les cellules dans un tableau
+\usepackage{tabularx}
+%========================================================================
+%\usepackage[english]{babel}
+%\usepackage[frenchb]{babel}    %% style french
+%------------------------------%% titres en francais
+%\addto\captionsfrench{\renewcommand{\figurename}{\em Figure}%
+%\renewcommand{\tablename}{\em Tableau}%
+%\renewcommand{\chaptername}{\em }
+%\renewcommand{\summaryname}{Sommaire}}
+%========================================================================
+%\usepackage{\stypath//floatflt}         %% figures dans les paragraphes -- il est nul
+%=======================================biblio en anglais(non compat avec cite)
+\usepackage[round]{natbib}
+%\usepackage[]{natbib} 
+
+%\bibliographystyle{plainnat}
+%                     \cite{}     %citation normale
+%                     \citet{}    %textuel
+%                     \cite[texte avant][texte apres]{}
+%                     \citep{}    %avec parenth{\`e}ses
+%                     \citealt{}, \citealp{}    %sans aucune parenth{\`e}se
+%                      \citeyear{},\citeauthor{}
+%
+%=======================================biblio en francais
+%\bibliographystyle{\stypath//plainnat-io}
+%\bibliographystyle{abbrvnat-fr} % biblio style francais
+%\usepackage{\stypath//frbib}
+%\bibliographystyle{\stypath//frcomplet}
+%%%%%%%%%%========================================================================
+%   --- couleurs
+\definecolor{myred}{rgb}{0.8,0.1,0.1}
+
+\def\textRed{\color{red}}
+\def\textBlack{\color{black}}
+\def\textBlue{\color{black}}
+\def\Blue#1{{\color{black}{#1}}}
+\def\Red#1{{\color{red}{#1}}}
+\def\Darkred#1{{\color{red}{#1}}}
+\def\Green#1{{\color{green}{#1}}}
+\def\Magenta#1{{\color{magenta}{#1}}}
+%========================================================================
+%========================================================================
+% 
+\def\vv{{\vec v}}
+\def\vva#1{\vec{#1}}
+\def\ds{\displaystyle}
+\def\pl{\partial}
+\newcommand{\Rey}{{\cal R}e}
+\newcommand{\Prd}{{\cal P}r}
+\newcommand{\Ray}{{\cal R}a}
+%\newcommand{\Gra}{{\cal G}r}
+\newcommand{\Bou}{{\cal B}o}
+\newcommand{\Ste}{{\cal S} te}
+\newcommand{\vref}{{\small ref}}
+
+\newcommand {\R} {{\mathbb R}}
+\newcommand {\N} {{\mathbb N}}
+\newcommand {\C} {{\mathbb C}}
+\newcommand {\Z} {{\mathbb Z}}
+\newcommand{\ie}{{\em i.\thinspace{}e. }}
+\newcommand{\etal}{{\em et al. }}
+\newcommand{\eg}{{\em e.\thinspace{}g. }}
+\newcommand{\CKC}{C_{{\hbox{\tiny CK}}}}
+\newcommand\widebar[1]{\mathop{\overline{#1}}}
+
+\def\cels#1{#1\, ${^\circ}$C}
+\def\celsm#1{#1\, {^\circ}\mbox{C}}
+
+\newcommand{\bigO}[1]{\ensuremath{\mathop{}\mathopen{}O\mathopen{}\left(#1\right)}}
+%========================================================================
+%mise en page
+
+\usepackage[hmargin={3cm,2.3cm},vmargin={3cm,3cm}]{geometry}
+
+%\topmargin -1.54cm   %marge en haut a 2cm %% on monte de 1.65 cm car dvi2ps marche en letter 11in
+%\oddsidemargin 0cm   %marge a 2 cm
+%\evensidemargin 0cm  %marge a 2 cm
+%\parindent 0.cm
+%\parskip 0.3cm
+%\headsep 0.5cm \topskip .5cm \footskip 1.5cm \headheight 1.0cm
+%\textwidth  15cm \textheight 22cm
+
+%-------- dimensions pour les cadres des exercices, theoremes, etc
+\def\leftsymb{0.5cm}
+\def\rightenv{\textwidth}
+
+%\def\minileft{5.3cm}
+%\def\miniright{10.5cm}
+\def\onefig{\textwidth}
+\def\onefigS{0.6\textwidth}
+\def\onefigM{0.75\textwidth}
+\def\onefigB{0.99\textwidth}
+\def\twofig{0.5\textwidth}
+\def\threefig{0.33\textwidth}
+
+\newtheorem{thm} {Théorème} [section]
+\newtheorem{defi}[thm] {Définition}
+\newtheorem{prop} [thm] {Proposition}
+\newtheorem{rem}[thm] {Remarque}
+\newtheorem{concl}[thm] {Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\LOGO{\hbox{\includegraphics[scale=0.75]{\stypath/logo-lmrs125.jpg}}}
+\font\fonteupmc=pagk at 10 true pt
+\font\plutotgros=pagk at 12 true pt
+\def\LAN{\plutotgros}
+\def\upmc{\fonteupmc}
+
+\def\entete{
+\vbox {
+\hbox to \hsize{%
+\hskip -1 cm\vbox{\LOGO}\hskip 0.45 true cm \vbox{\hbox{\LAN
+Laboratoire de mathématiques Raphael Salem} \vskip .2 true cm \hbox{\upmc
+Université de Rouen} \vskip .5 true cm
+\hbox{\upmc Avenue de l'Université, BP.12,
+  76801 Saint-Étienne-du-Rouvray}}
+ \hfill}
+ {\vskip .9 true cm
+\hbox{\hskip -1 cm} \vskip .1 true cm
+\hbox{\hskip -1 cm}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\titlehead{\hspace{1.5cm}\entete}
+%\title{\vspace{-1cm}
+%	\huge\Magenta{
+%	Numerical simulation of phase-change materials.
+%}\\
+
+%{\includegraphics[width=0.35\textwidth]{\figpath/figs_bose/lattice_3.jpg}}
+%}
+
+\usepackage{orsay-title}
+
+%\author{\Large \Blue{Aina Rakotondrandisa} }
+\author{Aina \textsc{Rakotondrandisa}}
+
+%\subject{\vspace{-2cm} Preliminary report}
+%\date{}
+
+\title[frenchb]{Simulation numérique des matériaux à changement de phases.}
+%Titles for other languages
+\title[english]{Numerical simulation of phase-change materials.}
+
+%Keywords for main language (french)
+\keywords[frenchb]{Convection naturelle, méthodes d'ordre élevé, différences finies, éléments finis, méthode de frontières immergées, étude numérique.}
+%Keywords for other languages languages
+\keywords[english]{Natural convection, high-order methods, study of the order, finite difference, finite element, immersed boundary method, numerical study. }
+
+\ordernumber{1234}
+
+%\publishers{\small
+%\begin{flushleft}
+%	\Blue{This document is intended to evolve by gradually adding contributions. Feel free to correct or add parts to the latex source file, eventually using colors.} \Red{red}, \Blue{blue}, \Green{green}, etc.\\
+%	The purpose of this study is twofold:
+%	\begin{enumerate}
+%	\item Evaluate the accuracy in time and space of the finite-element solver for phase change systems.\\ Idea: manufactured solutions will be used to estimate the space accuracy (stationary Burggraf flow) and time-dependent manufactured solution (as in \cite{nourgaliev2016fully}) for the time accuracy.
+%	
+%	\item Try to find an equivalence between the two models used to take into account the solid phase inside a single-domain approach: the viscosity penalty used in \cite{dan-2014-JCP} and the well-know Carman-Kozeny model (\eg \citep{belhamadia2012}).\\ Idea: study the mathematical derivation of the  Carman-Kozeny model from the Darcy equations; study the behaviour of the CK model compared to the viscosity penalisation for simple models/configurations (melting of a PCM).
+%
+%\end{enumerate} 	 
+%\end{flushleft}
+%}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+%\renewcommand{\refname}{Bibliography of chapter }
+%\renewcommand*\partformat    {\partname~\thepart: } % regle le pb titre partie
+\renewcommand*\partformat    {\thepart } % regle le pb titre partie
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% initialisation minitoc
+%\doparttoc %Table of contents for parts
+%\dopartlof List of figures for parts
+%\dopartlot List of tables for parts
+%\dominitoc %Table of contents for chapters
+%\dominilof List of figures for chapters
+%\dominilot List of tables for chapters
+%\dosecttoc Table of contents for sections
+%\dosectlof List of figures for sections
+%\dosectlot List of tables for sections
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%minitoc commands
+%\parttoc Table of contents for parts
+%\partlof List of figures for parts
+%\partlot List of tables for parts
+%\minitoc Table of contents for chapters
+%\minilof List of figures for chapters
+%\minilot List of tables for chapters
+%\secttoc Table of contents for sections
+%\sectlof List of figures for sections
+%\sectlot List of tables for sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%don't forget if needed %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter[toc version]{title version}
+%\chaptermark{head version}
+%\section[toc version]{title version%
+%              \sectionmark{head version}}
+%\sectionmark{head version}
+%%%%%%%%%%%%%%%%%%don't forget if needed %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frontmatter
+
+
+%Print title NOW
+\maketitle%
+
+%Disable page numbering
+\pagestyle{empty}
+
+%########################################################################
+% Multilingual abstracts
+
+\begin{abstract}[english]
+%\dummytext
+In this thesis we present a new ...
+\end{abstract}
+
+%%Horizontal rule
+\noindent\hspace*{0.35\textwidth}\hrulefill\hspace*{0.35\textwidth}\\[-\bigskipamount]
+
+
+%French abstract:
+\begin{abstract}[frenchb]
+%\dummytext
+Nous proposons dans cette étude une nouvelle approche ...
+\end{abstract}
+
+%########################################################################
+
+
+
+%########################################################################
+% Contents
+%########################################################################
+
+%\strut\newpage
+\small
+\tableofcontents
+
+\newpage
+
+%%%%%%%%=====================================================
+%\pagestyle{myheadings}
+\pagestyle{headings}
+\renewcommand*{\chaptermarkformat}{%
+\chapapp~\thechapter\autodot\enskip}
+
+
+%%%%%%%%=====================================================
+\mainmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%Le%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\graphicspath{{\figpath/CARMAN-COZENY}}
+\include{\chaptpath/chap_intro}
+\include{\chaptpath/chap_GOV_EQ}
+\graphicspath{{\figpath/Fig_cap_2}}
+\include{\chaptpath/chap_METH_NUM}
+\graphicspath{{\figpath/Fig_cap_natconv}}
+\include{\chaptpath/chap_NATCONV}
+\graphicspath{{\figpath/Fig_cap_melting}}
+\include{\chaptpath/chap_MELTING}
+\include{\chaptpath/chap_MELTING_BELOW}
+\graphicspath{{\figpath/Fig_cap_solidif}}
+\include{\chaptpath/chap_SOLIDIFICATION}
+%\include{appendix}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%=====================================================
+%\part{Bibliography}
+%\parttoc
+%%%%%%%=====================================================
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\bibliographystyle{\stypath/plainnat-io}
+%\bibliographystyle{plain}
+%\renewcommand{\bibname}{\em }
+\bibliography{\bibpath/bib_thesis_2}
+\end{document}

@@ -1,0 +1,165 @@
+%%%%%%%%%%%%%%%%%%don't forget if needed %%%%%%%%%%%%%%%%%%%%%
+%\section[toc version]{title version%
+%              \sectionmark{head version}}
+%\sectionmark{head version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\titcourt{Numerical resolution of the Navier-Stokes-Boussinesq model}
+\def\titlong{Numerical resolution of the Navier-Stokes-Boussinesq model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[\titlong]{\titlong%
+              \chaptermark{\titcourt}}
+\chaptermark{\titcourt}
+\label{chap-NSB}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Governing equations} \label{sec-gov-eq}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We consider a solid-liquid system placed in a two-dimensional square cavity of height $H$. In the following, subscripts $s$ and $l$ will refer to the solid and liquid phases, respectively. 
+
+For the numerical implementation, it is convenient to adopt a single-domain approach to describe both phases using the same system of equations. 
+The model is based on the Navier-Stokes equations with Boussinesq approximation, which is the natural description of the fluid flow with natural convection. 
+A penalty term is added to the momentum equations to bring the velocity to zero inside the solid region. 
+For the energy conservation equation, an enthalpy method is used to model the phase change process. The single-domain model is described in detail in the following sections.
+
+\section{Enthalpy method}
+
+The phase change process is modelled using an enthalpy method \citep{voller1987pcm,Cao1989,Cao1990} with temperature-based formulation. We start from the energy equation:
+\begin{equation}
+\label{eq-energie}
+   \frac{\partial (\rho h)}{\partial t_{\varphi}} + \nabla \cdot(\rho h \vec{\tilde{u}}) - \nabla \cdot (k \nabla T) = 0,
+\end{equation}
+where $t_{\varphi}$ is the physical time, $h$ the enthalpy, $\rho$ the density, $\vec{\tilde{u}}$  the velocity vector, $T$ the temperature and $k$ the thermal conductivity. 
+To make Equation (\ref{eq-energie})  valid for the entire domain containing both liquid and solid phases, the total enthalpy $h$ is regarded as the sum of the sensible heat and the latent heat:
+\begin{equation}
+\label{eq-enth-model}
+  h = c ( T + s(T) ),
+\end{equation} 
+with $c$ the local specific heat. The function $s(T)$ is introduced to model the jump of the enthalpy due to the phase change and is theoretically a Heaviside step function depending on the temperature: it takes the zero value in the solid region and a large value in the liquid, equal to $h_{sl}/c$, with $h_{sl}$ the latent heat of fusion. 
+Linear  \citep{voller1987pcm,Wang2010} or smoother functions \citep{dan-2014-JCP} can be used to regularize $s(T)$ and also the jump of material properties (from solid to liquid). 
+We use a regularization of all step-type functions by a continuous and differentiable hyperbolic-tangent function suggested by \cite{dan-2014-JCP} (see below). 
+\Blue{%Moreover, we assume that the undercooling problem is here negligible since only pure and homogeneous materials are considered.
+We assume moreover that the undercooling phenomenon is negligible (see also \cite{wang2010numerical,kowalewski2004phase}).}
+
+Equation (\ref{eq-energie}) can be further simplified by considering the following assumptions: (i) the density difference between solid and liquid phases is negligible, \ie $\rho_l=\rho_s=\rho$ is constant; (ii) the regularization zone is narrow and the velocity inside this zone is very low. 
+Consequently, the final expression of the energy equation is obtained by combining (\ref{eq-enth-model})  and (\ref{eq-energie}) and  neglecting the convection term $\nabla \cdot ( c s \vec{\tilde{u}})$\footnote{In the liquid phase, $\nabla \cdot ( c s \vec{\tilde{u}})  = h_{sl} \nabla \cdot  \vec{\tilde{u}}=0$; in the solid phase, $s=0$; in the regularization region, it is assumed that $\vec{\tilde{u}}=0.$}:
+\begin{equation}\label{eq-energie-enth-model}
+\frac{\partial \left(c T\right)}{\partial t_{\varphi}} + \nabla \cdot\left( c T \vec{\tilde{u}}\right) -
+\nabla \cdot\left( \frac{k}{\rho} \nabla T \right) +  \frac{\partial \left(c s\right)}{\partial t_{\varphi}}  = 0.
+\end{equation}
+The essential feature of the current approach is that the phase change front is not tracked explicitly but is instead recovered a posteriori from the computed temperature field.
+The phase-change occurs over a temperature interval $  T \in [T_f - T_{\varepsilon1}, T_f + T_{\varepsilon2}] $ around the temperature of fusion $T_f$.
+For non-isothermal phase-change PCM, $T_{\varepsilon1}$ and $T_{\varepsilon2}$ correspond to the solidus and the liquidus temperature of the material.
+However, for a pure material involving a unique phase-change temperature, $T_{\varepsilon1}$ and $T_{\varepsilon2}$ represent an artificial mushy zone used to regularize discontinuous parameters and should be set as small as possible.
+
+\section{Navier-Stokes equations with Boussinesq approximation}
+ 
+
+The natural convection in the liquid part of the system is modelled using the incompressible Navier-Stokes equations, with  Boussinesq approximation for buoyancy effects. To make this model valid for both liquid and solid phases, the momentum equation is modified as follows:
+\begin{equation}\label{eq-momentum-conserv-1}
+  \rho \left( \frac{\partial \vec{\tilde{u}}}{\partial t_{\varphi}} +   {(\vec{\tilde{u}}\cdot\nabla ) \vec{\tilde{u}}} \right) + \nabla P - \mu_{l}  {\nabla^2 \vec{\tilde{u}}} 
+- \rho g \vec{e}_y= A(T) \vec{\tilde{u}},
+\end{equation}
+where $P$ denotes the pressure, $\mu_{l}$ the dynamic viscosity of the liquid (assumed to be constant).  
+%and $f_B(T)$ the Boussinesq force. 
+
+The penalty term $A(T) \vec{\tilde{u}}$ is artificially introduced in (\ref{eq-momentum-conserv-1}) to extend this equation in the solid phase, where the velocity, pressure, viscosity and Boussinesq force are meaningless.  Consequently, $A(T)$  is modelled to vanish in the liquid, where the Navier-Stokes-Boussinesq momentum equation is recovered. A large value of $A(T)$ is imposed in the solid, reducing the momentum eq. (\ref{eq-momentum-conserv-1})  to $A(T) \vec{\tilde{u}}=0$, equivalent to $\vec{\tilde{u}}=0$. Exact expression for $A$ will be given in the next section.
+
+Under the assumption of a small variation of the density and the temperature, the Boussinesq approximation allows to linearize the density in the buoyancy part $\rho g$ of the eq. (\ref{eq-momentum-conserv-1}) as follows:
+\begin{equation}
+   \rho = \rho_{ref} (1 - \beta (T-T_{ref})),
+\end{equation}
+with $\beta = - (1/\rho_{ref}) (\partial \rho / \partial T)$.
+Therefore, the momentum equation can be written as:
+
+\begin{equation}\label{eq-momentum-conserv}
+  \frac{\partial \vec{\tilde{u}}}{\partial t_{\varphi}} +   {(\vec{\tilde{u}}\cdot\nabla ) \vec{\tilde{u}}} + \nabla p - \nu_{l}  {\nabla^2 \vec{\tilde{u}}} 
+- f_B(T) \vec{e}_y= A(T) \vec{\tilde{u}},
+\end{equation}
+where $p = (P + \rho_{ref} g y)/ \rho_{ref}$ and $f_B(T) = g \beta (T-T_{ref})$ denotes the buoyancy force.
+
+Finally, the conservation of mass in the liquid phase is expressed by the continuity equation:
+\begin{equation}\label{eq-mass-conserv}
+\nabla \cdot \vec{\tilde{u}} = 0.
+\end{equation} 
+
+
+\section{Final system of equations for the single-domain approach}\label{sec-eq-scaling}
+
+It is convenient to numerically solve a dimensionless form of the previous equations.
+Using the cavity height $H$ as length scale and a reference state $(\rho, V_{ref}, T_{ref})$, we can define the following scaling for the space, velocity, temperature and time variables:
+\begin{equation}\label{eq-adim}
+\vec{x} = \frac{\vec{\tilde{x}}}{H} \, , \,  \vec{u} = \frac{\vec{\tilde{u}}}{V_{ref}} \, , \,  \theta = \frac{T-T_{ref}}{\delta T} \, , \,  t = \frac{V_{ref}}{H} \, t_{\varphi},
+\end{equation}
+Temperatures $T_h$ (hot) and $T_c$ (cold) will be used to set isothermal walls of the cavity. The difference $\delta T$, 
+%$\delta T=T_{h}-T_{f}$with $T_f$ the temperature of fusion, 
+is considered as the representative temperature scale  for the natural convection onset in the liquid region. 
+For the natural convection problem without phase-change, $\delta T$ could be defined as $\delta T=T_{h}-T_{c}$ since the flow in the fluid is driven by the temperature difference between the "hot" and the "cold" temperature.
+However, for the melting PCM, the convection is driven by the temperature difference $\delta T=T_{h}-T_{f}$, with $T_f$ the temperature of fusion.
+As far as the solidification process is concerned, a distinct discussion will be provided in section \ref{chap-SOLIDIFICATION}. % during the melting,  and $\delta T = T_f - T_c$ during the solidification. }
+Thus $\delta T$ is used to define the Rayleigh number of the flow:
+\begin{equation}
+\label{eq-Rayleigh}
+\Ray = \frac{g \beta H^3 \delta T}{\nu_l \alpha_l},
+\end{equation}
+where $\alpha = k/(\rho c)$ is the thermal diffusivity and  $\beta$ the thermal expansion coefficient. 
+Note that the reference temperature for the phase-change problem is   $T_f$, resulting in  $\theta_f = 0$.
+Since the mushy zone is defined for  $  \theta_f - \varepsilon1 \, \leq \theta \leq \, \theta_f + \varepsilon2 $, this choice of the reference temperature 
+simplifies the identification of the latter to  $  -\varepsilon \, \leq \theta \leq \,\varepsilon $.
+
+Finally, the dimensionless system of equations to be solved in both liquid and solid regions can be written as:
+\begin{eqnarray}
+\nabla\cdot \vec{u}&=&0, \label{eq-qmvt} \\ \vspace{0.2cm}
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{\Rey}{\nabla^2 \vec{u}} 
+ - f_B(\theta)\, \vec{e}_y - A(\theta) \vec{u}&=&0, \label{eq-qmvt-2} \\ \vspace{0.2cm}
+ \frac{\partial \left(C \theta\right)}{\partial t} + \nabla \cdot\left( C \theta \vec{u}\right) -
+ \nabla \cdot\left( \frac{K}{\Rey \Pr} \nabla \theta \right) +  \frac{\partial \left(C S\right)}{\partial t}  &=& 0, \label{eq-energ} 
+\end{eqnarray}
+where the linearised (Boussinesq) buoyancy force ($f_B$), the Reynolds ($\Rey$) and Prandtl ($\Pr$) numbers are defined as:
+\begin{equation}\label{eq-RePr}
+f_B(\theta) = \frac{\Ray}{\Pr \Rey^2} \theta, \quad \Rey = \frac{\rho V_{ref} H}{\mu_l}=  \frac{V_{ref} H}{\nu_l} , \quad \Pr = \frac{\nu_l}{\alpha_l}.
+\end{equation}
+Non-dimensional conductivity and specific heat are functions of the temperature $\theta$, 
+\begin{equation}\label{eq-adimKC}
+K(\theta)= \frac{k}{k_l} , \,  \, C(\theta) = \frac{c}{c_l},
+\end{equation}
+and have to take into account the variation of material properties between the solid and the liquid regions. 
+
+In the energy equation (\ref{eq-energ}), the non-dimensional function $S = s/\delta T$, introduced by the enthalpy model, is regularized across the regularization region using a hyperbolic-tangent function \citep{dan-2014-JCP}:
+\begin{equation}
+S(\theta) = S_{l} + \frac{S_{s}-S_{l}}{2}\left\{
+1 + \tanh\left(\frac{\theta_r-\theta}{R_r}\right)
+\right\},
+\label{eq-Stanh}
+\end{equation} 
+where $\theta_r$ is the central value around which we regularize (typically $\theta_r=\theta_f=0$) and $R_r$ the smoothing radius (typically $R_r=\varepsilon$). Note that $S_{s} = 0$ and
+\begin{equation}
+S_{l} = \frac{h_{sl}/c_l}{\delta T} = \frac{1}{\Ste},
+\label{eq-Ste}
+\end{equation} 
+where $Ste$ is the Stefan number. Regularizations similar to (\ref{eq-Stanh}) are used to model the variation inside the regularization region of functions (\ref{eq-adimKC}) defining material properties.
+
+Finally, the penalty term in the momentum equation (\ref{eq-qmvt-2}) is derived from the Darcy's law, by modeling the fluid flow within the mushy region as a flow through a porous medium.
+In fact, the Darcy's law states that the velocity of flow in porous medium is proportional to the pressure gradient:
+
+\begin{equation}
+	\vec u = - \frac{\zeta^*}{\mu} \vec \nabla p.
+\end{equation}
+where $\zeta^*$ is the permeability, which is a function of the porosity.
+As the porosity decreases, the permeability (and the velocity) also decreases, down to the limiting value of zero when the mush becomes completely solid.
+This behavior can be accounted in a numerical model by adding a source term $A \vec u$ in the momentum equation.
+The well-known equation derived from the Darcy law, the Carman-Kozeny equation \ref{ck eq}, could be a suitable form for the function $A$:
+
+\begin{equation} \label{ck eq}
+	\nabla p = - \frac{\CKC (1 - \lambda)^2}{\lambda^3} \vec u.
+\end{equation}
+
+Finally $A$ takes the form \citep{Belhamadia2012,kheirabadi2015effect}:
+
+\begin{equation}\label{eq-CK}
+A(\theta) = -\frac{\CKC (1 - \varphi(\theta))^2}{\varphi(\theta)^3 + b},
+\end{equation}
+where $\varphi(\theta)$ is the phase-change variable, which is  $1$ in the fluid region and $0$ in the solid. Inside the regularization region,  $\varphi(\theta)$ is regularized using a hyperbolic-tangent function similar to (\ref{eq-Stanh}).
+The constant $\CKC$ is set to a  large value (as discussed below) and  the constant $b=10^{-6}$ is introduced to avoid division by zero.
+

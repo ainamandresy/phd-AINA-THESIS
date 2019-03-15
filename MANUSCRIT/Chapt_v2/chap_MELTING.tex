@@ -1,0 +1,328 @@
+%%%%%%%%%%%%%%%%%%don't forget if needed %%%%%%%%%%%%%%%%%%%%%
+%\section[toc version]{title version%
+%              \sectionmark{head version}}
+%\sectionmark{head version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\titcourt{Numerical validation of the Navier-Stokes-Boussinesq solver involving phase-change}
+\def\titlong{Numerical validation of the Navier-Stokes-Boussinesq solver involving phase-change}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[\titlong]{\titlong%
+              \chaptermark{\titcourt}}
+\chaptermark{\titcourt}
+\label{chap-MELTING}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Having validated our code for the Navier-Stokes-Boussinesq solver, including both two-dimensional and three-dimensional problems,
+we now pay a closer attention to phase-change systems evolving natural convection.
+Two new non-linearities are considered in the system: the Carman-Kozeny penalty term and the enthalpy source term $S$.
+The Carman-Kozeny penalty term is used to ensure zero velocity in the solid region since the same system of equations are
+solved throughout the whole domain.
+The enthalpy non-linear source term is used to model the phase-change in the energy equation.
+
+Experimental and numerical benchmarks from the literature are used to validate our method.
+The first part of this section is devoted to extensive validation and analysis of the octadecane PCM, generally use for buildings purposes,
+due to its phase change temperature of $28^o C$.
+Three benchmarks are considered: \cite{Okada1984} (experimental), \cite{gong2015numerical} (experimental) and \cite{bertrand1999melting} (numerical).
+We provide then details about the time evolution of different physical parameter of the system.
+The time evolution of the melting process is discussed first, in which the existence of three distinct regimes is drawn.
+A comparison of the evolution of the Nusselt number and the liquid fraction with some analytical correlations is then given.
+Finally, the influence of the Rayleigh number on the melting process is developed. 
+
+Different geometries and materials are presented in a second part of this section to illustrate the capability of our method to deal with complexe configurations:
+melting of cylindrical PCM with inner heated tubes, solid crust formation in a highly distorted mesh and melting of Gallium.
+
+For the simulation of the melting process, we use the following choice for the scaling introduced in Sec. \ref{sec-eq-scaling}, eqs. (\ref{eq-adim}) and  (\ref{eq-RePr}):
+\begin{equation}\label{ref-adimPCM}
+V_{ref}=\frac{\nu_l}{H}  \, \Rightarrow  \, t = t_{\varphi}\frac{\nu_l}{H^2} \, \Rightarrow  \, \Rey  = 1. \\
+\end{equation}
+Moreover, a second dimensionless time $\tau$ is introduced in order to assess our results with respect to the numerical data of \cite{bertrand1999melting} and the analytical correlation of \cite{jany1988scaling}:
+\begin{equation}
+\label{eq-adim-tau}
+\tau = \Ste\cdot Fo = \Ste\cdot \frac{\alpha t_{\varphi}}{H^2}  = \Ste\cdot \frac{t}{Pr},
+\end{equation}
+where $Fo$ is the Fourier number. 
+
+We recall that the reference temperature is the fusion temperature and thus $\theta_f = 0$. The regularization range is defined for $ -\varepsilon_1 \leq \theta \leq \varepsilon_2 $, with $\varepsilon_1 = \varepsilon_2 = 0.01$.  
+We also assume that physical properties of the material are identical in both liquid and solid phases, and, consequently, we obtain from (\ref{eq-adimKC}) that   $C(\theta)=1$ and $K(\theta)=1$.
+This choice of the scaling was made to have the same set of parameters as in previous numerical simulations of this case \citep{Okada1984, Wang2010, Ma2006, dan-2014-JCP}. 
+
+\section{Parameter settings}
+We present in this section the influence of some parameters on the numerical resolution of the Newton algorithm, namely the initialization, the Caraman-Kozeny constant in the penalty term \ref{eq-CK}, the mesh adaptation and the size of the mushy zone.
+The physical and numerical parameters  are detailed in sec. \ref{sec-desc-prog}.
+
+\subsection{Carman-Kozeny constant}
+The Carman-Kozeny penalty term is used to annihilate the velocity in the solide region when a single domain method is applied.
+The Carman-Kozeny constant \ref{eq-CK} is a constant accounting for the mushy-region morphology.
+The effect of this constant on the melting and the solidification have attracted some attention.
+Even though it is generally assumed that a large value for $\CKC$ must be set, the exact value of this constant could influence the accuracy of the results \citep{kheirabadi2015effect, kumar2017influence}. 
+The influence of $\CKC$ in the location of the front was shown by \citep{kheirabadi2015effect}.
+They concluded that, high $\CKC$ values corresponded to slower melting rates and the smallest $\CKC$ values resulted in unphysical predictions of the melt front development.
+They also noticed that $\CKC$ and the melting temperature range $\Delta T_{\varepsilon} = T_{\varepsilon2}-T_{\varepsilon1}$ are dependent of one another: different values of $\Delta T_{\varepsilon}$ requires different values of $\CKC$ to achieve the same melt front location.
+\cite{Kumar2017} studied the effect of the mushy zone constant and its influence on the melt fraction, vortex strength and the amount of heat storage. They concluded that increasing $\CKC$ leads to a decrease of the convection strength and consequently leads to a decrease of the heat transfer rate. 
+These studies show the necessity of choosing an appropriate value of this parameter, but because of the semi-solid state and porous nature of the mushy zone, the choice of the value of this constant is a still open problem.
+
+We simulate the melting of a PCM with different value of $\CKC$ ranging from $10^6$ to $10^10$ and compare the location of the melting front with experimental data.
+Fig. \ref{fig:pcm-CK} displays the location of the melting interface for three values of $\CKC$: $10^6$, $10^8$ and $10^{10}$.
+Very good agreement with the experimental result of \cite{Okada1984} is obtained for $\CKC$ varying in the range $[10^6, 10^8]$. 
+Nevertheless, imposing  a too large value $\CKC=10^{10}$ results  in artificially slowing the propagation of the melting front. We set for all subsequent simulations $\CKC= 10^6$.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=.5\textwidth]{\figpath/Fig_cap_melting/PCM_ck_compare}
+	\end{center}
+	\caption{Location of the interface during the melting of the PCM using different value of $\CKC$ ranging from $10^6$ to $10^20$. Comparison with experimental data of \cite{Okada1984}}
+	\label{fig:pcm-CK}
+\end{figure}
+
+\subsection{Mesh adaptativity}
+The use of mesh adaptation proved mandatory in the simulation of the melting of a PCM to obtain accurate results within reasonable computational time.
+For the melting case, we used five metrics intersection to adapt the mesh, based on $S^{n+1}, S^{n}, T^{n+1}, T^{n}, \vec{u}^{n+1}$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider the metrics computed from actual (at $t_{n+1}$) and  previous (at $t_{n}$) values, for the same variable used for adaptivity (see also \cite{Belhamadia2004_S}).
+The anisotropy of the mesh is a parameter of the algorithm and it was set to values close to 1. This is an inevitable limitation since we also impose the minimum edge-length of triangles to avoid generating too large number of nodes.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/Mesh_MELT}
+	\end{center}
+	\caption{Adapted mesh during PCM melting. (a) $12,000$ triangles: mesh is refined around the melting front and the boundary layers. (b) zoom showing the decrease of the mesh size around the temperature isoline $\theta = 0$.}
+	\label{fig:pcm-mesh}
+\end{figure}
+
+The method is able to accurately capture the liquid-solid interface during the melting process and the two solidification fronts appearing during the solidification of the PCM. 
+Mesh adaptivity is performed at each time step and offers a refined discretization of the regularization region where sharp gradients have to be accurately captured.  
+Fig. \ref{fig:pcm-mesh}a illustrates the adapted mesh during the melting.
+The mesh is refined around the melting front (Fig \ref{fig:pcm-mesh}b), localized by the temperature $\theta = 0$, while coarser mesh is applied in the solid region.
+The number of triangles for the melting case is $N_t=12,000$. Non-adapted grids offering the same spatial resolution everywhere inside the computational domain would have resulted for the two cases in $N_t=9.94 \cdot 10^{10}$ triangles, respectively. Consequently, mesh adaptivity greatly helps in reducing the computational time. 
+
+The minimum and the maximum edge-length of triangles are imposed to avoid too large meshes.
+At the same time, the minimum size of triangles should allow to capture the boundary layers and the artificial mushy zone where discontinuous variables are smoothly regularized.
+As far as the boundary layers are concerned, Fig. \ref{fig:min-size-bnd} draws the thermal ($\delta_T$) and the viscous ($\delta_\nu$) boundary layers, function of Prandtl number.
+The scale for the thermal boundary layer in natural convection flow along a vertical wall is indeed given by \citep{bejan2013convection}:
+\begin{equation} \label{eq-bnd-layer-T}
+   \delta_T \sim \left\{
+   \begin{array}{ll}
+   H Ra^{-1/4} &	 \mbox{if }  Pr \gg 1,\\
+   H Pr^{-1/4} Ra^{-1/4} &   \mbox{if } Pr \ll 1,
+   \end{array}
+   \right.
+\end{equation}
+and the scale for the thickness of the viscous boundary layer near the wall is:
+\begin{equation} \label{eq-bnd-layer-nu}
+   \delta_\nu \sim Pr^{1/2} \delta_T.
+\end{equation}
+Thus, for high-Prandtl simulations the thickness of the thermal boundary layer is thinner than the velocity and the viscous boundary layers. 
+For Rayleigh numbers in the range of $10^6$ to $10^8$ and a Prandtl number of order of $50$, we have a dimensionless thickness of the thermal boundary layer of $\delta_\theta \sim 0.01$.
+Conversely, for low-Prandtl simulations the viscous boundary layer is thinner than the thermal boundary layer.
+For the same range of Rayleigh numbers ($10^6$ to $10^8$) and Prandtl number of order of $0.1$, we have a dimensionless thickness of the viscous boundary layer of $\delta_\nu \sim 0.015$.
+Therefore the minimum edge-length must be lower than $0.01$.
+Moreover, a minimum of 8 triangles should be included in the mushy zone to ensure an accurate location of the melting interface and a correct resolution of gradients.
+Consequently, for all subsequent simulations the minimum edge-length is set to $h_{min} = 10^{-3}$ and the maximum edge-lenght to $h_{max} = 0.1$.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=.8\textwidth]{\figpath/Fig_cap_melting/thermal_bnd}
+	\end{center}
+	\caption{Thermal and viscous boundary layer thickness function of the Prandtl number \citep{bejan2013convection}.}
+	\label{fig:min-size-bnd}
+\end{figure}
+
+\subsection{Initialization}
+The initialization is critical task in the Newton algorithm.
+The PCM is initially solid and the temperature should be set to a cold temperature $\theta_c$ under the temperature of fusion $\theta_f$.
+However, increasing abruptly the boundary temperature to a hot temperature $\theta_h$, over the temperature of fusion, in order to initiate the melting process is numerically complicate because of the strong temperature gradient between the wall and the PCM.
+
+A first solution is to set a very thin fluid layer of  $\delta x = 0.01$ with a constant temperature $\theta = \theta_c$.
+The drawback of this approach is that it is not physical and the evaluation of some physical properties depending on the temperature gradient at the heated wall, like the Nusselt number or the accumulated heat input, can be distorted.
+
+A second approach consist of setting an establishment regime.
+The temperature is increased smoothly over a small time steps combined with Rayleigh continuation steps.
+This approach has physical significance and is more robust when higher Rayleigh number simulations are tackled.
+
+\newpage
+
+%\section{Melting of octadecane PCM: numerical validation and physical analysis}\label{sec: melting-2D}
+\section{Melting of octadecane PCM in a square cavity with lateral heating} \label{sec: melting-2D} %: Comparison with experimental data of \cite{Okada1984}  and \cite{gong2015numerical}, and numerical data of \cite{bertrand1999melting}.}
+
+Three cases are investigated.
+The first consists of an experimental study of the melting of the PCM in a differentially heated square cavity of height $H=1.5$ cm by \cite{Okada1984}.
+The second reproduces the melting of the PCM included in a transparent building brick of height $H = 15.2$ cm, investigated experimentally and numerically by \cite{gong2015numerical}.
+The last compares our results with various numerical methods, presented by \cite{bertrand1999melting}, simulating the melting of octadecane, considering a higher value of the Rayleigh number.\\
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.85\textwidth]{\figpath/Fig_cap_melting/fig02_2}
+	\end{center}
+	\caption{Location of the interface during the melting of the PCM. 
+	(a) Comparison with experimental data of \cite{Okada1984} and numerical results of \cite{dan-2014-JCP} and \cite{Wang2010} for two time instants ($\tau=0.032$ and $0.063$). Benchmark 1: $\Ray = 3.27 \cdot 10^5$, $\Pr = 56.2$ and $\Ste = 0.045$
+	(b) Comparison with both experiment and simulation of \cite{gong2015numerical} for five time instants  ($\tau = 0.0002$, $0.00050$, $0.00067$, $0.00125$, $0.00252$). Benchmark 2: $\Ray = 2.48 \cdot 10^8$, $\Pr = 50$ and $\Ste = 0.072$.
+	}
+	\label{fig:pcm-valid}
+\end{figure}
+
+We first examine the location of the interface obtained in our simulations.
+The comparison with the experimental results of \cite{Okada1984} and \cite{gong2015numerical} is presented in Figure \ref{fig:pcm-valid}.
+The experimental study of \cite{Okada1984} in Figure \ref{fig:pcm-valid}(a) consists of a differentially heated square cavity of dimensions $1.5$ cm $\times \, 1.5$ cm, filled with an octadecane paraffin. The non-dimensional parameters are: $\Ray = 3.27 \cdot 10^5$, $\Pr = 56.2$ and $\Ste = 0.045$ (Benchmark 1).
+
+For two particular time instants ($\tau=0.032$ and $\tau=0.063$), we could compare our results to available experimental \citep{Okada1984} and numerical \citep{Okada1984,Wang2010,dan-2014-JCP} data. 
+In the experimental set up of \cite{Okada1984}, the author has reported that the top of the PCM was not perfectly insulated and consequently the growth of the experimental upper melting front was delayed.
+In Figure \ref{fig:pcm-valid}(a), for the two time instants $\tau=0.032$ and $\tau=0.063$, the current work agrees well with the experimental results of \citep{Okada1984} at the bottom part of the melting front.
+However, our results overestimate the location of the front in the top part of the cavity, which could be related to the experimental heat loss mentioned by the author.
+Moreover, our results are qualitatively in a better agreement with experimental data than previously published numerical results. 
+This is a direct consequence of the precise tracking of the melting front achieved by the mesh adaptivity performed at each time step. 
+
+Figure \ref{fig:pcm-valid}(b) illustrates the interface location in the experiment and simulations of   \cite{gong2015numerical}, who studied the melting of an octadecane PCM inside a transparent building brick of dimensions 
+$15.2$cm$\times 3$cm.
+Their numerical simulation has been performed using a Lattice Boltzmann method. 
+The non-dimensional parameters were: $\Ray = 2.48 \cdot 10^8$, $\Pr = 50$ and $\Ste = 0.072$ (Benchmark 2).
+The difficulty here compared to the first validation case is the presence of a stronger natural convection flow in the fluid due to the high value of the Rayleigh number.
+The location of the interface is compared for five particular time instants: $\tau = 0.0002$, $0.00050$, $0.00067$, $0.00125$ and $0.00252$.
+We notice a very good agreement with the numerical and the experimental data of \cite{gong2015numerical}.
+
+
+A last validation case is also investigated to test the robustness of the method.
+The physical parameters are: $\Ray = 10^8$, $\Pr = 50$ and $\Ste = 0.1$ (Benchmark 3).
+\cite{bertrand1999melting} compiled results provided by five different authors (Lacroix, Le Qu{\'e}r{\'e}, Gobin-Vieira, Delannoy and Binnet-Lacroix). Results provided by these authors will be hereafter referred to as (say) 'Lacroix, from \cite{bertrand1999melting}'.
+They have attempted a first comparison by taking several numerical methods to compute the basic configuration presented in this section. 
+Two investigators among the five failed to predict the process and showed unrealistic behaviors (see Figures \ref{fig Bertran} and \ref{fig-Nu-Lf-Bertran}):
+Lacroix and Delannoy seem to be insufficiently converged (Figure \ref{fig Bertran}), and Binet-Lacroix overestimates the average Nusselt number by more than $30 \%$ (Figure \ref{fig-Nu-Lf-Bertran}).
+Hence, this collection of results allows us to compare our numerical method and check whether or not realistic results are obtained for complex physical configurations.\\
+We further inspect the melting front, the temporal evolution of the liquid fraction $L_f$ and the Nusselt number $N\!u$ at the left wall ($x=0$), for each of the five methods presented by \cite{bertrand1999melting}.
+For the liquid fraction, the initial solid state corresponds to $L_f = 0$, while  $L_f = 1$ indicates the  complete melting of the PCM. 
+The average Nusselt number $N\!u$ at $x=0$ left boundary is defined as follows:
+\begin{equation}\label{eq-Nu}
+N\!u = \int_{0}^1 \left(\frac{\partial \theta}{\partial x}\right)_{x=0}\, dy.
+\end{equation}
+\\
+\begin{figure}
+	\begin{center}
+		\begin{minipage}[t]{0.75\textwidth}
+			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/fig03}
+		\end{minipage}
+	\end{center}
+	\caption{Melting of a PCM (Benchmark 3). Location of the solid-liquid interface at dimensionless time (panels a to d) $\tau = 0.0005$,  $\tau = 0.002$, $\tau = 0.006$ and $\tau = 0.01$, compared with five simulations presented by \cite{bertrand1999melting}. 
+	$\Ray = 2 \cdot 10^8$, $\Pr = 50$ and $\Ste = 0.1$.} \label{fig Bertran}
+\end{figure}
+\begin{figure}
+	\begin{center}
+		\begin{minipage}[t]{0.75\textwidth}
+			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/fig04}
+		\end{minipage}
+	\end{center}
+	\caption{Time evolution of the Nusselt number (a) and the liquid fraction (b) compared with five simulations presented by \cite{bertrand1999melting}.
+	$\Ray = 2 \cdot 10^8$, $\Pr = 50$ and $\Ste = 0.1$.} \label{fig-Nu-Lf-Bertran}
+\end{figure}
+The phase-change interface for four time steps, $\tau = 5 \cdot 10^{-4}$, $\tau = 2 \cdot 10^{-3}$, $\tau = 6 \cdot 10^{-3}$ and $\tau = 1 \cdot 10^{-2}$ is represented in Figure \ref{fig Bertran}.
+Our results are for each case in fairly good agreement with those of Gobin and those of  Le Qu{\'e}r{\'e}.
+Gobin uses a front-tracking method using a coordinate transformation with a finite volume method with a $62 \times 42$ grids.
+Le Quéré solves a single domain model using a second order scheme with a finite volume method with a $192 \times 192$ grids  (\cite{gobin2000melting}).\\
+The time evolution of the Nusselt number and the liquid fraction are presented in Figure \ref{fig-Nu-Lf-Bertran}.
+A very good agreement is obtained with Gobin and Le Qu{\'e}r{\'e}.
+A relative difference, less than $2\%$ is noticed for the Nusselt number, and a dispersion, smaller than $4 \%$, for the melted fraction.\\
+The high value of the Rayleigh number $\Ray = 10^8$ results in a very demanding numerical test.
+The high velocity, inducing a very narrow thermal boundary layer can lead to unrealistic results and some numerical methods have failed.
+The interest of the mesh adaptation is clearly evidenced since we  initially use only $40 \times 40$ grid points.
+
+
+%\section{Melting of PCM included in different geometries: cylindrical evolving inclusions, distorted mesh and rectangular}
+\section{Melting of cylindrical PCM with inner heated tubes} \label{subsec-luo}
+
+We have simulated previously phase-change problems evolving in a square cavity.
+A more complex system is studied in this section, by simulating the melting of pure PCM on multitube thermal energy storage systems.
+Similar configurations were studied by \cite{luo2015lattice}. Hence we could compare our numerical results to those of \cite{luo2015lattice}.
+The interest is twofold: the geometry is challenging since is it complex and \cite{luo2015lattice} uses Lattice Boltzmann method, a microscopic model, which is different from previous validation cases.
+
+Cylindrical PCM of dimensionless radius $R=1$ with tube inclusions are studied.
+Shell and tube PCM are indeed most intensely used in latent heat energy storage systems.
+\cite{agyenim2010review} pointed out, in a critical review of materials used for heat storage, that more than $70\%$ of the PCM container are using the shell and the tube system.
+We simulate three cases taking into account one heated tube, four heated tubes, and nine heated tubes with the same contact area.
+For the one heated tube case, the radius $R_i$ of the inner tube is one-quarter of the outer tube ($R_i = R/4$), for four heated tubes $R_i = R/8$ and for nine heated tubes $R_i = R/12$.
+A Dirichlet boundary condition is applied to inner tubes $\theta = \theta_h$,
+and a Neumann boundary condition $\frac{\partial \theta}{\partial n} = 0 $ is used at the outers.
+An homogenous Dirichlet boundary condition ($\vec u = 0$) is applied everywhere for the velocity.
+Only the half of the domain is simulated since the problem is symmetric.
+The mesh is refined initially around inner tubes, and is dynamically adapted at each time step around the melting front and the thermal boundary layer area.
+The physical parameters of the simulation are:  $\Ray = 5 \cdot 10^4$, $\Pr =0.2$ and $\Ste = 0.02$.
+%The same metrics presented in \ref{sec-case1} are used for the mesh adaptation process.
+
+The melting front (black line), the temporal evolution of the temperature field, and the time evolution of the liquid fraction, showing the effect of the configuration, are shown in Figures \ref{fig-Luo-Field} and \ref{fig-Lf-Luo}.
+The configuration of the obstacles in the liquid phase, influences directly the fluid motion and the shape of melting front.
+The more the number of inner tubes, the stronger the natural convection in the melted PCM.
+Consequently the shape of the interface is impacted.
+The heat transfer is hence enhanced, inducing a faster melting time: a ratio of $5.4$ is noticed from the melting time with nine and one tubes.
+
+The evolution of the liquid fraction is compared with the numerical result of \cite{luo2015lattice} in Figure \ref{fig-Lf-Luo} and a good agreement is obtained.
+
+\begin{figure}
+	\begin{center}
+		\begin{minipage}[t]{0.8\textwidth}
+			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/MELT_Luo_Field}
+		\end{minipage}
+	\end{center}
+	\caption{Temperature field for the melting of cylindrical PCM, in the half of the domain, with one (a), four (b), and nine (c) heated tubes.  
+	$R_i = R/4$ for one heated tube, $R_i = R/8$ for four tubes and $R_i = R/12$ for nine tubes.
+	Melting  front are localized with black lines.  $\Ray = 5 \cdot 10^4$, $\Pr =0.2$ and $\Ste = 0.02$.} \label{fig-Luo-Field}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\begin{minipage}[t]{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/Lf_Luo}
+		\end{minipage}
+	\end{center}
+	\caption{Time evolution of the liquid fraction for one, four, and nine heated tubes. Comparison with numerical results of \cite{luo2015lattice}. $\Ray = 5 \cdot 10^4$, $\Pr =0.2$ and $\Ste = 0.02$.} \label{fig-Lf-Luo}
+\end{figure}
+
+\section{Solid crust formation in a highly distorted mesh}
+
+The solid crust formation inside a highly distorted domain, simulated by \cite{nourgaliev2016fully} is of interest in this section.
+\cite{nourgaliev2016fully} used finite element with discontinuous Galerkin method.
+
+The fluid is initially motionless with an initial dimensionless temperature $\theta_i = 2$.
+The temperature of fusion is set to $\theta_f = 1.4$ according to \cite{nourgaliev2016fully} parameters.
+It is worth noting that \cite{nourgaliev2016fully} have used $T_{ref} \ne T_f$ thus $\theta_f \ne 0$.
+
+The left side is set at cold temperature $\theta_c = 1.39$ in the initial stage as the right wall was kept constant at a hot temperature $\theta_h = 2$, inducing a nearly steady-state natural circulation. 
+The cold temperature at the left wall is then dropped down to $\theta_c = 1$, below the temperature of solidification starting the formation of a solid crust layer. 
+
+\begin{figure}
+	\begin{center}
+		\begin{minipage}[t]{\textwidth}
+			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/Nourgaliev-Valid_2}
+		\end{minipage}
+	\end{center}
+	\caption{Solid crust formation in a distorted mesh. Temperature field and streamlines of our simulation (a) and \cite{nourgaliev2016fully}  (b). } \label{fig-Nourgaliev}
+\end{figure}
+
+The temperature field and the streamlines are reported in Figure \ref{fig-Nourgaliev}.
+We are qualitatively in a fairly good agreement with \cite{nourgaliev2016fully}.
+
+
+
+\section{Melting of Gallium in a rectangular cavity}
+
+The observation on the melting of the gallium in a rectangular cavity was a controversy since the question if  the flow in the fluid is monocellular of multicellular was raised by \cite{dantzig1989modelling}.
+The experimental result exhibits indeed a monocellular structure, while many researchers claim this observation to be incorrect.
+Prior to \cite{dantzig1989modelling} note, both experimental and numerical result support a single cell solution in the fluid phase.
+Later, simulations provides solutions with multicellular flow. 
+\cite{hannoun2003resolving} concluded that monocellular observation is caused by a problem of convergence of the numerical solution. It can be due to the grid size or inconsistencies in the mathematical model.
+
+Therefore, this test case simulating the melting of the Gallium is a relevant exercice to test the consistency of our method.
+To capture the very small cell during the first step of the melting, \cite{hannoun2003resolving} uses a $800 \times 1,120$ fixed grids in a rectangular domain of dimensions $6.35$ cm $\times \, 8.89$ cm. 
+However, a maximum of $6 000$ triangles are necessary with our adaptive method to reproduce the numerical result of \cite{hannoun2003resolving}, that is a ratio of $10^2$.
+
+\begin{figure}
+	\begin{center}
+		\begin{minipage}[t]{\textwidth}
+			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/evol_Gallium_FIELD}
+		\end{minipage}
+	\end{center}
+	\caption{Melting of gallium: temperature field, streamlines, and melting front. 
+	Physical time instants (panels a to g): $20 s$, $32s$, $36s$, $42s$, $85s$, $155s$, and $280s$.} \label{fig-Gallium}
+\end{figure}
+
+The time evolution of the flow is presented in the Figure \ref{fig-Gallium} with the plot of the streamlines for several physical times: $t_{\varphi} = 20s$, $32s$, $36s$, $42s$, $85s$, $155s$ and $280s$.
+These times was voluntarily chosen for they correspond to roll merging.
+\cite{hannoun2003resolving}, \cite{cerimele2002numerical} and \cite{giangi2000melting} compare the number of rolls in the fluid flow as a validation criterion.
+Five primary cells are captured at $t=32s$ and decreases later through a process of roll merging as it is noticed by \cite{hannoun2003resolving}.
+Our numerical results are in good agreement with the observations of \cite{hannoun2003resolving}, \cite{cerimele2002numerical} and \cite{giangi2000melting}.
+
+

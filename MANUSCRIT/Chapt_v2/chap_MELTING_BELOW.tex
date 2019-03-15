@@ -1,0 +1,356 @@
+%%%%%%%%%%%%%%%%%%don't forget if needed %%%%%%%%%%%%%%%%%%%%%
+%\section[toc version]{title version%
+%              \sectionmark{head version}}
+%\sectionmark{head version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\titcourt{Numerical simulation of melting of phase change materials}
+\def\titlong{Numerical simulation of melting of phase change materials}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[\titlong]{\titlong%
+              \chaptermark{\titcourt}}
+\chaptermark{\titcourt}
+\label{chap-MELTING-CAVITY}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Melting of octadecane PCM with lateral heating.}
+
+\subsection{Analysis of the time evolution of the melting process} \label{sec-melting}
+
+We now pay a closer attention to the temporal evolution of different physical parameter of the system, during the melting phase.
+We consider the following physical parameters:
+$\Ray = 3.27 \cdot 10^5$, $\Pr = 56.2$ and $\Ste = 0.045$.
+
+%\subsubsection{Time evolution} 
+
+We start by analysing the time evolution of the melting process. At $\tau=0$, the material is solid and the initial temperature is set to $\theta_0=-0.01$ everywhere inside the cavity. Then, the temperature of the left wall is suddenly increased to $\theta_h=1$, while the right wall is maintained at the same cold temperature $\theta_c=-0.01$. The material starts to melt, with a melting (identified by the iso-line $\theta=\theta_f=0$) propagating from the left to the right side of the domain. The time evolution of the phase-change system is depicted in Fig. \ref{fig:melt-field} for representative time instants, also reported in previous studies.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/fig05}
+	\end{center}
+	\caption{Complete melting of the PCM. Temperature iso-lines and streamlines in the fluid phase. The solid part is represented in blue and corresponds to the region of temperature $\theta \leq \theta_f=0$. Time instants (panels  a to f): $\tau=0.004; 0.016; 0.032; 0.063; 0.08; 0.2$. $\Ray = 3.27 \cdot 10^5$, $\Pr = 56.2$ and $\Ste = 0.045$.
+		}\label{fig:melt-field}
+\end{figure}
+
+
+From Fig.  \ref{fig:melt-field}, we can easily identify three different regimes describing the time evolution of the melting process. 
+\begin{itemize}
+	\item From $\tau=0$ to $\tau =0.004$ (Fig.  \ref{fig:melt-field}a), we note the vertical shape of the melting front, well predicted by the classical conduction model of \cite{stefan1891theorie}. This indicates that, at this stage, heat transfer is dominated solely by conduction.
+	
+	 \item Between $\tau =0.016$ to $\tau =0.032$ (Fig.  \ref{fig:melt-field}b), the natural convection in the fluid phase starts to alter the shape of the melting front.
+	A mixed conduction and convection regimes rule the heat transfer. 	Convection mainly affects the upper part of the fluid motion, while conduction is still dominating in the lower part. As the volume thermal expansion coefficient $\beta$ is positive, we expect a clockwise circulation of the liquid inside the convection cell, as noted by \cite{jany1988scaling}.
+	This also makes the liquid-solid interface to move faster at the top of the cavity, explaining the deformed shape of the melting front, which is a signature of the convection effects  (see also \cite{kowalewski2004phase}). 
+	
+	\item After $\tau=0.032$ (Fig.  \ref{fig:melt-field}c-d), natural convection dominates the heat transfer process and impacts radically the solid-liquid interface shape and motion.
+	The melting front line exhibits four distinct regions characterized by different slopes with respect to the vertical axis. The largest slope is observed at the top of the cavity and is related to the particular shape of the convection cell. Note that top and bottom parts of the interface are normal to the cavity boundaries because of the imposed adiabatic boundary conditions.
+
+	\item After $\tau =0.08$  the melting front is nearly touching the right wall of the cavity, firstly at the top (Fig.  \ref{fig:melt-field}e) of the cavity. The melting process continues and the fluid progressively fills the cavity, with a melting front  deforming to a vertical line. The  simulation of the melting process is stopped at $\tau =0.2$ (Fig.  \ref{fig:melt-field}f), when it is numerically difficult to separate the melting front from the right wall boundary. At this time instant,  the fluid fraction reaches the value of $0.95$ and  the melting of the PCM is considered to be complete, even though a small region of solid PCM remains at the lower right bottom of the cavity. Note from Fig.  \ref{fig:melt-field}f the existence in the fluid  of two recirculating zones instead of a single one observed during previous stages.
+	
+\end{itemize}
+
+\subsection{Scaling analysis} \label{sec:scaling anal}
+
+We further analyse each of the three regimes cited previously, and identify the proper scales proper of the phenomenon.
+It is well known that during the first stage of the melting, the heat transfer is essentially ruled by conduction. The fluid phase is motionless and the horizontal heat flux across the incipient melting PCM is balanced by the enthalpy absorbed at the interface.
+Accordingly, the interface remain vertical during this stage.
+At the solid-liquid interface, the energy balance condition which takes into account the released latent heat and the discontinuity of heat flux between the solid and the liquid can be handle by the following Stefan condition:
+\begin{eqnarray} \label{eq:Ste-condition}
+	\left. T\right|_{x=\Gamma_i} &=& T_f, \\ \nonumber
+	\rho h_{sl} \frac{\partial \Gamma_i}{\partial n} &=& - k \frac{\partial T}{\partial n},
+\end{eqnarray}
+with, $\Gamma_i$ the interface position. Using the scaling \ref{ref-adimPCM}, the dimensionless form of \ref{eq:Ste-condition} is:
+
+\begin{eqnarray} \label{eq:Ste-condition}
+	\theta_i &=& 0, \\ \nonumber
+	\frac{\partial \Gamma_i}{\partial n} &=& - \frac{\Ste}{\Pr} \frac{\partial \theta}{\partial n},
+\end{eqnarray}
+with $\theta_i$ the temperature at the interface.
+Since the velocity in the liquid phase is relatively small during this stage, and $\partial \theta / \partial y = 0$, eqs. (\ref{eq-qmvt}) and \ref{eq:Ste-condition} becomes:
+\begin{eqnarray} \label{eq-balance-momentum}
+   \frac{\partial p}{\partial x} &=& \frac{\Ray}{\Rey^2 \Pr} \theta, \\ \label{eq-energy}
+    \frac{\partial \theta}{\partial t} &=&  \frac{\partial^2 T}{\partial x^2}, \\ \label{eq-stefan-x}
+   \frac{\partial \Gamma_i}{\partial t} &=& - \frac{\Ste}{\Pr} \frac{\partial \theta}{\partial x}.
+\end{eqnarray}
+The temperature field during the conduction regime is quasi-steady, thus linear, eq. (\ref{eq-stefan-x}) can be approximated by:
+\begin{equation}
+    \frac{\partial \Gamma_i}{\partial t} \approx - \frac{\Ste}{\Pr} \frac{\theta_i - \theta_h}{\Gamma_i} \approx  \frac{\Ste}{\Pr} \frac{1}{\Gamma_i}.
+\end{equation}
+The location $\Gamma_i$ of the interface could hence be approximated by:
+\begin{equation}
+   \Gamma_i = \sqrt{2 \times \frac{Ste}{Pr} t} = \sqrt{2 \tau}.
+\end{equation}
+Moreover, the Nusselt number can be evaluated using the same assumption:
+\begin{equation}
+   N\!u= \int_0^{H} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy \approx \frac{H}{\Gamma_i} \approx ({2 \tau})^{-1/2}.
+\end{equation}
+To summarize, during the first stage of the melting, when the heat transfert is lead by conduction, the time evolution of the liquid fraction (given by the location of the interface) and the Nusselt number can be approximated by
+$Lf \sim \tau^{1/2}$ and $N\!u \sim \tau^{-1/2}$.
+
+While the melting continue to expand to the right side of the domain, a natural convection flow is arising from the top of the cavity since the PCM is heated from the left side. 
+Convection and conduction coexist at this stage, hence the total heat transfer rate is the sum of the conductive and the convective heat transfer.
+Let $dy$ be the height of the liquid zone altered by the convection flow.
+On can thus define a Rayleigh number based on $dy$ as $\Ray_{dy} = \Ray \times dy^3$.
+Since $\Pr >> 1$, the thermal boundary layer in this region can be hence evaluated as (see eq. (\ref{eq-bnd-layer-T})):
+ \begin{equation} \label{eq-conv-cond-reg}
+ \delta_{dy} \sim dy \times \Ray^{-1/4}.
+\end{equation}
+By assuming, that at the convection-conduction level $\delta_{dy} \sim \Gamma_i$, we have $dy \sim (2 \tau)^2 \times \Ray$ from (\ref{eq-conv-cond-reg}) and: 
+\begin{equation}
+\frac{dy}{\Gamma_i} \sim (2 \tau)^{3/2} \times Ra. 
+\end{equation}
+The Nusselt number during the mixed convection-convection regime can therefore be approximated by:
+\begin{equation} \label{eq-Nu-conv-cond}
+   N\!u \sim (2 \tau)^{-1/2} + (2 \tau)^{3/2} \times \Ray
+\end{equation}
+Eq. \ref{eq-Nu-conv-cond} indicates that the contribution of the conduction ($(2 \tau)^{-1/2}$) decreases with time while the convection one is increasing.
+From a simple analysis of $\partial N\!u/\partial \theta = 0$, one can find the minimum value of the Nusselt number $N\!u_{min} \sim Ra^{1/4}$ occurring at $\tau \sim \Ray^{-1/2}$.
+
+Finally, when the natural convection flow is fully developed and dominates the heat transfer along the vertical heated wall the thermal boundary layer is $\delta_T \sim Ra^{1/4}$ and therefore the Nusselt number scale is:
+\begin{equation}
+   N\!u \sim Ra^{1/4}
+\end{equation}
+
+\cite{jany1988scaling} have suggested the following single correlation gathering the foregoing scaling of the Nusselt number at each regime:
+\begin{equation} \label{eq-Nu-scale}
+N\!u(\tau) =  \frac{1}{\sqrt{2 \tau}} + \left[c_1 \Ray^{1/4} - \frac{1}{\sqrt{2 \tau}} \right]  \left[ 1 + \left(c_2 \Ray^{3/4}  \tau^{3/2}\right)^n \right]^{1/n}.
+\end{equation}
+The values of the constants were fitted from numerical data: $c_1 = 0.27$, $c_2 = 0.0275$, and $n=-2$. 
+
+In Fig. \ref{fig:Nusselt} we compare the time evolution of the Nusselt number obtained from our numerical data (see Figure \ref{fig: pcm-case})  to experimental results of  \cite{Okada1984}  and predictions obtained from the correlation (\ref{eq-Nu-scale}). Our results perfectly fit the theoretical prediction of \cite{jany1988scaling}. They are also in good agreement with experimental data, suggesting, however, that very accurate measurements and numerical simulations are needed to validate theoretical scaling analysis.
+\begin{enumerate}
+	\item The pure conduction regime ($N\!u \sim (2 \tau)^{-1/2}$) for $\tau  \gtrsim 0$ to $\tau \sim \Ray^{-1/2} =0.02$  (corresponding to Fig.  \ref{fig:melt-field}a).
+	Since the temperature gradient has initially huge values because of the sudden increase of the temperature of the left wall, the Nusselt number rapidly decreases during the first stage of the flow evolution. 
+	The  signature of this conduction regime is the slow heat transfer characterized by a monotonic decrease of the Nusselt number.
+	
+	\item The mixed conduction-convection regime  ($ N\!u \sim \tau^{-1/2} + \Ray\, \tau^{3/2}$) for $  0.02  \leq \tau \leq 0.05$ (illustrated in  Fig.  \ref{fig:melt-field}b).
+
+	\item The convection dominated regime ($ N\!u \sim \Ray^{1/4}$) for $\tau > Ra^{-1/2}$  (corresponding to Figs.  \ref{fig:melt-field}c-e).
+	The plateau at the value of $\Ray^{1/4}$ corresponds to the pure convective transfer and is observed in Fig. \ref{fig:Nusselt} for $  0.05 \leq \tau \leq 0.1$. Numerical results show a slight decrease of the $N\!u$ in the final stage ($\tau \geq 0.1$), when the melting front starts to touch the right wall of the cavity (see Figs.  \ref{fig:melt-field}e-f). The correlation model is not valid for this late evolution of the melting process.
+\end{enumerate}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{\figpath/Fig_cap_melting/fig06}
+	\end{center}
+	\caption{Complete melting of the PCM. Time evolution of the average Nusselt number defined at the hot (left) wall (cf. eq. \ref{eq-Nu}) (solid line). Comparison with the experimental results of  \cite{Okada1984} (dashed line) and the predictions using the correlation (\ref{eq-Nu-scale}) suggested by \cite{jany1988scaling} (dash-dot line). $\Ray = 3.27 \cdot 10^5$, $\Pr = 56.2$ and $\Ste = 0.045$.}\label{fig:Nusselt}
+\end{figure}
+
+
+Another important basic quantity describing the melting process is the liquid fraction $L_f$.  
+The time evolution of the liquid fraction (Fig. \ref{fig:Lf}a) displays three regimes during the melting process. $L_f$  initially grows as $\tau^{ 1/2}$, which is a typical law for a conduction-dominated heat transfer. Then, a linear temporal evolution is observed, until the melting front reaches the right wall.
+This linear regime corresponds to the quasi-steady state observed in the evolution of the Nusselt number (Fig. \ref{fig:Nusselt}).
+
+Using the asymptotic limits of Eq. (\ref{eq-Nu-scale}) for $ \tau \to 0$ (pure conduction) and $ \tau \to \infty$ (pure convection),  \cite{jany1988scaling} suggested the following correlation law for the time evolution of the liquid fraction:
+\begin{equation} \label{eq-Lf-scale}
+L_f(\tau) = \left[\left({\sqrt{2 \tau}} \right)^5 + \left(c_1 \Ray^{1/4}  \tau \right)^{5} \right]^{1/5},
+\end{equation}
+where $c_1=0.27$ is the same constant as in (\ref{eq-Nu-scale}). We compare in Fig. \ref{fig:Lf}b our numerical results with the predictions based on (\ref{eq-Lf-scale}) within the validity domain of the analysis, \ie before the melting front reaches the right wall of the cavity. A very good agreement is found with theoretical predictions and also with previously published numerical results \citep{Wang2010}.
+
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{\figpath/Fig_cap_melting/fig07}
+	\end{center}
+	\caption{Complete melting of the PCM. (a) Time evolution of the liquid fraction for the complete melting of the PCM. (b) Comparison of our results (solid line) with the numerical results of  \cite{Wang2010} (dashed line) and the predictions using the correlation (\ref{eq-Lf-scale}) suggested by \cite{jany1988scaling} (dash-dot line).}\label{fig:Lf}
+\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%Ã¹
+\subsection{Influence of the Rayleigh number}
+%%%%%%%%%%%%%%%%%%%%%
+
+To assess the influence of the Rayleigh number on the evolution of the melting process, we performed two other simulations by multiplying the initial value of $\Ray = 3.27 \cdot 10^5$ by a factor of 5 and 10, respectively. The exact values are: $\Ray = 1.62 \cdot 10^6$ and $\Ray = 3.27 \cdot 10^6$. 
+First, we increase the height $H$ of the cavity by a factor of $\sqrt[3]{5}$ and $\sqrt[3]{10}$ and consider the same $\delta T$.
+Thus the Stefan number $\Ste$ is kept constant.
+Second, we increase the temperature difference parameter $\delta T$ by keeping $H$ constant.
+It corresponds of an increased value of the Stefan number by a factor of $5 $ and $10$:
+$\Ste = 0.223$ and $\Ste = 0.45$.
+Figures \ref{fig:Ra-Nusselt-H} and \ref{fig:Ra-Nusselt-deltaT} show the temporal evolution of the liquid fraction $L_f$ (a),  and the average Nusselt number defined at the hot wall,  (b). 
+The same heat transfer regimes described previously are observed for each case: conduction, mixed conduction-convection and convection.
+
+Figure \ref{fig:Ra-Nusselt-H}(a) indicates that increasing the Rayleigh number by keeping $\delta T$ constant induces a slower melting rate.
+This is the expected behaviour since the size of the PCM is increased by a factor of 2, and the velocity $\vec u$ is hence decreasing  in order to satisfy the condition $\Rey = 1$.
+We note however a non-monotonic variation of time necessary to melt a fixed value of fluid.
+For instance, to achieve $L_f = 0.5$ (50\% of the volume is melted), an increase of $\Ray$ by a factor of $10$ leads to a growth of the time by a factor of $1.7$.
+Nonetheless, when $\Ray$ is  $5$ times larger, the necessary time only increases by a factory of $2$.
+This is most likely due to the non-linear intricacies of the problem and requires further investigation.
+Furthermore, the Nusselt number reported in Figure \ref{fig:Ra-Nusselt-H}(b) shows that the higher the Rayleigh number, the higher the Nusselt number.
+This is consistent, since the temperature gradient is integrated along a greater heated wall. 
+
+Figure \ref{fig:Ra-Nusselt-deltaT}(a) shows that by increasing the value of $\delta T$ and consequently increasing the Rayleigh number and the Stefan number, the PCM melts faster. 
+We note that the heigh $H$ of the cavity is kept constant, hence the natural convection flow in the melted PCM is enhanced when the Rayleigh number keep increasing.
+As a consequence, the convection-dominated regime is reached earlier, as shown by the shift of the minimum of the $N\!u$ to lower values of $t_{\varphi}$ in Figure \ref{fig:Ra-Nusselt-deltaT}(b). This evolution is also observed for the liquid fraction. 
+As expected, an increase of the Rayleigh number and the Stefan number is followed by an enhancement of the heat transfer during the melting, and consequently an improved efficiency of the PCM.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.95\textwidth]{\figpath/Fig_cap_melting/fig08}
+	\end{center}
+	\caption{Complete melting of the PCM.  Influence of the value of the Rayleigh number ($\Ray$) on the time evolution of the average Nusselt number defined at the hot (left) wall (a) and liquid fraction (b). The reference case ($\Ray=3.27\cdot 10^5$) is represented by red continuous lines. The value of the $\Ray$ was increased by a factor of $5$ and $10$, respectively while the Stefan number $\Ste$ is kept constant.}\label{fig:Ra-Nusselt-H}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.95\textwidth]{\figpath/Fig_cap_melting/fig09}
+	\end{center}
+	\caption{Complete melting of the PCM.  Influence of the value of the Rayleigh number ($\Ray$) on the time evolution of the average Nusselt number defined at the hot (left) wall (a) and liquid fraction (b). The reference case ($\Ray=3.27\cdot 10^5$) is represented by red continuous lines. The value of the $\Ray$ and $\Ste$ were increased by a factor of $5$ and $10$, respectively.}\label{fig:Ra-Nusselt-deltaT}
+\end{figure}
+
+
+
+
+
+\section{Melting of octadecane PCM with basal heating.}
+
+
+The melting of PCM heated from the side was presented in Sec. \ref{chap-MELTING}.
+The dynamic of the melting, the identification of three regimes describing the melting process and the effect of the Rayleigh number have been discussed in detail.
+In this chapter, we pay more attention to PCM heated from below.
+This configuration is indeed known to be overspread in the nature or in human activities, such as geophysical flows (Earth's mantle formation, magma oceans) or heat dissipation from electronic devices.
+
+While the melting of PCM heated from the side have attracted many consideration, the melting of PCM heated from below have received less attention.
+\cite{diaz1984visualization,hale1980solid} have studied experimentally the solid-liquid interface morphology of PCM during basal heating.
+\cite{gong1998flow} studied numerically the flow and heat transfer during the melting of pure n-octadecane in a rectangular cavity heated from below.
+Recent numerical simulations investigate different boundary conditions such as
+periodic configurations along the horizontal axis \citep{esfahani2018basal,madruga2018dynamic,favier2019rayleigh} or wavy surface in a rectangular cavity heated from below \citep{kousksou2014melting}.
+
+ We investigate in this chapter the melting of a pure octadecane PCM in a square enclosure heated from below.
+ The dynamics of the melting is fundamentally different in the basal heating case compared with the lateral heating.
+ It has been observed that for this configuration natural convection develops in the form of Benard cells and
+ results in a nonplanar solid-liquid interface. 
+\citep{vasil2011dynamic,favier2019rayleigh} have studied the hydrodynamic instabilities at the onset of convection and compared their observation with the classical Rayleigh-Bénard \citep{chandrasekhar2013hydrodynamic} instability mechanism.
+\citep{favier2019rayleigh} have focused their attention to the effect of the non-planar topography of the interface to the convection flow.
+ On the other hand, \citep{gong1998flow,esfahani2018basal,madruga2018dynamic} mostly focused on global quantities such as the heat flux and the statistical properties of the interface.
+
+The physical parameters considered are the same as presented in Sec. \ref{sec-melting}:
+$\Pr = 56.2$ and $\Ste = 0.045$.
+Three Rayleigh numbers are carried out: $\Ray = 3.27 \cdot 10^5$, $\Ray = 1.62 \cdot 10^6$, $\Ray = 3.27 \cdot 10^6$ to assess the influence of the size of the domain on the dynamic of the natural convection flow
+as observed by \cite{madruga2018dynamic}.
+The PCM is initially solid at a cold dimensionless temperature $\theta_c$ under the temperature of fusion.
+The top of the wall is set at an isothermal temperature $\theta = \theta_c$, the vertical wall are adiabatic and the bottom is heated at a dimensionless temperature $\theta = \theta_h$.
+ We carried out a two-dimensional numerical simulation even if 
+ \cite{gau1983flow} and  \cite{gong1998flow} have noticed the existence of three-dimensional convection cells during the very first step of the melting process.
+ Indeed, this three-dimensional convection cell can be neglected since the duration is very short compared with the whole melting step,
+so that the two-dimensional model is realistic.
+A qualitative observation of the dynamic of the natural convection flow and its impact on the melting front is first addressed.
+Second, the observation of four regimes during the melting is discussed.
+Finally, a comparison between the lateral and the basal heating is presented.
+
+\subsection{Time evolution of the melting process} \label{sec-RB-melt-process}
+
+The natural convection flow in the melt PCM during lateral heating exhibits convection cells deforming the solid-liquid interface (see Fig. \ref{fig:melt-field}).
+The dynamic of the natural convection flow during the basal heating is fundamentally different.
+It is well known that any non-planar topography can lead to a baroclinic flow at any Rayleigh number.
+
+Fig. \ref{fig:melt-below} displays the structure of the natural convection in the melt PCM through a sequence of panels for temperature isolines and streamlines in the liquid phase.
+An array of lengthening plumes (panel a to c) and counter-rotating convective cells (panel d to f)  is located in the liquid phase.
+The number of convective cells and plumes increases with the Rayleigh number.
+For $\Ray = 3.27 \cdot 10^5$, three equidistant plumes (Fig. \ref{fig:melt-below}a) and five convective cells (Fig. \ref{fig:melt-below}d) can be observed, while four and six plumes are observed for $\Ray = 1.62 \cdot 10^6$ and $\Ray = 3.27 \cdot 10^6$ respectively (Figs. \ref{fig:melt-below}b and \ref{fig:melt-below}c).
+These observations agree well with the numerical results of \cite{gong1998flow} and \cite{madruga2018dynamic}.
+
+The shape of the interface is directly linked to the dynamic of the plumes.
+The mushroom form of the plumes results from the two symmetric counter-rotating convective cells surrounding each plumes.
+We observe an anti-clockwise recirculation of the left convection cell and a clockwise recirculation of the right.
+Thus, the melt is heated to the highest temperature at bottom and then floats up, reaches the phase change interface and splits into opposite directions.
+The melt is cooled as it flows through the phase change interface.
+It results a non-planar interface with a peak at the center of each couple of counter-rotating convective cells.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_MELT_BASAL_heating_2}
+	\end{center}
+	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.62 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$.}
+	\label{fig:melt-below}
+\end{figure}
+
+It is useful to introduce the effective Rayleigh and Nusselt numbers of the fluid layer, based on the height of the melting PCM, to describe the temporal evolution of the melting:
+
+\begin{eqnarray}
+	Ra_{e} &=& Ra \times \bar {\delta_H}^3, \\
+	N\!u_{e} &=& N\!u \times \bar{\delta_H},
+\end{eqnarray}
+with $\bar{\delta_H}$ the averaged fluid height. Note that $\bar{\delta_H}$ here can be assimilated to the liquid fraction.
+In the limit of vanishing $\Ste$ number, the classical no-slip Rayleigh-Bénard convection predicts a critical Rayleigh number $\Ray_c \approx 1707.76 $ \citep{chandrasekhar2013hydrodynamic} after which the first instability appears and the melting front becomes non-planar.
+This critical value is increased for increasing values of $\Ste$.
+In our simulations, the convective onset occurs at around $\Ray_e \approx 3 \times 10^3$, which is in good agreement with the observation of \citep{esfahani2018basal,favier2019rayleigh}.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_Ra-327e5}
+	\end{center}
+	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.62 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$.}
+	\label{fig:T-evol-Ra-3.27e5}
+\end{figure}
+
+The time evolution of the melting for $\Ray = 3.27 \times 10^5$ is illustrated in details in Fig. \ref{fig:T-evol-Ra-3.27e5} in panels (a) to (f).
+Before the first instability arise, the melt layer evolves solely by conduction. 
+There is no noticeable fluid flow and the melting front remains straight (panel (a)).
+The convective onset occurs at around $\Ray_e \approx 3 \times 10^3$ and the phase-change interface becomes non-planar (panel (b)).
+The appearance of convection is marked by a change in the shape of the interface from straight to nearly periodic curve.
+While the fluid depth increases, the effective Rayleigh number increases and the convective rolls are stretched vertically (panels (b) and (c)).
+We note that during this stage, the number of rolls is time-independent.
+This stage can be compared to the steady convection after the onset in the Rayleigh-Bénard system.
+After the rolls are elongated vertically, they start to oscillate laterally and then merge to create greater rolls (panels (d) and (e)).
+The essential consequence of the foregoing observation is that the melting front is modified.
+The interface is actually shaped by the new flow pattern. 
+Two peaks are observed but is still periodic at the interface related to the four convective rolls.
+The foregoing steady convection observation is then observed again after the rolls have merged (panel (f)).
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_327e6_1}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_327e6_2}
+	\end{center}
+	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain.$\Ray = 3.27 \cdot 10^6$}
+	\label{fig:T-evol-Ra-3.27e6}
+\end{figure}
+
+Fig. \ref{fig:T-evol-Ra-3.27e6} shows the dynamic of the melting for higher $\Ray$ number.
+The size of the cavity is increased of an order of three, corresponding to $\Ray = 3.27 \times 10^6$ while the $\Ste$ number remains the same.
+The stages described previously are recovered in panels (a) to (d).
+At $\Ray_e = 4 \times 10^5$ the interface loses periodicity and becomes smoother without cusps (panels (e) and (f)).
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_654e6_1}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_654e6_2}
+	\end{center}
+	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.62 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$.}
+	\label{fig:T-evol-Ra-6.54e6}
+\end{figure}
+
+\subsection{Scaling analysis} \label{sec-RB-scal-analysis}
+
+The previous observation can be assessed more quantitatively by evaluating the heat transfert rate during the melting.
+Fig. \ref{fig:NU-LF-evol}(a) plots the temporal evolution of the heat flux represented by the Nusselt number and the strength of buoyancy represented by the Rayleigh number when the melting evolve.
+The onset of the convection arises at $\Ray_e = 3 \times 10^3$ when a sudden jump in $N\!u_e$ is observed.
+\cite{vasil2011dynamic} have investigated a weakly non-linear stability analysis and have highlighted a superexponentional amplitude growth when the Rayleigh number becomes close to the traditional critical value in the limit of vanishing Stefan number.
+This superexponential growth is moreover followed by a rapid pattern readjustment.
+The trend of $N\!u_e$ at the onset of convection is in total accordance with the foregoing prediction of \cite{vasil2011dynamic}.
+The results of \citep{esfahani2018basal,madruga2018dynamic,favier2019rayleigh} exhibit the same behaviour despite the different conditions (periodic lateral boundary conditions, adiabatic boundary conditions at the top of the cavity and low value of $\Pr$ for \cite{esfahani2018basal} and \cite{favier2019rayleigh}.
+The rapid growth of $N\!u_e$ is followed by a power law with averaged smaller exponent $N\!u \sim \Ray^{0.28}$.
+Within the framework of natural convection, the Grossmann-Lohse theory \citep{grossmann2000scaling} predicts a scaling exponent of $2/7$ for $10^5 \leq \Ray \leq 10^{14}$.
+Our results match remarkably well with this power-law evolution of $N\!u \sim \Ray^{2/7}$.
+The transition from steady pattern of the convective rolls to oscillating patterns followed by cell merging, as it is clearly shown in Figs. \ref{fig:T-evol-Ra-3.27e6}(d-f) and \ref{fig:T-evol-Ra-6.54e6}(c-f), 
+is also illustrated by a decrease of $N\!u$ at $\Ray \sim 10^5$ followed by high oscillation in the temporal evolution of the heat transfert.
+The power-law relation Nu-Ra is bounded in this stage by the average exponent of $1/3$.
+
+One can introduce the following scaling for the time evolution of the liquid fraction.
+\begin{equation}\label{eq:scal-Lf-RB}
+	L_f(t) = \left[ \sqrt{2 \tau}^{(2-3 \beta)}+ c \Ray^\beta \tau \right]^{1/(2-3 \beta)},
+\end{equation}
+ with $\beta$ the exponent in the Nu-Ra power law, $c = \frac{(2-3 \beta) \gamma}{2 + \Ste}$ and $\gamma$ a constant fitted from numerical data.
+The time evolution of the liquid fraction is illustrated in Fig. \ref{fig:NU-LF-evol}(b).
+As expected, the purely diffusive stage displays the scaling $L_f \sim t^{1/2}$.
+By replacing $\beta$ by the exponent value $2/7$ in eq. (\ref{eq:scal-Lf-RB}), we obtain $L_f \sim t^{7/8}$.
+Our simulations exhibit a power-law evolution of $L_f \sim t^{0.82}$ when the convection is fully developed in the fluid, corresponding to $\Ray_e \geq \Ray_c$.
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/NU-LF-PHYS}
+	\end{center}
+	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.62 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$.}
+	\label{fig:NU-LF-evol}
+\end{figure}
