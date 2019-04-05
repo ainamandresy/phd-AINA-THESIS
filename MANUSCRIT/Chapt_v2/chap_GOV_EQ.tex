@@ -3,8 +3,8 @@
 %              \sectionmark{head version}}
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\titcourt{Numerical resolution of the Navier-Stokes-Boussinesq model}
-\def\titlong{Numerical resolution of the Navier-Stokes-Boussinesq model}
+\def\titcourt{Navier-Stokes-Boussinesq model and Enthalpy method}
+\def\titlong{Navier-Stokes-Boussinesq model and Ethalpy method}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -16,22 +16,25 @@
 %\section{Governing equations} \label{sec-gov-eq}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We consider a solid-liquid system placed in a two-dimensional square cavity of height $H$. In the following, subscripts $s$ and $l$ will refer to the solid and liquid phases, respectively. 
+We consider a solid-liquid system placed in a two-dimensional numerical domain of characteristic length $L_{ref}$. 
+In the following, subscripts $s$ and $l$ will refer to the solid and liquid phases, respectively. 
 
-For the numerical implementation, it is convenient to adopt a single-domain approach to describe both phases using the same system of equations. 
+The single domain approach, using the same system of equations in both phases is described first in detail.
+%For the numerical implementation, it is convenient to adopt a single-domain approach to describe both phases using the same system of equations. 
 The model is based on the Navier-Stokes equations with Boussinesq approximation, which is the natural description of the fluid flow with natural convection. 
 A penalty term is added to the momentum equations to bring the velocity to zero inside the solid region. 
-For the energy conservation equation, an enthalpy method is used to model the phase change process. The single-domain model is described in detail in the following sections.
+For the energy conservation equation, an enthalpy method is used to model the phase change process. %The single-domain model is  in detail in the following sections.
+Secondly, a scale analysis is presented in order to have a comprehensive view of the melting and the heat transfer rate during the phase-change.
 
 \section{Enthalpy method}
 
-The phase change process is modelled using an enthalpy method \citep{voller1987pcm,Cao1989,Cao1990} with temperature-based formulation. We start from the energy equation:
+The phase change process is modeled using an enthalpy method \citep{voller1987pcm,Cao1989,Cao1990} with temperature-based formulation. We start from the energy equation:
 \begin{equation}
 \label{eq-energie}
    \frac{\partial (\rho h)}{\partial t_{\varphi}} + \nabla \cdot(\rho h \vec{\tilde{u}}) - \nabla \cdot (k \nabla T) = 0,
 \end{equation}
 where $t_{\varphi}$ is the physical time, $h$ the enthalpy, $\rho$ the density, $\vec{\tilde{u}}$  the velocity vector, $T$ the temperature and $k$ the thermal conductivity. 
-To make Equation (\ref{eq-energie})  valid for the entire domain containing both liquid and solid phases, the total enthalpy $h$ is regarded as the sum of the sensible heat and the latent heat:
+To make eq. (\ref{eq-energie})  valid for the entire domain containing both liquid and solid phases, the total enthalpy $h$ is regarded as the sum of the sensible heat and the latent heat:
 \begin{equation}
 \label{eq-enth-model}
   h = c ( T + s(T) ),
@@ -42,8 +45,9 @@ We use a regularization of all step-type functions by a continuous and different
 \Blue{%Moreover, we assume that the undercooling problem is here negligible since only pure and homogeneous materials are considered.
 We assume moreover that the undercooling phenomenon is negligible (see also \cite{wang2010numerical,kowalewski2004phase}).}
 
-Equation (\ref{eq-energie}) can be further simplified by considering the following assumptions: (i) the density difference between solid and liquid phases is negligible, \ie $\rho_l=\rho_s=\rho$ is constant; (ii) the regularization zone is narrow and the velocity inside this zone is very low. 
-Consequently, the final expression of the energy equation is obtained by combining (\ref{eq-enth-model})  and (\ref{eq-energie}) and  neglecting the convection term $\nabla \cdot ( c s \vec{\tilde{u}})$\footnote{In the liquid phase, $\nabla \cdot ( c s \vec{\tilde{u}})  = h_{sl} \nabla \cdot  \vec{\tilde{u}}=0$; in the solid phase, $s=0$; in the regularization region, it is assumed that $\vec{\tilde{u}}=0.$}:
+Eq. (\ref{eq-energie}) can be further simplified by considering the following assumptions: (i) the density difference between solid and liquid phases is negligible, \ie $\rho_l=\rho_s=\rho$ is constant. 
+We note however that this is not strictly true for all substances, but also serves as a convenient simplification; (ii) the regularization zone is narrow and the velocity inside this zone is very low. 
+Consequently, the final expression of the energy equation is obtained by combining eqs. (\ref{eq-enth-model})  and (\ref{eq-energie}) and  neglecting the convection term $\nabla \cdot ( c s \vec{\tilde{u}})$\footnote{In the liquid phase, $\nabla \cdot ( c s \vec{\tilde{u}})  = h_{sl} \nabla \cdot  \vec{\tilde{u}}=0$; in the solid phase, $s=0$; in the regularization region, it is assumed that $\vec{\tilde{u}}=0.$}:
 \begin{equation}\label{eq-energie-enth-model}
 \frac{\partial \left(c T\right)}{\partial t_{\varphi}} + \nabla \cdot\left( c T \vec{\tilde{u}}\right) -
 \nabla \cdot\left( \frac{k}{\rho} \nabla T \right) +  \frac{\partial \left(c s\right)}{\partial t_{\varphi}}  = 0.
@@ -52,61 +56,74 @@ The essential feature of the current approach is that the phase change front is 
 The phase-change occurs over a temperature interval $  T \in [T_f - T_{\varepsilon1}, T_f + T_{\varepsilon2}] $ around the temperature of fusion $T_f$.
 For non-isothermal phase-change PCM, $T_{\varepsilon1}$ and $T_{\varepsilon2}$ correspond to the solidus and the liquidus temperature of the material.
 However, for a pure material involving a unique phase-change temperature, $T_{\varepsilon1}$ and $T_{\varepsilon2}$ represent an artificial mushy zone used to regularize discontinuous parameters and should be set as small as possible.
+The solid-liquid interface is thus identified through the isoline $T=T_f$.
+One could include the Gibbs-Thomson effect due to the surface energy of the solid-liquid interface which is assumed to be negligible in our simulations.
 
 \section{Navier-Stokes equations with Boussinesq approximation}
- 
 
-The natural convection in the liquid part of the system is modelled using the incompressible Navier-Stokes equations, with  Boussinesq approximation for buoyancy effects. To make this model valid for both liquid and solid phases, the momentum equation is modified as follows:
+The natural convection in the liquid part of the system is modeled using the incompressible Navier-Stokes equations, with  Boussinesq approximation for buoyancy effects. To make this model valid for both liquid and solid phases, the momentum equation is modified as follows:
 \begin{equation}\label{eq-momentum-conserv-1}
   \rho \left( \frac{\partial \vec{\tilde{u}}}{\partial t_{\varphi}} +   {(\vec{\tilde{u}}\cdot\nabla ) \vec{\tilde{u}}} \right) + \nabla P - \mu_{l}  {\nabla^2 \vec{\tilde{u}}} 
-- \rho g \vec{e}_y= A(T) \vec{\tilde{u}},
++ \rho g \vec{e}_y= A(T) \vec{\tilde{u}},
 \end{equation}
-where $P$ denotes the pressure, $\mu_{l}$ the dynamic viscosity of the liquid (assumed to be constant).  
+where$P$ denotes the pressure, $\mu_{l}$ the dynamic viscosity of the liquid (assumed to be constant).  
 %and $f_B(T)$ the Boussinesq force. 
 
-The penalty term $A(T) \vec{\tilde{u}}$ is artificially introduced in (\ref{eq-momentum-conserv-1}) to extend this equation in the solid phase, where the velocity, pressure, viscosity and Boussinesq force are meaningless.  Consequently, $A(T)$  is modelled to vanish in the liquid, where the Navier-Stokes-Boussinesq momentum equation is recovered. A large value of $A(T)$ is imposed in the solid, reducing the momentum eq. (\ref{eq-momentum-conserv-1})  to $A(T) \vec{\tilde{u}}=0$, equivalent to $\vec{\tilde{u}}=0$. Exact expression for $A$ will be given in the next section.
+The penalty term $A(T) \vec{\tilde{u}}$ is artificially introduced in eq. (\ref{eq-momentum-conserv-1}) to extend this equation in the solid phase, where the velocity, pressure, viscosity and Boussinesq force are meaningless.  Consequently, $A(T)$  is modelled to vanish in the liquid, where the Navier-Stokes-Boussinesq momentum equation is recovered. A large value of $A(T)$ is imposed in the solid, reducing the momentum eq. (\ref{eq-momentum-conserv-1})  to $A(T) \vec{\tilde{u}}=0$, equivalent to $\vec{\tilde{u}}=0$. Exact expression for $A$ will be given in the next section.
 
-Under the assumption of a small variation of the density and the temperature, the Boussinesq approximation allows to linearize the density in the buoyancy part $\rho g$ of the eq. (\ref{eq-momentum-conserv-1}) as follows:
+The density is assumed to be constant everywhere except in the body force term $\rho g$ of the $\vec e_y$ momentum eq. (\ref{eq-momentum-conserv-1}).
+Under the assumption of a small variation of the density and the temperature, the Boussinesq approximation allows to linearize the density as follows:
 \begin{equation}
    \rho = \rho_{ref} (1 - \beta (T-T_{ref})),
 \end{equation}
-with $\beta = - (1/\rho_{ref}) (\partial \rho / \partial T)$.
+with $\beta = - (1/\rho_{ref}) (\partial \rho / \partial T)$ the thermal expansion coefficient and $(\rho_{ref},T_{ref})$ a reference states.
+It is worth noting that this approximation is valid for $\beta (T - T_{ref})$ considerably smaller than unity.
 Therefore, the momentum equation can be written as:
 
 \begin{equation}\label{eq-momentum-conserv}
   \frac{\partial \vec{\tilde{u}}}{\partial t_{\varphi}} +   {(\vec{\tilde{u}}\cdot\nabla ) \vec{\tilde{u}}} + \nabla p - \nu_{l}  {\nabla^2 \vec{\tilde{u}}} 
 - f_B(T) \vec{e}_y= A(T) \vec{\tilde{u}},
 \end{equation}
-where $p = (P + \rho_{ref} g y)/ \rho_{ref}$ and $f_B(T) = g \beta (T-T_{ref})$ denotes the buoyancy force.
+where  $\nu_l = \mu_l/\rho$ is the kinematic viscosity,  $p = (P + \rho_{ref} g y)/ \rho_{ref}$ accounting for the hydrostatic pressure $\rho_{ref} g y$ and $f_B(T) = g \beta (T-T_{ref})$ denotes the buoyancy force.
 
-Finally, the conservation of mass in the liquid phase is expressed by the continuity equation:
+Finally, the conservation of mass in the liquid phase is expressed by the continuity equation in the frame of incompressible fluid:
 \begin{equation}\label{eq-mass-conserv}
 \nabla \cdot \vec{\tilde{u}} = 0.
 \end{equation} 
 
+The final system of equations for the single-domain approach is thus:
+\begin{eqnarray}
+	\nabla \cdot \vec{\tilde{u}} &=& 0, \\
+	\frac{\partial \vec{\tilde{u}}}{\partial t_{\varphi}} +   {(\vec{\tilde{u}}\cdot\nabla ) \vec{\tilde{u}}} + \nabla p - \nu_{l}  {\nabla^2 \vec{\tilde{u}}} 
+- f_B(T) \vec{e}_y - A(T) \vec{\tilde{u}} & = & 0, \\
+	\frac{\partial \left(c T\right)}{\partial t_{\varphi}} + \nabla \cdot\left( c T \vec{\tilde{u}}\right) -
+\nabla \cdot\left( \frac{k}{\rho} \nabla T \right) +  \frac{\partial \left(c s\right)}{\partial t_{\varphi}}  &=& 0.
+\end{eqnarray}
 
-\section{Final system of equations for the single-domain approach}\label{sec-eq-scaling}
+
+\section{Dimensionless system of equations for the single-domain approach}\label{sec-eq-scaling}
 
 It is convenient to numerically solve a dimensionless form of the previous equations.
-Using the cavity height $H$ as length scale and a reference state $(\rho, V_{ref}, T_{ref})$, we can define the following scaling for the space, velocity, temperature and time variables:
+Using the length scale $L_{ref}$ and a reference state $(\rho, V_{ref}, T_{ref})$, we can define the following scaling for the space, velocity, temperature and time variables:
 \begin{equation}\label{eq-adim}
-\vec{x} = \frac{\vec{\tilde{x}}}{H} \, , \,  \vec{u} = \frac{\vec{\tilde{u}}}{V_{ref}} \, , \,  \theta = \frac{T-T_{ref}}{\delta T} \, , \,  t = \frac{V_{ref}}{H} \, t_{\varphi},
+\vec{x} = \frac{\vec{\tilde{x}}}{L_{ref}} \, , \,  \vec{u} = \frac{\vec{\tilde{u}}}{V_{ref}} \, , \,  \theta = \frac{T-T_{ref}}{\delta T} \, , \,  t = \frac{V_{ref}}{L_{ref}} \, t_{\varphi},
 \end{equation}
-Temperatures $T_h$ (hot) and $T_c$ (cold) will be used to set isothermal walls of the cavity. The difference $\delta T$, 
+Temperatures $T_h$ (hot) and $T_c$ (cold) will be used to set isothermal boundary conditions. The difference $\delta T$, 
 %$\delta T=T_{h}-T_{f}$with $T_f$ the temperature of fusion, 
 is considered as the representative temperature scale  for the natural convection onset in the liquid region. 
-For the natural convection problem without phase-change, $\delta T$ could be defined as $\delta T=T_{h}-T_{c}$ since the flow in the fluid is driven by the temperature difference between the "hot" and the "cold" temperature.
+For the classical natural convection problem without phase-change, $\delta T$ could be defined as $\delta T=T_{h}-T_{c}$ since the flow in the fluid is driven by the temperature difference between the "hot" and the "cold" temperature.
 However, for the melting PCM, the convection is driven by the temperature difference $\delta T=T_{h}-T_{f}$, with $T_f$ the temperature of fusion.
-As far as the solidification process is concerned, a distinct discussion will be provided in section \ref{chap-SOLIDIFICATION}. % during the melting,  and $\delta T = T_f - T_c$ during the solidification. }
+As far as the solidification process is concerned, a distinct discussion will be provided in sec. (\ref{chap-SOLIDIFICATION}). % during the melting,  and $\delta T = T_f - T_c$ during the solidification. }
 Thus $\delta T$ is used to define the Rayleigh number of the flow:
 \begin{equation}
 \label{eq-Rayleigh}
-\Ray = \frac{g \beta H^3 \delta T}{\nu_l \alpha_l},
+\Ray = \frac{g \beta L_{ref}^3 \delta T}{\nu_l \alpha_l},
 \end{equation}
-where $\alpha = k/(\rho c)$ is the thermal diffusivity and  $\beta$ the thermal expansion coefficient. 
+where $\alpha = k/(\rho c)$ is the thermal diffusivity. 
 Note that the reference temperature for the phase-change problem is   $T_f$, resulting in  $\theta_f = 0$.
-Since the mushy zone is defined for  $  \theta_f - \varepsilon1 \, \leq \theta \leq \, \theta_f + \varepsilon2 $, this choice of the reference temperature 
-simplifies the identification of the latter to  $  -\varepsilon \, \leq \theta \leq \,\varepsilon $.
+Since the mushy zone is defined for  $  \theta_f - \varepsilon_1 \, \leq \theta \leq \, \theta_f + \varepsilon_2 $, this choice of the reference temperature 
+simplifies the identification of the latter to  $  -\varepsilon_1 \, \leq \theta \leq \,\varepsilon_2 $.
+The solid-liquid interface is therefore identified by the isoline $\theta=0$.
 
 Finally, the dimensionless system of equations to be solved in both liquid and solid regions can be written as:
 \begin{eqnarray}
@@ -118,7 +135,7 @@ Finally, the dimensionless system of equations to be solved in both liquid and s
 \end{eqnarray}
 where the linearised (Boussinesq) buoyancy force ($f_B$), the Reynolds ($\Rey$) and Prandtl ($\Pr$) numbers are defined as:
 \begin{equation}\label{eq-RePr}
-f_B(\theta) = \frac{\Ray}{\Pr \Rey^2} \theta, \quad \Rey = \frac{\rho V_{ref} H}{\mu_l}=  \frac{V_{ref} H}{\nu_l} , \quad \Pr = \frac{\nu_l}{\alpha_l}.
+f_B(\theta) = \frac{\Ray}{\Pr \Rey^2} \theta, \quad \Rey = \frac{\rho V_{ref} L_{ref}}{\mu_l}=  \frac{V_{ref} L_{ref}}{\nu_l} , \quad \Pr = \frac{\nu_l}{\alpha_l}.
 \end{equation}
 Non-dimensional conductivity and specific heat are functions of the temperature $\theta$, 
 \begin{equation}\label{eq-adimKC}
@@ -126,7 +143,7 @@ K(\theta)= \frac{k}{k_l} , \,  \, C(\theta) = \frac{c}{c_l},
 \end{equation}
 and have to take into account the variation of material properties between the solid and the liquid regions. 
 
-In the energy equation (\ref{eq-energ}), the non-dimensional function $S = s/\delta T$, introduced by the enthalpy model, is regularized across the regularization region using a hyperbolic-tangent function \citep{dan-2014-JCP}:
+In the energy eq. (\ref{eq-energ}), the non-dimensional function $S = s/\delta T$, introduced by the enthalpy model, is regularized across the mushy region using a hyperbolic-tangent function \citep{dan-2014-JCP}:
 \begin{equation}
 S(\theta) = S_{l} + \frac{S_{s}-S_{l}}{2}\left\{
 1 + \tanh\left(\frac{\theta_r-\theta}{R_r}\right)
@@ -138,9 +155,10 @@ where $\theta_r$ is the central value around which we regularize (typically $\th
 S_{l} = \frac{h_{sl}/c_l}{\delta T} = \frac{1}{\Ste},
 \label{eq-Ste}
 \end{equation} 
-where $Ste$ is the Stefan number. Regularizations similar to (\ref{eq-Stanh}) are used to model the variation inside the regularization region of functions (\ref{eq-adimKC}) defining material properties.
+where $Ste$ is the Stefan number. Regularizations similar to eq. (\ref{eq-Stanh}) are used to model the variation inside the regularization region of functions (\ref{eq-adimKC}) defining material properties.
+We note that linear functions \citep{voller1987pcm,wang2010numerical} or cubic Hermite polynomial \citep{Belhamadia2012} are also used in the literature.
 
-Finally, the penalty term in the momentum equation (\ref{eq-qmvt-2}) is derived from the Darcy's law, by modeling the fluid flow within the mushy region as a flow through a porous medium.
+Finally, the penalty term in the momentum eq. (\ref{eq-qmvt-2}) is derived from the Darcy's law, by modeling the fluid flow within the mushy region as a flow through a porous medium.
 In fact, the Darcy's law states that the velocity of flow in porous medium is proportional to the pressure gradient:
 
 \begin{equation}
@@ -149,7 +167,7 @@ In fact, the Darcy's law states that the velocity of flow in porous medium is pr
 where $\zeta^*$ is the permeability, which is a function of the porosity.
 As the porosity decreases, the permeability (and the velocity) also decreases, down to the limiting value of zero when the mush becomes completely solid.
 This behavior can be accounted in a numerical model by adding a source term $A \vec u$ in the momentum equation.
-The well-known equation derived from the Darcy law, the Carman-Kozeny equation \ref{ck eq}, could be a suitable form for the function $A$:
+The well-known equation derived from the Darcy law, the Carman-Kozeny eq.\ref{ck eq}, could be a suitable form for the function $A$:
 
 \begin{equation} \label{ck eq}
 	\nabla p = - \frac{\CKC (1 - \lambda)^2}{\lambda^3} \vec u.
@@ -160,6 +178,88 @@ Finally $A$ takes the form \citep{Belhamadia2012,kheirabadi2015effect}:
 \begin{equation}\label{eq-CK}
 A(\theta) = -\frac{\CKC (1 - \varphi(\theta))^2}{\varphi(\theta)^3 + b},
 \end{equation}
-where $\varphi(\theta)$ is the phase-change variable, which is  $1$ in the fluid region and $0$ in the solid. Inside the regularization region,  $\varphi(\theta)$ is regularized using a hyperbolic-tangent function similar to (\ref{eq-Stanh}).
+where $\varphi(\theta)$ is the phase-change variable, which is  $1$ in the fluid region and $0$ in the solid. Inside the regularization region,  $\varphi(\theta)$ is regularized using a hyperbolic-tangent function similar to eq. (\ref{eq-Stanh}).
 The constant $\CKC$ is set to a  large value (as discussed below) and  the constant $b=10^{-6}$ is introduced to avoid division by zero.
+
+\section{Boundary layer approximation and scale analysis}
+Either PCM is used for energy storage or for building insulation or for other purposes, one would necessarily assess the heat transfer during the phase-change process.
+Mainly, it was extensively proven that the convective heat transfer plays significant role during the melting stage.
+Therefore, before solving numerically eqs. (\ref{eq-qmvt}) - (\ref{eq-energ}), we first rely on scale analysis to predict theoretically the fluid flow and heat transfer patterns that can develop in the fluid part.
+The idea behind the scaling analysis is about identifying the proper scales of the phenomenon, in order to understand the evolution of the heat transfer and the melting rates.
+
+In the present analysis, we will consider first only the liquid phase without phase-change.
+A further analysis of the scale during the melting will be developed in sec. (\ref{chap-MELTING-CAVITY}).
+We consider a two-dimensional enclosure of height H filled with Newtonian fluid, differentially heated from the vertical walls and insulated from the horizontal walls.
+A No-slip boundary condition is considered for the velocity. 
+Since no external force is applied to our system, the fluid flow is merely driven by natural convection flow, induced by temperature differences from the vertical walls.
+It is well-known from the foregoing boundary conditions that the fluid layer situated close to the vertical walls stuck to the wall and are motionless.
+The heat transfer through the fluid layer immediately adjacent to the wall is accordingly by pure conduction, i.e, $ q = - \left. (\partial \theta/ \partial x) \right |_{x=0} $.
+We therefore define the average Nusselt number to quantify the heat transfer rate at the heated wall:
+\begin{equation}\label{eq-def-Nu}
+   N\!u = - \int_0^1 \left. \frac{\partial \theta}{\partial x} \right |_{x=0} dy.
+\end{equation}
+
+When a steady state could be reached, the fluid near each sidewall is characterized by two boundary layers: a thermal boundary layer of thickness $\delta_{\theta}$ and a viscous boundary layer of thickness $\delta_\nu$.
+The boundary layer approximation assumes that the flow and the energy transfer are restricted predominantly to the boundary layer region.
+This theory was proposed first by Prandtl in 1904 and validated later by many experimental and numerical studies.
+The main consequences of the boundary layer approximations are that: \\
+{\it (i)} the normal part of the momentum equation has a negligible importance, \\
+{\it (ii)} the downstream diffusion term in the momentum and energy equations are neglected in comparison with the normal diffusion terms ($\partial^2 \vec{u}/\partial y^2 \ll \partial^2 \vec{u}/\partial x^2$ and $\partial^2 T/\partial y^2 \ll \partial^2 T/\partial x^2$) since the boundary layer thickness is much smaller than the enclosure height ($ \delta \ll H$), \\
+{\it (iii)} the pressure distribution is purely hydrostatic, i.e, $P = - \rho g y$, \\
+{\it (iv)} the thermal and the viscous boundary layer thickness are given by the order of magnitude expressions: $\delta_\nu/\delta_\theta = o \left(\Pr^{1/2} \right)$.\\
+These assumptions lead to the following boundary layer equations for the conservation of mass, momentum and energy:
+\begin{eqnarray} \label{eq-bound-mass}
+	\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} &=& 0, \\  \label{eq-bound-mom}
+	u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} &=& \nu \frac{\partial^2 v}{\partial x^2} + g \beta (T - T_{ref}), \\ \label{eq-bound-energy}
+	u \frac{\partial T}{\partial x} + v \frac{\partial T}{\partial y} &=& \alpha \frac{\partial^2 T}{\partial x^2}. 
+\end{eqnarray}
+The mass conservation in eq. (\ref{eq-bound-mass}) in the boundary layer region leads to:
+\begin{equation}
+	\frac{u}{\delta_\theta} \sim \frac{v}{H}.
+\end{equation}
+The energy eq. (\ref{eq-bound-energy}) expresses a balance between longitudinal convection and transverse conduction:
+\begin{equation}
+	\frac{v}{H} \sim \frac{\alpha}{\delta_\theta^2},
+\end{equation}
+which yields:
+\begin{equation} \label{eq-scale-v}
+	v \sim \frac{\alpha H}{\delta_\theta^2}.
+\end{equation}
+As far as momentum eq. (\ref{eq-bound-mom}) is concerned, we could identify the interplay among three forces:
+\begin{equation} \label{eq-scale-momentum}
+	\underbrace{\frac{v^2}{H}}_{inertia} \quad \underbrace{\nu \frac{v}{\delta_\theta^2}}_{friction} \quad \underbrace{g \beta \delta T}_{buoyancy}.
+\end{equation}
+Using the expression of $v$ in eq. (\ref{eq-scale-v}) and by dividing eq. (\ref{eq-scale-momentum}) by $g \beta \delta T$, we obtain:
+\begin{equation} \label{eq-final-scale}
+	\underbrace{\left( \frac{H}{\delta_\theta} \right)^4 Pr ^{-1} \Ray^{-1}}_{inertia} \quad  \underbrace{\left( \frac{H}{\delta_\theta} \right)^4 \Ray^{-1}}_{friction} \quad \underbrace{1}_{buoyancy}.
+\end{equation}
+Eq. (\ref{eq-final-scale}) indicates that the behaviour of the fluid in the boundary layer depends on the $\Pr$ number. \\
+First, for a high-Prandtl fluid ($\Pr \geq 1$), the friction-buoyancy balance yields: 
+\begin{equation}
+	\delta_\theta \sim H \Ray^{-1/4}.
+\end{equation}
+The Nusselt number from eq. (\ref{eq-def-Nu}) scales as $H/\delta_\theta$, resulting: 
+\begin{equation}
+	N\!u \sim Ra^{1/4}
+\end{equation}
+and $v \sim \alpha/H \Ray^{1/2}$. \\
+Second, for a low-Prandtl fluid ($\Pr \ll 1$), we observe a balance between inertia and buoyancy, leading to:
+\begin{equation} \label{eq-corr-Low-Pr}
+	\delta_\theta \sim H Pr^{-1/4} \Ray^{-1/4}.
+\end{equation}
+Accordingly we obtain a Nu-Ra correlation:
+\begin{equation}
+	Nu \sim Pr^{1/4} \Ray^{1/4}.
+\end{equation}
+
+
+%Let us consider eqs. (\ref{eq-qmvt}) - (\ref{eq-energ}) in the thermal boundary layer region ($x \sim \delta_\theta$, $y \sim H$), where the heating effect of the wall is maximum.
+
+
+%The approximation commonly employed, in addition to the Boussinesq approximation, to analyse the behaviour of the heat transfer in the boundary layer is the boundary layer assumption.
+%
+%
+%
+%For further simplification, our analysis will be considered at the steady state, i.e reasonable Rayleigh number are of interests ($\Ray \leq 10^7$).
+%Following the boundary layer approximation, the following assumptions could be taken.
 

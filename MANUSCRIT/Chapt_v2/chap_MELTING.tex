@@ -76,6 +76,8 @@ Nevertheless, imposing  a too large value $\CKC=10^{10}$ results  in artificiall
 \end{figure}
 
 \subsection{Mesh adaptativity}
+
+
 The use of mesh adaptation proved mandatory in the simulation of the melting of a PCM to obtain accurate results within reasonable computational time.
 For the melting case, we used five metrics intersection to adapt the mesh, based on $S^{n+1}, S^{n}, T^{n+1}, T^{n}, \vec{u}^{n+1}$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider the metrics computed from actual (at $t_{n+1}$) and  previous (at $t_{n}$) values, for the same variable used for adaptivity (see also \cite{Belhamadia2004_S}).
 The anisotropy of the mesh is a parameter of the algorithm and it was set to values close to 1. This is an inevitable limitation since we also impose the minimum edge-length of triangles to avoid generating too large number of nodes.
