@@ -29,7 +29,7 @@ We solve the system of eqs. (\ref{eq-qmvt}) - (\ref{eq-energ}) without the penal
 Linear and non-linear expressions of the buoyancy force $f_B(T)$ in the Boussinesq approximation (\ref{eq-energie-enth-model}) are investigated, by simulating the natural convection of air and the natural convection of water.
 Natural convection of water exhibits actually a non-linear variation of the density with a maximum value around $T=4^o C$ while linear variation is generally assumed for the natural convection of air in the Boussinesq approximation.
 
-We consider a cavity of height $H$ and the physical property of air and water are listed in tab. (\ref{tab-param-phys-air}):
+We consider a cavity of height $H$ and the physical property of air and water are listed in tab. (\ref{tab-param-phys-air}).
 \begin{table}[ht!]
    \begin{center}
       \begin{tabular}{*{8}{cl}}
@@ -38,7 +38,7 @@ We consider a cavity of height $H$ and the physical property of air and water ar
         & kg/m$^3$& kg/(m s) & J/(kg K) & W/(m K) & m$^2$/s & 1/K \\
          \hline
         Air & 1.177 & 1.85 $\cdot 10^{-5}$  & 1006 & $0.0262$ & $2.22 \cdot 10^{-5}$ & $3.4 \cdot 10^{-3}$ \\
-        Water & 999.84 & 1.003 $\cdot 10^{-3}$  & 4182 & $0.6$ & $1.33 \cdot 10^{-7}$ & $6.91 \cdot 10^{-5}$
+        Water & 999.84 & 1.003 $\cdot 10^{-3}$  & 4182 & $0.578$ & $1.33 \cdot 10^{-7}$ & $6.91 \cdot 10^{-5}$
       \end{tabular}
    \end{center}
    \caption{Physical parameters of air and water at $T = 300K$, used in our simulations. For air these parameters lead to dimensionless $\Pr = 0.71$ and $\Pr = 6.99$ for water.}
@@ -66,7 +66,7 @@ the characteristic scales of the problem defined in eq. \ref{eq-adim} are:
 	L_{ref} = H, \quad T_{ref} = \frac{T_h + T_c}{2},
 \end{equation}
 and
-\begin{equation}
+\begin{equation} \label{eq-scaling-3}
    V_{ref} = \frac{\nu_l}{H} \sqrt{\frac{Ra}{Pr}} 
    \quad \Longrightarrow \quad t_{ref} = \frac{\nu_l}{H^2} \sqrt{\frac{Pr}{Ra}} 
    \quad \Longrightarrow \quad \Rey = \sqrt{\frac{Ra}{Pr}}.
@@ -132,6 +132,31 @@ We also recall that the characteristics method needs a very small time step for 
 	\label{tab-valid-natconv}
 \end{table}
 
+Finally, we compare the average Nusselt number at the left vertical wall with the reference values of \cite{de1983natural} and \cite{LeQuere91}.
+From the viewpoint of an engineer, the most important characteristic of the flow is probably the rate of heat  transfer across the cavity.
+In the next chapters, the Nusselt number will be largely used to compare the optimized configuration of a PCM either for melting or solidification.
+It is thus essential to ensure about the accuracy of the computed value of this parameter.
+$N\!u$ is calculated as defined in eq. \ref{eq-def-Nu}.
+The comparison with \cite{de1983natural} is summarized below in Tab. \ref{tab-Nu-natconv}:
+\begin{table}[ht!]
+   \begin{center}
+      \begin{tabular}{*{4}{cl}}
+         
+       $\Ray$ & $10^4$ &$ 10^5$ & $10^6 $ \\
+         \hline
+        \cite{de1983natural} & 2.245 & 4.523  & 8.927 \\
+        \cite{LeQuere91} & - & - &  8.8252 \\
+        Present simulation & 2.2448 & 4.5217  & 8.8252 \\
+      \end{tabular}
+   \end{center}
+   \caption{Average Nusselt number on the vertical boundary of the cavity at $x=0$. Comparison with \cite{de1983natural} and \cite{LeQuere91} for $Ra = 10^4$ to $10^6$.}
+   \label{tab-Nu-natconv}
+\end{table}
+
+Excellent agreement with \cite{de1983natural} is obtained for each of the three $\Ray$ numbers, with a relative error lower than $0.01$.
+It is important to note that we have exactly the same computed value of the Nusselt number as \cite{LeQuere91}.
+Also, the comparison with a P$_1$ discretization of the temperature have also been carried out and larger differences between \cite{de1983natural} and \cite{LeQuere91} was observed.
+
 \subsection{Differentially heated cavity with inner heated square} \label{sub-2D-OBSTACLE}
 
 \begin{figure}
@@ -168,10 +193,10 @@ A further difficulty will be introduced in the next section when a non-linear ex
 
 \section{Natural convection of water in a two dimensional square cavity}\label{sec: natconv-water}
 We investigate in this section the natural convection of water in a differentially heated cavity. 
-A further difficulty is taken into account compared to the previous validation by introducing non-linear variation of the density in the buoyancy force.
-Pure water involve actually non-linear density variation for $T< \celsm{10.2}$ with a maximum at $T_m= \celsm{4.0293}$. 
+A further difficulty is introduced compared to the previous validations by taking into account non-linear variation of the density in the buoyancy force.
+Pure water involves actually non-linear density variation for $T< \celsm{10.2}$ with a maximum at $T_m= \celsm{4.0293}$. 
 We use below the following density-temperature relationship  proposed in \cite{Gebhart1977}:
-\begin{equation}
+\begin{equation}\label{eq-dens-nonlin}
 \rho(T)=\rho_m \left(1 - w \left|T - T_m\right|^q\right),
 \end{equation}
 with $\rho_m=999.972$ [kg/m$^3$], $w=9.2793\cdot 10^{-6}$ [($^\circ C)^{-q}$], and $q=1.894816$.
@@ -185,22 +210,40 @@ where $\beta=(1/\rho_m) \left(d\rho/dT\right)$ is the thermal expansion coeffici
 We simulate a differentially heated cavity of height $H = 0.38 m$ filled with liquid pure distilled water.
 This problem was investigated experimentally and numerically in \cite{Giangi-2000,Kowalewski-1999,Kowalewski-2003}.
 The height $H$ of the cavity is considered as a length scale of the problem $L_{ref} = H$. 
-We choose $T_{ref} = T_h - T_c$ in order to compare our simulation with the numerical results of \cite{Kowalewski-2003},
+We choose $T_{ref} = T_h - T_c = 10 K$ in order to compare our simulation with the numerical results of \cite{Kowalewski-2003},
 and define the following scaling:
-\begin{equation}
+\begin{equation} \label{eq-def-scal-1}
    V_{ref} = \frac{\nu_l}{H} 
    \quad \Longrightarrow \quad t_{ref} = \frac{\nu_l}{H^2}
    \quad \Longrightarrow \quad \Rey = 1.
 \end{equation} 
 The non-dimensional parameters describing the problem result from the physical properties of water in Tab. \ref{tab-param-phys-air}: $\Ray=2.518084\cdot 10^{6}$ and $\Pr=6.99$. %  (see also \cite{Kowalewski-2003} for physical details). % and $\Ste = 6.99$.
 
-The initial temperature is linearly distributed with a hot temperature $T_h =\celsm{10}$ at the left wall and a cold temperature $T_c=T_f=\celsm{0}$ at the right wall, corresponding to dimensionless thermal boundary condition $\theta_h = 1$ and 
-$\theta_c = 0$. The top and the bottom of the cavity are adiabatic and no-slip boundary condition $\vec u = 0$ is used for the velocity.
+The initial temperature is linearly distributed with a hot temperature $\theta_h =1$ at the left wall and a cold temperature $\theta_c=0$ at the right wall. %, corresponding to dimensionless thermal boundary condition $\theta_h = 1$ and $\theta_c = 0$. 
+The top and the bottom of the cavity are adiabatic and no-slip boundary condition $\vec u = 0$ is used for the velocity.
 
-The Temperature field of the steady state is presented in Figure \ref{fig-T1w-isoT}a and a more accurate comparison of the temperature profile along the horizontal symmetry line is given in Figure \ref{fig-T1w-isoT}b. 
-The isoline $\theta = \theta_m$, corresponding to the line of maximum density is presented in Figure \ref{fig-T1w-isoT}a by dashed line.
-Indeed, due to the anomalous thermal variation of water density, two recirculating zones are formed in the flow: a lower (abnormal) recirculation  in the vicinity of the cold wall where $\theta<\theta_m$ and an upper (normal) one where the density decreases with temperature ($\theta>\theta_m$).
+The Temperature field of the steady state is presented in Fig. (\ref{fig-T1w-isoT}a).
+Unlike the natural convection of air, in which two distinct boundary layers along the vertical walls and a stagnant and thermally stratified fluid in the core of the fluid flow were observed, an anomalous variation of the temperature is pointed out around the iso-line $\theta = 0.4$ for the natural convection of water.
+This anomalous thermal variation of water density, is clearly discernible in the streamline of the steady flow in Fig. (\ref{fig-T1w-isoT}b).
+Two recirculating zones are formed in the flow: a lower (abnormal) recirculation  in the vicinity of the cold wall where $\theta<\theta_m$ and an upper (normal) one where the density decreases with temperature ($\theta>\theta_m$).
 
+Accounting for the foregoing comments, a greater mesh resolution should be applied around $\theta_m$.
+We define thus a P$_1$ function $\Phi(\theta)$ defined by the following hyperbolic-tangent function similar to eq. (\ref{eq-Stanh}):
+\begin{equation}
+\Phi(\theta) =  \frac{1}{2}\left\{
+1 + \tanh\left(\frac{\theta_m-\theta}{R_{\Phi}}\right)
+\right\},
+\label{eq-Stm}
+\end{equation} 
+with $R_{\Phi}=0.02$. 
+The function $\Phi(\theta)$ and the two components of the velocity are used to compute the metric for the adaptivity.
+$\Phi(\theta)$ is used to track $\theta_m$ and the velocity allows to refine the boundary layer region.
+To reduce the reduce the impact of the interpolation on the global accuracy, since our algorithm is optimized to afford the mesh refinement every time step, we use both $\Phi(\theta^n)$ and $\Phi(\theta)^{n+1}$ in the adaptivity procedure.
+The final mesh is displayed in Fig. (\ref{fig-T1w-isoT}c).
+The mesh is clearly refined along the line $\theta = \theta_m$ where  the structure and the extent of the two recirculating zones should be captured and along the vertical walls where the heat transfer is dominated by the boundary layer transfer.
+Furthermore, as expected in the relatively stagnant fluid region, a coarser mesh is applied.
+
+A more accurate comparison of the temperature profile along the horizontal symmetry line is given in Fig. \ref{fig-T1w-isoT}b. 
 The temperature profile $\theta(x)$ along the horizontal symmetry line of the cavity is in good agreement with the numerical results   of \cite{Kowalewski-2003} obtained with FV and FD codes (FLUENT and FRECONV3V), commonly used in the heat transfer community. Differences are visible in the vicinity of the maximum density line, region where our mesh is well refined to capture the separation line between the two recirculation zones. It should be noted that the FLUENT simulations in \cite{Kowalewski-2003} are performed with a fixed uniform grid with $380\times380$ nodes, while our adapted grid has only 8751 vertices (17257 triangles).
 
 \begin{figure}
@@ -211,29 +254,22 @@ The temperature profile $\theta(x)$ along the horizontal symmetry line of the ca
 	\label{fig-T1w-isoT} % label should be placed after the caption
 \end{figure}
 
-\section{Natural convection of air in a three dimensional cavity using FFDDM}\label{sec: natconv-air-3D}
+We can conclude from Secs. (\ref{sec: natconv-air-2D}) and (\ref{sec: natconv-water}) that the developed Newton method is able to deal  efficiently with the two-dimensional Navier-Stokes-Boussinesq problem either with linear or non-linear formulations of the buoyancy force.
+The natural convection of air including obstacle or not have shown very good agreement with the numerical solutions of \cite{LeQuere91} and \cite{Raluca2013}.
+Excellent agreement with \cite{de1983natural} and \cite{LeQuere91} have also been observed for the value of the average Nusselt number at the heated wall. 
+The challenging case of the natural convection of water have demonstrated the robustness of the 2D code. 
+Good agreement with the numerical simulations of \cite{Kowalewski-2003} was noticed. 
+The influence of the mesh adaptivity was clearly shown by the total grid number differences of order of eight between the present simulation and those of \cite{Kowalewski-2003} .
+The refined mesh along the line $\theta_m$ have permitted to solve more accurately the structures and the extent of the two recirculating zones.
+The next sections are now devoted to the three-dimensional simulations of natural convection of air using parallel algorithm.
 
-\subsection{Natural convection in a differentially heated cube cavity}
+\newpage
+\section{Numerical simulation of the natural convection of air in a three-dimensional cavity using parallel agorithm}\label{sec: natconv-air-3D}
+
+\subsection{Natural convection of air in differentially heated cube cavity}
 We present in this section some 3D simulations using ffddm.
 
-%A schematic model of the problem is displayed in figure \ref{fig-3Dmesh} a).
 The Prandtl number is $0.71$ and three Rayleigh numbers are considered:  $\Ray=10^4$, $\Ray=10^5$, $\Ray=10^6$. The walls are rigid and impermeable. The vertical walls at $x=0$ and $x=1$ are isothermal and have different temperatures $T_h=0.5$ and $T_c=-0.5$ respectively. The remaining walls are considered adiabatic. % Figure \ref{fig-3Dmesh} b) shows the present three dimensional grid.
-%\begin{figure}%[!htbp]
-%\begin{minipage}{0.45\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/Fig_cap_natconv/3D_scema.jpg}}\\
-% a)
-%\end{center}
-%\end{minipage}\hfill
-%\begin{minipage}{0.45\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/Fig_cap_natconv/mesh3D.jpg}}\\
-% b)
-%\end{center}
-%\end{minipage}
-%\caption{(a) Schematic model for the natural convection in a cubic cavity; (b) present 3D uniform mesh.}
-%\label{fig-3Dmesh}
-%\end{figure}
  
 Our result were obtained for uniform grids of $  40 \times 40 \times 40$ and is compared with \cite{Wakashima-2004} who used a forth order finite difference method, with a vorticity-stream function formulation with different uniform meshes of  $120 \times 120 \times 120 \times 10$ grid nodes. 
 This result obtained with sequential algorithm is also used to validate the 3D simulations using ffddm.
@@ -284,16 +320,6 @@ The number of subdomain vary from $28$ to $70$ for $1.8$ millions of unknown.
 \caption{3D differentially heated cavity. Temperature contours at the mid-plane of ($y=0.5$); comparison with the results of \cite{Wakashima-2004} (left images). }
 \label{fig-3DT} 
 \end{figure}
-
-
-%  1 proc    MatLoc  MatCS   PREC    GMRES   CSolve
-%  2 48      6186.33 108.385 61.0397 473.66  2.97339
-%  3 96      2468.68 116.805 33.2671 283.099 3.03667
-%  4 128     1814.26 116.464 45.5823 237.853 2.74235
-%  5 192     1111.5  116.601 25.7295 169.174 2.96447
-%  6 240     889.422 123.724 20.8664 146.539 3.03816
-%  7 320     674.204 123.723 16.5842 114.346 3.0098
-%  8 400     614.418 136.961 14.4055 107.422 3.14586
 
 \subsection{Natural convection in a cube with an inner heated obstacle}\label{sub-OBSTACLE-3D}
 
@@ -353,191 +379,3 @@ Different Rayleigh numbers varying in the range of $10^4 -10^6$ are considered. 
 	\caption {3D convection in a cube with an inner heated cube. Comparison between sequential and ffddm algorithm for uniform grids of $40 \times 40 \times 40$ for $Ra = 10^4$ and $80 \times 80 \times 80$ for $Ra = 10^5$}
 	\label{tab-T2}
 \end{table}
-
-%The study investigated the effect of the inner sphere location on the heat transfer and fluid flow. A schematic of the three-dimensional domain is presented in figure \ref{fig-cerc_3D}. 
-%\begin{figure}[!htbp]
-%\begin{minipage}{1.\linewidth}
-%\begin{center}
-% {\includegraphics[width=0.6\textwidth]{\figpath/figs_Raluca_thesis/cap_5/grafic_C3D.jpg}}\\
-%\end{center}
-%\end{minipage}
-%\caption{Computational domain and boundary conditions for a 3D convection problem with a spherical obstacle.}
-%\label{fig-cerc_3D} 
-%\end{figure}
-%
-%%The flow and termal fields eventually reach the steady state for all Rayleigh numbers regardless of the sphere location.
-%No-slip boundary conditions are imposed on the walls for the velocity field. The walls are isothermal, of temperature $T=0$, while the inner sphere temperature is $T=1$. The flow and thermal fields converge towards a steady state for all Rayleigh numbers.  
-%
-%Figure \ref{fig-cerc_iso} presents the isotherms and streamlines obtained by \cite{Yoon-2010} for Rayleigh numbers varying from $10^4$ to $10^6$. 
-%\begin{figure}[!htbp]
-%\begin{minipage}{1.\linewidth}
-%\begin{center}
-%$Ra=10^4$\\
-% {\includegraphics[width=0.5\textwidth]{\figpath/figs_Raluca_thesis/cap_5/grafic_C3D_Ra1e4.jpg}}
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{1.\linewidth}
-%\begin{center}
-% $Ra=10^5$\\
-% {\includegraphics[width=0.5\textwidth]{\figpath/figs_Raluca_thesis/cap_5/grafic_C3D_Ra1e5.jpg}}
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{1.\linewidth}
-%\begin{center}
-%$Ra=10^6$\\
-% {\includegraphics[width=0.5\textwidth]{\figpath/figs_Raluca_thesis/cap_5/grafic_C3D_Ra1e6.jpg}}
-%\end{center}
-%\end{minipage}
-%\caption{3D convection problem with a spherical obstacle. Isotherms and streamlines for three different $Ra$ numbers.  Results of \cite{Yoon-2010}.}
-%\label{fig-cerc_iso} 
-%\end{figure}
-%
-%
-%%%\clearpage
-%
-%Figure \ref{fig-cerc_ra6} shows the same maps obtained with our numerical code.  For $\Ray=10^4$, the effect of convection on heat transfer is low forming a weak upward thermal plume on the top of the sphere.  The thermal boundary layer on the bottom part of sphere is thinner than that on the upper side. The circulation in the upper part of the enclosure is more active, resulting in the formation of one inner recirculation cell.
-%
-%
-%For $Ra=10^5$ convection is predominant with respect to conduction,  as shown in figure \ref{fig-cerc_ra6}. A plume forms on top of the inner sphere which gives rise to stronger thermal gradient on the top of the enclosure. The dominant flow is in the upper half of the enclosure, and correspondingly the center of the recirculating cell is located in the upper half. %The flow at the bottom of the enclosure is weak compared with that the middle and top regions suggesting a stratification effect in the lower part of the cavity.
-%
-%
-%For $\Ray=10^6$, the isotherms are distorted  due to the stronger convection effects thus having a stable stratification of isotherms.
-%The convection velocity increases with increasing Rayleigh number, the boundary layer behaviour can be seen in the lower part regions of the sphere and the upper part of the enclosure. The plume arising form the sphere separates as it reaches the top wall. The centres of the inner recirculation cells move toward the upper corners. 
-%
-%
-%\begin{figure}[!htbp]
-%$Ra=10^4$\\
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e4_3.jpg}}\\
-% \end{center}
-%\end{minipage}
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e4_7.jpg}}\\
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e4_9.jpg}}\\
-%\end{center}
-%\end{minipage}
-%
-%$Ra=10^5$\\
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e5_4.jpg}}\\
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e5_7.jpg}}\\
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e5_9.jpg}}\\
-%\end{center}
-%\end{minipage}
-%
-%
-%$Ra=10^6$\\
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e6_3.jpg}}\\
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e6_7.jpg}}\\
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{0.32\linewidth}
-%\begin{center}
-% {\includegraphics[width=1.\textwidth]{\figpath/figs_Raluca_thesis/cap_5/Ra1e6_9.jpg}}\\
-%\end{center}
-%\end{minipage}
-%\caption{3D convection problem with a spherical obstacle. Present study. Isotherms and streamlines for different Rayleigh numbers.}
-%\label{fig-cerc_ra6} 
-%\end{figure}
-%
-%We can conclude that the results obtained with our FD+IBM method for the 3D case  are in good agreement with the test case considered, rendering possible the simulation of 3D configurations with obstacles of general geometries.
-
-
-%\subsection{Note on parameters for ffddm and Newton method}\label{ffddm-param}
-%In this section, we only focus on natural or mixed convection, without phase changing. The system of non-linear equations (\ref{eq-weak-all}) is solved using a Newton method. We have tested two ways of solving this non linear problem. Rewriting the problem as 
-%$$
-%F(U) = 0,
-%$$
-%Newton method can be implemented in any of the two following ways:\begin{itemize}
-%\item Start with initial guess $U^{(0)}$ and compute $W$ from:
-%$$
-%W = DF(U^{(k)})^{-1}\ F(u^{(k)}).
-%$$
-%Then, update $U^{(k+1)} = U^{(k)}-W$.
-%\item Start with initial guess $U^{(0)}$ and directly compute $U^{(k+1)}$ from:
-%\begin{equation}\label{eq:newton_approach}
-%U^{(k+1)} = DF(U^{(k)})^{-1}\left( DF(U^{(k)}) U^{(k)} - F(U^{(k)})\right).
-%\end{equation}
-%\end{itemize}
-%We choose the latter \eqref{eq:newton_approach} for several reasons: for example, the right hand side and time-dependent boundary conditions (when applicable) are easier to implement. Moreover, ffddm uses algebraic norms to compute residuals, thus making the norms mesh dependent. It is then natural to use the iterative solver of ffddm with relative tolerance. This relative error is based on the right hand side. In the first case, this norm will decrease so that it is difficult to set up a good criterion. In the latter, we expect very few variations in the amplitude of the successive RHS.
-%
-%Eventually, at each Newton iteration, we have to solve linear problems of the kind: start with $(u^{(0)},p^{(0)},\theta^{(0)})=(u_n,p_n,\theta_n)$, and find $(u^{(k+1)},p^{(k+1)},\theta^{(k+1)})$ from
-%\begin{align*}
-%cdt\ u^{(k+1)} + u^{(k)}\nabla u^{(k+1)} + u^{(k+1)}\nabla u^{(k)} &- IRe\Delta u^{(k+1)} + \nabla p^{(k+1)} - IRe\;cc\;\theta^{(k+1)} e_y \\
-%&= u^{(k)}\nabla u^{(k)}  + cdt\ u_n, \\
-%\nabla\cdot u^{(k+1)} + \epsilon p^{(k+1)} &= 0, \\
-%cdt\ \theta^{(k+1)} + u^{(k)}\nabla\theta^{(k+1)} + u^{(k+1)}\nabla\theta^{(k)} -IPr\Delta \theta^{(k+1)} &= u^{(k)}\nabla\theta{(k)} + cdt\ \theta_n
-%\end{align*}
-%
-%$\epsilon$ is a penalty term with very small value ($\epsilon=1.e-7$), $cdt$ is $1/{\delta t}$ (resp. 0) in the unsteady problem (resp. stationary cases). $cc=1$ for unsteady problems. For stationary problems, we solve the problems for different values of $cc$, from $0$ to $1$. The reason is that the original problem ($cc=1$) can be difficult to approximate with Newton's method. By changing this parameter, we hope to start with a suitable initial guess, so that the method may converge.
-%
-%For stationary solutions, we recommend the use of the following parameters:
-%\begin{itemize}
-%\item tolerance in Newton's iterations: for the first steps ($cc<1$), use $1.e-3$; for the last step ($cc=1$), use a tolerance less than $1.e-6$,
-%\item relative tolerance in ffddm: $1.e-9$,
-%\item maximum number of iterations for ffddm: at least 400, but this can change according to the problem (usually I put 2000 to be sure), especially for 3D problems: need to test influence of the number of procs on the number of iterations needed by GMRES.
-%\end{itemize}
-%
-%For time dependent solutions, we recommend the use of the following parameters:
-%\begin{itemize}
-%\item tolerance in Newton's iterations: use a tolerance less than $1.e-6$,
-%\item relative tolerance in ffddm: $1.e-9$,
-%\item if we want to approximate a steady solution with the unsteady scheme, we set a tolerance $\epsilon_{conv}$ on the residuals. It must be consistent with the tolerance for Newton's iterations, e.g. $\epsilon_{conv}>\epsilon_{Newton}$.
-%\end{itemize}
-%
-%Finally, there is an issue with ffddm in 3D for some configurations, e.g. natural convection in a cube without the central sphere. This issue has been partially fixed if we use the develop version in \\
-%\url{https://github.com/FreeFem/FreeFem-sources/tree/develop}.
-%
-%In order to have a working set up, the following changes have to be made with this latest release of ffddm:\begin{itemize}
-%\item The command \verb?scaledExchange(A,rhs)? does no longer exist: it must be replaced by \verb?exchange(A,rhs,scaled=true)?,
-%\item This fix works only with pure Dirichlet BC: we have to use $tgv=-1$ in FF++\begin{verbatim}
-%Mat = vPb(WhAugmented, WhAugmented,tgv=-1);
-%rhsFull = vM(0, WhAugmented,tgv=-1);
-%\end{verbatim}
-%\end{itemize}
-
-%\subsection{Scalability with ffddm}
-%
-%\begin{figure}[h]
-%   \begin{center}
-%      \includegraphics[width=0.49\textwidth]{\figpath/Fig_cap_natconv/Sta_3d_40_scalability.pdf}
-%      \includegraphics[width=0.49\textwidth]{\figpath/Fig_cap_natconv/Sta_3d_60_scalability.pdf}\\
-%      \includegraphics[width=0.49\textwidth]{\figpath/Fig_cap_natconv/Sta_3d_80_scalability.pdf}
-%   \end{center}
-%   \caption{scalability for a discretisation of $40\times 40$, $60\times 60$ and $80\times 80$}
-%   \label{fig-sca_3d_40}
-%\end{figure}
-%
-%\begin{figure}[h]
-%   \begin{center}
-%      \includegraphics[width=0.3\textwidth]{\figpath/Fig_cap_natconv/Sta_3d_40_gmres.pdf}
-%      \includegraphics[width=0.3\textwidth]{\figpath/Fig_cap_natconv/Sta_3d_60_gmres.pdf}
-%      \includegraphics[width=0.3\textwidth]{\figpath/Fig_cap_natconv/Sta_3d_80_gmres.pdf}
-%   \end{center}
-%   \caption{GMRES iterations for a discretisation of $40\times 40$, $60\times 60$ and $80\times 80$}
-%   \label{fig-sca_3d_40}
-%\end{figure}
-
-
-

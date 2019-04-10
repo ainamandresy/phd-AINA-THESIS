@@ -92,7 +92,7 @@ Finally, the conservation of mass in the liquid phase is expressed by the contin
 \end{equation} 
 
 The final system of equations for the single-domain approach is thus:
-\begin{eqnarray}
+\begin{eqnarray} 
 	\nabla \cdot \vec{\tilde{u}} &=& 0, \\
 	\frac{\partial \vec{\tilde{u}}}{\partial t_{\varphi}} +   {(\vec{\tilde{u}}\cdot\nabla ) \vec{\tilde{u}}} + \nabla p - \nu_{l}  {\nabla^2 \vec{\tilde{u}}} 
 - f_B(T) \vec{e}_y - A(T) \vec{\tilde{u}} & = & 0, \\
@@ -181,7 +181,7 @@ A(\theta) = -\frac{\CKC (1 - \varphi(\theta))^2}{\varphi(\theta)^3 + b},
 where $\varphi(\theta)$ is the phase-change variable, which is  $1$ in the fluid region and $0$ in the solid. Inside the regularization region,  $\varphi(\theta)$ is regularized using a hyperbolic-tangent function similar to eq. (\ref{eq-Stanh}).
 The constant $\CKC$ is set to a  large value (as discussed below) and  the constant $b=10^{-6}$ is introduced to avoid division by zero.
 
-\section{Boundary layer approximation and scale analysis}
+\section{Boundary layer approximation and scale analysis} \label{sec-bound-scal-anal}
 Either PCM is used for energy storage or for building insulation or for other purposes, one would necessarily assess the heat transfer during the phase-change process.
 Mainly, it was extensively proven that the convective heat transfer plays significant role during the melting stage.
 Therefore, before solving numerically eqs. (\ref{eq-qmvt}) - (\ref{eq-energ}), we first rely on scale analysis to predict theoretically the fluid flow and heat transfer patterns that can develop in the fluid part.
@@ -235,7 +235,7 @@ Using the expression of $v$ in eq. (\ref{eq-scale-v}) and by dividing eq. (\ref{
 \end{equation}
 Eq. (\ref{eq-final-scale}) indicates that the behaviour of the fluid in the boundary layer depends on the $\Pr$ number. \\
 First, for a high-Prandtl fluid ($\Pr \geq 1$), the friction-buoyancy balance yields: 
-\begin{equation}
+\begin{equation} \label{eq-scale-nbd-high-Pr}
 	\delta_\theta \sim H \Ray^{-1/4}.
 \end{equation}
 The Nusselt number from eq. (\ref{eq-def-Nu}) scales as $H/\delta_\theta$, resulting: 
