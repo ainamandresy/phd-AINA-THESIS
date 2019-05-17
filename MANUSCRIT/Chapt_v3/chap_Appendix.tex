@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%%don't forget if needed %%%%%%%%%%%%%%%%%%%%%
+%\section[toc version]{title version%
+%              \sectionmark{head version}}
+%\sectionmark{head version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\titcourt{ }
+\def\titlong{ }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter[\titlong]{\titlong%
+%              \chaptermark{\titcourt}}
+%\chaptermark{\titcourt}
+%\label{chap-MELTING-CAVITY}
+
+
+\chapter{Appendix} \label{chap-Appendix}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Boundary layer approximation and scale analysis} \label{sec-bound-scal-anal}
+Either PCM is used for energy storage or for building insulation or for other purposes, one would necessarily assess the heat transfer during the phase-change process.
+Mainly, it was extensively proven that the convective heat transfer plays significant role during the melting stage.
+Therefore, before solving numerically eqs. (\ref{eq-qmvt}) - (\ref{eq-energ}), we first rely on scale analysis to predict theoretically the fluid flow and heat transfer patterns that can develop in the fluid part.
+The idea behind the scaling analysis is about identifying the proper scales of the phenomenon, in order to understand the evolution of the heat transfer and the melting rates.
+
+In the present analysis, we will consider first only the liquid phase without phase-change.
+A further analysis of the scale during the melting will be developed in sec. (\ref{chap-MELTING-CAVITY}).
+We consider a two-dimensional enclosure of height H filled with Newtonian fluid, differentially heated from the vertical walls and insulated from the horizontal walls.
+A No-slip boundary condition is considered for the velocity. 
+Since no external force is applied to our system, the fluid flow is merely driven by natural convection flow, induced by temperature differences from the vertical walls.
+It is well-known from the foregoing boundary conditions that the fluid layer situated close to the vertical walls stuck to the wall and are motionless.
+The heat transfer through the fluid layer immediately adjacent to the wall is accordingly by pure conduction, i.e, $ q = - \left. (\partial \theta/ \partial x) \right |_{x=0} $.
+We therefore define the average Nusselt number to quantify the heat transfer rate at the heated wall:
+\begin{equation}\label{eq-def-Nu}
+   N\!u = - \int_0^1 \left. \frac{\partial \theta}{\partial x} \right |_{x=0} dy.
+\end{equation}
+
+When a steady state could be reached, the fluid near each sidewall is characterized by two boundary layers: a thermal boundary layer of thickness $\delta_{\theta}$ and a viscous boundary layer of thickness $\delta_\nu$.
+The boundary layer approximation assumes that the flow and the energy transfer are restricted predominantly to the boundary layer region.
+This theory was proposed first by Prandtl in 1904 and validated later by many experimental and numerical studies.
+The main consequences of the boundary layer approximations are that: \\
+{\it (i)} the normal part of the momentum equation has a negligible importance, \\
+{\it (ii)} the downstream diffusion term in the momentum and energy equations are neglected in comparison with the normal diffusion terms ($\partial^2 \vec{u}/\partial y^2 \ll \partial^2 \vec{u}/\partial x^2$ and $\partial^2 T/\partial y^2 \ll \partial^2 T/\partial x^2$) since the boundary layer thickness is much smaller than the enclosure height ($ \delta \ll H$), \\
+{\it (iii)} the pressure distribution is purely hydrostatic, i.e, $P = - \rho g y$, \\
+{\it (iv)} the thermal and the viscous boundary layer thickness are given by the order of magnitude expressions: $\delta_\nu/\delta_\theta = o \left(\Pr^{1/2} \right)$.\\
+These assumptions lead to the following boundary layer equations for the conservation of mass, momentum and energy:
+\begin{eqnarray} \label{eq-bound-mass}
+	\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} &=& 0, \\  \label{eq-bound-mom}
+	u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} &=& \nu \frac{\partial^2 v}{\partial x^2} + g \beta (T - T_{ref}), \\ \label{eq-bound-energy}
+	u \frac{\partial T}{\partial x} + v \frac{\partial T}{\partial y} &=& \alpha \frac{\partial^2 T}{\partial x^2}. 
+\end{eqnarray}
+The mass conservation in eq. (\ref{eq-bound-mass}) in the boundary layer region leads to:
+\begin{equation}
+	\frac{u}{\delta_\theta} \sim \frac{v}{H}.
+\end{equation}
+The energy eq. (\ref{eq-bound-energy}) expresses a balance between longitudinal convection and transverse conduction:
+\begin{equation}
+	\frac{v}{H} \sim \frac{\alpha}{\delta_\theta^2},
+\end{equation}
+which yields:
+\begin{equation} \label{eq-scale-v}
+	v \sim \frac{\alpha H}{\delta_\theta^2}.
+\end{equation}
+As far as momentum eq. (\ref{eq-bound-mom}) is concerned, we could identify the interplay among three forces:
+\begin{equation} \label{eq-scale-momentum}
+	\underbrace{\frac{v^2}{H}}_{inertia} \quad \underbrace{\nu \frac{v}{\delta_\theta^2}}_{friction} \quad \underbrace{g \beta \delta T}_{buoyancy}.
+\end{equation}
+Using the expression of $v$ in eq. (\ref{eq-scale-v}) and by dividing eq. (\ref{eq-scale-momentum}) by $g \beta \delta T$, we obtain:
+\begin{equation} \label{eq-final-scale}
+	\underbrace{\left( \frac{H}{\delta_\theta} \right)^4 Pr ^{-1} \Ray^{-1}}_{inertia} \quad  \underbrace{\left( \frac{H}{\delta_\theta} \right)^4 \Ray^{-1}}_{friction} \quad \underbrace{1}_{buoyancy}.
+\end{equation}
+Eq. (\ref{eq-final-scale}) indicates that the behaviour of the fluid in the boundary layer depends on the $\Pr$ number. \\
+First, for a high-Prandtl fluid ($\Pr \geq 1$), the friction-buoyancy balance yields: 
+\begin{equation} \label{eq-scale-nbd-high-Pr}
+	\delta_\theta \sim H \Ray^{-1/4}.
+\end{equation}
+The Nusselt number from eq. (\ref{eq-def-Nu}) scales as $H/\delta_\theta$, resulting: 
+\begin{equation}
+	N\!u \sim Ra^{1/4}
+\end{equation}
+and $v \sim \alpha/H \Ray^{1/2}$. \\
+Second, for a low-Prandtl fluid ($\Pr \ll 1$), we observe a balance between inertia and buoyancy, leading to:
+\begin{equation} \label{eq-corr-Low-Pr}
+	\delta_\theta \sim H Pr^{-1/4} \Ray^{-1/4}.
+\end{equation}
+Accordingly we obtain a Nu-Ra correlation:
+\begin{equation}
+	Nu \sim Pr^{1/4} \Ray^{1/4}.
+\end{equation}
+
