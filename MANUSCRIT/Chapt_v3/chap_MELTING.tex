@@ -4,7 +4,7 @@
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\titcourt{Numerical simulation of Phase Change Material}
-\def\titlong{Numerical simulation of Phase Change Material in two-dimensional configuration}
+\def\titlong{Numerical simulation of Phase Change Material in 2D configuration}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -13,25 +13,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Having proven the efficiency and the accuracy of our numerical method to deal with the Navier-Stokes-Boussinesq equations, we now pay a closer attention to convective phase-change problems.
-This chapter aims to validate accurately our developed method with respect to physical feature of the problem.
+Having proven the accuracy and the efficiency of our numerical method to deal with the Navier-Stokes-Boussinesq equations, we now pay a closer attention to convective phase-change problems.
+This chapter aims to validate accurately our developed method with respect to physical features of the problem.
 Discussion about the numerical parameters is given first followed by a sequence of comparison computing different physical and geometrical configurations.
 
-The Newton algorithm in eq. (\ref{eq-newton-C1}) is now solved in the whole domain containing liquid and solid phases.
+The Newton algorithm in Eq. \ref{eq-newton-C1} is now solved in the whole domain containing liquid and solid phases.
 When compared to the previous validation, two new non-linearities are now treated: the Carman-Kozeny penalty term in the momentum equation and the enthalpy source term in the energy equation.
 The Carman-Kozeny penalty term is used to ensure zero velocity in the solid region and 
 the enthalpy non-linear source term is included to model the phase-change in the energy equation.
-Following the same idea as the natural convection validation in Chap. (\ref{chap-NATCONV}), non-linearity in the body force is gradually added.
+Following the same idea as the natural convection validation in Chapter \ref{chap-NATCONV}, non-linearity in the body force is gradually added.
 We consider first the linear form of $f_B(\theta)$ by investigating the melting of various PCM within several containers.
-Then, the challenging case of water freezing described by a non-linear variation of the density (see eq. (\ref{eq-dens-nonlin}) in Chap. (\ref{chap-NATCONV})) is computed.
+Then, the challenging case of water freezing characterized by a non-linear variation of the density (see Eq. \ref{eq-dens-nonlin} in Chapter \ref{chap-NATCONV}) is computed.
 
-Details about the parameter settings are first given in Sec. (\ref{sec-param-set}):
+Details about the parameter settings are first given in Sec. \ref{sec-param-set}:
 the characteristics of the mushy-zone, the mesh adaptivity and the initial condition are discussed in details.
-Second, the melting of octadecane and gallium are presented in Sec. (\ref{sec: melting-2D}) and Sec. (\ref{sec-melt-gallium}).
-%Gallium and n-octadecane are the most investigated material in the frame of PCM analysis, be it experimentally \citep{gau1983flow,campbell1994visualization,Okada1984,gong2015numerical}, numerically \citep{rady1996natural,bertrand1999melting,hannoun2003resolving,Wang2010,dan-2014-JCP,rakotondrandisa2019numerical} or theoretically \citep{Okada1984,jany1988scaling,bejan1989analysis,kowalewski2004phase,chabot2017solid}. 
-%Besides their physical properties are equal in both liquid and solid phases (difference less than $3 \%$), gallium and n-octadecane melt near room temperature, making them the preferred materials for experimentally investigating melting and solidification of low and high Prandtl-number PCMs.
-%These problems in a rectangular cavity have been also extensively used in the literature for the assessment of phase-change numerical methods and will be used in the present work to assess the accuracy of our numerical method. 
-The physical properties of octadecane and gallium used in our simulations are reported in Tab. (\ref{tab-param-PCM}).
+Second, the melting of n-octadecane and gallium are presented in Secs. \ref{sec: melting-2D} and \ref{sec-melt-gallium}.
+The physical properties of n-octadecane and gallium used in our simulations are reported in Tab. \ref{tab-param-PCM}.
 \begin{table}[!h]
    \begin{center}
       \begin{tabular}{*{8}{cl}}
@@ -43,39 +40,30 @@ The physical properties of octadecane and gallium used in our simulations are re
         Gallium & 6093 & 1.81 $\cdot 10^{-3}$  & 80.16 & $381.5$ & $32$ & $301$ & 1.2 $\cdot 10^{-4}$ \\
       \end{tabular}
    \end{center}
-   \caption{Physical parameters of octadecane and gallium PCM, used in our simulations.}
+   \caption{Physical parameters of n-octadecane and gallium PCM, used in our simulations.}
    \label{tab-param-PCM}
 \end{table}
-%Octadecane is representative of high-Prandtl material while gallium is representative of low-Prandtl PCM.
-%Experimental and numerical benchmarks from the literature are used to validate our numerical method.
-%Three benchmarks are considered for the octadecane: \cite{Okada1984} (experimental), \cite{gong2015numerical} (experimental) and \cite{bertrand1999melting} (numerical).
-%The melting of the gallium is compared with the numerical investigation of \cite{hannoun2003resolving}.
 
-Then, Secs. (\ref{subsec-luo}) and (\ref{sec-solid-crust}) shows the power of our code to deal with different geometrical shapes.
-The melting of cylindrical PCM with inner heated tubes is discussed in Sec. (\ref{subsec-luo}) and the solid crust formation in a highly distorted mesh is carried out in Sec. (\ref{sec-solid-crust}).
-Finally, the water freezing is shown in Sec. (\ref{sec-water-freeze}).
-Although the non-linear definition of the body force, the striking feature of the water freezing case is the tracking of several interfaces, namely the solidification front and anomalous thermal variation of water density. % proving the effectiveness of the mesh adaptivity.
+Then, Secs. \ref{subsec-luo} and \ref{sec-solid-crust} shows the power of our code to deal with different geometrical shapes.
+The melting of cylindrical PCM with inner heated tubes is discussed in Sec. \ref{subsec-luo} and the solid crust formation in a highly distorted mesh is carried out in Sec. \ref{sec-solid-crust}.
+Finally, the water freezing case is performed in Sec. \ref{sec-water-freeze}.
+Although the non-linear definition of the body force, the striking feature of the water freezing case is the tracking of several interfaces, namely the solidification front and anomalous thermal variation of water density. 
 Our result is qualitatively compared with the experimental work of \cite{Kowalewski-1999}.
 
-%For the simulation of the melting process, we use the following choice for the scaling introduced in Sec. \ref{sec-eq-scaling}, eqs. (\ref{eq-adim}) and  (\ref{eq-RePr}):
-%\begin{equation}\label{ref-adimPCM}
-%V_{ref}=\frac{\nu_l}{H}  \, \Rightarrow  \, t = t_{\varphi}\frac{\nu_l}{H^2} \, \Rightarrow  \, \Rey  = 1. \\
+%The dimensionless time $\tau$ is introduced in order to assess our results with respect to the numerical data of \cite{bertrand1999melting} and the analytical correlation of \cite{jany1988scaling}:
+%\begin{equation}
+%\label{eq-adim-tau}
+%\tau = \Ste\cdot Fo = \Ste\cdot \frac{\alpha t_{\varphi}}{H^2}  = \Ste\cdot \frac{t}{Pr},
 %\end{equation}
-%The scaling (\ref{eq-def-scal-1}) is used for the numerical simulation of the melting.
-The dimensionless time $\tau$ is introduced in order to assess our results with respect to the numerical data of \cite{bertrand1999melting} and the analytical correlation of \cite{jany1988scaling}:
-\begin{equation}
-\label{eq-adim-tau}
-\tau = \Ste\cdot Fo = \Ste\cdot \frac{\alpha t_{\varphi}}{H^2}  = \Ste\cdot \frac{t}{Pr},
-\end{equation}
-where $Fo$ is the Fourier number. 
-
-We recall that the reference temperature is the fusion temperature and thus $\theta_f = 0$. The mushy zone is defined for $ -\varepsilon_1 \leq \theta \leq \varepsilon_2 $, with $\varepsilon_1 = \varepsilon_2 = 0.01$.  
-We also assume that physical properties of the material are identical in both liquid and solid phases, and, consequently, we obtain from (\ref{eq-adimKC}) that   $C(\theta)=1$ and $K(\theta)=1$.
-This choice of the scaling was made to have the same set of parameters as in previous numerical simulations of this case \citep{Okada1984, Wang2010, Ma2006, dan-2014-JCP}. 
+%where $Fo$ is the Fourier number. 
+%
+%We recall that the reference temperature is the fusion temperature and thus $\theta_f = 0$. The mushy zone is defined for $ -\varepsilon_1 \leq \theta \leq \varepsilon_2 $, with $\varepsilon_1 = \varepsilon_2 = 0.01$.  
+%We also assume that physical properties of the material are identical in both liquid and solid phases, and, consequently, we obtain from Eq. \ref{eq-adimKC} that   $C(\theta)=1$ and $K(\theta)=1$.
+%This choice of the scaling was made to have the same set of parameters as in previous numerical simulations of this case \citep{Okada1984, Wang2010, Ma2006, dan-2014-JCP}. 
 
 \newpage
 \section{Parameter settings} \label{sec-param-set}
-We present in this section the setting of some numerical parameters. %defined in Chap. \ref{chap-ToolBox}.
+We present in this section the setting of some numerical parameters. 
 The influence of the penalty term $A(\theta)$ in the momentum equation is discussed first, namely the value of the Carman-Kozeny constant $\CKC$.
 Then, the parameters used in the mesh adaptivity procedure is detailed.
 
@@ -83,16 +71,16 @@ Then, the parameters used in the mesh adaptivity procedure is detailed.
 The Carman-Kozeny penalty term is used to annihilate the velocity in the solide region when a single domain method is applied.
 The Carman-Kozeny constant appearing in Eq. \ref{eq-CK} is a constant accounting for the mushy-region morphology.
 The effect of this constant on the melting and the solidification have attracted some attention.
-Even though it is generally assumed that a large value for $\CKC$ must be set, the exact value of this constant could influence the accuracy of the results \citep{kheirabadi2015effect, kumar2017influence}. 
-The influence of $\CKC$ in the location of the front was shown by \citep{kheirabadi2015effect}.
+Even though it is generally assumed that a large value for $\CKC$ must be set, the exact value of this constant could influence the accuracy of the results \citep{kheirabadi2015effect, kumar2017influence}. \\
+The influence of $\CKC$ in the location of the front was shown by \cite{kheirabadi2015effect}.
 They have concluded that, high $\CKC$ values should induce a slower melting rates, and conversely small $\CKC$ values should resulted in unphysical predictions of the melt front development.
-They have also noticed that $\CKC$ and the melting temperature range $\Delta T_{\varepsilon} = T_{\varepsilon2}-T_{\varepsilon1}$ are dependent of one another: different values of $\Delta T_{\varepsilon}$ requires different values of $\CKC$ to achieve the same melt front location.
+They have also noticed that $\CKC$ and the melting temperature range $\Delta T_{\varepsilon} = T_{\varepsilon2}-T_{\varepsilon1}$ are dependent of one another: different values of $\Delta T_{\varepsilon}$ requires different values of $\CKC$ to achieve the same melt front location.\\
 \cite{Kumar2017} studied the effect of the mushy zone constant and its influence on the melt fraction, vortex strength and the amount of heat storage. They concluded that increasing $\CKC$ leads to a decrease of the convection strength and consequently leads to a decrease of the heat transfer rate. 
 These studies show the necessity of choosing an appropriate value of this parameter, but because of the semi-solid state and porous nature of the mushy zone, the choice of the value of this constant is a still open problem.
 
-We simulate first the melting of an octadecane PCM within rectangular enclosure with the following dimensionless parameters: $\Ray = 3.27 \cdot 10^5$, $\Prd = 56.2$ and $\Ste = 0.045$.
-Different value of $\CKC$ are computed ranging from $10^6$ to $10^10$ and we compare the location of the melting front with the experimental data of \cite{Okada1984}.
-Fig. \ref{fig:pcm-CK} displays the location of the melting interface for three values of $\CKC$: $10^6$, $10^8$ and $10^{10}$.
+To assess the influence of the Carman-Kozeny constant, we simulate the melting of an octadecane PCM within rectangular enclosure with the following dimensionless parameters: $\Ray = 3.27 \cdot 10^5$, $\Prd = 56.2$ and $\Ste = 0.045$.
+Different value of $\CKC$ are computed ranging from $10^6$ to $10^{10}$ and we compare the location of the melting front with the experimental data of \cite{Okada1984}.
+Fig. \ref{fig:pcm-CK} displays the location of the phase-change interface for three values of $\CKC$: $10^6$, $10^8$ and $10^{10}$.
 Very good agreement with the experimental result of \cite{Okada1984} is obtained for $\CKC$ varying in the range $[10^6, 10^8]$. 
 Nevertheless, imposing  a too large value $\CKC=10^{10}$ results  in artificially slowing the propagation of the melting front. 
 
@@ -105,10 +93,10 @@ L_f(\theta) = 1 - \frac{1}{2}\left\{
 \label{eq-Lf-CK}
 \end{equation}
 
-The value of $\theta_{ck}$ is set in order to have the sharp variation of the derivative of d$L_f/$d$\theta$ near the new phase appearing in the system, liquid for melting ($\theta_{ck}=\varepsilon$) and solid  for freezing ($\theta_{ck}=\theta_f$) (see also \cite{dan-2014-JCP}).
+The value of $\theta_{ck}$ is set in order to have the sharp variation of the derivative of d$L_f/$d$\theta$ near the new phase appearing in the system, i.e. liquid for melting ($\theta_{ck}=\varepsilon$), and solid  for freezing ($\theta_{ck}=\theta_f$) (see also \cite{dan-2014-JCP}).
 This is to ensure that the velocity in the solid region is correctly set to $\vec u = 0$.
 As far as $R_{ck}$ is concerned, several values ranging from $\varepsilon$ to $\varepsilon/4$ are tested. 
-We set accordingly for all subsequent simulations $\CKC= 10^6$ and $R_{ck} = \varepsilon$.
+We set for all subsequent simulations $\CKC= 10^6$ and $R_{ck} = \varepsilon$.
 
 \begin{figure}
 	\begin{center}
@@ -133,20 +121,20 @@ The minimum and the maximum edge-length of triangles are imposed to avoid too la
 
 The minimum size of triangles and the interpolation error level should allow to capture the boundary layers region and the phase-change front.
 %As far as the boundary layers are concerned, Fig. \ref{fig:min-size-bnd} draws the thermal ($\delta_T$) and the viscous ($\delta_\nu$) boundary layers, function of Prandtl number.
-The scale for the thermal boundary layer ($\delta_T$) in natural convection flow along a vertical wall is given by \citep{bejan2013convection}:
-\begin{equation} \label{eq-bnd-layer-T}
-   \delta_T \sim \left\{
-   \begin{array}{ll}
-   H Ra^{-1/4} &	 \mbox{if }  Pr \gg 1,\\
-   H Pr^{-1/4} Ra^{-1/4} &   \mbox{if } Pr \ll 1,
-   \end{array}
-   \right.
-\end{equation}
-and the scale for the thickness of the viscous boundary layer near the wall is:
-\begin{equation} \label{eq-bnd-layer-nu}
-   \delta_\nu \sim Pr^{1/2} \delta_T.
-\end{equation}
-Thus, for high-Prandtl simulations the thickness of the thermal boundary layer is thinner than the velocity and the viscous boundary layers. 
+The scale for the thermal boundary layers in natural convection flow along a vertical wall is given by Eqs. \ref{eq-scale-nbd-high-Pr} and \ref{eq-corr-Low-Pr}.
+%\begin{equation} \label{eq-bnd-layer-T}
+%   \delta_T \sim \left\{
+%   \begin{array}{ll}
+%   H Ra^{-1/4} &	 \mbox{if }  Pr \gg 1,\\
+%   H Pr^{-1/4} Ra^{-1/4} &   \mbox{if } Pr \ll 1,
+%   \end{array}
+%   \right.
+%\end{equation}
+%and the scale for the thickness of the viscous boundary layer near the wall is:
+%\begin{equation} \label{eq-bnd-layer-nu}
+%   \delta_\nu \sim Pr^{1/2} \delta_T.
+%\end{equation}
+For high-Prandtl simulations, the thickness of the thermal boundary layer is thinner than the velocity and the viscous boundary layers. 
 For Rayleigh numbers in the range of $10^6$ to $10^8$ and a Prandtl number of order of $50$, we have a dimensionless thickness of the thermal boundary layer of $\delta_\theta \sim 0.01$.
 Conversely, for low-Prandtl simulations the viscous boundary layer is thinner than the thermal boundary layer.
 For the same range of Rayleigh numbers ($10^6$ to $10^8$) and Prandtl number of order of $0.1$, we have a dimensionless thickness of the viscous boundary layer of $\delta_\nu \sim 0.015$.
@@ -571,14 +559,18 @@ The melting of cylindrical PCM including inner heated tubes and the solidificati
 
 \begin{table}[!h]
 \centering
-\begin{tabular}{*{3}{c}}
-   & {\small CPU time (s)} & {\small Number of triangles}  \\
+\begin{tabular}{*{4}{c}}
+   \multicolumn{2}{c}{Case}  & {\small CPU time (s)} & {\small Number of triangles}  \\
   \toprule 
-  case $\#1$ (Bench $\#1$) & $2876.39$ & $2,900$ \\
-  case $\#1$ (Bench $\#2$)  & $40522.7$ & $7,000$ \\
-  case $\#2$ & $2060.42$ & $3,076$ \\
-  case $\#3$ & $14621.2$ & $4,820$ \\
-  case $\#4$ & $6657.58$ & $2,769$ \\
+  \multirow{2}{*}{Case $\#1$} & bench $\#1$ & $2876.39$ & $2,900$ \\
+  \cline{2-4}
+   & bench $\#2$  & $40522.7$ & $7,000$ \\
+   \hline
+   \multicolumn{2}{c}{Case $\#2$} & $2060.42$ & $3,076$ \\
+   \hline
+  \multicolumn{2}{c}{Case $\#3$} & $14621.2$ & $4,820$ \\
+  \hline
+  \multicolumn{2}{c}{Case $\#4$} & $6657.58$ & $2,769$ \\
 %  {\small CPU time} & $2876.39$ & $40522.7$ & $2060.42$ & $14621.2$ & $6657.58$\\
 %  {\small Number of triangles} & $2,900$ & $7,000$ & $3,076$ & $4,820$ & $2,769$ \\
 \bottomrule
