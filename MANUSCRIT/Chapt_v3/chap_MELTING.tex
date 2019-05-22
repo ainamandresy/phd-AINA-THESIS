@@ -75,7 +75,7 @@ This choice of the scaling was made to have the same set of parameters as in pre
 
 \newpage
 \section{Parameter settings} \label{sec-param-set}
-We present in this section the setting of some numerical parameters defined in Chap. \ref{chap-ToolBox}.
+We present in this section the setting of some numerical parameters. %defined in Chap. \ref{chap-ToolBox}.
 The influence of the penalty term $A(\theta)$ in the momentum equation is discussed first, namely the value of the Carman-Kozeny constant $\CKC$.
 Then, the parameters used in the mesh adaptivity procedure is detailed.
 
@@ -356,8 +356,8 @@ However, a maximum of $4, 820$ triangles are necessary with our adaptive method,
 			\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting/figsCPC_11}
 		\end{minipage}
 	\end{center}
-	\caption{Melting of gallium: temperature field, streamlines, and melting front. 
-	Physical time instants (panels a to g): $20 s$, $32s$, $36s$, $42s$, $85s$, $155s$, and $280s$.} \label{fig-Gallium}
+	\caption{PCM-Case $\#2$. Melting of Gallium: temperature field, streamlines, and melting front for dimensionless time instants (panels a to d): 
+	$t = 0.0015$, $0.006$, $0.01$, and $0.019$. For a better view of the convection cells, a ratio $2:1$ was used for the axis dimensions} \label{fig-Gallium}
 \end{figure}
 
 %We consider a rectangular cavity of  $0.0635m$ height and $0.0889m$ width.
@@ -440,11 +440,11 @@ The difference is explained by \cite{luo2015lattice} by the contribution of cond
 			\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/figsCPC_09}
 		\end{minipage}
 	\end{center}
-	\caption{Temperature fields for the melting of a cylindrical PCM with inner heated tubes. 
+	\caption{PCM-Case $\#3$. Temperature fields for the melting of a cylindrical PCM with inner heated tubes. 
 	Time instants corresponding to the same liquid fraction $L_f=80\%$. 
 	Configurations with  (a) one tube ($t=2.5$), (b) four tunes ($t=0.99$) and (c) nine tubes ($t=0.4$).
 	Melting  front are localized with black lines (only half of the domain is simulated).  
-	$\Ray = 5 \cdot 10^4$, $\Prd =0.2$ and $\Ste = 0.02$.}  \label{fig-Luo-Field}
+	}  \label{fig-Luo-Field}
 \end{figure}
 
 \begin{figure} 
@@ -453,7 +453,7 @@ The difference is explained by \cite{luo2015lattice} by the contribution of cond
 			\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/Lf_Luo_3}
 		\end{minipage}
 	\end{center}
-	\caption{Time evolution of the liquid fraction for one, four, and nine heated tubes. Comparison with numerical results of \cite{luo2015lattice}. $\Ray = 5 \cdot 10^4$, $\Prd =0.2$ and $\Ste = 0.02$.} \label{fig-Lf-Luo}
+	\caption{PCM-Case $\#3$. Time evolution of the liquid fraction for one, four, and nine heated tubes. Comparison with numerical results of \cite{luo2015lattice}.} \label{fig-Lf-Luo}
 \end{figure}
 
 \section{PCM-Case $\#4$: Solid crust formation in a highly distorted mesh} \label{sec-solid-crust}
@@ -497,7 +497,7 @@ The scaling in eq. (\ref{eq-scaling-3}), which is also used by \cite{nourgaliev2
 			\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/figsCPC_12}
 		\end{minipage}
 	\end{center}
-	\caption{Solid crust formation in a distorted mesh. Temperature field and streamlines of our simulation (a) and \cite{nourgaliev2016fully}  (b). } \label{fig-Nourgaliev}
+	\caption{PCM-Case $\#4$: Solid crust formation in a distorted mesh. Temperature field and streamlines of our simulation (a) and \cite{nourgaliev2016fully}  (b). } \label{fig-Nourgaliev}
 \end{figure}
 
 The temperature distribution, the streamlines as well as the melting front position are reported in Fig. \ref{fig-Nourgaliev}a and compared with the numerical results of \cite{nourgaliev2016fully},
@@ -544,7 +544,8 @@ As a consequence, the temperature level lines in Fig. \ref{fig-T2w-manip}d are s
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/figsCPC_15}
 	\end{center}
-	\caption{Freezing of pure water.  Configuration at (physical time) $t_{\varphi}=2340 [s]$: (a) experimental image from \cite{Kowalewski-1999}; the thick red line represents the solid-liquid interface computed with the present method (b) computed streamlines showing the two recirculating zones in the fluid phase.}
+	\caption{Freezing of pure water.  Configuration at (physical time) $t_{\varphi}=2340 [s]$: (a) experimental image from \cite{Kowalewski-1999}; the thick red line represents the solid-liquid interface computed with the present method (b) computed streamlines showing the two recirculating zones in the fluid phase.
+	(c) finite-element mesh refined along the solid-liquid interface ($T = 0^oC$) and also along the line of maximum water density ($T = 4^oC$) (d) temperature iso-lines.}
 	\label{fig-T2w-manip}
 \end{figure}
 %\begin{figure}

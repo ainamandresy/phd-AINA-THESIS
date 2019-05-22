@@ -3,8 +3,8 @@
 %              \sectionmark{head version}}
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\titcourt{Numerical simulation of natural convection flow}
-\def\titlong{Numerical simulation of natural convection flow}
+\def\titcourt{Numerical simulation of natural convection flow in 2D configurations}
+\def\titlong{Numerical simulation of natural convection flow in 2D configurations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -56,7 +56,7 @@ in sec. \ref{sub-2D-OBSTACLE},
 %\item Natural convection of air in a cube with a cubic heated obstacle is presented in sec. \ref{sub-OBSTACLE-3D}.
 \end{enumerate}
 
-\section{Natural convection of air in a two dimensional square cavity}\label{sec: natconv-air-2D}
+\section{Natural convection of air}\label{sec: natconv-air-2D}
 We start by testing the Newton algorithm (\ref{eq-newton-C1}) by investigating simulations with linear expression of $f_B(\theta)$ as presented in eq. (\ref{eq-RePr}).
 The classical problem of the thermally driven square cavity with adiabatic top and bottom walls is of interest.
 We consider a cavity of height $H = 0.1$m, initially filled with motionless air with a linear distribution of the temperature. 
@@ -94,7 +94,7 @@ Moreover, for {\it i)} the maximum value $u_{max}$ and its location $Y$ are accu
 	\begin{center}
 		\includegraphics[width=0.98\textwidth]{\figpath/Fig_cap_natconv/NATCONV_air_valid-WS} 
 	\end{center}
-	\caption{Natural convection of air for $Ra = 10^4$ (a and d), $Ra = 10^4$ (b and e), and $Ra = 10^6$ (c and e), and $\Pr = 0.71$. Temperature fields and streamlines at the steady state. Panels (a) to (c) correspond to the benchmark solution of \cite{Wakashima-2004}. Panels (d) to (f) show our numerical results.}
+	\caption{Natural convection of air for $Ra$ ranging from $10^4$ to $10^6$ (from the left to the right) and $\Pr = 0.71$. Temperature fields and streamlines at the steady state. Panels (a) to (c) correspond to the benchmark solution of \cite{Wakashima-2004} (top). Panels (d) to (f) show our numerical results (bottom).}
 	\label{fig-natconv-field}
 \end{figure}
 
@@ -123,8 +123,21 @@ The influence of the imposed temperature difference $\delta T$ on the boundary l
 Eq. (\ref{eq-corr-Low-Pr}) indicates a decreasing thickness of the boundary layer for an increasing value of $\Ray$. 
 For $\Ray = 10^6$ a viscous boundary layer with a dimensionless thickness of order of $\delta_\nu \sim 0.02$ should be present close to the vertical walls.
 Accordingly, the mesh resolution should allow to capture these structures.
-A mesh convergence analysis shows a reasonable relative error (lower than $3\%$) from a $80 \times 80$ grid resolution.
 Also, from $\Ray = 10^5$ the fluid in the core of the cavity is relatively stagnant and thermally stratified.
+%
+A mesh convergence analysis is investigated in Fig. \ref{fig-mesh-analysis}. 
+We compare the differences $\varepsilon_V = |V - V_{LQ}|$ along $x-$direction  and $\varepsilon_U = |U - U_{LQ}|$ along $y-$direction, between the present simulation and the numerical benchmark of \cite{LeQuere91}.
+Differences decrease when the mesh resolution is increased, validating hence the Newton method.
+We can observe that differences lower than $6 \cdot 10^{-4}$ is obtained from $80 \times 80$ grid resolution.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_natconv/Mesh-conv} 
+	\end{center}
+	\caption{Natural convection of air. Mesh convergence analysis for $Ra=10^6$ and $\Pr = 0.71$. Comparison with \cite{LeQuere91}.}
+	\label{fig-mesh-analysis}
+\end{figure}
+
 
 Tab. \ref{tab-valid-natconv} offers a quantitative assessment of the accuracy of the present Newton method. 
 The values of $u_{max}$  and its location $Y$ are compared to reference values from \cite{LeQuere91}. 
@@ -139,10 +152,10 @@ We also recall that the characteristics method needs a very small time step for 
 			\multicolumn{2}{|l|}{Run} & $u_{max}$ at x=$0.5$ (error) & $Y$ (error) \\
 			\hline
 			Reference values & spectral & 0.0648344           & 0.850 \\ \hline
-			Char-Galerkin       &$M=80$ & 0.0662229 (2.14 $\%$) & 0.856160 ( 0.72 $\%$) \\ \hline
-			\cite{dan-2014-JCP}              &$M=80$ & 0.0650082 (0.26 $\%$) & 0.849906 ( 0.01 $\%$) \\ \hline
-			Newton (Steady)        &$M=80$ & 0.0648297 (0.007 $\%$) & 0.850394( 0.05 $\%$) \\ \hline
-			Newton (Unsteady)        &$M=80$ & 0.0648296 (0.007 $\%$) & 0.850532 ( 0.06 $\%$) \\ \hline
+			Char-Galerkin       & nbseg$=80$ & 0.0662229 (2.14 $\%$) & 0.856160 ( 0.72 $\%$) \\ \hline
+			\cite{dan-2014-JCP}              & nbseg$=80$ & 0.0650082 (0.26 $\%$) & 0.849906 ( 0.01 $\%$) \\ \hline
+			Newton (Steady)        & nbseg$=80$ & 0.0648297 (0.007 $\%$) & 0.850394( 0.05 $\%$) \\ \hline
+			Newton (Unsteady)        & nbseg$=80$ & 0.0648296 (0.007 $\%$) & 0.850532 ( 0.06 $\%$) \\ \hline
 		\end{tabular}
 	\end{center}
 	\caption {Natural convection of air in a differentially heated cavity for $Ra = 10^6$ and $\Pr = 0.71$. Maximum value $u_{max}$ of the horizontal velocity profile at mid-domain ($x=0.5$) and location $Y$ of this maximum. Comparison to reference values by \cite{LeQuere91}.}
@@ -150,12 +163,15 @@ We also recall that the characteristics method needs a very small time step for 
 \end{table}
 
 Finally, we compare the average Nusselt number at the left vertical wall with the reference values of \cite{de1983natural} and \cite{LeQuere91}.
-From the viewpoint of an engineer, the most important characteristic of the flow is probably the rate of heat  transfer across the cavity.
+From an engineering point of view, the most important characteristic of the flow is probably the rate of heat  transfer across the cavity.
 In the next chapters, the Nusselt number will be largely used to compare the optimized configuration of a PCM either for melting or solidification.
 It is thus essential to ensure about the accuracy of the computed value of this parameter.
 $N\!u$ is calculated as defined in Eq. \ref{eq-def-Nu}.
-The comparison with \cite{de1983natural} is summarized below in Tab. \ref{tab-Nu-natconv}:
-\begin{table}[ht!]
+The comparison with \cite{de1983natural} is summarized below in Tab. \ref{tab-Nu-natconv}.
+Excellent agreement with \cite{de1983natural} is obtained for each of the three $\Ray$ numbers, with a relative error lower than $0.01$.
+It is important to note that we have exactly the same computed value of the Nusselt number as \cite{LeQuere91}.
+%Also, the comparison with a P$_1$ discretization of the temperature have also been carried out and larger differences between \cite{de1983natural} and \cite{LeQuere91} was observed.
+\begin{table}[!h]
    \begin{center}
       \begin{tabular}{*{4}{cl}}
          
@@ -170,17 +186,14 @@ The comparison with \cite{de1983natural} is summarized below in Tab. \ref{tab-Nu
    \label{tab-Nu-natconv}
 \end{table}
 
-Excellent agreement with \cite{de1983natural} is obtained for each of the three $\Ray$ numbers, with a relative error lower than $0.01$.
-It is important to note that we have exactly the same computed value of the Nusselt number as \cite{LeQuere91}.
-Also, the comparison with a P$_1$ discretization of the temperature have also been carried out and larger differences between \cite{de1983natural} and \cite{LeQuere91} was observed.
 
 \subsection{Differentially heated cavity with inner heated square} \label{sub-2D-OBSTACLE}
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\figpath/Fig_cap_natconv/STA_validation_obstacle_2} 
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_natconv/STA_validation_obstacle_3} 
 	\end{center}
-	\caption{Natural convection of air in a differentially heated cavity with inner heated square for $Ra = 10^6$. Temperature field (a) and transversal velocity profile along the  horizontal symmetry lines (b). Results obtained using the present Newton method (red solid line), with mesh resolution $M=80$; comparison with the finite difference code of \cite{Raluca2013}.}
+	\caption{Natural convection of air in a differentially heated cavity with inner heated square for $\Ray$ ranging from $10^4$ to $10^6$. Temperature field and streamlines (top) and transversal velocity profile along the  horizontal symmetry lines (bottom). Results obtained using the present Newton method (red solid line), with mesh resolution nbseg $=80$; comparison with the finite difference code of \cite{Raluca2013}.}
 	\label{fig-obst-2D}
 \end{figure}
 
@@ -208,7 +221,7 @@ We have demonstrated in this part that the proposed Newton method offers an effi
 A further difficulty will be introduced in the next section when a non-linear expression of the body force is defined since natural convection of water is of interest.
 %We can conclude from this section that the proposed Newton method offers an efficient way to solve the Navier-Stokes-Boussinesq system of equations for natural convection. After this validation, we test in the following section the capability of the method to deal with phase-change, introducing nonlinearity in the momentum and the energy equations.
 
-\section{Natural convection of water in a two dimensional square cavity}\label{sec: natconv-water}
+\section{Natural convection of water inside a square cavity}\label{sec: natconv-water}
 We investigate in this section the natural convection of water in a differentially heated cavity. 
 A further difficulty is introduced compared to the previous validations by taking into account non-linear variation of the density in the buoyancy force.
 Pure water involves actually non-linear density variation for $T< \celsm{10.2}$ with a maximum at $T_m= \celsm{4.0293}$. 
@@ -278,8 +291,9 @@ The challenging case of the natural convection of water have demonstrated the ro
 Good agreement with the numerical simulations of \cite{Kowalewski-2003} was noticed. 
 The influence of the mesh adaptivity was clearly shown by the total grid number differences of order of eight between the present simulation and those of \cite{Kowalewski-2003} .
 The refined mesh along the line $\theta_m$ have permitted to solve more accurately the structures and the extent of the two recirculating zones.
-The next sections are now devoted to the three-dimensional simulations of natural convection of air using parallel algorithm.
-%
+%The next sections are now devoted to the three-dimensional simulations of natural convection of air using parallel algorithm.
+
+
 %\newpage
 %\section{Numerical simulation of the natural convection of air in a three-dimensional cavity using parallel agorithm}\label{sec: natconv-air-3D}
 %
