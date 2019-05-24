@@ -247,7 +247,7 @@ with $\mathcal{N}$ the number of steps.
 
 This approach allows to achieve the natural convection of air in $6$ iterations for $\Ray = 10^6$ instead of $150$ iterations when the unsteady system of equations is solved.
 
-\newpage
+%\newpage
 \section{Characteristics method for the convective terms} \label{sec-charac-FreeFem}
 
 An alternative for the treatment of non-linear terms in the momentum equation is offered by the characteristics Galerkin method \cite{Pironneau92}. Defining the characteristic flow (passing at time $t$ through the point $\vec{x}$)
@@ -290,7 +290,7 @@ a\left(\vec{u}^{n+1}, \vec{v}\right)
 \end{eqnarray}
 The system of Eq. \ref{eq-charact} is then solved to advance the solution from $t_n$ to $t_{n+1}$ in one step. The drawback of the method is that it requires small time steps for accurately computing of the convection terms. 
 
-\newpage
+%\newpage
  \section{Mesh adaptivity} \label{subs:FEadapt}
 We use the standard mesh adaptivity function (\texttt{adaptmesh}) offered by \ff \citep{hecht-2012-JNM}. The key idea implemented in this function (see also \cite{hecht-1996-missi,hecht-2000-ijnmf,hecht-1997-aiaa,george-1998,frey-george-1999,moham-piron-2000})  is to modify the scalar product used in the automatic mesh generator to evaluate distance and volume.  Equilateral elements are thus constructed, accordingly to the new metric.  The scalar
 product is based on the evaluation of the Hessian $\mathcal{H}$ of the variables of the problem. For example, for a P$_1$ discretization of a
