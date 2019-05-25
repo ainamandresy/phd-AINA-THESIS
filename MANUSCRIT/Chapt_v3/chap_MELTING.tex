@@ -363,8 +363,8 @@ Later, simulations provides solutions with multicellular flow.
 
 Therefore, this test case simulating the melting of the Gallium is a relevant exercice to test the consistency of our method.
 To capture the very small cell during the first step of the melting, \cite{hannoun2003resolving} uses a $800 \times 1,120$ fixed grids in a rectangular domain of dimensions $6.35$ cm $\times \, 8.89$ cm. 
- \cite{hannoun2003resolving} have reported that the melting solution up to 32 s have required about 980 CPU hours on a Compaq Alpha (667 MHz, ev67) processor.
-However, a maximum of $4, 820$ triangles are necessary with our adaptive method, and only 4 CPU hours are spent to reproduce the numerical result of \cite{hannoun2003resolving} up to the final time 280s.%, that is a ratio of $10^2$.
+ \cite{hannoun2003resolving} have reported that the melting solution up to 32 s have required about $980$ CPU hours on a Compaq Alpha (667 MHz, ev67) processor.
+However, a maximum of $4, 820$ triangles are necessary with our adaptive method, and only $4$ CPU hours are spent to reproduce the numerical result of \cite{hannoun2003resolving} up to the final time 280s.%, that is a ratio of $10^2$.
 
 \begin{figure}
 	\begin{center}
@@ -590,15 +590,17 @@ The melting of cylindrical PCM including inner heated tubes and the solidificati
 \begin{tabular}{*{4}{c}}
    \multicolumn{2}{c}{Case}  & {\small CPU time (s)} & {\small Number of triangles}  \\
   \toprule 
-  \multirow{2}{*}{Case $\#1$} & bench $\#1$ & $2876.39$ & $2,900$ \\
-  \cline{2-4}
-   & bench $\#2$  & $40522.7$ & $7,000$ \\
+  \multirow{3}{*}{N-octadecane} & Bench $\#1$ & $2876.39$ & $2,900$ \\
+  %\cline{2-4}
+   & Bench $\#2$  & $19231$ & $4,198$ \\
+   & Bench $\#3$  & $40522.7$ & $7,000$ \\
    \hline
-   \multicolumn{2}{c}{Case $\#2$} & $2060.42$ & $3,076$ \\
+   \multicolumn{2}{c}{Gallium} & $14621.2$ & $4,820$ \\
    \hline
-  \multicolumn{2}{c}{Case $\#3$} & $14621.2$ & $4,820$ \\
+  %\multicolumn{2}{c}{Cylindrical PCM} & $14621.2$ & $4,820$ \\
+  \multicolumn{2}{c}{Cylindrical PCM} & $2060.42$ & $3,076$ \\
   \hline
-  \multicolumn{2}{c}{Case $\#4$} & $6657.58$ & $2,769$ \\
+  \multicolumn{2}{c}{Highly distorted PCM} & $6657.58$ & $2,769$ \\
 %  {\small CPU time} & $2876.39$ & $40522.7$ & $2060.42$ & $14621.2$ & $6657.58$\\
 %  {\small Number of triangles} & $2,900$ & $7,000$ & $3,076$ & $4,820$ & $2,769$ \\
 \bottomrule
@@ -608,20 +610,7 @@ The melting of cylindrical PCM including inner heated tubes and the solidificati
 \end{table}
 The total CPU time and the typical number of triangles corresponding to each PCM cases are summarized in Tab. \ref{tab-melt-cases}.
 Noticeable is the fact that, less than $2$ CPU hours are necessary for most of the simulations, even a sequential algorithm is used. 
-
-%\begin{table}[!h]
-%\centering
-%\begin{tabular}{*{6}{c}}
-%   & case $\#1$ & case $\#1$ & case $\#3$ & case $\#4$ &case $\#5$ \\
-%   & (Benchmark $\#1$) & (Benchmark $\#2$) & & & \\
-%  \toprule 
-%  {\small CPU time} & $2876.39$ & $40522.7$ & $2060.42$ & $14621.2$ & $6657.58$\\
-%  {\small Number of triangles} & $2,900$ & $7,000$ & $3,076$ & $4,820$ & $2,769$ \\
-%\bottomrule
-% \end{tabular}
-%\caption{Parameters for the cases simulating  the melting of a phase-change material.}
-%\label{tab-melt-cases}
-%\end{table}
+The interest and the power of mesh adaptivity was highlighted by the simulation of the melting of the gallium, since only $4$ CPU hours are necessary to perform this case, while $980$ CPU hours was needed by \cite{hannoun2003resolving} using fixed-grid algorithm.
 
 Non-linear expression of $f_B$ is considered for the solidification of pure water case. 
 Besides the high $\Ray$ and $\Ste$ considered in our simulations, the efficiency of the mesh adaptivity was demonstrated by its capability to track simultaneously the interface $\theta = \theta_f$ and the line $\theta = \theta_m$ separating the two recirculating liquid regions.
