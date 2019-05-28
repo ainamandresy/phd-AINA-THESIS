@@ -18,14 +18,14 @@
 This chapter sets the numerical algorithm for solving the system of equation described previously in Chapter \ref{chap-NSB} for both two and three-dimensional configurations.
 The finite element method and the Newton algorithm are presented first in detail.
 %The accuracy of the developed method is then assessed with some basic theoretical test for two-dimensional configurations.
-Then, the domain decomposition method for the three-dimensional configuration is developped.% with a strong scalability analysis.
+Then, the domain decomposition method for the three-dimensional configuration is discussed.% with a strong scalability analysis.
 
 \section{Motivation for the choice of the numerical method}
 %Aside from the non-linear convection terms in the momentum and the energy Eqs. \ref{eq-qmvt} - \ref{eq-energ}, a further difficulty arise from the non-linearity introduced by the source term $\partial (CS)/\partial t$ in Eq. \ref{eq-energ}.
 In many in-house or commercial codes used to simulate phase-change problems (ANSYS CFX, Fluent, etc.),
 finite difference (FD) or finite volume (FV) methods are used in most of the time with a fixed-mesh approach.
 Accurate simulations are therefore carried out by increasing considerably the mesh resolution in the whole domain, increasing consequently dramatically the computational time.
-At the example of \cite{voller1996cyclic} who used insufficient grid resolution to compute the melting of gallium, \cite{wang2010numerical} had to consider thinner mesh resulting by increasing by a factor of three the total mesh number to capture correctly the boundary layer structures. 
+At the example of \cite{voller1996cyclic} who used insufficient grid resolution to compute the melting of gallium, \cite{wang2010numerical} had to consider thinner mesh, resulting by a strong increase, of a factor of three, of the total mesh number to capture correctly the boundary layer structures. 
 
 Our choice for the finite element (FE) methods is motivated by its capability to adapt dynamically the mesh and to deal with several geometrical domain.
 The adaptive capabilities of FE discretization by applying finer mesh where sharp phenomena takes place (solid-liquid interfaces, boundary layers, recirculation zones, ...) and coarser mesh elsewhere (in the solid, in the bulk of the fluid region where the gradient are lower than the boundary layer region, ...) is helpful to reduce the degree of freedom involved in the numerical resolution and thus reduce the computational time.
@@ -44,12 +44,15 @@ A fully implicit backward second order scheme (BDF2 or GEAR) is employed in the 
 \label{eq-Gear}
 	\frac{d\phi}{dt} \simeq \frac{3\phi^{n+1} - 4\phi^{n}+ \phi^{n-1}}{2\delta t},
 \end{equation}
-computing the solution $\phi^{n+1}$ at time  $t_{n+1}=(n+1) \delta t$ by using two previous states ($\phi^{n}, \phi^{n-1}$). We use this scheme to advance in time both velocity ($\phi=\vec{u}$) and temperature fields  ($\phi=\theta$).  The other terms in Eqs. \ref{eq-qmvt} - \ref{eq-energ} are treated implicitly (\ie taken at time $t_{n+1}$). The resulting non-linear equations are solved using a Newton algorithm. \\
-Some authors have used a Richardson extrapolation \citep{Belhamadia2012,wang2010numerical} in the momentum equation by extrapolating U from previous time steps.
+
+\noindent computing the solution $\phi^{n+1}$ at time  $t_{n+1}=(n+1) \delta t$ by using two previous states ($\phi^{n}, \phi^{n-1}$). We use this scheme to advance in time both velocity ($\phi=\vec{u}$) and temperature fields  ($\phi=\theta$).  The other terms in Eqs. \ref{eq-qmvt} - \ref{eq-energ} are treated implicitly (\ie taken at time $t_{n+1}$). The resulting non-linear equations are solved using a Newton algorithm. 
+
+\noindent Some authors have used a Richardson extrapolation \citep{Belhamadia2012,wang2010numerical} in the momentum equation by extrapolating U from previous time steps.
 We have tested this approach but the results exhibit less accurate solutions and the computations requests small $\delta t$.
-In addition, a projection algorithm with an explicit discretization of the Navier-Stokes-Boussinesq equations was also tested, using the Adams-Bashforth and Crank-Nicolson second order scheme.
-The main drawback is the very small $\delta t$ ($\sim 10^{-6}$ vs $10^{-1}$ for the fully implicit discretization) needed to ensure convergence at each time steps.\\
-A last alternative for the treatment of non-linear terms in the momentum equation is offered by the characteristics Galerkin method \cite{Pironneau92}.
+In addition, a projection algorithm with an explicit discretization of the Navier-Stokes-Boussinesq equations was also investigated, using the Adams-Bashforth and Crank-Nicolson second order scheme.
+The main drawback is the very small $\delta t$ ($\sim 10^{-6}$ vs $10^{-1}$ for the fully implicit discretization) needed to ensure convergence at each time steps.
+
+\noindent A last alternative for the treatment of non-linear terms in the momentum equation is offered by the characteristics Galerkin method \cite{Pironneau92}.
 This method will be discussed in detail in Sec. \ref{sec-charac-FreeFem}.
 
 Finally, a supplementary difficulty comes from the one-domain method which need techniques to bring the velocity to zero in the solid region.
@@ -77,7 +80,8 @@ We use the second-order implicit finite-difference discretization in Eq. \ref{eq
 - \nabla \cdot\left( \frac{K}{RePr} \nabla \theta^{n+1} \right) &=& \\  \nonumber
 2\frac{ \theta^{n} + S(\theta^{n})}{\delta t}-\frac{ \theta^{n-1} + S(\theta^{n-1}) }{2\delta t}.
 \end{eqnarray}
-The penalty parameter $\gamma$ takes very low values ($\gamma=10^{-7}$)  to ensure a pressure field with zero average and, at the algebraic level, fulfill the diagonal of the pressure term.  
+
+\noindent The penalty parameter $\gamma$ takes very low values ($\gamma=10^{-7}$)  to ensure a pressure field with zero average and, at the algebraic level, fulfill the diagonal of the pressure term.  
 This system of non-linear equations is solved at time  $t_{n+1}=(n+1) \delta t$, using two  previous states at $t_{n}$ and $t_{n-1}$.
 
 The space discretization of variables over the domain $\Omega=[0,1]^2$ uses a finite-element method based on a weak formulation of the system of Eqs. \ref{eq-time-disc1} - \ref{eq-time-disc3}. 
@@ -87,7 +91,7 @@ We consider homogeneous Dirichlet boundary conditions for the velocity, \ie $\ve
 \vec{V}=V\times V, \, V=H^1_0(\Omega), \quad Q=\left\{q\in L^2(\Omega)\left|\; \int_{\Omega}q=0\right.\right\}
 \end{equation}
 
-\noindent Following the generalization of the Stokes problem \citep{Temam,GRaviart,Quarteroni}, the variational formulation of the system  (\ref{eq-time-disc1})-(\ref{eq-time-disc3}) can be written as: find $(\vec{u}^{n+1}, p^{n+1}, \theta^{n+1}) \in \vec{V}\times Q\times V$, such that:
+\noindent Following the generalization of the Stokes problem \citep{Temam,GRaviart,Quarteroni}, the variational formulation of the system  of Eqs. \ref{eq-time-disc1} - \ref{eq-time-disc3} can be written as: find $(\vec{u}^{n+1}, p^{n+1}, \theta^{n+1}) \in \vec{V}\times Q\times V$, such that
 \begin{eqnarray}
 \label{eq-weak-all}
 b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& \\ \nonumber
@@ -106,18 +110,9 @@ b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& \\ \nonumber
 \frac{2}{\delta t} \left( \theta^{n}+S(\theta^n), \phi\right)
 - \frac{1}{2 \delta t} \left( \theta^{n-1}+S(\theta^{n-1}), \phi\right),\, \forall \, \phi \in V,
 \end{eqnarray}
-where {$(u , v)=\int_{\Omega} u\cdot v$} denotes the scalar product in $L^2(\Omega)$ or $\left(L^2(\Omega)\right)^2$; the bilinear forms $a, b$ and trilinear form $c$ are defined as \cite{GRaviart,Quarteroni}:
-%\begingroup \small{
-%	\begin{eqnarray*}\nonumber
-%		a: \vec{V} \times \vec{V} \rightarrow \R, & & {a(\vec{u},\vec{v})= \int_{\Omega}  
-%			 \vec{D}(\vec{u}) : \vec{D}(\vec{v}) = \int_{\Omega}   \sum_{i,j=1}^2{D}_{ij}(\vec{u}) {D}_{ij}(\vec{v})},\\ 
-%		b: \vec{V} \times Q \rightarrow \R, & & b(\vec{u},q) = -\int_{\Omega}\nabla \cdot\vec{u}\, q =
-%		-\sum_{i=1}^2\int_{\Omega}\pl_i u_i\cdot q, \\ \nonumber
-%		c: \vec{V} \times \vec{V} \times \vec{V} \rightarrow \R, & & c(\vec{w}; \vec{z}, \vec{v})=\int_{\Omega} \left[\left(\vec{w} \cdot \nabla\right) \vec{z}\right] \cdot\vec{v}
-%		=\sum_{i,j=1}^2\int_{\Omega} w_j (\pl_j z_i) v_i,
-%		\label{eq-biforms}
-%	\end{eqnarray*}
-%}
+
+\noindent where {$(u , v)=\int_{\Omega} u\cdot v$} denotes the scalar product in $L^2(\Omega)$ or $\left(L^2(\Omega)\right)^2$; the bilinear forms $a, b$ and trilinear form $c$ are defined as \cite{GRaviart,Quarteroni}:
+
 \begingroup{ \small
 	\begin{eqnarray*}\nonumber
 		a: \vec{V} \times \vec{V} \rightarrow \R, & & a(\vec{u},\vec{v})= \int_{\Omega}  
@@ -129,53 +124,30 @@ where {$(u , v)=\int_{\Omega} u\cdot v$} denotes the scalar product in $L^2(\Ome
 		\label{eq-biforms}
 	\end{eqnarray*}
 }
-%$\vec D(\vec u) = (1/2)\left( \nabla \vec u + \nabla \vec u^T \right)$ is the rate of strain symmetric tensor with components
-%$D_{ij}(\vec u) = (1/2) \left( \partial u_i/ \partial x_j + \partial u_j/ \partial x_i \right) $.
+
 
 The system of non-linear Eqs. \ref{eq-weak-all} - \ref{eq-weak-energy} is solved using a Newton method. To advance the solution from time $t_n$ to $t_{n+1}$, we start from an initial guess $w_0 = (\vec{u}^{n}, p^{n}, \theta^{n})$ (which is the solution at $t_n$), and construct the Newton sequence $w_k = (u_k, p_k, \theta_k)$ by solving for each inner iteration $k$:
+
 \begin{equation}
 D_w{\cal F} (w_k ) w_{k+1} = D_w{\cal F}(w_k) w_k -  {\cal F}(w_k).
 \label{eq-newton-w}
 \end{equation}
-$D_w{\cal F}$ is the linear operator representing the differential of $\cal F$.
+
+\noindent $D_w{\cal F}$ is the linear operator representing the differential of $\cal F$.
 Eq. \ref{eq-newton-w} can be rewritten as follow when applied to the discretized equation, in which Eqs. \ref{eq-weak-all} - \ref{eq-weak-energy} are regarded as ${\cal F}(w) = 0$:
-%\begingroup \small{
-%	\begin{eqnarray} \label{eq-newton-C1}
-%	b\left(\vec{u}_{k+1}, q\right) - \gamma (p_{k+1},q) &=& 0, \\ %\nonumber
-%	\frac{3}{2 \delta t} \left(\vec{u}_{k+1},\vec{v}\right)
-%	+ c\left(\vec{u}_{k+1} ; \vec{u}_{k}, \vec{v} \right)
-%	&+& c\left(\vec{u}_{k} ; \vec{u}_{k+1}, \vec{v} \right)\\ \nonumber
-%	+ 
-%	a\left( \vec{u}_{k+1}, \vec{v}\right)
-%	- \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{u}_k, \vec{v}\right)
-%	&-& \left(A(\theta_k) \, \vec{u}_{k+1}, \vec{v}\right) + b\left(\vec{v}, p_{k+1}\right)  \\ \nonumber
-%	- {\left(\frac{df_B}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{e}_y, \vec{v}\right)} &=&  
-%	\frac{1}{\delta t} \left( 2 \vec{u}^n - \frac{1}{2} \vec{u}^{n-1},\vec{v}\right) \\ \nonumber
-%	+ c\left(\vec{u}_k ; \vec{u}_{k}, \vec{v} \right) 
-%	&-& \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k} \, \vec{u}_k, \vec{v}\right), \,\,\, \\  %\nonumber
-%	\frac{3}{2\delta t} \left(\theta_{k+1} + \frac{dS}{d\theta}(\theta_k)\, \theta_{k+1}, \phi\right)
-%	+\left(\vec{u}_{k} \cdot \nabla \theta_{k+1} , \phi  \right)
-%	&+& \left( \vec{u}_{k+1} \cdot \nabla  \theta_k , \phi \right) \\ \nonumber
-%	+ \left( \frac{K}{Re Pr} \nabla \theta_{k+1}, \nabla \phi \right) 
-%	&=&
-%	\frac{2}{\delta t} \left(\theta^n + S(\theta^n) , \phi\right)  \\ \nonumber
-%	+\left(\vec{u}_{k} \cdot \nabla  \theta_k, \phi \right)
-%	+ \frac{3}{2 \delta t} \left(\frac{dS}{d\theta}(\theta_k)\, \theta_{k}  - S(\theta^n) ,\, \phi\right) 
-%	&-& \frac{1}{2 \delta t} \left(\theta^{n-1} + S(\theta^{n-1}),\, \phi\right).\,\,\,
-%	\end{eqnarray}
-%} \endgroup
+
 \begingroup \small{
 	\begin{eqnarray} \label{eq-newton-C1}
-	b\left(\vec{u}_{k+1}, q\right) - \gamma (p_{k+1},q) &=& 0, \\ %\nonumber
-	\frac{3}{2 \delta t} \left(\vec{u}_{k+1},\vec{v}\right)
+	b\left(\vec{u}_{k+1}, q\right) - \gamma (p_{k+1},q) &=& 0, \\ \label{eq-newton-C2}%\nonumber
+	\frac{3}{2 \delta t} \left(\vec{u}_{k+1},\vec{v}\right) 
 	+ c\left(\vec{u}_{k+1} ; \vec{u}_{k}, \vec{v} \right)
 	&+& c\left(\vec{u}_{k} ; \vec{u}_{k+1}, \vec{v} \right)\\ \nonumber
 	+ 
 	\frac{1}{Re} a\left( \vec{u}_{k+1}, \vec{v}\right)
-	- \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{u}_k, \vec{v}\right)
+	- \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{u}_k, \vec{v}\right) 
 	&-& \left(A(\theta_k) \, \vec{u}_{k+1}, \vec{v}\right) + b\left(\vec{v}, p_{k+1}\right)  \\  \nonumber
 	- {\left(\frac{df_B}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{e}_y, \vec{v}\right)} &=&  
-	\frac{1}{\delta t} \left( 2 \vec{u}^n - \frac{1}{2} \vec{u}^{n-1},\vec{v}\right) \\ \label{eq-newton-C2} \nonumber
+	\frac{1}{\delta t} \left( 2 \vec{u}^n - \frac{1}{2} \vec{u}^{n-1},\vec{v}\right) \\ \nonumber
 	+ c\left(\vec{u}_k ; \vec{u}_{k}, \vec{v} \right) - \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k} \, \vec{u}_k, \vec{v}\right)
 	&-& \left( \left(\frac{df_B}{d\theta}(\theta_k)\, \theta_{k} - f_B(\theta_k)\right)\, \vec{e}_y,\vec{v}\right), \,\,\, \\   %\nonumber
 	\frac{3}{2\delta t} \left(\theta_{k+1} + \frac{dS}{d\theta}(\theta_k)\, \theta_{k+1}, \phi\right)
@@ -189,8 +161,10 @@ Eq. \ref{eq-newton-w} can be rewritten as follow when applied to the discretized
 	&-& \frac{1}{2 \delta t} \left(\theta^{n-1} + S(\theta^{n-1}),\, \phi\right).\,\,\,
 	\end{eqnarray}
 } \endgroup
-Note that the last term of Eq. \ref{eq-newton-C2} cancels in the case of a linear Boussinesq force $f_B$  (see Eq. \ref{eq-RePr}); this is not the case when non-linear variations of the density of the liquid are considered (convection or solidification of water).  Note also that the previous system of Eqs. \ref{eq-newton-C1} - \ref{eq-newton-C3} depends only on $\vec{u}^n$, $\vec{u}^{n-1}$, $\theta^n$ and $\theta^{n-1}$ and is independent of $p^n$, the pressure being in this approach a Lagrange multiplier for the divergence free constraint. 
-We underline the fact that the Newton loop (following $k$) has to be iterated until convergence for each time step $\delta t$ following the algorithm:
+
+\noindent Note that the last term of Eq. \ref{eq-newton-C2} cancels in the case of a linear Boussinesq force $f_B$  (see Eq. \ref{eq-RePr}); this is not the case when non-linear variations of the density of the liquid are considered (convection or solidification of water).  Note also that the previous system of Eqs. \ref{eq-newton-C1} - \ref{eq-newton-C3} depends only on $\vec{u}^n$, $\vec{u}^{n-1}$, $\theta^n$ and $\theta^{n-1}$ and is independent of $p^n$, the pressure being in this approach a Lagrange multiplier for the divergence free constraint. 
+We underline the fact that the Newton loop (following $k$) has to be iterated until convergence for each time step $\delta t$ following the algorithm
+
 \begin{equation} \label{eq-Newton-algo}
 \begin{tabular}{||ll}
 \multicolumn{2}{||l}{Navier-Stokes time loop following $n$}\\
@@ -203,15 +177,11 @@ We underline the fact that the Newton loop (following $k$) has to be iterated un
 \multicolumn{2}{||l}{actualize $(\vec{u}^{n+1}, p^{n+1}, \theta^{n+1}) = w_{k+1}$}
 \end{tabular}
 \end{equation}
-%It is interesting to note that the previous system of equations depends only on $\vec{u}^n$, $\vec{u}^{n-1}$, $\theta^n$ and $\theta^{n-1}$ and is independent of $p^n$, the pressure being in this approach a Lagrange multiplier for the divergence free constraint. 
 
-
-%The \ff syntax to implement the Newton algorithm is very close to the mathematical formulation given above. \\
-%After defining a vectorial finite-element space \texttt{fespace Wh(Th,[P2,P2,P1,P1]);}, associated to the mesh \texttt{Th}, we define the velocity, pressure and temperature variables in a compact manner by \texttt{Wh [u1,u2,p,T];}. Corresponding test functions are defined similarly. It is then very easy to define a \texttt{problem} formulation in \ff and include all the terms of the algorithm  (\ref{eq-newton-C1})-(\ref{eq-newton-C2}). This makes the lecture of the programs very intuitive by comparing each term to its mathematical expression. New terms could be added to the variational formulation expressed in the \texttt{problem} structure, without affecting other parts of the program. Consequently, the implementation of new models  or numerical methods for this problem is greatly facilitated by this modular structure of programs.
-
-In some cases, it is more relevant to solve directly the steady equation corresponding to Eqs. \ref{eq-weak-all} - \ref{eq-weak-energy} (i.e. without the temporal derivatives), when a steady state could be achieved.
+\noindent In some cases, it is more relevant to solve directly the steady equation corresponding to Eqs. \ref{eq-weak-all} - \ref{eq-weak-energy} (i.e. without the temporal derivatives), when a steady state could be achieved.
 It is for example the case for natural convection of air or water in differentially heated configurations.
 In that case, the weak formulation of the problem becomes:
+
 \begin{eqnarray}
 \label{eq-weak-steady}
 b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& 0, \\ %\nonumber
@@ -225,11 +195,12 @@ b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& 0, \\ %\nonumber
 \left( \frac{K}{Re Pr} \nabla \theta^{n+1}, \nabla \phi \right) &=& %\\  \nonumber
 0,
 \end{eqnarray}
-The parameter $\alpha$ is introduced before the buoyancy force term $f_B$ as a control parameter of the Newton convergence.
+
+\noindent The parameter $\alpha$ is introduced before the buoyancy force term $f_B$ as a convergence parameter of the Newton algorithm.
 The initial condition should be indeed close to the solution to limit the Newton iteration and ensure the convergence of the method.
 The idea is to solve successive steady problems by increasing $\alpha$ from $0$ to $1$.
 At each stage, the previous computed solution is set as initial conditions.
-These steps could be assimilate to a smooth increase of the $\Ray$ number.
+These steps could be assimilate to a smooth increase of the $\Ray$ number,
 
 \begin{equation} \label{eq-Newton-steady}
 \begin{tabular}{||ll}
@@ -243,11 +214,12 @@ These steps could be assimilate to a smooth increase of the $\Ray$ number.
 \multicolumn{2}{||l}{actualize $(\vec{u}^{n+1}, p^{n+1}, \theta^{n+1}) = w_{k+1}$}
 \end{tabular}
 \end{equation}
-with $\mathcal{N}$ the number of steps.
 
-This approach allows to achieve the natural convection of air in $6$ iterations for $\Ray = 10^6$ instead of $150$ iterations when the unsteady system of equations is solved.
+\noindent with $\mathcal{N}$ the number of steps.
 
-%\newpage
+\noindent This approach allows to achieve the natural convection of air in $6$ iterations for $\Ray = 10^6$ instead of $150$ iterations when the unsteady system of equations is solved.
+
+\newpage
 \section{Characteristics method for the convective terms} \label{sec-charac-FreeFem}
 
 An alternative for the treatment of non-linear terms in the momentum equation is offered by the characteristics Galerkin method \cite{Pironneau92}. Defining the characteristic flow (passing at time $t$ through the point $\vec{x}$)
@@ -270,9 +242,10 @@ and finally use the time discretization:
 \begin{equation}
 \left(\frac{D\Phi}{Dt}\right)^{n+1}(\vec{x})\approx\frac{\Phi^{n+1}(\vec{x})-\Phi^{n}\circ \vec{X}^n(\vec{x})}{\delta t},
 \end{equation}
-with $\vec{X}^n(\vec{x})$ a suitable approximation of $\vec{X}(t_n,t_{n+1},\vec{x})$, obtained by an integration back in time of (\ref{eq-charact}) from $t_{n+1}$ to $t_n$ for each grid point $\vec{x}$. The Galerkin characteristic method is implemented in Freefem++ as an operator computing $\Phi \circ \vec{X}^n$ for given mesh, convection velocity field and time step.
+with $\vec{X}^n(\vec{x})$ a suitable approximation of $\vec{X}(t_n,t_{n+1},\vec{x})$, obtained by an integration back in time of Eq. \ref{eq-charact} from $t_{n+1}$ to $t_n$ for each grid point $\vec{x}$. The Galerkin characteristic method is implemented in Freefem++ as an operator computing $\Phi \circ \vec{X}^n$ for given mesh, convection velocity field and time step.
 
-The weak formulation in Eq. \ref{eq-weak-all} becomes after using the characteristics method:
+\noindent The weak formulation in Eq. \ref{eq-weak-all} becomes after using the characteristics method:
+
 \begin{eqnarray}
 \label{eq-charact}
 b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& \\ \nonumber
@@ -288,7 +261,8 @@ a\left(\vec{u}^{n+1}, \vec{v}\right)
 \left( \frac{K}{\Prd} \nabla \theta^{n+1}, \nabla \phi \right) &=& \\ \nonumber
  \frac{2}{\delta t} \left(\theta^{n}\circ \vec{X}^n, \phi\right) -  \frac{1}{2 \delta t} \left(\theta^{n-1}\circ \vec{X}^{n-1}, \phi\right), \, \forall \, \phi \in V,
 \end{eqnarray}
-The system of Eq. \ref{eq-charact} is then solved to advance the solution from $t_n$ to $t_{n+1}$ in one step. The drawback of the method is that it requires small time steps for accurately computing of the convection terms. 
+
+\noindent The system of Eq. \ref{eq-charact} is then solved to advance the solution from $t_n$ to $t_{n+1}$ in one step. The drawback of the method is that it requires small time steps for accurately computing of the convection terms. 
 
 %\newpage
  \section{Mesh adaptivity} \label{subs:FEadapt}
@@ -299,7 +273,8 @@ variable $\chi$, the interpolation error is bounded by:
 {\cal E } = |\chi - \Pi_h \chi |_0 \leq c \sup_{T\in \mathcal{T}_{h}} \sup_{x,y,z\in T}   |\mathcal{H}(x)|(y-z , y-z),
 \label{eq1}
 \end{equation}
-where $\Pi_h \chi $ is the $P_1$ interpolate  of $\chi$, $ |\mathcal{H}(x)|$ is the  Hessian of $\chi$ at point $x$ after being made positive definite.
+
+\noindent where $\Pi_h \chi $ is the $P_1$ interpolate  of $\chi$, $ |\mathcal{H}(x)|$ is the  Hessian of $\chi$ at point $x$ after being made positive definite.
 Using the Delaunay algorithm (\eg \cite{george-1998}) to generate a  triangular mesh with edges close to the unit length  in the metric  $\mathcal{M} ={|\mathcal{H}| \over (c {\cal{E}})}$ will result in a equally distributed  interpolation error ${\cal E}$ over the edges $a_i$ of the mesh. More precisely, we get
 \begin{equation}
 {1 \over c {\cal E}} a_i^T {\cal M } a_i \le 1.
@@ -332,9 +307,9 @@ Then we focus on the list of input parameters and the structure of output files.
 \end{figure}
 
 \subsection{Program architecture}
-Fig. \ref{fig-folder-tree} gives a schematic overview of the content of the toolbox. All files are provided in a directory called \texttt{PCM-Toolbox}.  Many detailed comments are included in the programs, with direct link to the mathematical expressions used in the paper. The used \ff syntax was intentionally kept at a low level of technicality and supplemented with detailed comments when specific more technical syntax was used.
+Fig. \ref{fig-folder-tree} gives a schematic overview of the content of the toolbox. All files are provided in a directory called \texttt{PCM-Toolbox}.  Many detailed comments are included in the programs, with direct link to the mathematical expressions used in this chapter. The used \ff syntax was intentionally kept at a low level of technicality and supplemented with detailed comments when specific more technical syntax was used.
 
-This directory is organized as follows:
+\noindent This directory is organized as follows:
 \begin{enumerate}
    \item The directory \texttt{Common-Macros} contains five files:\\
 $\bullet$ {\em Macro$\_$operator.idp} includes macros and functions defining mathematical operators,\\
@@ -347,30 +322,33 @@ $\bullet$ {\em Macro$\_$system.idp}: macros identifying the OS and defining spec
     $\bullet$  natural convection of air or water in a differentially heated square cavity, \\
     $\bullet$  melting of a PCM stored in containers of different shapes,\\
     $\bullet$  melting followed by solidification of a rectangular PCM,\\
-    $\bullet$  freezing of pure water in a square cavity.\\
-   Each subdirectory contains  three files: {\em NEWTON$\_$\$case.edp} is the main \ff script file, $param_\_phys.inc$ defines the physical parameters and $param_\_num.inc$ the numerical parameters. For example, to run the natural convection case of air in a square cavity, the user can use the following command in a terminal window:
-  \item {FreeFem++ NEWTON$\_$stat$\_$natconv.edp}.\\
-  The folder structure of each test case is illustrated in Fig. \ref{fig-case-folder}.
+    $\bullet$  freezing of pure water in a square cavity.
+    
+   \noindent Each subdirectory contains  three files: {\em NEWTON$\_$\$case.edp} is the main \ff script file, $param_\_phys.inc$ defines the physical parameters and $param_\_num.inc$ the numerical parameters. For example, to run the natural convection case of air in a square cavity, the user can use the following command in a terminal window:
+  \texttt{FreeFem++ NEWTON$\_$stat$\_$natconv.edp}.
+  
+  \noindent The folder structure of each test case is illustrated in Fig. \ref{fig-case-folder}.
   The obtained solutions are saved in the folder \texttt{OUTPUT/Data}. Depending on the output format selected by the user,  data files are generated in specific folders for being visualized with: Tecplot, Paraview, Gnuplot or Medit. We also provide in the folder \texttt{Figures} ready-made layouts for these visualisation softwares. The user can thus obtain the figures from this paper using  newly generated data. More details about the output structure are given below.
 \end{enumerate}
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{\figpath/Fig_cap_2/figsCPC_02}
+		\includegraphics[width=0.8\textwidth]{\figpath/Fig_cap_2/figsCPC_02}
 	\end{center}
 	\caption{Structure of each Test-case folder. 
 	}
 	\label{fig-case-folder}
 \end{figure}
 
+%\newpage
 \subsection{Input parameters}
 
 Physical parameters and parameters related to the run are separated into two files.\\
-{\textbf (1)} The file $param_\_phys.inc$ contains the physical descriptions of the problem:
+\textbf{ (1)} The file $param_\_phys.inc$ contains the physical descriptions of the problem:
 \begin{itemize}
-   \item {\textbf typeT}: is the finite-element type for the temperature, with possible values \texttt{P2} or \texttt{P1},
-   \item {\textbf Torder}: is the accuracy order of the time integration scheme, with possible values $1$ (Euler scheme) or $2$ (Gear scheme),
-   \item {\textbf scalAdim}: defines the characteristic scales of the problem, see Eq. \ref{eq-adim}. Possible values 1, 2 or 3 correspond to the following choice of the characteristic scales \citep{dan-2014-JCP}:
+   \item \textbf{ typeT}: is the finite-element type for the temperature, with possible values \texttt{P2} or \texttt{P1},
+   \item \textbf{ Torder}: is the accuracy order of the time integration scheme, with possible values $1$ (Euler scheme) or $2$ (Gear scheme),
+   \item \textbf{ scalAdim}: defines the characteristic scales of the problem, see Eq. \ref{eq-adim}. Possible values 1, 2 or 3 correspond to the following choice of the characteristic scales \citep{dan-2014-JCP}:
    \begin{eqnarray} \label{eq-scal1}
     (1) &:&  V_\vref^{(1)} = \frac{\nu_l}{H} \Longrightarrow \ds t_\vref^{(1)} = \frac{H^2}{\nu_l}  \Longrightarrow \Rey=1,\\
       \label{eq-scal2}
@@ -378,14 +356,15 @@ Physical parameters and parameters related to the run are separated into two fil
       \label{eq-scal3}
      (3) &:& V_\vref^{(3)} = \frac{\nu_l}{H} \sqrt{\frac{\Ray}{\Prd}} \Longrightarrow \ds t_\vref^{(3)} = t_\vref^{(1)} \sqrt{\frac{\Prd}{\Ray}}       \Longrightarrow \Rey = \sqrt{\frac{\Ray}{\Prd}},
 \end{eqnarray}
-   \item {\textbf x$_l$, x$_r$, y$_l$, y$_r$}: are the values defining the dimensions of the cavity $[x_l,x_r]\times[y_l,y_r]$,
-   \item {\textbf Pr, Ra, Ste}: are the  Prandtl, Rayleigh and Stefan numbers, see Eq. \ref{eq-Rayleigh} and \ref{eq-RePr},
-   \item {\textbf T$_{hot}$, T$_{cold}$}: are  dimensionless temperatures according to Eq. \ref{eq-adim},
-   \item {\textbf bcu$_1$, bcu$_2$, bcT}: are macros defining the velocity (u) and the temperature (T) boundary conditions.
-   \item {\textbf epsi}: is the half width $\varepsilon$ of the mushy region. \underline{Default value} = $0.01$,
-   \item {\textbf dt}: is the dimensionless time step,
-   \item {\textbf t$_{max}$}: is the dimensionless final time,
-   \item {\textbf Parameters for regularization functions}: \\
+
+   \item \textbf{ x$_l$, x$_r$, y$_l$, y$_r$}: are the values defining the dimensions of the cavity $[x_l,x_r]\times[y_l,y_r]$,
+   \item \textbf{ Pr, Ra, Ste}: are the  Prandtl, Rayleigh and Stefan numbers, see Eq. \ref{eq-Rayleigh} and \ref{eq-RePr},
+   \item \textbf{ T$_{hot}$, T$_{cold}$}: are  dimensionless temperatures according to Eq. \ref{eq-adim},
+   \item \textbf{ bcu$_1$, bcu$_2$, bcT}: are macros defining the velocity (u) and the temperature (T) boundary conditions.
+   \item \textbf{ epsi}: is the half width $\varepsilon$ of the mushy region. \underline{Default value} = $0.01$,
+   \item \textbf{ dt}: is the dimensionless time step,
+   \item \textbf{ t$_{max}$}: is the dimensionless final time,
+   \item \textbf{ Parameters for regularization functions}: \\
  The parameters of the hyperbolic-tangent function in Eq. \ref{eq-smooth}, used to regularize discontinuous functions are set by default as follows:
  \end{itemize}
     \begin{table}[!ht]
@@ -403,10 +382,7 @@ Physical parameters and parameters related to the run are separated into two fil
     \label{tab-constant}
     \end{table}
    \begin{itemize} 
-    %\textit {\textbf rho(T) and Drho(T)}: (water cases only) define  the density and its derivative as functions of the temperature, following the model
-    \item {\textbf rho(T) and Drho(T)}: (water cases only) define  the density and its derivative as functions of the temperature, following the model
-
-\citep{Gebhart1977}:\\
+    \item \textbf{ rho(T) and Drho(T)}: (water cases only) define  the density and its derivative as functions of the temperature, following the model \citep{Gebhart1977}:\\
  
     \begin{table}[!ht]
     \centering
@@ -420,18 +396,18 @@ Physical parameters and parameters related to the run are separated into two fil
      \end{tabular}
     \label{tab-rho}
     \end{table}
-    \item {\textbf f$_B$(T), df$_B$(T)}: define the buoyancy force and its derivative.
+    \item \textbf{ f$_B$(T), df$_B$(T)}: define the buoyancy force and its derivative.
     \end{itemize}
 
-\noindent {\textbf (2)} The file {\em param$\_$num.inc} contains the parameters controlling the run.\\
-{\textbf Restart parameters:}
+\noindent \textbf{ (2)} The file {\em param$\_$num.inc} contains the parameters controlling the run.\\
+\textbf{ Restart parameters:}
 \begin{itemize}
-   \item {\textbf Nsave}: the solution is saved every $N\!save$ time steps in the \texttt{Data} folder (see Fig. \ref{fig-case-folder}). The temperature and the velocity fields are saved in \texttt{Tecplot} and \texttt{Medit} folders, while the liquid fraction, the Nusselt number, and the accumulated heat input are saved in the \texttt{Gnuplot} folder.
-   \item {\textbf Nrestart}: restart files (mesh and solution) are saved every $N\!restart$ time steps. Solutions at current and previous iterations, the CPU time, the accumulated heat input $Q_0$, and the time step $dt$ are saved in the folder \texttt{RST}.
-   \item {\textbf Ncondt}: allows the user to stop the run and save the solution properly. \\
+   \item \textbf{ Nsave}: the solution is saved every $N\!save$ time steps in the \texttt{Data} folder (see Fig. \ref{fig-case-folder}). The temperature and the velocity fields are saved in \texttt{Tecplot} and \texttt{Medit} folders, while the liquid fraction, the Nusselt number, and the accumulated heat input are saved in the \texttt{Gnuplot} folder.
+   \item \textbf{ Nrestart}: restart files (mesh and solution) are saved every $N\!restart$ time steps. Solutions at current and previous iterations, the CPU time, the accumulated heat input $Q_0$, and the time step $dt$ are saved in the folder \texttt{RST}.
+   \item \textbf{ Ncondt}: allows the user to stop the run and save the solution properly. \\
    The file \texttt{OUTPUT/zz.condt} is read every $N\!condt$ time steps: if the user replaces the value "0" in this file by "1" the run is stopped. This is a simple solution for a clean stop of the job by the user. \underline{Default value} = $20$.
-   \item {\textbf Nremesh}: the mesh is adapted every $N\!remesh$ iterations. If this parameter is set to "1" the mesh is adapted every time step.
-   \item {\textbf IFrestart}: is a boolean controlling the set up of the initial field. \\
+   \item \textbf{ Nremesh}: the mesh is adapted every $N\!remesh$ iterations. If this parameter is set to "1" the mesh is adapted every time step.
+   \item \textbf{ IFrestart}: is a boolean controlling the set up of the initial field. \\
   $I\!Frestart = 0$, the  initial condition is built in the code for each test case. For the PCM melting cases, the PCM is initially motionless at isothermal temperature. 
   	To set-up a smooth initial field, a few time steps (with very small $\delta t$) are computed by increasing progressively the boundary temperature at the hot wall and the Rayleigh number (by continuation).  Outputs are saved in  \texttt{OUTPUT/Data-RST-0}.\\
    $I\!Frestart > 0$, (positive integer values) the solution field previously computed at iteration $I\!Frestart$ is loaded from the folder \texttt{OUTPUT/Data-RST-filenameRST/RST}, \\
@@ -439,35 +415,36 @@ Physical parameters and parameters related to the run are separated into two fil
    $I\!Frestart < 0$, (negative integer values), the same principle for loading a solution is used, but from the folder \texttt{INIT}  (see Fig. \ref{fig-case-folder}). The solution fields stored in this folder could come from different previous calculations (\eg a steady state solution or, for the water, the natural convection field before freezing).
 \end{itemize}
 
-{\textbf Newton parameters:}
+\noindent \textbf{ Newton parameters:}
 \begin{itemize}
-   \item {\textbf epsconv}: is the value of  the stopping criterion for steady cases,
-   \item {\textbf gamma}: is the penalty parameter in  (\ref{eq-time-disc1}). \underline{Default value} = $10^{-7}$,
-   \item {\textbf tolNewton}: is the Newton tolerance $\xi_N$ (see (\ref{eq-Newton-algo})). \underline{Default value} = $10^{-6}$,
-   \item {\textbf newtonMax}: limits the maximum number of iterations in  the Newton algorithm (\ref{eq-Newton-algo}). \\
+   \item \textbf{ epsconv}: is the value of  the stopping criterion for steady cases,
+   \item \textbf{ gamma}: is the penalty parameter in  (\ref{eq-time-disc1}). \underline{Default value} = $10^{-7}$,
+   \item \textbf{ tolNewton}: is the Newton tolerance $\xi_N$ (see (\ref{eq-Newton-algo})). \underline{Default value} = $10^{-6}$,
+   \item \textbf{ newtonMax}: limits the maximum number of iterations in  the Newton algorithm (\ref{eq-Newton-algo}). \\
    \underline{Default value} = $50$,
   % \Blue{\textit {\textbf c$_1$, c$_2$, c$_3$}: \Red{(-- why not negative $a_2$ ?? si c'est trop compliqué de changer, il faut le laisser tel quel --$>$ } \Blue{C'est modifié en a$_2$ négatif maintenant dans le code)--}  are the coefficients of the time integration scheme: c$_1 =1/$dt, c$_2 = -1/$dt, c$_3 = 0$ correspond to the first order backward Euler scheme and c$_1 =1.5/$dt, c$_2 = -2/$dt, and c$_3 = 0.5/$dt to the second order Gear scheme.}
 \end{itemize}
-{\textbf Mesh parameters:}
+
+\noindent \textbf{ Mesh parameters:}
 \begin{itemize}
-   \item {\textbf nbseg}: is  the number of segments for the discretisation along the $x$ and $y$ directions,
-   \item {\textbf errh}: is the interpolation error level. \underline{Default value} = $0.02$,
-   \item {\textbf hmin, hmax}: are the minimum and maximum edge size, respectively,
-   \item {\textbf adaptratio}: is the ratio for a prescribed smoothing of the metric. For a value less than $1.1$ no smoothing is done. \underline{Default value} = $1.5$,
-   \item {\textbf nbvx}: is the maximum number of vertices allowed in the mesh generator. \underline{Default value} = $50000$.
+   \item \textbf{ nbseg}: is  the number of segments for the discretisation along the $x$ and $y$ directions,
+   \item \textbf{ errh}: is the interpolation error level. \underline{Default value} = $0.02$,
+   \item \textbf{ hmin, hmax}: are the minimum and maximum edge size, respectively,
+   \item \textbf{ adaptratio}: is the ratio for a prescribed smoothing of the metric. For a value less than $1.1$ no smoothing is done. \underline{Default value} = $1.5$,
+   \item \textbf{ nbvx}: is the maximum number of vertices allowed in the mesh generator. \underline{Default value} = $50000$.
 \end{itemize}
 
-\noindent {\textbf Output parameters:}
+\noindent \textbf{ Output parameters:}
    \begin{itemize}
-      \item {\textbf dircase}: is the name of the output folder,
-      \item{\textbf fcase}: is the prefix-name for ouput files.
-      \item{\textbf Tecplot, Medit, Gnu}: correspond to the name of the visualisation software to be used; the format of the outputs written in \texttt{OUTPUT/Data} (see Fig. \ref{fig-case-folder}) is accordingly set.  The files from the Tecplot folder can be easily read  also with Paraview.
+      \item \textbf{ dircase}: is the name of the output folder,
+      \item \textbf{ fcase}: is the prefix-name for ouput files.
+      \item \textbf{ Tecplot, Medit, Gnu}: correspond to the name of the visualisation software to be used; the format of the outputs written in \texttt{OUTPUT/Data} (see Fig. \ref{fig-case-folder}) is accordingly set.  The files from the Tecplot folder can be easily read  also with Paraview.
    \end{itemize}
    
 \subsection{Outputs}
-When a computation starts, the \texttt{OUTPUT} directory is created (see Fig. \ref{fig-case-folder})).
+When a computation starts, the \texttt{OUTPUT} directory is created (see Fig. \ref{fig-case-folder}).
 It contains two folders storing the output data and the echo of the run parameters.
-The folder \texttt{Data} contains four subdirectories with different output format files of the computed solution. File names are created using  the prefix defined by the parameter {\textbf fcase}, the current iteration and the current dimensionless time $t$. 
+The folder \texttt{Data} contains four subdirectories with different output format files of the computed solution. File names are created using  the prefix defined by the parameter \textbf{ fcase}, the current iteration and the current dimensionless time $t$. 
 Solution files can be visualized using either Tecplot or any other CFD Visualization tools (Paraview, Visit, etc.). 
 Moreover, {\em .gmsh}  (mesh) and {\em .rst} (fields) files are generated in the folder \texttt{RST} to enable restarts of the computation. Note that the folder \texttt{FFglut} contains  \ff scripts that re-read and visualize the RST-files to facilitate the selection of a restart field.  
 An {\em .echo} file with a summary of the main parameters, informations on the run and the names of the output files is saved in the folder \texttt{RUNPARAM}.  This directory additionally contains a copy of the {\em .inc} parameter files, allowing an easy identification of each case and preparing an eventual rerun of the same case.
