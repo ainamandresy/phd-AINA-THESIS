@@ -3,8 +3,8 @@
 %              \sectionmark{head version}}
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\titcourt{Numerical simulation of natural convection flow in 2D configurations}
-\def\titlong{Numerical simulation of natural convection flow in 2D configurations}
+\def\titcourt{Numerical simulation of natural convection flow in 2D square cavity}
+\def\titlong{Numerical simulation of natural convection flow in 2D square cavity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -14,21 +14,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We first focus on the capability of our code to deal with natural convection flow in square enclosures.
-Internal convection flow is a relevant case to validate rigorously the Navier-Stokes-Boussinesq solver since the publications related to the subject is very abundant in the literature.
+Internal convection flow is a relevant case to validate rigorously the Navier-Stokes-Boussinesq solver since publications related to the subject is very abundant in the literature.
 A large number of benchmark solutions with reference to natural convection problem induced by temperature difference could be found in the literature. 
 It is indeed central in a long list of engineering (circulations in building applications, double-wall insulations, solar collectors, etc.) and geophysical systems.
 
 \noindent In this chapter, we are interested by natural convection of fluid in a square cavity differentially heated from the vertical walls.
-The fluid temperature rises and its density decreases along the heated wall, convecting the fluid up to the point where it reaches the cold wall, where the reverse process occurs. 
+The fluid temperature rises and its density decreases along the heated wall, convecting the fluid up to the point where it reaches the cold wall, during which the reverse process occurs. 
 This two simultaneous opposing effects create a recirculation cell within a stationary zone in the center.
 
 We solve the system of Eqs. \ref{eq-qmvt} - \ref{eq-energ}, with $A(\theta) = 0$ in the momentum equation and $S(\theta) = 0$ in the energy equation.
-Linear and non-linear expressions of the buoyancy force $f_B(T)$ in the Boussinesq approximation (Eq. \ref{eq-energie-enth-model}) are investigated, by simulating the natural convection of air and the natural convection of water.
+Linear and non-linear expressions of the buoyancy force $f_B(T)$ are investigated, by simulating the natural convection of air and the natural convection of water.
 Natural convection of water exhibits actually a non-linear variation of the density with a maximum value around $T=4^o C$, while a linear variation is generally assumed for the natural convection of air in the Boussinesq approximation.
-
 We consider a square enclosure of height $H$. 
 Physical properties of air and water are listed in Tab. \ref{tab-param-phys-air}.
-\begin{table}[ht!]
+\begin{table}[!h]
    \begin{center}
       \begin{tabular}{*{8}{cl}}
          
@@ -46,24 +45,25 @@ Physical properties of air and water are listed in Tab. \ref{tab-param-phys-air}
 \noindent Isothermal boundary conditions are applied to the vertical walls and adiabatic boundary conditions to the upper and lower walls.
 Quantitative and qualitative validations are carried out as following:
 \begin{enumerate}[label=(\roman*)]
-\item Natural convection of air without obstacle: the velocity profile along symmetry lines, the maximum value of $u_{max}$ at mid-domain($x=0.5$) and location $Y$ of this maximum  are compared with the spectral-accurate simulations by \cite{LeQuere91} in Sec. \ref{sub-diff-heated}, 
-\item Natural convection of air with heated obstacle: transversal velocity profile along the  horizontal symmetry lines is compared with numerical results of \cite{Raluca2013} 
+\item \textbf{Natural convection of air without obstacle}: the velocity profile along symmetry lines, the maximum value of $u_{max}$ at mid-domain ($x=0.5$) and location $Y$ of this maximum  are compared with the spectral-accurate simulations by \cite{LeQuere91} in Sec. \ref{sub-diff-heated}, 
+\item \textbf{Natural convection of air with heated obstacle}: transversal velocity profile along the  horizontal symmetry lines is compared with numerical results of \cite{Raluca2013} 
 in Sec. \ref{sub-2D-OBSTACLE}, 
-\item Natural convection of water: temperature profile along the horizontal symmetry line is compared with the numerical results of \cite{Kowalewski-2003} in Sec. \ref{sec: natconv-water}.
+\item \textbf{Natural convection of water}: temperature profile along the horizontal symmetry line is compared with numerical results of \cite{Kowalewski-2003} in Sec. \ref{sec: natconv-water}.
 
 \end{enumerate}
 
 \section{Natural convection of air}\label{sec: natconv-air-2D}
 We start by testing the Newton algorithm in Eq. \ref{eq-newton-C1} with respect to linear expression of $f_B(\theta)$  (see Eq. \ref{eq-RePr}). % by investigating simulations with linear expression of $f_B(\theta)$ as presented in Eq. \ref{eq-RePr}.
 The classical problem of the thermally driven square cavity with adiabatic top and bottom walls is of interest.
-We consider a cavity of height $H = 0.1$m, initially filled with motionless air and a linear distribution of the temperature. 
+We consider a cavity of height $H = 0.1$ m, initially filled with motionless air and a linear distribution of the temperature. 
 The dimensionless parameters describing the investigated configuration are based on the fluid properties presented in Tab. \ref{tab-param-phys-air}, mainly $\Pr = 0.71$.
 Three $\Ray$ numbers are computed: $Ra = 10^4, 10^5, 10^6$. 
 The characteristic scales of the problem are 
 \begin{equation} \label{eq-scale-air}
 	L_{ref} = H, \quad T_{ref} = \frac{T_h + T_c}{2},
 \end{equation}
-and
+
+\noindent and,
 \begin{equation} \label{eq-scaling-3}
    V_{ref} = \frac{\nu_l}{H} \sqrt{\frac{Ra}{Pr}} 
    \quad \Longrightarrow \quad t_{ref} = \frac{\nu_l}{H^2} \sqrt{\frac{Pr}{Ra}} 
@@ -81,9 +81,9 @@ Besides, the steady case is performed using Rayleigh number continuation:
 a smaller value of the Rayleigh number is set initially, and is then increased smoothly until reaching the correct value.
 At each stage, the computation starts from the solutions obtained from the previous Rayleigh number simulation.
 
-Two cases are carried out: {\textit i)} a differentially heated square cavity and {\textit ii)} a differentially heated cavity with inner heated obstacle.
-For each of them, the horizontal and the vertical velocity profiles $u(y)$ and $v(x)$ at mid-domain ($y=0.5$ and $x=0.5$ respectively) are plotted and compared with numerical result by \cite{LeQuere91} and \cite{Raluca2013}. 
-Moreover, for {\textit i)} the maximum value $u_{max}$ and its location $Y$ are accurately compared with the solutions obtained by spectral accurate simulations by \cite{LeQuere91}.
+Two cases are carried out: \textbf{ i)} a differentially heated square cavity and \textbf{ ii)} a differentially heated cavity with inner heated obstacle.
+For each of them, the horizontal and the vertical velocity profiles $u(y)$ and $v(x)$ at mid-domain ($y=0.5$ and $x=0.5$ respectively) are plotted and compared with numerical results by \cite{LeQuere91} and \cite{Raluca2013}. 
+Moreover, for \textit{ i)} the maximum value $u_{max}$ and its location $Y$ are accurately compared with the solutions obtained by spectral accurate simulations by \cite{LeQuere91}.
 
 \subsection{Differentially heated square cavity} \label{sub-diff-heated}
 

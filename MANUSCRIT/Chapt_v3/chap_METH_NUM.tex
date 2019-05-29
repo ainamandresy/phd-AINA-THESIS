@@ -171,7 +171,7 @@ We underline the fact that the Newton loop (following $k$) has to be iterated un
 \multicolumn{2}{||l}{set  $w_0=(\vec{u}^{n}, p^{n}, \theta^{n})$}\\
 & \begin{tabular}[t]{||ll}
 \multicolumn{2}{||l}{Newton iterations  following $k$}\\
-&solve (\ref{eq-newton-C1}) to get $ \vec w_{k+1} $\\
+&solve Eq. \ref{eq-newton-C1} to get $ \vec w_{k+1} $\\
 \multicolumn{2}{||l}{stop when  $\| \vec w_{k+1} - \vec w_k \| < \xi_N$}
 \end{tabular}\\
 \multicolumn{2}{||l}{actualize $(\vec{u}^{n+1}, p^{n+1}, \theta^{n+1}) = w_{k+1}$}
@@ -325,7 +325,10 @@ $\bullet$ {\em Macro$\_$system.idp}: macros identifying the OS and defining spec
     $\bullet$  freezing of pure water in a square cavity.
     
    \noindent Each subdirectory contains  three files: {\em NEWTON$\_$\$case.edp} is the main \ff script file, $param_\_phys.inc$ defines the physical parameters and $param_\_num.inc$ the numerical parameters. For example, to run the natural convection case of air in a square cavity, the user can use the following command in a terminal window:
-  \texttt{FreeFem++ NEWTON$\_$stat$\_$natconv.edp}.
+   \begin{lstlisting}
+	FreeFem++ NEWTON_stat_natconv.edp
+  \end{lstlisting}
+
   
   \noindent The folder structure of each test case is illustrated in Fig. \ref{fig-case-folder}.
   The obtained solutions are saved in the folder \texttt{OUTPUT/Data}. Depending on the output format selected by the user,  data files are generated in specific folders for being visualized with: Tecplot, Paraview, Gnuplot or Medit. We also provide in the folder \texttt{Figures} ready-made layouts for these visualisation softwares. The user can thus obtain the figures from this paper using  newly generated data. More details about the output structure are given below.
@@ -360,7 +363,7 @@ Physical parameters and parameters related to the run are separated into two fil
    \item \textbf{ x$_l$, x$_r$, y$_l$, y$_r$}: are the values defining the dimensions of the cavity $[x_l,x_r]\times[y_l,y_r]$,
    \item \textbf{ Pr, Ra, Ste}: are the  Prandtl, Rayleigh and Stefan numbers, see Eq. \ref{eq-Rayleigh} and \ref{eq-RePr},
    \item \textbf{ T$_{hot}$, T$_{cold}$}: are  dimensionless temperatures according to Eq. \ref{eq-adim},
-   \item \textbf{ bcu$_1$, bcu$_2$, bcT}: are macros defining the velocity (u) and the temperature (T) boundary conditions.
+   \item \textbf{ bcu$_1$, bcu$_2$, bcT}: are macros defining the velocity ($\vec u$) and the temperature ($T$) boundary conditions.
    \item \textbf{ epsi}: is the half width $\varepsilon$ of the mushy region. \underline{Default value} = $0.01$,
    \item \textbf{ dt}: is the dimensionless time step,
    \item \textbf{ t$_{max}$}: is the dimensionless final time,
@@ -418,9 +421,9 @@ Physical parameters and parameters related to the run are separated into two fil
 \noindent \textbf{ Newton parameters:}
 \begin{itemize}
    \item \textbf{ epsconv}: is the value of  the stopping criterion for steady cases,
-   \item \textbf{ gamma}: is the penalty parameter in  (\ref{eq-time-disc1}). \underline{Default value} = $10^{-7}$,
-   \item \textbf{ tolNewton}: is the Newton tolerance $\xi_N$ (see (\ref{eq-Newton-algo})). \underline{Default value} = $10^{-6}$,
-   \item \textbf{ newtonMax}: limits the maximum number of iterations in  the Newton algorithm (\ref{eq-Newton-algo}). \\
+   \item \textbf{ gamma}: is the penalty parameter in Eq. \ref{eq-time-disc1}. \underline{Default value} = $10^{-7}$,
+   \item \textbf{ tolNewton}: is the Newton tolerance $\xi_N$ (see Eq. \ref{eq-Newton-algo}). \underline{Default value} = $10^{-6}$,
+   \item \textbf{ newtonMax}: limits the maximum number of iterations in  the Newton algorithm (Eq. \ref{eq-Newton-algo}). \\
    \underline{Default value} = $50$,
   % \Blue{\textit {\textbf c$_1$, c$_2$, c$_3$}: \Red{(-- why not negative $a_2$ ?? si c'est trop compliqué de changer, il faut le laisser tel quel --$>$ } \Blue{C'est modifié en a$_2$ négatif maintenant dans le code)--}  are the coefficients of the time integration scheme: c$_1 =1/$dt, c$_2 = -1/$dt, c$_3 = 0$ correspond to the first order backward Euler scheme and c$_1 =1.5/$dt, c$_2 = -2/$dt, and c$_3 = 0.5/$dt to the second order Gear scheme.}
 \end{itemize}
@@ -456,7 +459,7 @@ We start by presenting tests of the accuracy of our numerical method. We used th
 original system of equations by introducing an extra source term, such that the new system admits an exact solution
 given by a convenient analytic expression. Even though in most cases exact solutions constructed in this way are not physically realistic,
 this approach allows one to rigorously verify computations.\\
-We tested the space and time accuracy using manufactured solutions for the system of equations (\ref{eq-qmvt})-(\ref{eq-energ}) for a stationary case (Burggraf flow) and a time-dependent one \citep{nourgaliev2016fully}. For both cases, we computed the global error $ \varepsilon$ for different norms in space:
+We tested the space and time accuracy using manufactured solutions for the system of Eqs. \ref{eq-qmvt} - \ref{eq-energ} for a stationary case (Burggraf flow) and a time-dependent one \citep{nourgaliev2016fully}. For both cases, we computed the global error $ \varepsilon$ for different norms in space:
 \begin{equation}
   \varepsilon  = \| \Phi_e - \phi_h \|,
   \label{eq-epsconv}
@@ -488,13 +491,13 @@ Note that  the velocity at the top border of the cavity is:
 \begin{equation}
 u_1(0,1) = 2\sigma (x^4 - 2x^3 + x^2), \quad u_2(x,1) =0,
 \end{equation}
-which ensures the continuity of the velocity at the corners ($\vec{u}(0,1) =\vec{u}(1,1) =0$), since non-slip walls are imposed for the other borders:
+which ensures the continuity of the velocity at the corners ($\vec{u}(0,1) =\vec{u}(1,1) =0$), since no-slip walls are imposed for the other borders:
 $\vec{u}(x,0) = \vec{u}(0,y) = \vec{u}(1,y) = 0$. 
 
 
 
 
-The forcing terms that have to be added to the momentum and energy (temperature) equation are derived by injecting the exact solution (\ref{burggraf-u}) into the system (\ref{eq-qmvt})-(\ref{eq-energ}):
+The forcing terms that have to be added to the momentum and energy (temperature) equation are derived by injecting the exact solution \ref{burggraf-u} into the system of Eqs. \ref{eq-qmvt} - \ref{eq-energ}:
 \begin{eqnarray}
    f_{u_1} &=& 0, \\ \nonumber
    f_{u_2} &=& \sigma^2 h(y) h'(y) \left( g''(x)^2 - g'(x)g^{(3)}(x) \right) \\ \nonumber
@@ -541,7 +544,8 @@ The values of the constants are reported in Table \ref{tab-constant}.
 \caption{Parameter for the time-dependent manufactured solution (\ref{eq-manufN}).}
 \label{tab-constant}
 \end{table}
-The corresponding forcing source terms are:
+
+\noindent The corresponding forcing source terms are
 \begin{eqnarray}
 	f_{u_1} &=& \alpha_u \, \cos(t) \, \cos(a) \sin(b) - U_c \, \gamma_1 \, \sin(a) \sin(b) + U_c \, \gamma_2  \, \cos(a)\cos(b) \\ \nonumber
 	  & & - U_c \,  u_1(x,y,t) \, \sin(a) \sin(b) + U_c \,  u_2(x,y,t) \, \cos(a) \cos(b)
@@ -563,8 +567,8 @@ $U_c = (\delta U_0 + \alpha_u \sin(t)), \,
 	T_c = (\delta T_0 + \alpha_u \sin(t)), \,
 	P_c = (\delta P_0 + \alpha_u \sin(t))$.
 
-Guided by  the results obtained  in \S \ref{subsub-conv-burg} for the space accuracy, we fixed the grid size to $h=dx = 0.01$ to ensure small spatial discretization errors.
-For diminishing values of the time step $\delta t$, the solution was evolved in time up to the time instant $t_{max} = \pi$ at which the error  (\ref{eq-epsconv}) was computed. 
+Guided by  the results obtained  in Sec. \ref{subsub-conv-burg} for the space accuracy, we fixed the grid size to $h=dx = 0.01$ to ensure small spatial discretization errors.
+For diminishing values of the time step $\delta t$, the solution was evolved in time up to the time instant $t_{max} = \pi$ at which the error Eq. \ref{eq-epsconv} was computed. 
 The time convergence is displayed in Fig. \ref{fig-conv-bdf2} for the temperature variable. 
 The expected second order convergence in time is obtained for both P$_1$ (Fig. \ref{fig-conv-bdf2}a) and P$_2$ (Fig. \ref{fig-conv-bdf2}b) discretizations of the temperature.
 
@@ -572,10 +576,11 @@ The expected second order convergence in time is obtained for both P$_1$ (Fig. \
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_2/figsCPC_04} 
 	\end{center}
-	\caption{Time accuracy of the numerical scheme tested using the time-dependent manufactured solution of \cite{nourgaliev2016fully}. Evolution of the global error $\varepsilon$ given in (\ref{eq-epsconv}) for  the temperature at $t_{max} = \pi$. Discretizations using: (a) P$_1$ and (b) P$_2$ finite elements.}
+	\caption{Time accuracy of the numerical scheme tested using the time-dependent manufactured solution of \cite{nourgaliev2016fully}. Evolution of the global error $\varepsilon$ given in Eq. \ref{eq-epsconv} for  the temperature at $t_{max} = \pi$. Discretizations using: (a) P$_1$ and (b) P$_2$ finite elements.}
 	\label{fig-conv-bdf2}
 \end{figure}
 
+\newpage
 \section{Domain decomposition method with FreeFem++: FFDDM}
 Solving the Navier-Stokes-Boussinesq systems of Eqs. \ref{eq-weak-all} - \ref{eq-weak-energy} in three-dimensional configurations could generate a large problem size.
 The natural convection of air in a cube of dimensions $[0,1]^3$ with $40 \times 40 \times 40$ uniform grids involves indeed $3$ millions of unknowns (d.o.f.) in the linear system, when a $P_1$ finite element is considered for the temperature.
@@ -619,16 +624,19 @@ To solve the linear equation $A x = rhs$, the ORAS preconditionner reads
 \begin{equation}
    M_{RAS}^{-1} = \sum_{j=1}^{\mathcal{N}} R^T_j D_j (R_j A R^T_j)^{-1} R_j,
 \end{equation}
-$R_j$ denote the restriction operators and $D_j$ are square diagonal matrices.
+
+\noindent $R_j$ denote the restriction operators and $D_j$ are square diagonal matrices.
 Local matrices are defined as:
 \begin{equation}
    A_j = R_i A R_i^T.
 \end{equation}
-The duplicated unknowns due to the overlap between subdomains are coupled via a partition of unity
+
+\noindent The duplicated unknowns due to the overlap between subdomains are coupled via a partition of unity
 \begin{equation}
    I = \sum_{i=1}^{\mathcal{N}} R_i^T D_i R_i.
 \end{equation}
-Thus, the global solutions $U$ is defined as:
+
+\noindent Thus, the global solution $U$ is defined as:
 \begin{equation}
   U = \sum_{i=1}^{\mathcal{N}} R_i^T D_i R_i U =  \sum_{i=1}^{\mathcal{N}} R_i^T D_i U_i.
 \end{equation}

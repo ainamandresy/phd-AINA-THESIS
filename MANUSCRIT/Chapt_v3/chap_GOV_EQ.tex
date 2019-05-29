@@ -269,7 +269,7 @@ The main consequences of the boundary layer approximations are that:
 These assumptions lead to the following boundary layer equations for the conservation of mass, momentum and energy:
 \begin{eqnarray} \label{eq-bound-mass}
 	\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} &=& 0, \\  \label{eq-bound-mom}
-	u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} &=& \nu \frac{\partial^2 v}{\partial x^2} + g \beta (T - T_{ref}), \\ \label{eq-bound-energy}
+	u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} &=& \nu \frac{\partial^2 v}{\partial x^2} + g \beta (T - T_{ref}), \\ \label{eq-bound-energy-1}
 	u \frac{\partial T}{\partial x} + v \frac{\partial T}{\partial y} &=& \alpha \frac{\partial^2 T}{\partial x^2}. 
 \end{eqnarray}
 
@@ -278,7 +278,7 @@ These assumptions lead to the following boundary layer equations for the conserv
 	\frac{u}{\delta_\theta} \sim \frac{v}{H}.
 \end{equation}
 
-\noindent The energy Eq. \ref{eq-bound-energy} expresses a balance between longitudinal convection and transverse conduction:
+\noindent The energy Eq. \ref{eq-bound-energy-1} expresses a balance between longitudinal convection and transverse conduction:
 \begin{equation}
 	\frac{v}{H} \sim \frac{\alpha}{\delta_\theta^2},
 \end{equation}
