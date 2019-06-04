@@ -105,30 +105,34 @@ We can easily identify three different regimes describing the time evolution of 
 \subsection{Scale analysis of the melting} \label{sec:scaling anal}
 
 We further analyse each of the three regimes cited previously and identify the proper scales of the phenomenon.
-The following analysis is similar to that outlined in Sec. \ref{sec-bound-scal-anal} for natural convection problem without phase-change.
-The location of the interface will be denoted by $\Gamma_i$.
-At the solid-liquid interface, the energy balance condition which takes into account the released latent heat and the discontinuity of heat flux between the solid and the liquid can be handle by the following Stefan condition:
-\begin{eqnarray} \label{eq:Ste-condition}
-	\left. T\right|_{x=\Gamma_i} &=& T_f, \\ \nonumber
-	\rho h_{sl} \frac{\partial \Gamma_i}{\partial n} &=& - k \frac{\partial T}{\partial n},
-\end{eqnarray}
-%\begin{eqnarray} \label{eq:Ste-condition}
-%	\left. \theta \right|_{x=\Gamma_i} &=& \theta_f =  0, \\ \nonumber
-%	\frac{\partial \Gamma_i}{\partial t} &=& - \frac{\Ste}{\Prd} \frac{\partial \theta}{\partial n},
-%\end{eqnarray}
+%The following analysis is similar to that outlined in Sec. \ref{sec-bound-scal-anal} for natural convection problem without phase-change.
+The (dimensionless) location of the interface will be denoted by $\Gamma_i$.
 
-Immediately after $t=0$ (see Fig. \ref{fig:melt-field}a), the melted PCM occupies a thin enclosure of height $H$ and width $\Gamma_i$, with $\Gamma_i \ll H$ (and thus $\partial^2 \theta/\partial y^2 \ll \partial^2 \theta/\partial x^2$).
+Immediately after $t=0$ (see Fig. \ref{fig:melt-field}a), the melted PCM occupies a thin enclosure of height $H$ and width $\Gamma_i$.
 In such configuration, the temperature varies linearly between the two sidewalls and the heat transfer is essentially ruled by conduction. 
 The fluid phase is almost motionless and the horizontal heat flux across the incipient melting PCM is balanced by the enthalpy absorbed at the interface.
-Accordingly, the interface remain vertical during this stage.
-Since the velocity in the liquid phase is relatively small during this conductive regime, the momentum, the energy equation, and the Stefan condition at the interface could be rewritten in the small enclosure containing the melted PCM as
-\begin{eqnarray} \label{eq-balance-momentum}
-   \frac{\partial p}{\partial x} &=& \frac{\Ray}{\Rey^2 \Prd} \theta, \\ \label{eq-energy-x}
-    \frac{\partial \theta}{\partial t} &=& \frac{1}{\Rey \Prd} \frac{\partial^2 \theta}{\partial x^2}, \\ \label{eq-stefan-x}
-   \frac{\partial \Gamma_i}{\partial t} &=& - \frac{\Ste}{\Prd} \frac{\partial \theta}{\partial x}.
+At the solid-liquid interface, the energy balance condition which takes into account the released latent heat and the discontinuity of heat flux between the solid and the liquid can be handle by the following Stefan condition:
+%\begin{eqnarray} \label{eq:Ste-condition}
+%	\left. T\right|_{x=\Gamma_i} &=& T_f, \\ \nonumber
+%	\rho h_{sl} \frac{\partial \Gamma_i}{\partial t_{\varphi}} &=& - k \frac{\partial T}{\partial n},
+%\end{eqnarray}
+\begin{eqnarray} \label{eq:Ste-condition}
+	\theta (x=\Gamma_i) &=& \theta_f =  0, \\ \nonumber
+	\frac{\partial \Gamma_i}{\partial t} &=& - \frac{\Ste}{\Prd} \frac{\partial \theta}{\partial x},
 \end{eqnarray}
 
-\noindent The temperature field during the conduction regime is quasi-steady, thus linear Eq. \ref{eq-stefan-x} could be approximated by
+%, with $\Gamma_i \ll H$ (and thus $\partial^2 \theta/\partial y^2 \ll \partial^2 \theta/\partial x^2$).
+
+
+%Accordingly, the interface remain vertical during this stage.
+%Since the velocity in the liquid phase is relatively small during this conductive regime, the momentum, the energy equation, and the Stefan condition at the interface could be rewritten in the small enclosure containing the melted PCM as
+%\begin{eqnarray} \label{eq-balance-momentum}
+%   \frac{\partial p}{\partial x} &=& \frac{\Ray}{\Rey^2 \Prd} \theta, \\ \label{eq-energy-x}
+%    \frac{\partial \theta}{\partial t} &=& \frac{1}{\Rey \Prd} \frac{\partial^2 \theta}{\partial x^2}, \\ \label{eq-stefan-x}
+%   \frac{\partial \Gamma_i}{\partial t} &=& - \frac{\Ste}{\Prd} \frac{\partial \theta}{\partial x}.
+%\end{eqnarray}
+
+\noindent Since the temperature field during the conduction regime is quasi-steady, the linear Eq. \ref{eq:Ste-condition} could be approximated by
 \begin{equation}
     \frac{\partial \Gamma_i}{\partial t} \approx - \frac{\Ste}{\Prd} \frac{\theta_f - \theta_h}{\Gamma_i} \approx  \frac{\Ste}{\Prd} \frac{1}{\Gamma_i}.
 \end{equation}
@@ -140,13 +144,13 @@ Since the velocity in the liquid phase is relatively small during this conductiv
 
 \noindent Moreover, the Nusselt number can be evaluated using the same assumption,
 \begin{equation}
-   N\!u= \int_0^{1} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy \approx \frac{1}{\Gamma_i} \approx ({2 \tau})^{-1/2}.
+   N\!u= \int_0^{1} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy = \frac{1}{\Gamma_i} = ({2 \tau})^{-1/2}.
 \end{equation}
 
 \noindent To summarize, during the first stage of the melting, when the heat transfer is led by conduction, the time evolution of the liquid fraction (given by the location of the interface) and the Nusselt number could be approximated by
 \begin{eqnarray} \label{eq-Nu-Lf-Corr-Lat}
-	L_f &\sim& \tau^{1/2}, \\ 
-	N\!u &\sim& \tau^{-1/2}.
+	L_f &\sim& (2 \tau)^{1/2}, \\ 
+	N\!u &\sim& (2 \tau)^{-1/2}.
 \end{eqnarray}
 
 \begin{figure}
@@ -159,31 +163,37 @@ Since the velocity in the liquid phase is relatively small during this conductiv
 While the melting continues to expand to the right side of the domain, a natural convection flow emerges from the top of the cavity (see Fig. \ref{fig:melt-scheme-regime}).
 Convection and conduction coexist at this stage and
 the total heat transfer rate is thus the sum of the conductive and the convective heat transfer.
-Turning back to the energy Eq. \ref{eq-energ}, applied to the liquid phase with $C = K = 1$, three distinct effects could be identified:
+Turning back to the energy Eq. \ref{eq-energ} in the liquid phase  (i.e. $C = K = 1$), three distinct effects could be identified:
 \begin{equation}
-	\underbrace{\frac{\delta \theta}{t}}_{Inertia} \quad \underbrace{v \frac{\delta \theta}{H}}_{Convection} \quad \underbrace{\frac{1}{\Rey \Prd} \frac{\delta \theta}{\Gamma_i^2}}_{Conduction},
+	\underbrace{\frac{\delta \theta}{t}}_{Inertia} \quad \underbrace{v \frac{\delta \theta}{H}}_{Convection} \quad \underbrace{\frac{\delta \theta}{\Gamma_i^2}}_{Conduction},
 \end{equation}
 
-\noindent As $t$ increases, the inertia decreases in importance, the convection effect increases since it is proportional to $v$, and the conduction becomes more and more negligible since $\Gamma_i$ is increasing with time. 
+\noindent As $t$ increases, the inertia decreases in importance while the convection effect increases since it is proportional to $v$, and the conduction becomes more and more negligible with the increasing value of $\Gamma_i$ with time. 
 To assess for the convective heat transfer contribution during this mixed regime,
 one can define a Rayleigh number based on $y^*$ as $\Ray_{y^*} = \Ray \times y^{*3}$,
-with $y^{*}$ the height of the melted zone altered by the convection flow as shown in Fig. \ref{fig:melt-scheme-regime}.
+with $y^{*}$ the height of the melted zone altered by the convection flow as shown in Fig. \ref{fig:melt-scheme-regime} (see also  \cite{jany1988scaling}).
 We note that at the bottom part of the cavity, the interface remains vertical by the effect of the conductive heat transfer.
 Since $\Pr \gg 1$, the scaling presented in Eq. \ref{eq-scale-nbd-high-Pr} allows to evaluate the thickness of the thermal boundary layer in the top region as
  \begin{equation} \label{eq-conv-cond-reg}
  \delta_{\theta}^* \sim y^* \times \Ray_{y^*} ^{-1/4}.
 \end{equation}
 
-\noindent A this stage, the thickness $\delta_{\theta}^*$ of the thermal boundary layer is proportional to the thickness of the liquid zone $\Gamma_i$ ($\sim \tau^{1/2}$) resulting that
+\noindent A this stage, the thickness $\delta_{\theta}^*$ of the thermal boundary layer is proportional to the thickness of the liquid zone $\Gamma_i$ ($\sim \sqrt{2 \tau}$) resulting that
  \begin{equation}
-	 y^* \sim (2 \tau)^2 \times \Ray \quad \Rightarrow \quad \frac{y^*}{\Gamma_i} \sim (2 \tau)^{3/2} \times \Ray.
+	 y^* \sim (2 \tau)^2 \times \Ray. %\quad  \Rightarrow \quad \frac{y^*}{\Gamma_i} \sim (2 \tau)^{3/2} \times \Ray.
  \end{equation}
-The Nusselt number during the mixed convection-convection regime can therefore be approximated by
+ 
+ \noindent The Nusselt number related to this region is hence
+  \begin{equation}
+   \Nuss= \int_{1-y^*}^{1} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy = \frac{y^*}{\Gamma_i} \sim (2 \tau)^{3/2} \times \Ray.
+\end{equation}
+
+\noindent The total Nusselt number during the mixed convection-convection regime can therefore be approximated by
 \begin{equation} \label{eq-Nu-conv-cond}
    N\!u \sim (2 \tau)^{-1/2} + (2 \tau)^{3/2} \times \Ray.
 \end{equation}
 
-\noindent Eq. \ref{eq-Nu-conv-cond} indicates that the contribution of the conduction $\left( 1/\sqrt{2 \tau}\right)$ decreases with the time while the convection one is increasing.
+\noindent Eq. \ref{eq-Nu-conv-cond} indicates that the contribution of the conduction $\left(\sim 1/\sqrt{2 \tau}\right)$ decreases with the time while the convection one is increasing.
 %From a simple analysis of $\partial N\!u/\partial \theta = 0$, one can find the minimum value of the Nusselt number $N\!u_{min} \sim Ra^{1/4}$ occurring at $\tau \sim \Ray^{-1/2}$.
 
 Finally, when the natural convection flow is fully developed and dominates the heat transfer along the vertical heated wall, the thermal boundary layer is $\delta_{\theta} \sim \Ray^{1/4}$ and therefore the Nusselt number scale is
@@ -373,7 +383,7 @@ It is useful to introduce the effective Rayleigh and Nusselt numbers of the flui
 	N\!u_{e} &=& N\!u \times \bar \delta_H ,
 \end{eqnarray}
 
-\noindent with ${\bar \delta_H}$ the averaged fluid height. Note that $\bar \delta_H $ could be assimilated to the liquid fraction.
+\noindent with ${\bar \delta_H}$ the non-dimensional averaged fluid height. Note that $\bar \delta_H $ could be assimilated to the liquid fraction.
 
 %\noindent In the limit of vanishing $\Ste$ number, the classical no-slip Rayleigh-Bénard convection predicts a critical Rayleigh number $\Ray_c \approx 1707.76 $ \citep{chandrasekhar2013hydrodynamic} after which the first instability appears. %and the melting front becomes non-planar.
 %This critical value is however higher for increasing $\Ste$ numbers.
@@ -450,7 +460,7 @@ Beyond this regime, due to the important non-linearities of the dynamics, we rel
 
 During the bulk heat transfer regime, the convective cells are stretched vertically and the number of rolls is time-independent.
 A schematic overview of the phenomenon is drawn in Fig. \ref{fig:roll-basal-heating}. 
-Let $L_r$ define the half-thickness of a cell. %as it is shown in Fig. (\ref{fig:roll-basal-heating}). 
+Let $L_r$ define the (dimensionless) half-thickness of a cell. %as it is shown in Fig. (\ref{fig:roll-basal-heating}). 
 A good scaling during this regime is hence
 \begin{equation}
 	x \sim L_{r}, \quad y \sim \bar \delta_H,
@@ -514,13 +524,13 @@ Since the heat transfer is dominated solely by bulk heat transfer we have
 Next, we turn attention back to the energy Eq. \ref{eq-bound-energy}.
 Three distinct effects could be identified:
 \begin{equation}
-	\underbrace{\frac{\delta T}{t}}_{Inertia} \quad \underbrace{v \frac{\delta T}{\bar \delta_h}}_{Convection} \quad \underbrace{\alpha \frac{\delta T}{L_r^2}}_{Conduction}.
+	\underbrace{\frac{\delta T}{t}}_{Inertia} \quad \underbrace{v \frac{\delta T}{\bar \delta_H}}_{Convection} \quad \underbrace{\alpha \frac{\delta T}{L_r^2}}_{Conduction}.
 \end{equation}
 
 \noindent When $t$ increases, there comes an effective time $t_{e}$ where the inertia decreases in importance and the energy equation expresses a balance between the convection and the conduction heat transfer,
 %Again, if the assumption $L_r \sim \delta_T$ holds, we obtain:
 \begin{equation}
-	v \frac{\delta T}{\bar \delta_H} \sim \alpha \frac{\delta T}{\delta_T^2},
+	v \frac{\delta T}{\bar \delta_H} \sim \alpha \frac{\delta T}{\delta_{\theta}^2},
 \end{equation}
 
 \noindent leading to

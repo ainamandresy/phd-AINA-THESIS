@@ -72,12 +72,12 @@ We use the second-order implicit finite-difference discretization in Eq. \ref{eq
 \begin{eqnarray} \label{eq-time-disc1}
 \nabla\cdot \vec{u}^{n+1} + {\gamma} p^{n+1} &=& 0, \\ %\nonumber
 \frac{3}{2} \frac{\vec{u}^{n+1}}{\delta t} +(\vec{u}^{n+1}\cdot\nabla) \vec{u}^{n+1} +\nabla p^{n+1} 
-- {\frac{1}{Re} \nabla^2 \vec u^{n+1}}  & & \\ \nonumber 
+- {\frac{1}{\Rey} \nabla^2 \vec u^{n+1}}  & & \\ \nonumber 
 - A(\theta^{n+1})\vec u^{n+1}- f_B(\theta^{n+1}) \, \vec{e}_y &=&  \\ \nonumber
 2 \frac{\vec{u}^{n}}{\delta t}-\frac{\vec{u}^{n-1}}{2\delta t},\\ \label{eq-time-disc3}
 \frac{3}{2} \frac{\theta^{n+1} + S(\theta^{n+1})}{\delta t} +
 \nabla\cdot\left(\vec{u}^{n+1} \theta^{n+1}\right)
-- \nabla \cdot\left( \frac{K}{RePr} \nabla \theta^{n+1} \right) &=& \\  \nonumber
+- \nabla \cdot\left( \frac{K}{\Rey \Prd} \nabla \theta^{n+1} \right) &=& \\  \nonumber
 2\frac{ \theta^{n} + S(\theta^{n})}{\delta t}-\frac{ \theta^{n-1} + S(\theta^{n-1}) }{2\delta t}.
 \end{eqnarray}
 
@@ -106,7 +106,7 @@ b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& \\ \nonumber
 \frac{3}{2 \delta t} \left(\theta^{n+1} + S(\theta^{n+1}), \phi\right)
 +\left(\vec{u}^{n+1} \cdot \nabla \theta^{n+1} , \phi
 \right) +
-\left( \frac{K}{Re Pr} \nabla \theta^{n+1}, \nabla \phi \right) &=& \\  \nonumber
+\left( \frac{K}{\Rey \Prd} \nabla \theta^{n+1}, \nabla \phi \right) &=& \\  \nonumber
 \frac{2}{\delta t} \left( \theta^{n}+S(\theta^n), \phi\right)
 - \frac{1}{2 \delta t} \left( \theta^{n-1}+S(\theta^{n-1}), \phi\right),\, \forall \, \phi \in V,
 \end{eqnarray}
@@ -153,7 +153,7 @@ Eq. \ref{eq-newton-w} can be rewritten as follow when applied to the discretized
 	\frac{3}{2\delta t} \left(\theta_{k+1} + \frac{dS}{d\theta}(\theta_k)\, \theta_{k+1}, \phi\right)
 	+\left(\vec{u}_{k} \cdot \nabla \theta_{k+1} , \phi  \right)
 	&+& \left( \vec{u}_{k+1} \cdot \nabla  \theta_k , \phi \right) \\ \nonumber
-	+ \left( \frac{K}{Re Pr} \nabla \theta_{k+1}, \nabla \phi \right) 
+	+ \left( \frac{K}{\Rey \Prd} \nabla \theta_{k+1}, \nabla \phi \right) 
 	&=&
 	\frac{2}{\delta t} \left(\theta^n + S(\theta^n) , \phi\right)  \\ \label{eq-newton-C3} \nonumber
 	+\left(\vec{u}_{k} \cdot \nabla  \theta_k, \phi \right)
@@ -192,7 +192,7 @@ b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=& 0, \\ %\nonumber
 &=& 0, \\ \label{eq-weak-energy-steady}  %\nonumber
 \left(\vec{u}^{n+1} \cdot \nabla \theta^{n+1} , \phi
 \right) +
-\left( \frac{K}{Re Pr} \nabla \theta^{n+1}, \nabla \phi \right) &=& %\\  \nonumber
+\left( \frac{K}{\Rey \Prd} \nabla \theta^{n+1}, \nabla \phi \right) &=& %\\  \nonumber
 0,
 \end{eqnarray}
 
@@ -464,7 +464,7 @@ We tested the space and time accuracy using manufactured solutions for the syste
   \varepsilon  = \| \Phi_e - \phi_h \|,
   \label{eq-epsconv}
 \end{equation}
-with $\Phi_e$ the exact solution and $\phi_h$ the numerical solution. Computations were performed for the convection of air ($C=K=1$, $A(\theta)=S(\theta)=0$), with a Rayleigh number $Ra = 10^4$ and a Prandtl number $Pr = 0.71$.
+with $\Phi_e$ the exact solution and $\phi_h$ the numerical solution. Computations were performed for the convection of air ($C=K=1$, $A(\theta)=S(\theta)=0$), with a Rayleigh number $\Ray = 10^4$ and a Prandtl number $\Prd = 0.71$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -477,7 +477,7 @@ The exact solution of the new flow with thermal effects is:
 \label{burggraf-u}
    u_1(x,y) &=& \sigma g'(x) h'(y), \\\nonumber
    u_2(x,y) &=& - \sigma g''(x) h(y), \\\nonumber
-   p(x,y)   &=& \frac{\sigma}{Re} \left( h^{(3)}(y) g(x) + g''(x)h'(y) \right) + \frac{\sigma^2}{2} g'(x)^2 \left( h(y)h''(y)-h'(y)^2 \right),\\ \nonumber
+   p(x,y)   &=& \frac{\sigma}{\Rey} \left( h^{(3)}(y) g(x) + g''(x)h'(y) \right) + \frac{\sigma^2}{2} g'(x)^2 \left( h(y)h''(y)-h'(y)^2 \right),\\ \nonumber
    T(x,y) &=& T_{c} + (T_{h} - T_{c}) y + a(x) b(y), 
 \end{eqnarray}
 with $\sigma >0$ a scaling parameter and functions
@@ -501,16 +501,16 @@ The forcing terms that have to be added to the momentum and energy (temperature)
 \begin{eqnarray}
    f_{u_1} &=& 0, \\ \nonumber
    f_{u_2} &=& \sigma^2 h(y) h'(y) \left( g''(x)^2 - g'(x)g^{(3)}(x) \right) \\ \nonumber
-   &+& \frac{\sigma}{Re}\left( g^{(4)}(x) h(y) + 2 g''(x)h''(y) + g(x) h^{(4)}(y) \right) \\ \nonumber
-   &+& \frac{\sigma^2}{2} g'(x)^2 \left( h(y) h^{(3)}(y) - h'(y)h''(y) \right) - \frac{Ra}{Pr Re^2} T(x,y),\\ \nonumber
+   &+& \frac{\sigma}{\Rey}\left( g^{(4)}(x) h(y) + 2 g''(x)h''(y) + g(x) h^{(4)}(y) \right) \\ \nonumber
+   &+& \frac{\sigma^2}{2} g'(x)^2 \left( h(y) h^{(3)}(y) - h'(y)h''(y) \right) - \frac{\Ray}{\Prd \Rey^2} T(x,y),\\ \nonumber
    f_T &=& u_1(x,y) a'(x) b(y) + u_2(x,y) \left( T_h - T_c + a(x) b'(y) \right) \\ \nonumber
-   &-& \frac{K}{Re Pr} \left( a''(x)b(y) + a(x) b''(y) \right).
+   &-& \frac{K}{\Rey \Prd} \left( a''(x)b(y) + a(x) b''(y) \right).
 \end{eqnarray}
 We used the Taylor-Hood finite element (P$_2$ for the velocity and P$_1$ for the pressure)  and tested P$_1$ or P$_2$ finite elements for the temperature.
 Figs. \ref{fig-conv-burggraf}a and  \ref{fig-conv-burggraf}b illustrate the streamlines and the temperature field, respectively.
 Fig. \ref{fig-conv-burggraf} plots the  discretization error $\varepsilon$  as a function of the grid size $h=\delta x=\delta y$ for the temperature.  Both ${L}^2$ and ${L}^\infty$ norms are displayed. The expected second order accuracy in  ${L}^2$-norm is obtained with  P$_1$ finite elements (Fig. \ref{fig-conv-burggraf}c), while an order exceeding three is 
 observed when  P$_2$ finite elements are used (Fig. \ref{fig-conv-burggraf}d).
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_2/figsCPC_03} 
 	\end{center}
@@ -532,7 +532,7 @@ To test the time accuracy of the Gear (BDF2) scheme, we used the manufactured ti
 	p(x,y,t) &=& \bar{P} + \left(\delta P_0 + \alpha_p \sin(t) \right) \, \sin(x+ \gamma_1 t) \, \cos(y+ \gamma_2 t), 
 \end{align}
 The values of the constants are reported in Table \ref{tab-const-Nourga}.
-\begin{table}[!h]
+\begin{table}[!ht]
 \centering
 \begin{tabular}{*{10}{c}}
  % \toprule
@@ -550,16 +550,16 @@ The values of the constants are reported in Table \ref{tab-const-Nourga}.
 	f_{u_1} &=& \alpha_u \, \cos(t) \, \cos(a) \sin(b) - U_c \, \gamma_1 \, \sin(a) \sin(b) + U_c \, \gamma_2  \, \cos(a)\cos(b) \\ \nonumber
 	  & & - U_c \,  u_1(x,y,t) \, \sin(a) \sin(b) + U_c \,  u_2(x,y,t) \, \cos(a) \cos(b)
 	  + P_c \, \cos(a) \cos(b)\\ \nonumber
-	  & & + \frac{2}{Re} \, u_1(x,y,t), \\	  \nonumber
+	  & & + \frac{2}{\Rey} \, u_1(x,y,t), \\	  \nonumber
 	f_{u_2} &=& - \alpha_u \,  \cos(t)  \, \sin(a) \cos(b) - U_c \,  \gamma_1  \,  \cos(a) \cos(b) + U_c \,  \gamma_2 \,  \sin(a)\sin(b) \\ \nonumber
 		  & & - U_c \,  u_1(x,y,t)  \,  \cos(a) \cos(b) + U_c  \, u_2(x,y,t)  \,  \sin(a) \sin(b)
 		  -  P_c  \,  \sin(a)  \,  \sin(b)\\ \nonumber
-		  & &+ \frac{2}{Re} \,  u_2(x,y,t)
-		  - \frac{Ra}{Pr Re^2} \,  T(x,y,t), \\  \nonumber
+		  & &+ \frac{2}{\Rey} \,  u_2(x,y,t)
+		  - \frac{\Ray}{\Prd \Rey^2} \,  T(x,y,t), \\  \nonumber
 	f_{T} &=& \alpha_t \,  \cos(t) \,  \cos(a) \sin(b) -  T_c  \,  \gamma_1 \,  \sin(a) \sin(b) + T_c \,   \gamma_2  \,  \cos(a)\cos(b) \\ \nonumber
 		  & &-  T_c \,  u_1(x,y,t)  \,  \sin(a) \sin(b)  
 		  +   T_c  \,  u_2(x,y,t)  \, \cos(a) \cos(b) 
-		  + \frac{2 K}{Re Pr} \,  T_c  \, \cos(a) \sin(b), \\ \nonumber
+		  + \frac{2 K}{\Rey \Prd} \,  T_c  \, \cos(a) \sin(b), \\ \nonumber
 \end{eqnarray}
 where $a = (x+ \gamma_1 t), \,
 b = (y+ \gamma_2 t)$ and  
@@ -572,7 +572,7 @@ For diminishing values of the time step $\delta t$, the solution was evolved in 
 The time convergence is displayed in Fig. \ref{fig-conv-bdf2} for the temperature variable. 
 The expected second order convergence in time is obtained for both P$_1$ (Fig. \ref{fig-conv-bdf2}a) and P$_2$ (Fig. \ref{fig-conv-bdf2}b) discretizations of the temperature.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_2/figsCPC_04} 
 	\end{center}

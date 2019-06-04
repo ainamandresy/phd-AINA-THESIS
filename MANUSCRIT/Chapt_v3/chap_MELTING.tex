@@ -498,10 +498,12 @@ K(T) =  1+ \frac{1}{2} \left( \frac{k_s}{k_l} - 1 \right)  \left\{
 
 \noindent with $k_s = 2.26$ and $k_l = 0.578$ the thermal conductivity of pure water in the solid and the liquid and $R_k = 0.0075$. 
 %The mushy-zone definition is also slightly modified compared to the melting case.
-The mushy-zone is defined as $\varepsilon_1 = 0$ and $\varepsilon_2 = 0.0075$, to ensure a very thin thickness of the mushy zone (see also \cite{dan-2014-JCP}).
+We also define $\varepsilon_1 = 0$ and $\varepsilon_2 = 0.0075$, to ensure a very thin thickness of the mushy zone (see also \cite{dan-2014-JCP}).
 
 Fig. \ref{fig-T2w-manip}a superimposes the experimental image from \cite{Kowalewski-1999} with our numerical results for the same physical time $t_{\varphi}=2340 [s]$. 
-The flow pattern in the liquid phase also corresponds very well qualitatively to the experimental image. Since a good agreement with the experiment was sought,  the simulation was performed with very small time steps ($\delta t =10^{-5} \approx 0.01 [s]$), but still reasonable grids ($2,500$ triangles) due to the efficiency of the adaptivity algorithm.
+The flow pattern in the liquid phase also corresponds very well qualitatively to the experimental image. 
+Since a good agreement with the experiment was sought,  the simulation was performed with very small time steps ($\delta t =10^{-5} \approx 0.014 [s]$), but still reasonable grids ($2,500$ triangles) due to the efficiency of the adaptivity algorithm.
+The discrepancy between the experimental interface and the current simulation comes principally from the model, mainly the three-dimensional effects, the supercooling of water and realistic boundary conditions (see \cite{Giangi-2000,Kowalewski-1999,Kowalewski-2003}) that are not taken into account by the present numerical method.
 
 The source term $S(\theta)$ is added to the metrics calculation presented in Sec. \ref{sec: natconv-water} to track the solidification front.
 The mesh is thus refined along the line $\theta_m$ through the function $\Phi(\theta)$ defined in Eq. \ref{eq-Stm}, the solid-liquid interface defined by $\theta = 0$ and in the boundary layer regions.
@@ -509,7 +511,11 @@ We use also both $\Phi(\theta^n)$ and $\Phi(\theta^{n+1})$ and $S(\theta^n)$ and
 The final mesh is displayed in Fig. \ref{fig-T2w-manip}c, clearly showing that the mesh is refined along the line $\theta=\theta_m$ and the solid-liquid interface ($\theta=0$). This allows to accurately capture the structure and the extent of the two recirculating zones, features that are difficult to obtain with fixed meshes (see discrepancies described in \cite{Giangi-2000,Kowalewski-1999,Kowalewski-2003}).
 %As a consequence, the temperature level lines in Fig. \ref{fig-T2w-manip}d are smooth and clearly define the two interfaces in the system: the liquid-solid interface ($\theta=0$) and the density inversion interface ($\theta=0.4$) separating the two recirculating liquid regions.
 
-The time evolution of the solid-liquid interface is depicted in Fig. \ref{fig-T2w-manip}d for several time instants from $t=0.05$ ($t_{\varphi}=0.05 [s]$) to final time $t=1.61$ ($2340 [s]$).
+The time evolution of the solid-liquid interface is depicted in Fig. \ref{fig-T2w-manip}d for several time instants from $t=0.05$ ($t_{\varphi}=70 [s]$) to final time $t=1.61$ ($2340 [s]$).
+We observe first a straight shape of the front from $t = 0$ to $t = 0.05$.
+Then, the top and the bottom of the freezing front move at different rates from $t = 0.3$ due to the competing effects of positive and negative buoyancy force in the unsolidified water.
+The upper clockwise circulation has indeed the task to transport the hot liquid to the top wall and back along the extremum of the density variation (localized at the temperature isoline $\theta = \theta_m$), and slow consequently the growth of the solid layer.
+However, the abnormal recirculation traps the cold liquid water at the bottom part of the cavity, enhancing thus the solidification rate at this region as one can note in Fig. \ref{fig-T2w-manip}d.
 
 \begin{figure}
 	\begin{center}
@@ -517,7 +523,7 @@ The time evolution of the solid-liquid interface is depicted in Fig. \ref{fig-T2
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/WFREEZ_thesis}
 	\end{center}
 	\caption{Freezing of pure water.  Configuration at (physical time) $t_{\varphi}=2340 [s]$ (t = 1.61): (a) experimental image from \cite{Kowalewski-1999}; the thick red line represents the solid-liquid interface computed with the present method (b) computed streamlines showing the two recirculating zones in the fluid phase.
-	(c) finite-element mesh refined along the solid-liquid interface ($T = 0^oC$) and also along the line of maximum water density ($T = 4^oC$) (d) location of the solidification front for several time instants.}
+	(c) finite-element mesh refined along the solid-liquid interface ($T = 0^oC$) and also along the line of maximum water density ($T = 4^oC$) (d) location of the solidification front for several time instants: from $t=0.05$ (corresponding to physical time $t_{\varphi}=70 [s]$) to $t=1.61$ ($2340 [s]$)}
 	\label{fig-T2w-manip}
 \end{figure}
 %\begin{figure}

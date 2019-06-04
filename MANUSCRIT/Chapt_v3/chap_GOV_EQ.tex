@@ -139,20 +139,20 @@ As far as the solidification process is concerned, a distinct discussion will be
 The dimensionless system of equations to be solved in both liquid and solid regions can be finally written as:
 \begin{eqnarray}
 \nabla\cdot \vec{u}&=&0, \label{eq-qmvt} \\ \vspace{0.2cm}
- \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re}{\nabla^2 \vec{u}} 
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{\Rey}{\nabla^2 \vec{u}} 
  - f_B(\theta)\, \vec{e}_y - A(\theta) \vec{u}&=&0, \label{eq-qmvt-2} \\ \vspace{0.2cm}
  \frac{\partial \left(C \theta\right)}{\partial t} + \nabla \cdot\left( C \theta \vec{u}\right) -
- \nabla \cdot\left( \frac{K}{Re Pr} \nabla \theta \right) +  \frac{\partial \left(C S\right)}{\partial t}  &=& 0. \label{eq-energ} 
+ \nabla \cdot\left( \frac{K}{\Rey \Prd} \nabla \theta \right) +  \frac{\partial \left(C S\right)}{\partial t}  &=& 0. \label{eq-energ} 
 \end{eqnarray}
 
-\noindent The linearised Boussinesq buoyancy force ($f_B$), the Reynolds ($Re$) and Prandtl ($Pr$) numbers are defined as:
+\noindent The linearised Boussinesq buoyancy force ($f_B$), the Reynolds ($Re$) and Prandtl ($\Prd$) numbers are defined as:
 \begin{equation}\label{eq-RePr}
-f_B(\theta) = \frac{Ra}{Pr Re^2} \theta, \quad Re = \frac{\rho V_{ref} H}{\mu_l}=  \frac{V_{ref} H}{\nu_l} , \quad Pr = \frac{\nu_l}{\alpha_l},
+f_B(\theta) = \frac{\Ray}{\Prd \Rey^2} \theta, \quad \Rey = \frac{\rho V_{ref} H}{\mu_l}=  \frac{V_{ref} H}{\nu_l} , \quad \Prd = \frac{\nu_l}{\alpha_l},
 \end{equation}
 with $\nu$ the kinematic viscosity and $\alpha = k/(\rho c)$  the thermal diffusivity. In the expression of $f_B$, the Rayleigh number of the flow is defined as:
 \begin{equation}
 \label{eq-Rayleigh}
-Ra = \frac{g \beta H^3 \delta T}{\nu_l \alpha_l},
+\Ray = \frac{g \beta H^3 \delta T}{\nu_l \alpha_l},
 \end{equation}
 with $\beta$ the thermal expansion coefficient and $g$ the gravitational acceleration.
 
@@ -194,7 +194,7 @@ F(\theta; a_r, \theta_r, R_r) = f_l + \frac{f_s-f_l}{2}\left\{
 
 \noindent where $f_l, f_s$ are the imposed values in the liquid and solid phases, $a_r$ a smoothing  parameter, $\theta_r$ the central value (around which we regularize), and $R_r$ the smoothing radius. For example, we use for the non-dimensional source term in Eq. \ref{eq-energ} the following regularisation over the artificial mushy region $\theta \in [-\varepsilon, \varepsilon]$:
 \begin{equation}
-S(\theta) = \frac{1}{Ste} - \frac{1}{2\,Ste}\left\{
+S(\theta) = \frac{1}{\Ste} - \frac{1}{2\,\Ste}\left\{
 1 + \tanh\left(\frac{\theta_s-\theta}{R_s}\right)
 \right\},
 \label{eq-Stanh}
@@ -257,14 +257,14 @@ The main consequences of the boundary layer approximations are that:
 \begin{enumerate}[label=(\roman*)]
 \item the normal part of the momentum equation has a negligible importance,
 \item the downstream diffusion term in the momentum and energy equations are neglected in comparison with the normal diffusion terms, i.e,
-\begin{eqnarray}
-\partial^2 \vec{u}/\partial y^2 & \ll & \partial^2 \vec{u}/\partial x^2, \\
-\partial^2 T/\partial y^2 & \ll & \partial^2 T/\partial x^2,
-\end{eqnarray}
+\begin{equation}
+	\frac{\partial^2 u}{\partial y^2}  \ll  \frac{\partial^2 u}{\partial x^2}, \quad \frac{\partial^2 T}{\partial y^2}  \ll  \frac{\partial^2 T}{\partial x^2},
+	%\frac{\partial^2 T}{\partial y^2} & \ll & \frac{\partial^2 T}{\partial x^2},
+\end{equation}
 
 \noindent since the boundary layer thickness is much smaller than the enclosure height ($ \delta \ll H$),
 \item the pressure distribution is purely hydrostatic, i.e, $P = \rho g y$,
-\item the thermal and the viscous boundary layer thickness are given by the order of magnitude expressions: $\delta_\nu/\delta_\theta = o \left(\Pr^{1/2} \right)$.
+\item the thermal and the viscous boundary layer thickness are given by the order of magnitude expressions: $\delta_\nu/\delta_\theta = o \left(\Prd^{1/2} \right)$.
 \end{enumerate}
 These assumptions lead to the following boundary layer equations for the conservation of mass, momentum and energy:
 \begin{eqnarray} \label{eq-bound-mass}
@@ -295,12 +295,12 @@ These assumptions lead to the following boundary layer equations for the conserv
 
 \noindent Using the expression of $v$ in Eq. \ref{eq-scale-v} and by dividing Eq. \ref{eq-scale-momentum} by $g \beta \delta T$, we obtain
 \begin{equation} \label{eq-final-scale}
-	\underbrace{\left( \frac{H}{\delta_\theta} \right)^4 Pr ^{-1} \Ray^{-1}}_{inertia} \quad  \underbrace{\left( \frac{H}{\delta_\theta} \right)^4 \Ray^{-1}}_{friction} \quad \underbrace{1}_{buoyancy}.
+	\underbrace{\left( \frac{H}{\delta_\theta} \right)^4 \Prd ^{-1} \Ray^{-1}}_{inertia} \quad  \underbrace{\left( \frac{H}{\delta_\theta} \right)^4 \Ray^{-1}}_{friction} \quad \underbrace{1}_{buoyancy}.
 \end{equation}
 
-\noindent Eq. \ref{eq-final-scale} indicates that the behaviour of the fluid in the boundary layer depends on the $\Pr$ number.
+\noindent Eq. \ref{eq-final-scale} indicates that the behaviour of the fluid in the boundary layer depends on the $\Prd$ number.
 
-\noindent First, for a high-Prandtl fluid ($\Pr \geq 1$), the friction-buoyancy balance yields
+\noindent First, for a high-Prandtl fluid ($\Prd \geq 1$), the friction-buoyancy balance yields
 \begin{equation} \label{eq-scale-nbd-high-Pr}
 	\delta_\theta \sim H \Ray^{-1/4}.
 \end{equation}
@@ -313,11 +313,11 @@ These assumptions lead to the following boundary layer equations for the conserv
 
 \noindent Second, for a low-Prandtl fluid ($\Pr \ll 1$), we observe a balance between inertia and buoyancy, leading to
 \begin{equation} \label{eq-corr-Low-Pr}
-	\delta_\theta \sim H Pr^{-1/4} \Ray^{-1/4}.
+	\delta_\theta \sim H \Prd^{-1/4} \Ray^{-1/4}.
 \end{equation}
 Accordingly we obtain a Nu-Ra correlation:
 \begin{equation}
-	Nu \sim Pr^{1/4} \Ray^{1/4}.
+	N\!u \sim \Prd^{1/4} \Ray^{1/4}.
 \end{equation}
 
 %
