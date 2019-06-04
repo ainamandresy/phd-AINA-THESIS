@@ -29,7 +29,7 @@ Details about the parameter settings are first given in Sec. \ref{sec-param-set}
 the characteristics of the mushy-zone, the mesh adaptivity and the initial condition are discussed in details.
 Second, the melting of n-octadecane and gallium are presented in Secs. \ref{sec: melting-2D} and \ref{sec-melt-gallium}.
 The physical properties of n-octadecane and gallium used in our simulations are reported in Tab. \ref{tab-param-PCM}.
-\begin{table}[!h]
+\begin{table}[!ht]
    \begin{center}
       \begin{tabular}{*{8}{cl}}
          
@@ -174,7 +174,7 @@ Three cases are investigated: \\
 \underline{\textit Benchmark $\#3$}: Numerical comparison of various numerical methods, presented by \cite{bertrand1999melting}. \\ % considering high value of the Rayleigh number. \\
 %The computed parameters are: $\Ray = 10^8$, $\Prd = 50$ and $\Ste = 0.1$.\\
 %
-\begin{table}[!h]
+\begin{table}[!ht]
    \begin{center}
 	\begin{tabular}{*{7}{c}}
   	 	&  & $\Ray$ & $\Prd$ & $\Ste$ & $\delta t$ & $V_{ref}$ \\
@@ -484,7 +484,7 @@ This case illustrates again the power of our mesh adaptivity algorithm.
 We consider finally the difficult case of water freezing in a square cavity. 
 After achieving the convection steady pattern in the cavity (see Figure \ref{fig-T1w-isoT}), freezing starts by dropping progressively the temperature of the cold (right) wall from $T_c=\celsm{0}$ to  $T_c=\celsm{-10}$. 
 %The new boundary condition on the right cold wall is imposed by setting a very thin layer of $\delta x=0.01$ with constant temperature $\theta=\theta_c$ and zero velocity.
-The dimensionless parameters describing the problem are: $\Ray=2.518084\cdot 10^{6}$, $\Prd=6.99$ and $\Ste = 0.125$.
+The dimensionless parameters describing the problem are: $\Ray=2.518084 \cdot 10^{6}$, $\Prd=6.99$ and $\Ste = 0.125$.
 
 Besides the complex fluid flow and the non-linear time evolution of the solid-liquid interface, the code have to handle the non-linear variation of the density presented in Eq. \ref{eq-dens-nonlin}.
 Moreover, one can note that in addition to the non-linear formulation of $f_B(\theta)$ in Eq. \ref{eq-fBnonlin}, the coefficient $\Ray \times 1/(\beta \delta T)$ is very large since the Boussinesq approximation imposes a value of $\beta \delta T \ll 0.01$.
@@ -501,20 +501,23 @@ K(T) =  1+ \frac{1}{2} \left( \frac{k_s}{k_l} - 1 \right)  \left\{
 The mushy-zone is defined as $\varepsilon_1 = 0$ and $\varepsilon_2 = 0.0075$, to ensure a very thin thickness of the mushy zone (see also \cite{dan-2014-JCP}).
 
 Fig. \ref{fig-T2w-manip}a superimposes the experimental image from \cite{Kowalewski-1999} with our numerical results for the same physical time $t_{\varphi}=2340 [s]$. 
-The flow pattern in the liquid phase also corresponds very well qualitatively to the experimental image. Since a good agreement with the experiment was sought,  the simulation was performed with very small time steps ($\delta t =10^{-4} \approx 0.15 [s]$), but still reasonable grids ($2,500$ triangles) due to the efficiency of the adaptivity algorithm.
+The flow pattern in the liquid phase also corresponds very well qualitatively to the experimental image. Since a good agreement with the experiment was sought,  the simulation was performed with very small time steps ($\delta t =10^{-5} \approx 0.01 [s]$), but still reasonable grids ($2,500$ triangles) due to the efficiency of the adaptivity algorithm.
 
 The source term $S(\theta)$ is added to the metrics calculation presented in Sec. \ref{sec: natconv-water} to track the solidification front.
 The mesh is thus refined along the line $\theta_m$ through the function $\Phi(\theta)$ defined in Eq. \ref{eq-Stm}, the solid-liquid interface defined by $\theta = 0$ and in the boundary layer regions.
 We use also both $\Phi(\theta^n)$ and $\Phi(\theta^{n+1})$ and $S(\theta^n)$ and $S(\theta^{n+1})$ in the adaptivity procedure.
 The final mesh is displayed in Fig. \ref{fig-T2w-manip}c, clearly showing that the mesh is refined along the line $\theta=\theta_m$ and the solid-liquid interface ($\theta=0$). This allows to accurately capture the structure and the extent of the two recirculating zones, features that are difficult to obtain with fixed meshes (see discrepancies described in \cite{Giangi-2000,Kowalewski-1999,Kowalewski-2003}).
-As a consequence, the temperature level lines in Fig. \ref{fig-T2w-manip}d are smooth and clearly define the two interfaces in the system: the liquid-solid interface ($\theta=0$) and the density inversion interface ($\theta=0.4$) separating the two recirculating liquid regions.
+%As a consequence, the temperature level lines in Fig. \ref{fig-T2w-manip}d are smooth and clearly define the two interfaces in the system: the liquid-solid interface ($\theta=0$) and the density inversion interface ($\theta=0.4$) separating the two recirculating liquid regions.
+
+The time evolution of the solid-liquid interface is depicted in Fig. \ref{fig-T2w-manip}d for several time instants from $t=0.05$ ($t_{\varphi}=0.05 [s]$) to final time $t=1.61$ ($2340 [s]$).
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/figsCPC_15}
+		%\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/figsCPC_15}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/WFREEZ_thesis}
 	\end{center}
-	\caption{Freezing of pure water.  Configuration at (physical time) $t_{\varphi}=2340 [s]$: (a) experimental image from \cite{Kowalewski-1999}; the thick red line represents the solid-liquid interface computed with the present method (b) computed streamlines showing the two recirculating zones in the fluid phase.
-	(c) finite-element mesh refined along the solid-liquid interface ($T = 0^oC$) and also along the line of maximum water density ($T = 4^oC$) (d) temperature iso-lines.}
+	\caption{Freezing of pure water.  Configuration at (physical time) $t_{\varphi}=2340 [s]$ (t = 1.61): (a) experimental image from \cite{Kowalewski-1999}; the thick red line represents the solid-liquid interface computed with the present method (b) computed streamlines showing the two recirculating zones in the fluid phase.
+	(c) finite-element mesh refined along the solid-liquid interface ($T = 0^oC$) and also along the line of maximum water density ($T = 4^oC$) (d) location of the solidification front for several time instants.}
 	\label{fig-T2w-manip}
 \end{figure}
 %\begin{figure}
