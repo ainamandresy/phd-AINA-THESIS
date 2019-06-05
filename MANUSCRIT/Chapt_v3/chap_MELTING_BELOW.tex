@@ -324,6 +324,13 @@ As expected, an increase of the Rayleigh number and the Stefan number is followe
 \newpage
 \clearpage
 \section{Basal Melting of n-octadecane PCM. Case BM} \label{sec-melting-basal}
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_MELT_BASAL_heating_2}
+	\end{center}
+	\caption{Melting of PCM heated from below. (top) Temperature field and solid-liquid interface for different Rayleigh numbers (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.635 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$ (bottom) streamlines in the liquid phase.}
+	\label{fig:melt-below}
+\end{figure}
 
 We now pay further attention to BM case.
 We investigate the melting of pure n-octadecane PCM in a square enclosure subject to heating from the bottom side.
@@ -352,7 +359,7 @@ Finally, a comparison between LM and BM cases is presented.
 %The dynamic of the natural convection flow during the basal heating is different,
 %since it is known that any non-planar topography can lead to a baroclinic flow at any Rayleigh number.
 
-Fig. \ref{fig:melt-below} displays the structure of the natural convection in the melting PCM through a sequence of panels for temperature isolines and streamlines in the liquid phase, for Rayleigh numbers ranging from $\Ray = 3.27 \cdot 10^5$ to $\Ray = 3.27 \cdot 10^6$, after the primary instability.
+Fig. \ref{fig:melt-below} displays the structure of the natural convection flow in the melting PCM through a sequence of panels for temperature isolines and streamlines in the liquid phase, for Rayleigh numbers ranging from $\Ray = 3.27 \cdot 10^5$ to $\Ray = 3.27 \cdot 10^6$, after the primary instability.
 An array of lengthening plumes (panel a to c) and counter-rotating convective cells (panel d to f)  are located in the liquid phase,
 in which the number of thermal plumes increases with the Rayleigh number.
 For $\Ray = 3.27 \cdot 10^5$, one can observe three equidistant plumes and five convective cells in Figs. \ref{fig:melt-below}a and \ref{fig:melt-below}d, while four and six plumes are observed for $\Ray = 1.635 \cdot 10^6$ and $\Ray = 3.27 \cdot 10^6$ respectively (Figs. \ref{fig:melt-below}b and \ref{fig:melt-below}c).
@@ -363,55 +370,57 @@ We observe an anti-clockwise recirculation of the left convection cell and a clo
 Thus, the melt is heated to the highest temperature at bottom and then floats up, reaches the phase change interface and splits into opposite directions.
 The melt is cooled as it flows through the phase-change interface.
 It results a non-planar front with a peak at the center of each couple of counter-rotating convective cells.
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_MELT_BASAL_heating_2}
-	\end{center}
-	\caption{Melting of PCM heated from below. (top) Temperature field and solid-liquid interface for different Rayleigh numbers (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.635 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$ (bottom) streamlines in the liquid phase.}
-	\label{fig:melt-below}
-\end{figure}
 
 \noindent As the melting evolves, it is useful to introduce the effective Rayleigh and Nusselt numbers of the fluid layer, based on the height of the melting PCM, to describe the temporal evolution of the melting:
 \begin{eqnarray}
-	\Ray_{e} &=& \Ray \times {\bar \delta_H} ^3, \\
+	\Ray_{e} &=& \Ray \times {\bar \delta_H}^3, \\
 	\Nuss_{e} &=& \Nuss \times \bar \delta_H ,
 \end{eqnarray}
-
 \noindent with ${\bar \delta_H}$ the non-dimensional averaged fluid height. Note that $\bar \delta_H $ could be assimilated to the liquid fraction.
 
 %\noindent In the limit of vanishing $\Ste$ number, the classical no-slip Rayleigh-Bénard convection predicts a critical Rayleigh number $\Ray_c \approx 1707.76 $ \citep{chandrasekhar2013hydrodynamic} after which the first instability appears. %and the melting front becomes non-planar.
 %This critical value is however higher for increasing $\Ste$ numbers.
 %In our simulations, the convective onset occurs at around $\Ray_e \approx 5 \times 10^3$, .
 
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_Ra-327e5}
-	\end{center}
-	\caption{Melting of PCM heated from below for $\Ray = 3.27 \cdot 10^5$. Time evolution of the temperature field, the streamlines and melting fronts corresponding to $6$ effective $\Ray$ numbers:
-	$\Ray_e = 2260.65$ (a), $\Ray_e = 4828.42$ (b), $\Ray_e = 1.362 \cdot 10^4$ (c), $\Ray_e = 3.468 \cdot 10^4$ (d), $\Ray_e = 6.925 \cdot 10^4$ (d), and $\Ray_e = 1.97 \cdot 10^5$ (f).}
-	\label{fig:T-evol-Ra-3.27e5}
-\end{figure}
+%\begin{figure}
+%	\begin{center}
+%		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_Ra-327e5}
+%	\end{center}
+%	\caption{Melting of PCM heated from below for $\Ray = 3.27 \cdot 10^5$. Time evolution of the temperature field, the streamlines and melting fronts corresponding to $6$ effective $\Ray$ numbers:
+%	$\Ray_e = 2260.65$ (a), $\Ray_e = 4828.42$ (b), $\Ray_e = 1.362 \cdot 10^4$ (c), $\Ray_e = 3.468 \cdot 10^4$ (d), $\Ray_e = 6.925 \cdot 10^4$ (d), and $\Ray_e = 1.97 \cdot 10^5$ (f).}
+%	\label{fig:T-evol-Ra-3.27e5}
+%\end{figure}
 
 %The time evolution of the melting for $\Ray = 3.27 \times 10^5$ is illustrated in details through panels (a) to (f) of Fig. \ref{fig:T-evol-Ra-3.27e5}.
-Fig. \ref{fig:T-evol-Ra-3.27e5} details the time evolution of the melting for $\Ray = 3.27 \times 10^5$.
-Before the first instability arises, the melt layer evolves solely by conduction. 
+Fig. \ref{fig:T-evol-Ra-6.54e6} depicts in detail the time evolution of the melting for $\Ray = 6.54 \cdot 10^6$, during which the effective Rayleigh number increases and influence the dynamic of the flow. 
+The temperature field, the location of the interface, and the streamlines are reported.
+
+\noindent Before the first instability arises, the melt layer evolves solely by conduction. 
 There is no noticeable fluid flow and the melting front remains straight (panel a).
-The convective onset occurs at $\Ray_e \approx 5 \times 10^3$ when the phase-change interface becomes non-planar (panel b), which is in good agreement with the observation of \cite{esfahani2018basal,favier2019rayleigh}.
-We note that, in the framework of the classical Rayleigh-Bénard convection flow, in the limit of vanishing $\Ste$ number, the first instability appears at critical Rayleigh number $\Ray_c \approx 1707.76 $.
-This critical value is however higher for increasing $\Ste$ numbers.
+The temperature is distributed linearly in the vertical direction through the incipient liquid layer.
+The convective onset occurs at $\Ray_e \approx 7 \times 10^3$ when the phase-change interface becomes non-planar (panel b), which is in good agreement with the observation of \cite{esfahani2018basal,favier2019rayleigh}.
+It is worth noting that, in the framework of the classical Rayleigh-Bénard convection flow, the first instability appears at critical Rayleigh number $\Ray_c \approx 1707.76 $, in the limit of vanishing $\Ste$ number.
+This critical value is however higher for greater $\Ste$ numbers.
 The appearance of convection is marked by a change in the shape of the interface from straight to nearly periodic curve.
 
-\noindent When the fluid depth increases, the effective Rayleigh number increases and the convective rolls are stretched vertically (panels b and c).
-We note that during this stage, the number of rolls is time-independent.
-This stage could be compared to the steady convection after the onset in the Rayleigh-Bénard system (see \cite{chandrasekhar2013hydrodynamic}).
+\noindent  As the fluid expands upwards, the effective Rayleigh number increases and we could observe $10$ convective rolls being stretched vertically (panels c to e).
+For $\Ray_e \leq 2 \cdot 10^5$, one can note that the number of rolls is time-independent.
+Such behavior could be compared to the steady convection regime after the onset of primary instability in the Rayleigh-Bénard system (see \cite{chandrasekhar2013hydrodynamic}).
+This regime will be referred to linear regime in the present study.
 
-\noindent After the rolls are elongated vertically, they start to oscillate laterally and then merge to create greater rolls (panels d and e).
+%Fig. \ref{fig:T-evol-Ra-6.54e6} illustrates the dynamic of the melting for higher $\Ray$ number.
+%The size of the cavity is increased of an order of $3$, corresponding to $\Ray = 6.54 \cdot 10^6$ while the $\Ste$ number is kept constant.
+%Panels (a) to (c) depict the time evolution of the primary cells
+%The regimes described previously are recovered in panels (a) to (e), mainly the onset of the natural convection at $\Ray_e = 4.8 \cdot 10^3$ followed by an oscillating regime accompanied by a roll merging process.
+%From $\Ray_e = 2.9 \times 10^5$ (panel g), the convective cells are oscillating leading to a roll merging process.
+\noindent After the rolls are elongated vertically, they start to oscillate laterally and then merge to create greater rolls, from $\Ray_e = 2.9 \times 10^5$ (panel g).
+The interface loses periodicity and the structure of the rolls becomes disordered.
+At this stage, neither the mushroom form of the plumes nor the periodic distribution of the convection cells are no longer observed. 
 The essential consequence of this observation is that the melting front is modified.
 The interface is actually shaped by the new flow pattern. 
 %Two peaks are observed but are still periodic at the interface related to the four convective rolls.
-Finally, after the roll merging and the oscillating behavior observed in panels (d) and (e), 
-the foregoing steady convection observation is then reached again in panel (f).
-
+%Finally, after the roll merging and the oscillating behavior observed in panels (d) and (e), 
+%the foregoing steady convection observation is then reached again in panel (f).
 %\begin{figure}
 %	\begin{center}
 %		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_327e6_1}
@@ -420,32 +429,23 @@ the foregoing steady convection observation is then reached again in panel (f).
 %	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. $\Ray = 3.27 \cdot 10^6$}
 %	\label{fig:T-evol-Ra-3.27e6}
 %\end{figure}
-
-
-\begin{figure}
+\begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_654e6_1}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_654e6_3}
 	\end{center}
-	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. $\Ray = 6.54 \cdot 10^6$}
+	\caption{Melting of PCM heated from below: temperature field, solid-liquid interface and streamlines for several effective Rayleigh numbers. $\Ray = 6.54 \cdot 10^6$}
 	\label{fig:T-evol-Ra-6.54e6}
 \end{figure}
 
-Fig. \ref{fig:T-evol-Ra-6.54e6} shows the dynamic of the melting for higher $\Ray$ number.
-The size of the cavity is increased of an order of $3$, corresponding to $\Ray = 6.54 \cdot 10^6$ while the $\Ste$ number remains the same.
-The regimes described previously are recovered in panels (a) to (e), mainly the onset of the natural convection at $\Ray_e = 4.8 \cdot 10^3$ followed by an oscillating regime accompanied by a roll merging process.
-At $\Ray_e = 4 \times 10^5$ (panel g) the interface loses periodicity and the structure of the rolls becomes disordered.
-At this stage, neither the mushroom form of the plumes nor the periodic distribution of the convection cells are no longer observed.
 
 \subsection{Scale analysis} \label{sec-RB-scal-analysis}
-We focus in this section on the heat transfer rate during the melting through a scale analysis.
-%We conduct in this section a more quantitative analysis by evaluating .
-%The same analysis used for the LM case is used to study the heat transfer when BM case is of interest.
+Let us now proceed on a scale analysis to describe more accurately the heat transfer processes during the melting.
 The dynamic of the melting for BM case is usually classified into five regimes in the literature: a conductive regime, a linear regime, an oscillating regime, a turbulent regime, and finally an ultimate regime.
 The simulations performed in the present work cover the first three regimes.
 During the conductive regime, the heat transfer is fully dominated by the conduction. 
 The time evolution of the liquid fraction and the Nusselt number could be approximated by the same scaling obtained in Eq. \ref{eq-Nu-Lf-Corr-Lat}.
-However, after the onset of the convection, the quasi-steady evolution of the heat transfer for LM case is no longer observed due to non-linear instabilities.
+Notwithstanding, after the onset of the convection, the quasi-steady evolution of the heat transfer for LM case is no longer observed due to non-linear instabilities.
 
 When the convective heat transfer is fully developed in the melted PCM, two heat transfer process could be identified.
 Firstly, a bulk heat transfer process occurs for low effective Rayleigh number regime, mainly for $\Ray_{e} \leq 10^5$.
@@ -468,7 +468,7 @@ A good scaling during this regime is hence
 \end{equation}
 
 \noindent with $L_{r} \ll \bar \delta_H$.
-We consider the dimensionless system of Eqs. \ref{eq-qmvt}  \ref{eq-energ} in the fluid ($C=K=1$, and $S(\theta) = A(\theta) = 0$), which could be rewritten as follows using scaling Eq. \ref{eq-def-scal-1} (i.e. $\Rey = 1$):
+We consider the dimensionless system of Eqs. \ref{eq-qmvt} - \ref{eq-energ} in the fluid ($C=K=1$, and $S(\theta) = A(\theta) = 0$), which could be rewritten as follows using scaling Eq. \ref{eq-def-scal-1} (i.e. $\Rey = 1$):
 
 \begin{eqnarray} \label{eq-mass-basal}
 	\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} &=& 0, \\  \label{eq-mom-basal-x}
