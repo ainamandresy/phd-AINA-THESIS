@@ -162,7 +162,7 @@ It is worth noticing that this behavior is not observed in the complete melting 
 \begin{figure}
 \begin{center}
 \begin{minipage}[t]{0.9\textwidth}
-	\includegraphics[width=\textwidth]{\figpath/Fig_cap_solidif/fig12_3}
+	\includegraphics[width=\textwidth]{\figpath/Fig_cap_solidif/fig12_4}
 \end{minipage}
 \end{center}
 \caption{Temporal evolution of the  liquid fraction ($L_f$), the Nusselt number $N\!u$, and the accumulated heat input $Q_0$ during the entire melting-solidification cycle. Case CM  (left) and  case PM  (right).}\label{fig:Lf_full_1D_profil}
@@ -195,22 +195,6 @@ This means that conduction dominates the solidification process, and the convect
 As a consequence, the melting fronts are vertical and have a symmetric position with respect to the center of the cavity. \\
 
 
-\subsection{Concluding remarks}
-The choice of simulating the complete cycle melting-solidification of n-octadecane PCM in this study is motivated by the fact that this material is generally used for buildings purposes, due to its phase change temperature of  $28^{o}C$.
-\cite{zhu2009dynamic} and \cite{kalnaes2015phase} listed various applications, starting from free cooling, peak load shifting, passive building systems and solar energy storage.
-For each case, the PCM is assumed to melt during day-time and to solidify during the night-time.
-
-It was noticed that, when the same Rayleigh number is considered to compare the melting and solidification cycles, meaning that the charge and the discharge modes occur at the same $\delta T$, the solidification is always slower than the melting. 
-This behavior is linked to the heat transfer mode leading each of the cycles. 
-Convective heat transfer dominates indeed the melting process, enhancing thus the heat transfer, while conduction is the main heat transfer mode during the solidification, resulting to a slower operating process.
-However, when the discharge temperature is decreased by a factor of 5, i.e both $\Ray_{co}$ and $r_{\delta} \times \Ste$ are increased, the solidification and the melting occur over similar times.
-
-A first issue that has been brought up by \cite{ascione2014energy} is the difficulty of the PCM systems to completely discharge during night-time.
-Though, if the PCM does not solidify entirely, the effectiveness of the system may be considerably reduced.
-In this case, to have a shorter cooling period, it is not advised to melt the PCM completely.
-
-However, for solar energy storage applications, full melting of the PCM is needed to utilize its latent heat storage capacity.
-Hence, a partial melting is not optimal.  For other applications, when shorter discharge time is needed, the use of external cooling techniques is needed to ensure a colder discharge temperature.
 
 \newpage
 \section{Melting-solidification cycle of a cylindrical PCM} \label{sec-cycle-cylindric}
@@ -250,3 +234,20 @@ From the scaling analysis in Eq. \ref{eq-cond-evol}, the radial expansion $\delt
 \noindent Mainly, in our case, by taking into account the remaining solid located at $\delta_r = 0.8$, the theoretical solidification time is $t_{sol} = 6.4$, which is in relatively good agreement with our numerical results.
 Increasing the Stefan number should hence results to a decreasing solidification time.
 
+
+\subsection{Concluding remarks}
+The choice of simulating the complete cycle melting-solidification of n-octadecane PCM in this study is motivated by the fact that this material is generally used for buildings purposes, due to its phase change temperature of  $28^{o}C$.
+\cite{zhu2009dynamic} and \cite{kalnaes2015phase} listed various applications, starting from free cooling, peak load shifting, passive building systems and solar energy storage.
+For each case, the PCM is assumed to melt during day-time and to solidify during the night-time.
+
+It was noticed that, when the same Rayleigh number is considered to compare the melting and solidification cycles, meaning that the charge and the discharge modes occur at the same $\delta T$, the solidification is always slower than the melting. 
+This behavior is linked to the heat transfer mode leading each of the cycles. 
+Convective heat transfer dominates indeed the melting process, enhancing thus the heat transfer, while conduction is the main heat transfer mode during the solidification, resulting to a slower operating process.
+However, when the discharge temperature is decreased by a factor of 5, i.e both $\Ray_{co}$ and $r_{\delta} \times \Ste$ are increased, the solidification and the melting occur over similar times.
+
+A first issue that has been brought up by \cite{ascione2014energy} is the difficulty of the PCM systems to completely discharge during night-time.
+Though, if the PCM does not solidify entirely, the effectiveness of the system may be considerably reduced.
+In this case, to have a shorter cooling period, it is not advised to melt the PCM completely.
+
+However, for solar energy storage applications, full melting of the PCM is needed to utilize its latent heat storage capacity.
+Hence, a partial melting is not optimal.  For other applications, when shorter discharge time is needed, the use of external cooling techniques is needed to ensure a colder discharge temperature.

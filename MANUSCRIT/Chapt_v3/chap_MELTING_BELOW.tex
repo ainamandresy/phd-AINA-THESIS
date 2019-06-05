@@ -36,14 +36,14 @@ in which a transparent brick of PCM is used as smart material to control the ind
 Bricks made of PCM melt from differences between outdoor and indoor temperatures and store the energy in the form of latent heat.
 Other applications such as solar collectors or other thermal energy storages are also typical of such configurations.
 In any cases, accurate assessment of the heat transfer is always essential.
-Analytical investigation of \cite{bejan1989analysis} and scaling analysis of \cite{jany1988scaling} have permitted to describe the heat transfer during the melting by the mean of $N\!u$-$\Ray$ correlation. 
+Analytical investigation of \cite{bejan1989analysis} and scaling analysis of \cite{jany1988scaling} have permitted to describe the heat transfer during the melting by the mean of $\Nuss$-$\Ray$ correlation. 
 
 \noindent The second class refers to passive temperature control for electronic devices or for a long list of geophysical problems,
 such as lava lakes, thermal convection in magma chambers, or ice-melt lakes. 
 %Ice-melt ponds that form during summer season in the Arctic \citep{polashenski2012mechanisms,esfahani2018basal} are known for example to display natural convection coupled to a phase-change process on the bottom side. In that case, Rayleigh-Bénard like convection cells are observed in the liquid phase.
 Experimental and numerical investigations of the dynamic of the melting could be find in the literature for BM case.
 However, in contrast with LM case,
-notwithstanding linear and weakly non-linear instability analysis based on a vanishingly small Stefan number assumption \citep{vasil2011dynamic}, exact expression of $N\!u$ and $L_f$ from purely theoretical work are not available during the convective regime due to the important non-linearities of the dynamics.
+notwithstanding linear and weakly non-linear instability analysis based on a vanishingly small Stefan number assumption \citep{vasil2011dynamic}, exact expression of $\Nuss$ and $L_f$ from purely theoretical work are not available during the convective regime due to the important non-linearities of the dynamics.
 Some comparisons with theories \citep{malkus1954heat,grossmann2000scaling} made in the frame of Rayleigh-Bénard convection flow have been however carried out \citep{esfahani2018basal,madruga2018dynamic,favier2019rayleigh}.
 
 %Numerical comparison of n-octadecane PCM with either lateral (LM) or basal melting (BM) is investigated in this chapter.
@@ -144,13 +144,13 @@ At the solid-liquid interface, the energy balance condition which takes into acc
 
 \noindent Moreover, the Nusselt number can be evaluated using the same assumption,
 \begin{equation}
-   N\!u= \int_0^{1} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy = \frac{1}{\Gamma_i} = ({2 \tau})^{-1/2}.
+   \Nuss= \int_0^{1} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy = \frac{1}{\Gamma_i} = ({2 \tau})^{-1/2}.
 \end{equation}
 
 \noindent To summarize, during the first stage of the melting, when the heat transfer is led by conduction, the time evolution of the liquid fraction (given by the location of the interface) and the Nusselt number could be approximated by
 \begin{eqnarray} \label{eq-Nu-Lf-Corr-Lat}
 	L_f &\sim& (2 \tau)^{1/2}, \\ 
-	N\!u &\sim& (2 \tau)^{-1/2}.
+	\Nuss &\sim& (2 \tau)^{-1/2}.
 \end{eqnarray}
 
 \begin{figure}
@@ -190,20 +190,20 @@ Since $\Pr \gg 1$, the scaling presented in Eq. \ref{eq-scale-nbd-high-Pr} allow
 
 \noindent The total Nusselt number during the mixed convection-convection regime can therefore be approximated by
 \begin{equation} \label{eq-Nu-conv-cond}
-   N\!u \sim (2 \tau)^{-1/2} + (2 \tau)^{3/2} \times \Ray.
+   \Nuss \sim (2 \tau)^{-1/2} + (2 \tau)^{3/2} \times \Ray.
 \end{equation}
 
 \noindent Eq. \ref{eq-Nu-conv-cond} indicates that the contribution of the conduction $\left(\sim 1/\sqrt{2 \tau}\right)$ decreases with the time while the convection one is increasing.
-%From a simple analysis of $\partial N\!u/\partial \theta = 0$, one can find the minimum value of the Nusselt number $N\!u_{min} \sim Ra^{1/4}$ occurring at $\tau \sim \Ray^{-1/2}$.
+%From a simple analysis of $\partial \Nuss/\partial \theta = 0$, one can find the minimum value of the Nusselt number $\Nuss_{min} \sim Ra^{1/4}$ occurring at $\tau \sim \Ray^{-1/2}$.
 
-Finally, when the natural convection flow is fully developed and dominates the heat transfer along the vertical heated wall, the thermal boundary layer is $\delta_{\theta} \sim \Ray^{1/4}$ and therefore the Nusselt number scale is
+Finally, when the natural convection flow is fully developed and dominates the heat transfer along the vertical heated wall, the dimensionless thickness of thermal boundary layer is $\delta_{\theta} \sim \Ray^{1/4}$ and therefore the Nusselt number scale is
 \begin{equation} \label{eq-Nu-Ra-LM}
-   N\!u \sim \Ray^{1/4}
+   \Nuss \sim \Ray^{1/4}
 \end{equation}
 
-\cite{Okada1984} have suggested from his experimental data the following correlation of $N\!u$ taking into account the foregoing presented regimes:
+\cite{Okada1984} have suggested from his experimental data the following correlation of $\Nuss$ taking into account the foregoing presented regimes:
 \begin{equation} \label{eq-corr-Okada}
-	N\!u = \left \{
+	\Nuss = \left \{
 	      %\begin{array}{ll}
 	      \begin{aligned}
 	      		\frac{1}{\sqrt{2 \tau}} \quad  &\text{if} \quad \tau \leq \tau_t, \\ 
@@ -213,27 +213,27 @@ Finally, when the natural convection flow is fully developed and dominates the h
 	       \end{aligned}
 	\right.
 \end{equation}
-with $c_1 = 0.234$ a constant fitted from the experimental data, $\tau_t$ the transition time from conduction to convection as discussed previously.
+with the constant $c_1 = 0.234$ and the power $0.266$ fitted from the experimental data, and $\tau_t$ the transition time from conduction to convection as discussed previously.
 
-\noindent \cite{jany1988scaling} have proposed the following single correlation, also combining the regimes described previously:
+\noindent \cite{jany1988scaling} have proposed more general single correlation, also combining the regimes described previously:
 \begin{equation} \label{eq-Nu-scale}
-N\!u(\tau) =  \frac{1}{\sqrt{2 \tau}} + \left[c_1 \Ray^{1/4} - \frac{1}{\sqrt{2 \tau}} \right]  \left[ 1 + \left(c_2 \Ray^{3/4}  \tau^{3/2}\right)^n \right]^{1/n}.
+\Nuss(\tau) =  \frac{1}{\sqrt{2 \tau}} + \left[c_1 \Ray^{1/4} - \frac{1}{\sqrt{2 \tau}} \right]  \left[ 1 + \left(c_2 \Ray^{3/4}  \tau^{3/2}\right)^n \right]^{1/n}.
 \end{equation}
 The values of the constants were fitted from numerical data: $c_1 = 0.27$, $c_2 = 0.0275$, and $n=-2$. 
 
 \noindent Both of Eqs. \ref{eq-corr-Okada} and \ref{eq-Nu-scale} are compared with our numerical results in Fig. \ref{fig:Nusselt} showing the time evolution of the Nusselt number at the left wall.
 Our results perfectly fit with the theoretical prediction of \cite{jany1988scaling} and are also in good agreement with the correlation of \cite{Okada1984}. 
 The gap between the current simulation and the results of \cite{Okada1984} could be explained by the experimental heat loss mentioned by the author and the uncertainties of the experimental measurements.
-The regimes described by the shape of the interface in Sec. \ref{subsec-time-evol-lat} could be featured by the temporal evolution of $N\!u$:
+The regimes described by the shape of the interface in Sec. \ref{subsec-time-evol-lat} could be featured by the temporal evolution of $\Nuss$:
 \begin{enumerate}
-	\item The pure conduction regime ($N\!u \sim (2 \tau)^{-1/2}$) for $\tau  \gtrsim 0$ to $\tau \sim \Ray^{-1/2} =0.02$  (corresponding to Fig.  \ref{fig:melt-field}a).
+	\item The pure conduction regime ($\Nuss \sim (2 \tau)^{-1/2}$) for $\tau  \gtrsim 0$ to $\tau \sim \Ray^{-1/2} =0.02$  (corresponding to Fig.  \ref{fig:melt-field}a).
 	Since the temperature gradient has initially huge values because of the increase of the temperature of the left wall, the Nusselt number rapidly decreases during the first stage of the flow evolution. 
 	The  signature of this conduction regime is the slow heat transfer characterized by a monotonic decrease of the Nusselt number.
 	
-	\item The mixed conduction-convection regime  ($ N\!u \sim \tau^{-1/2} + \Ray\, \tau^{3/2}$) for $  0.02  \leq \tau \leq 0.05$ (illustrated in  Fig.  \ref{fig:melt-field}b).
+	\item The mixed conduction-convection regime  ($ \Nuss \sim \tau^{-1/2} + \Ray\, \tau^{3/2}$) for $  0.02  \leq \tau \leq 0.05$ (illustrated in  Fig.  \ref{fig:melt-field}b).
 
-	\item The convection dominated regime ($ N\!u \sim \Ray^{1/4}$) for $\tau > Ra^{-1/2}$  (corresponding to Figs.  \ref{fig:melt-field}c-e).
-	The plateau at the value of $\Ray^{1/4}$ corresponds to the pure convective transfer and is observed in Fig. \ref{fig:Nusselt} for $  0.05 \leq \tau \leq 0.1$. Numerical results show a slight decrease of the $N\!u$ in the final stage ($\tau \geq 0.1$), when the melting front starts to touch the right wall of the cavity (see Figs.  \ref{fig:melt-field}e-f). The correlation model is not valid for this late evolution of the melting process.
+	\item The convection dominated regime ($ \Nuss \sim \Ray^{1/4}$) for $\tau > Ra^{-1/2}$  (corresponding to Figs.  \ref{fig:melt-field}c-e).
+	The plateau at the value of $\Ray^{1/4}$ corresponds to the pure convective transfer and is observed in Fig. \ref{fig:Nusselt} for $  0.05 \leq \tau \leq 0.1$. Numerical results show a slight decrease of the $\Nuss$ in the final stage ($\tau \geq 0.1$), when the melting front starts to touch the right wall of the cavity (see Figs.  \ref{fig:melt-field}e-f). The correlation model is not valid for this late evolution of the melting process.
 \end{enumerate}
 
 \begin{figure}
@@ -304,19 +304,19 @@ This is consistent, since the temperature gradient is integrated along a greater
 
 \noindent Fig. \ref{fig:Ra-Nusselt-deltaT}a shows that by increasing the value of $\delta T$, and consequently increasing the Rayleigh number and the Stefan number, the PCM melts faster. 
 We note that the height $H$ of the cavity is kept constant, hence the natural convection flow in the melted PCM is enhanced when the Rayleigh number keep increasing.
-As a consequence, the convection-dominated regime is reached earlier, as shown by the shift of the minimum of the $N\!u$ to lower values of $t_{\varphi}$ in Fig. \ref{fig:Ra-Nusselt-deltaT}b. 
+As a consequence, the convection-dominated regime is reached earlier, as shown by the shift of the minimum of the $\Nuss$ to lower values of $t_{\varphi}$ in Fig. \ref{fig:Ra-Nusselt-deltaT}b. 
 This evolution is also observed for the liquid fraction. 
 As expected, an increase of the Rayleigh number and the Stefan number is followed by an enhancement of the heat transfer during the melting, and consequently an improved efficiency of the PCM.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/fig08}
+		\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/fig08_2}
 	\end{center}
 	\caption{Complete melting of the PCM.  Influence of the value of the Rayleigh number ($\Ray$) on the time evolution of the liquid fraction (a) and the average Nusselt number defined at the hot (left) wall (b). The reference case ($\Ray=3.27\cdot 10^5$) is represented by red continuous lines. The value of the $\Ray$ was increased by a factor of $5$ and $10$, respectively while the Stefan number $\Ste$ is kept constant.}\label{fig:Ra-Nusselt-H}
 \end{figure}
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/fig09}
+		\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/fig09_2}
 	\end{center}
 	\caption{Complete melting of the PCM.  Influence of the value of the Rayleigh number ($\Ray$) on the time evolution of the liquid fraction (a) and the average Nusselt number defined at the hot (left) wall (b). The reference case ($\Ray=3.27\cdot 10^5$) is represented by red continuous lines. The value of the $\Ray$ and $\Ste$ were increased by a factor of $5$ and $10$, respectively.}\label{fig:Ra-Nusselt-deltaT}
 \end{figure}
@@ -325,25 +325,21 @@ As expected, an increase of the Rayleigh number and the Stefan number is followe
 \clearpage
 \section{Basal Melting of n-octadecane PCM. Case BM} \label{sec-melting-basal}
 
-%The dynamic of the lateral convective melting PCM was investigated in Sec. \ref{sec-melting-lateral}.
-%The melting of PCM heated from the side was presented in Sec. \ref{chap-MELTING}.
-%The dynamic of the melting, the identification of three regimes describing the melting process and the effect of the Rayleigh number have been discussed in detail.
-We now pay further attention to basal melting of PCM in the current section.
+We now pay further attention to BM case.
 We investigate the melting of pure n-octadecane PCM in a square enclosure subject to heating from the bottom side.
-When compared to the LM case, the dynamics of the melting is different in the BM case, since 
-it has been observed that such configuration, natural convection develops in the form of Benard cells and results in a non-planar solid-liquid interface. 
-The physical parameters considered are the same as presented in Sec. \ref{sec-melting-lateral}.
+When compared to the lateral melting case, the dynamic of the melting is different for such configuration, in which natural convection develops in the form of Bénard cells. %and results in a non-planar solid-liquid interface. 
+The physical parameters and the numerical configuration are reported in Fig. \ref{fig:melt-scheme}.
 %Four Rayleigh numbers are carried out: $\Ray = 3.27 \cdot 10^5$, $1.62 \cdot 10^6$, $3.27 \cdot 10^6$, and $6.54 \cdot 10^6$ to assess the influence of the size of the domain on the dynamic of the natural convection flow.
 %as observed by \cite{madruga2018dynamic}.
 %The PCM is initially solid with isothermal temperature.
 %The top of the wall is set at $\theta = \theta_c $, the vertical walls are adiabatic and the bottom wall is heated at a dimensionless temperature $\theta = \theta_h$.
 We perform two-dimensional numerical simulations even if 
  \cite{gau1983flow} and  \cite{gong1998flow} have noticed the existence of three-dimensional convection cells during the very first step of the melting process.
-These three-dimensional convection cells are however usually neglected for relatively moderate $\Ray$ numbers, mainly $\Ray \leq 10^8$. 
+These three-dimensional convection cells are however usually neglected for relatively moderate $\Ray$ numbers, mainly for $\Ray \leq 10^8$. 
 In such case actually, three-dimensional cells exist in a very short duration compared with the whole melting step,
 so that the two-dimensional model is realistic.
 
-\noindent A qualitative observation of the dynamic of the natural convection flow and its impact on the melting front is first addressed.
+\noindent A qualitative description of the dynamic of the natural convection flow and its impact on the melting front is first addressed.
 Then, a scale analysis is conducted to describe the heat transfer that occurs during the melting.
 Finally, a comparison between LM and BM cases is presented.
 
@@ -356,31 +352,29 @@ Finally, a comparison between LM and BM cases is presented.
 %The dynamic of the natural convection flow during the basal heating is different,
 %since it is known that any non-planar topography can lead to a baroclinic flow at any Rayleigh number.
 
-Fig. \ref{fig:melt-below} displays the structure of the natural convection in the melting PCM through a sequence of panels for temperature isolines and streamlines in the liquid phase, for $\Ray$ ranging from $\Ray = 3.27 \cdot 10^5$ to $\Ray = 3.27 \cdot 10^6$.
-An array of lengthening plumes (panel a to c) and counter-rotating convective cells (panel d to f)  are located in the liquid phase.
-The number of convective cells and plumes increases with the Rayleigh number.
-For $\Ray = 3.27 \cdot 10^5$, three equidistant plumes (Fig. \ref{fig:melt-below}a) and five convective cells (Fig. \ref{fig:melt-below}d) can be observed, while four and six plumes are observed for $\Ray = 1.62 \cdot 10^6$ and $\Ray = 3.27 \cdot 10^6$ respectively (Figs. \ref{fig:melt-below}b and \ref{fig:melt-below}c).
-These observations agree well with the numerical results of \cite{gong1998flow} and \cite{madruga2018dynamic}.
-
-\noindent The shape of the interface is directly linked to the dynamic of these plumes.
-The mushroom form of the plumes results from the two symmetric counter-rotating convective cells surrounding each plumes.
+Fig. \ref{fig:melt-below} displays the structure of the natural convection in the melting PCM through a sequence of panels for temperature isolines and streamlines in the liquid phase, for Rayleigh numbers ranging from $\Ray = 3.27 \cdot 10^5$ to $\Ray = 3.27 \cdot 10^6$, after the primary instability.
+An array of lengthening plumes (panel a to c) and counter-rotating convective cells (panel d to f)  are located in the liquid phase,
+in which the number of thermal plumes increases with the Rayleigh number.
+For $\Ray = 3.27 \cdot 10^5$, one can observe three equidistant plumes and five convective cells in Figs. \ref{fig:melt-below}a and \ref{fig:melt-below}d, while four and six plumes are observed for $\Ray = 1.635 \cdot 10^6$ and $\Ray = 3.27 \cdot 10^6$ respectively (Figs. \ref{fig:melt-below}b and \ref{fig:melt-below}c).
+These observations agree well with the numerical results of \cite{gong1998flow} and \cite{madruga2018dynamic} who studied the correlation between the number of thermal plumes and the size of the domain.
+The shape of the interface is directly linked to the dynamic of these plumes.
+The mushroom form of the plumes results from the two symmetric counter-rotating convective cells surrounding each of them.
 We observe an anti-clockwise recirculation of the left convection cell and a clockwise recirculation of the right.
 Thus, the melt is heated to the highest temperature at bottom and then floats up, reaches the phase change interface and splits into opposite directions.
 The melt is cooled as it flows through the phase-change interface.
-It results a non-planar interface with a peak at the center of each couple of counter-rotating convective cells.
+It results a non-planar front with a peak at the center of each couple of counter-rotating convective cells.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_MELT_BASAL_heating_2}
 	\end{center}
-	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.62 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$.}
+	\caption{Melting of PCM heated from below. (top) Temperature field and solid-liquid interface for different Rayleigh numbers (a) $\Ray = 3.27 \cdot 10^5$ and $t=30$, (b)  $\Ray = 1.635 \cdot 10^6$ and $t=15$, (c) $\Ray = 3.27 \cdot 10^6$ and $t=10$ (bottom) streamlines in the liquid phase.}
 	\label{fig:melt-below}
 \end{figure}
 
-It is useful to introduce the effective Rayleigh and Nusselt numbers of the fluid layer, based on the height of the melting PCM, to describe the temporal evolution of the melting:
-
+\noindent As the melting evolves, it is useful to introduce the effective Rayleigh and Nusselt numbers of the fluid layer, based on the height of the melting PCM, to describe the temporal evolution of the melting:
 \begin{eqnarray}
-	Ra_{e} &=& Ra \times {\bar \delta_H} ^3, \\
-	N\!u_{e} &=& N\!u \times \bar \delta_H ,
+	\Ray_{e} &=& \Ray \times {\bar \delta_H} ^3, \\
+	\Nuss_{e} &=& \Nuss \times \bar \delta_H ,
 \end{eqnarray}
 
 \noindent with ${\bar \delta_H}$ the non-dimensional averaged fluid height. Note that $\bar \delta_H $ could be assimilated to the liquid fraction.
@@ -398,17 +392,18 @@ It is useful to introduce the effective Rayleigh and Nusselt numbers of the flui
 	\label{fig:T-evol-Ra-3.27e5}
 \end{figure}
 
-The time evolution of the melting for $\Ray = 3.27 \times 10^5$ is illustrated in details through panels (a) to (f) of Fig. \ref{fig:T-evol-Ra-3.27e5}.
+%The time evolution of the melting for $\Ray = 3.27 \times 10^5$ is illustrated in details through panels (a) to (f) of Fig. \ref{fig:T-evol-Ra-3.27e5}.
+Fig. \ref{fig:T-evol-Ra-3.27e5} details the time evolution of the melting for $\Ray = 3.27 \times 10^5$.
 Before the first instability arises, the melt layer evolves solely by conduction. 
 There is no noticeable fluid flow and the melting front remains straight (panel a).
-The convective onset occurs at $\Ray_e \approx 5 \times 10^3$ and the phase-change interface becomes non-planar (panel b), which is in good agreement with the observation of \cite{esfahani2018basal,favier2019rayleigh}.
+The convective onset occurs at $\Ray_e \approx 5 \times 10^3$ when the phase-change interface becomes non-planar (panel b), which is in good agreement with the observation of \cite{esfahani2018basal,favier2019rayleigh}.
 We note that, in the framework of the classical Rayleigh-Bénard convection flow, in the limit of vanishing $\Ste$ number, the first instability appears at critical Rayleigh number $\Ray_c \approx 1707.76 $.
 This critical value is however higher for increasing $\Ste$ numbers.
 The appearance of convection is marked by a change in the shape of the interface from straight to nearly periodic curve.
 
 \noindent When the fluid depth increases, the effective Rayleigh number increases and the convective rolls are stretched vertically (panels b and c).
 We note that during this stage, the number of rolls is time-independent.
-This stage can be compared to the steady convection after the onset in the Rayleigh-Bénard system (see \cite{chandrasekhar2013hydrodynamic}).
+This stage could be compared to the steady convection after the onset in the Rayleigh-Bénard system (see \cite{chandrasekhar2013hydrodynamic}).
 
 \noindent After the rolls are elongated vertically, they start to oscillate laterally and then merge to create greater rolls (panels d and e).
 The essential consequence of this observation is that the melting front is modified.
@@ -430,7 +425,7 @@ the foregoing steady convection observation is then reached again in panel (f).
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_654e6_1}
-		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_654e6_2}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/T_evol_654e6_3}
 	\end{center}
 	\caption{Melting of PCM heated from below: Temperature field and solid-liquid interface for different size of the domain. $\Ray = 6.54 \cdot 10^6$}
 	\label{fig:T-evol-Ra-6.54e6}
@@ -446,29 +441,17 @@ At this stage, neither the mushroom form of the plumes nor the periodic distribu
 We focus in this section on the heat transfer rate during the melting through a scale analysis.
 %We conduct in this section a more quantitative analysis by evaluating .
 %The same analysis used for the LM case is used to study the heat transfer when BM case is of interest.
-The dynamic of the melting for BM case could be classified into five regimes: a conductive regime, a linear regime, an oscillating regime, a turbulent regime, and finally an ultimate regime.
-We note that the simulations investigated in the present work rely only on the first three regimes.
+The dynamic of the melting for BM case is usually classified into five regimes in the literature: a conductive regime, a linear regime, an oscillating regime, a turbulent regime, and finally an ultimate regime.
+The simulations performed in the present work cover the first three regimes.
 During the conductive regime, the heat transfer is fully dominated by the conduction. 
 The time evolution of the liquid fraction and the Nusselt number could be approximated by the same scaling obtained in Eq. \ref{eq-Nu-Lf-Corr-Lat}.
-However, after the onset of the convection, the quasi-steady state assumption used for LM case is no longer valid due to the non-linear instabilities.
+However, after the onset of the convection, the quasi-steady evolution of the heat transfer for LM case is no longer observed due to non-linear instabilities.
 
 When the convective heat transfer is fully developed in the melted PCM, two heat transfer process could be identified.
-First, a bulk heat transfer process occurs for low effective Rayleigh number regime, mainly for $\Ray_{e} \leq 10^5$.
-Then, a boundary layer heat transfer regime is predominant when oscillating or turbulent regimes are achieved.
-We develop in this section a scale analysis during the bulk heat transfer regime to approximate the amount of heat transfer.
+Firstly, a bulk heat transfer process occurs for low effective Rayleigh number regime, mainly for $\Ray_{e} \leq 10^5$.
+Secondly, a boundary layer heat transfer regime is predominant when oscillating or turbulent regimes are achieved.
+We develop in this section a scale analysis during the linear regime, during which bulk heat transfer occurs, to approximate the amount of heat transfer.
 Beyond this regime, due to the important non-linearities of the dynamics, we rely on theories developed in the frame of turbulent Rayleigh-Benard convection flow  \citep{malkus1954heat,grossmann2000scaling}. %made in the frame of Rayleigh-Bénard convection flow
-
-During the bulk heat transfer regime, the convective cells are stretched vertically and the number of rolls is time-independent.
-A schematic overview of the phenomenon is drawn in Fig. \ref{fig:roll-basal-heating}. 
-Let $L_r$ define the (dimensionless) half-thickness of a cell. %as it is shown in Fig. (\ref{fig:roll-basal-heating}). 
-A good scaling during this regime is hence
-\begin{equation}
-	x \sim L_{r}, \quad y \sim \bar \delta_H,
-\end{equation}
-
-\noindent with $L_{r} \ll \bar \delta_H$.
-Since the quasi steady-state assumption is no longer valid, we turn back to the full incompressible Navier-Stokes-Boussinesq equations:
-
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{\figpath/Fig_cap_melting_basal/MELT_basal_rolls}
@@ -476,103 +459,129 @@ Since the quasi steady-state assumption is no longer valid, we turn back to the 
 \label{fig:roll-basal-heating}
 \end{figure}
 
+During the linear regime, the convective cells are elongated vertically and the number of rolls is time-independent.
+A schematic overview of the phenomenon is drawn in Fig. \ref{fig:roll-basal-heating}. 
+Let $L_r$ define the (dimensionless) half-thickness of a cell. 
+A good scaling during this regime is hence
+\begin{equation}
+	x \sim L_{r}, \quad y \sim \bar \delta_H,
+\end{equation}
+
+\noindent with $L_{r} \ll \bar \delta_H$.
+We consider the dimensionless system of Eqs. \ref{eq-qmvt}  \ref{eq-energ} in the fluid ($C=K=1$, and $S(\theta) = A(\theta) = 0$), which could be rewritten as follows using scaling Eq. \ref{eq-def-scal-1} (i.e. $\Rey = 1$):
+
 \begin{eqnarray} \label{eq-mass-basal}
 	\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} &=& 0, \\  \label{eq-mom-basal-x}
-	\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} &=& - \frac{\partial p}{\partial x} + \nu \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right), \\ \label{eq-mom-basal-y}
-	\frac{\partial v}{\partial t} + u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} &=& - \frac{\partial p}{\partial y} +  \nu \left( \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} \right) + g \beta (T - T_{ref}), \\ \label{eq-bound-energy}
-	\frac{\partial T}{\partial t} + u \frac{\partial T}{\partial x} + v \frac{\partial T}{\partial y} &=& \alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} \right). 	
+	\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} &=& - \frac{\partial p}{\partial x} +  \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right), \\ \label{eq-mom-basal-y}
+	\frac{\partial v}{\partial t} + u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} &=& - \frac{\partial p}{\partial y} +   \left( \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} \right) + \frac{\Ray}{\Prd} \theta, \\ \label{eq-bound-energy}
+	\frac{\partial \theta}{\partial t} + u \frac{\partial \theta}{\partial x} + v \frac{\partial \theta}{\partial y} &=& \frac{1}{\Prd} \left( \frac{\partial^2 \theta}{\partial x^2} + \frac{\partial^2 \theta}{\partial y^2} \right). 	
 \end{eqnarray}
 
-\noindent The pressure $p$ is first eliminate by combining $\partial/\partial y$ of Eq. \ref{eq-mom-basal-x} and $\partial/\partial y$ of Eq. \ref{eq-mom-basal-y}, and we have
+\noindent The pressure $p$ is first eliminate by combining $\partial/\partial y$ of Eq. \ref{eq-mom-basal-x} and $\partial/\partial x$ of Eq. \ref{eq-mom-basal-y}, and we have
+
 \begin{eqnarray} \label{eq-mom-rassembly}
 	\frac{\partial}{\partial y} \left( \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} \right) - \frac{\partial}{\partial x} \left(  \frac{\partial v}{\partial t} + u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} \right)  \\ \nonumber
-	= \nu \left[ \frac{\partial}{\partial y} \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right)   - \frac{\partial}{\partial x} \left( \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} \right) \right] - \frac{\partial T}{\partial x} g \beta.
+	=  \left[ \frac{\partial}{\partial y} \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right)   - \frac{\partial}{\partial x} \left( \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} \right) \right] - \frac{\Ray}{\Prd} \frac{\partial \theta}{\partial x}.
 \end{eqnarray}
 
 \noindent Since we have $L_{r} \ll \bar \delta_H$ (consequently $\partial^2 v/\partial y^2 \ll \partial^2 v/\partial x^2 $),
 three terms dominate the Eq. \ref{eq-mom-rassembly}:
 \begin{equation}
-	\underbrace{\frac{\partial ^2 v}{\partial x \partial t}}_{inertia} \quad \underbrace{\nu \frac{\partial^3v}{\partial x^3}}_{friction} \quad \underbrace{g \beta \frac{\partial T}{\partial x}}_{buoyancy}.
+	\underbrace{\frac{\partial ^2 v}{\partial x \partial t}}_{inertia} \quad \underbrace{ \frac{\partial^3v}{\partial x^3}}_{friction} \quad \underbrace{\frac{\Ray}{\Prd} \frac{\partial \theta}{\partial x}}_{buoyancy}.
 \end{equation}
 
 \noindent In terms of representative scales, this momentum balance reads
 \begin{equation} \label{eq-basal-heat-mom}
-	\underbrace{\frac{v}{L_{r} t}}_{inertia} \quad \underbrace{\nu \frac{v}{L_{r}^3}}_{friction} \quad \underbrace{g \beta \frac{\delta T}{L_{r}}}_{buoyancy}.
+	\underbrace{\frac{v}{L_{r} t}}_{inertia} \quad \underbrace{\frac{v}{L_{r}^3}}_{friction} \quad \underbrace{\frac{\Ray}{\Prd} \frac{\delta \theta}{L_{r}}}_{buoyancy},
 \end{equation}
 
-\noindent The regime of interest occurs after a pure conductive regime where the boundary layer thickness increases as
+\noindent with $\delta \theta = 1$. The regime of interest occurs after a pure conductive regime where the boundary layer thickness increases as
 \begin{equation}
-	\delta_{\theta} \sim (\alpha t)^{1/2},
+	\delta_{\theta} \sim \left( \frac{t}{\Prd} \right)^{1/2}.
 \end{equation}
 
-\noindent with $\delta_{\theta}$ the thickness of the boundary layer. 
-Since the heat transfer is dominated solely by bulk heat transfer we have
+\noindent Since the heat transfer is dominated solely by bulk heat transfer we have
 \begin{equation} \label{eq-Lf-deltT}
  	L_{r} \sim \delta_{\theta}.
  \end{equation}
  
-\noindent Eq. \ref{eq-basal-heat-mom} could be hence simplified by replacing $\delta_{\theta}^2 \sim (\alpha t)$ and dividing Eq. \ref{eq-basal-heat-mom} through the friction scale, leading to
+\noindent Eq. \ref{eq-basal-heat-mom} could be hence simplified by replacing $\delta_{\theta}^2 \sim \left(\frac{t}{\Prd}\right)$ and dividing Eq. \ref{eq-basal-heat-mom} through the friction scale, leading to
 \begin{equation}
-	\underbrace{\frac{1}{\Pr}}_{inertia} \quad \underbrace{1}_{friction}  \quad \underbrace{\frac{g \beta \delta T \delta_{\theta}^2}{v \nu}}_{buoyancy}.
+	\underbrace{\frac{1}{\Prd}}_{inertia} \quad \underbrace{1}_{friction}  \quad \underbrace{\frac{\Ray \delta_{\theta}^2}{v \Prd}}_{buoyancy}.
 \end{equation}
 
 \noindent For high-Prandtl fluid, the momentum balance is between buoyancy and friction and we obtain
 \begin{equation}
-	v \sim \frac{g \beta \delta T \alpha t}{\nu}.
+	v \sim \frac{\Ray \delta_{\theta}^2}{\Prd}.
 \end{equation}
 
-Next, we turn attention back to the energy Eq. \ref{eq-bound-energy}.
-Three distinct effects could be identified:
+Next, we turn attention back to the energy Eq. \ref{eq-bound-energy} and identify
+three distinct effects:
 \begin{equation}
-	\underbrace{\frac{\delta T}{t}}_{Inertia} \quad \underbrace{v \frac{\delta T}{\bar \delta_H}}_{Convection} \quad \underbrace{\alpha \frac{\delta T}{L_r^2}}_{Conduction}.
+	\underbrace{\frac{1}{t}}_{Inertia} \quad \underbrace{\frac{v}{\bar \delta_H}}_{Convection} \quad \underbrace{\frac{1}{L_r^2 \Prd}}_{Conduction}.
 \end{equation}
 
 \noindent When $t$ increases, there comes an effective time $t_{e}$ where the inertia decreases in importance and the energy equation expresses a balance between the convection and the conduction heat transfer,
 %Again, if the assumption $L_r \sim \delta_T$ holds, we obtain:
 \begin{equation}
-	v \frac{\delta T}{\bar \delta_H} \sim \alpha \frac{\delta T}{\delta_{\theta}^2},
+	\frac{v}{\bar \delta_H} \sim \frac{1}{\delta_{\theta}^2 \Prd},
 \end{equation}
 
 \noindent leading to
 \begin{equation}
-	t_{e} \sim \left( \frac{\nu \bar \delta_H}{g \beta \delta T \alpha} \right)^{1/2}.
+	t_{e} \sim \left( \frac{\bar \delta_H}{\Ray_e} \right)^{1/2} \times \Prd.
 \end{equation}
 
 \noindent At such a time, the thermal layer thickness is:
 \begin{equation}
-	\delta_{\theta} \sim (\alpha t_{e})^{1/2} \sim \bar \delta_H \Ray_{e}^{-1/4} \sim \left( \bar \delta_H H^3 \right)^{1/4} \Ray^{-1/4}.
+	\delta_{\theta} \sim \left(\frac{t_{e}}{\Prd} \right)^{1/2} \sim \left(\frac{\bar \delta_H}{ \Ray_{e}}\right)^{1/4} \sim \left( \bar \delta_H \right)^{-1/2} \Ray^{-1/4}.
 \end{equation}
 
-\noindent Accordingly, for $\Ray \leq 10^5$, the scaling for $N\!u$ could be written as
+\noindent Accordingly, for $\Ray \leq 10^5$, the scaling for $\Nuss$ could be written as
 
 \begin{equation} \label{eq-Nu-scal-basal}
-	N\!u \sim \left( \frac{H}{\bar \delta_H}\right)^{1/4} \Ray^{1/4}.
+	\Nuss \sim  \delta_H ^{1/2} \times \Ray^{1/4}.
 \end{equation}
 
-\noindent One can note that when $\bar \delta_H = H$, we recover the scaling for LM case in Eq. \ref{eq-Nu-Ra-LM}.
+%\noindent One can note that when $\bar \delta_H = H$, we recover the scaling for LM case in Eq. \ref{eq-Nu-Ra-LM}.
 
 \noindent Fig. \ref{fig:NU-LF-evol}a plots the temporal evolution of the heat flux, represented by the Nusselt number, and the strength of buoyancy, represented by the Rayleigh number, when the melting evolves.
 
-\noindent The onset of the convection arises at $\Ray_e = 3 \times 10^3$, when a sudden jump in $N\!u_e$ is observed.
+\noindent The onset of the convection arises at $\Ray_e = 3 \times 10^3$, when a sudden jump in $\Nuss_e$ is observed.
 \cite{vasil2011dynamic} have investigated a weakly non-linear stability analysis and have highlighted a superexponentional amplitude growth when the Rayleigh number becomes close to the traditional critical value in the limit of vanishing Stefan number.
 This superexponential growth is moreover followed by a rapid pattern readjustment.
-The trend of $N\!u_e$ at the onset of convection is in total accordance with this prediction of \cite{vasil2011dynamic}.
+The trend of $\Nuss_e$ at the onset of convection is in total accordance with this prediction of \cite{vasil2011dynamic}.
 The results of \citep{esfahani2018basal,madruga2018dynamic,favier2019rayleigh} exhibit the same trend despite the different boundary conditions (periodic lateral boundary conditions, adiabatic boundary conditions at the top of the cavity, and low value of $\Prd$ for \cite{esfahani2018basal} and \cite{favier2019rayleigh}).
 
-\noindent The rapid growth of $N\!u_e$ is followed by a power law with averaged exponent $N\!u \sim \Ray^{0.28}$ for  $10^3 \leq \Ray \leq  10^5$.
+\noindent The rapid growth of $\Nuss_e$ is followed by a power law with averaged exponent $\Nuss \sim \Ray^{0.28}$ for  $10^3 \leq \Ray \leq  10^5$.
 Our results overestimate slightly the predicted scaling exponent of $1/4$ presented in Eq. \ref{eq-Nu-scal-basal}.
 This is mostly due to the number of convection cells in the melted PCM, which increases with the $\Ray$ numbers, and the effect of the non-planar solid-liquid interface, not taken into account in our analysis.
 However, our numerical results match better with the Grossmann-Lohse theory \citep{grossmann2000scaling}, which predicts a scaling exponent of $2/7$, within the framework of natural convection flow.
 
-\noindent Finally, the transition from steady pattern of the convective rolls to oscillating patterns followed by cell merging, as it is clearly shown in Fig. \ref{fig:T-evol-Ra-6.54e6}(d-f), 
-is also illustrated by a decrease of $N\!u$ at $\Ray \sim 10^5$ followed by high oscillation in the temporal evolution of the heat transfer.
-The power-law relation $N\!u-\Ray$ is bounded in this stage by the average exponent of $1/3$.
+\noindent Finally, the transition from steady pattern of the convective rolls to oscillating pattern followed by cell merging, as it is clearly shown in Fig. \ref{fig:T-evol-Ra-6.54e6}(d-f), 
+is also illustrated by a decrease of $\Nuss$ at $\Ray \sim 10^5$ followed by high oscillation in the temporal evolution of the heat transfer.
+The power-law relation $\Nuss-\Ray$ is bounded in this stage by the average exponent of $1/3$.
+
+\begin{table}[!ht]
+   \begin{center}
+      \begin{tabular}{*{3}{cl}}
+         $\Ray$ & Linear regime & oscillating regime \\
+         \bottomrule
+         $3.27 \cdot 10^5$ & $0.286299$ & - \\
+         $1.635 \cdot 10^6$ & $0.274789$ & 0.269158 \\
+         $3.27 \cdot 10^6$ & $0.279616$ & 0.283658 \\
+         $6.54 \cdot 10^6$ & $0.274043$ & 0.294528 \\
+      \end{tabular}
+   \end{center}
+   \caption{Exponent of the power laws of the linear and the oscillating regimes.}
+   \label{tab-power-expo}
+\end{table}
 
 As far as the time evolution of the liquid fraction $L_f$ is concerned, one can introduce the following scaling, from the \cite{grossmann2000scaling} theory (see also \cite{favier2019rayleigh}):
 \begin{equation}\label{eq:scal-Lf-RB}
-	L_f(t) = \left[ \sqrt{2 \tau}^{(2-3 \beta)}+ c \Ray^\beta \tau \right]^{1/(2-3 \beta)},
+	L_f(t) = \left[ \sqrt{2 t}^{(2-3 \beta)}+ c \Ray^\beta t \right]^{1/(2-3 \beta)},
 \end{equation}
-with $\beta$ the exponent in the $N\!u-\Ray$ power law, $c = \frac{(2-3 \beta) \gamma}{2 + \Ste}$ and $\gamma$ a constant fitted from numerical data.
+with $\beta$ the exponent in the $\Nuss-\Ray$ power law, $c = \frac{(2-3 \beta) \gamma}{2 + \Ste}$ and $\gamma$ a constant fitted from numerical data.
 
 The time evolution of the liquid fraction is illustrated in Fig. \ref{fig:NU-LF-evol}b.
 As expected, the purely diffusive stage displays the scaling $L_f \sim t^{1/2}$.
@@ -582,7 +591,7 @@ Our simulations exhibit a power-law evolution of $L_f \sim t^{0.82}$ when the co
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/NU-LF-PHYS}
+		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/NU-LF-PHYS_2}
 	\end{center}
 	\caption{BM case for three Rayleigh numbers: $\Ray = 3.27 \cdot 10^5$, $1.62 \cdot 10^6$, and $3.27 \cdot 10^6$. Time evolution of the Nusselt number (a) and the melting rate (b).}
 	\label{fig:NU-LF-evol}
@@ -590,34 +599,34 @@ Our simulations exhibit a power-law evolution of $L_f \sim t^{0.82}$ when the co
 
 \section{Comparison between LM and BM cases} \label{sec-compare-LM-BM}
 We now compare the temporal evolution of some physical quantities for both cases LM and BM.
-The liquid fraction $L_f$, the Nusselt number $N\!u$, and the accumulated heat input $Q_0$ are plotted in Fig. \ref{fig:NU-LF-Q0-compare}, for $3$ values of the $\Ray$ numbers: $\Ray = 3.27 \cdot 10^5$ (left), $\Ray = 1.62 \cdot 10^6$ (middle), and $\Ray = 3.27 \cdot 10^6$ (right).
+The liquid fraction $L_f$, the Nusselt number $\Nuss$, and the accumulated heat input $Q_0$ are plotted in Fig. \ref{fig:NU-LF-Q0-compare}, for $3$ values of the $\Ray$ numbers: $\Ray = 3.27 \cdot 10^5$ (left), $\Ray = 1.62 \cdot 10^6$ (middle), and $\Ray = 3.27 \cdot 10^6$ (right).
 Blue lines denote the lateral heating case and red lines the basal heating.
 
 The temporal evolution of melting rate, the heat transfer rate, and the accumulated heat input, for $\Ray = 3.27 \cdot 10^5$ are reported in the left column of Fig. \ref{fig:NU-LF-Q0-compare}.
-%For $\Ray = 3.27 \cdot 10^5$ (panel a), $L_f$, $N\!u$, and $Q_0$ evolves with the same trends.
+%For $\Ray = 3.27 \cdot 10^5$ (panel a), $L_f$, $\Nuss$, and $Q_0$ evolves with the same trends.
 From $t=0$ to $t=18$, red and blue curves matches perfectly well during the conductive regime. 
 It is the expected solution since the scaling analysis performed previously have predicted the same trend for both cases during the conductive regime.
 Differences occur from the emergence of the convective flow at $t=20$.
-The evolution of $N\!u$ is smooth for LM case, while the BM case exhibits a sudden increase due to the hydrodynamical instabilities. 
+The evolution of $\Nuss$ is smooth for LM case, while the BM case exhibits a sudden increase due to the hydrodynamical instabilities. 
 The gap between both curves is then followed by a reconnection at $t=40$.
 As predicted by Eq. \ref{eq-Nu-scal-basal}, as the fluid depth $\bar \delta_H$ increases, the behavior of the heat transfer occurring during BM case should tend to the LM case value, during the linear regime.
 
 Significant differences arise for $\Ray_e \geq 5 \cdot 10^5$, corresponding to greater cavity size. 
 %From $t=$ $\Ray = 1.62 \cdot 10^6$, and $\Ray = 3.27 \cdot 10^6$.
-From $t=40$ for $\Ray = 1.62 \cdot 10^6$ (panel b), and $t=30$ for $\Ray = 3.27 \cdot 10^6$ (panel c), $N\!u$ displays a highly oscillating value, for the BM case, when the melting advances, while smooth and quasi-steady evolution is noticed for the LM case.
+From $t=40$ for $\Ray = 1.62 \cdot 10^6$ (panel b), and $t=30$ for $\Ray = 3.27 \cdot 10^6$ (panel c), $\Nuss$ displays a highly oscillating value, for the BM case, when the melting advances, while smooth and quasi-steady evolution is noticed for the LM case.
 %noticeable differences are apparent in the time evolution of the Nusselt number.
-%The blue curves (lateral heating) exhibit a smooth and a quasi-steady evolution of $N\!u$, while high oscillating value of $N\!u$ is observed for the red curves (basal heating).
+%The blue curves (lateral heating) exhibit a smooth and a quasi-steady evolution of $\Nuss$, while high oscillating value of $\Nuss$ is observed for the red curves (basal heating).
 Moreover, lower amount of heat transfer and accumulated heat input is featured by the BM case.
 At this stage, the decrease of the heat transfer is correlated by the decrease of the number of convection cells.
 %the decrease of the number of convection cells is accompanied by a decrease of the heat transfer.
 It occurs when the heat transfer is no longer bulk transfer for the BM case.
 %Consequently, the accumulated heat input $Q_0$ is higher for the LM case from the oscillating regime.
 
-\noindent This decreasing value of $Q_0$ and $N\!u$, for the BM case, during the oscillating regime, could be explained by the rule of the bulk heat transfer at this stage.
+\noindent This decreasing value of $Q_0$ and $\Nuss$, for the BM case, during the oscillating regime, could be explained by the rule of the bulk heat transfer at this stage.
 The scaling relation in Eq. \ref{eq-Lf-deltT} is indeed no more valid, since $\delta_{\theta} \ll L_r$.
 Thus, the contribution of the bulk part during the oscillating regime is:
 \begin{equation} \label{eq-Nu-scal-bulk}
-	N\!u \sim \left( \frac{H}{L_r}\right)^{1/4} \Ray^{1/4},
+	\Nuss \sim \left( \frac{H}{L_r}\right)^{1/4} \Ray^{1/4},
 \end{equation}
 
 \noindent which indicates clearly that higher is the size of the convective cells, lower is the amount of the bulk heat transfer.
