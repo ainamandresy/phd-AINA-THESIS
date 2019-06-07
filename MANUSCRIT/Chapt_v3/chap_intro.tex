@@ -171,7 +171,7 @@ The study was focused on two-dimensional square cavity configuration.
 A first objective of this thesis is to improve the existing code, developed by the numerical methods and applications group of the LMRS Laboratory \footnote{http://lmrs-num.math.cnrs.fr}, and to organize the program as a toolbox for the software FreeFem++.
 To this end, the objectives are listed as follows: 
 \begin{enumerate}[label=(\roman*)]
-\item increase the accuracy by using  a second order scheme for the time discretization and P$_2$ finite element for the temperature, 
+\item increase the accuracy by using  a second order scheme for the time discretization and $\PP_2$ finite element for the temperature, 
 \item implement a Carman-Kozeny model, in addition to the viscosity-based approach, to annihilate the velocity in the solid region, 
 \item investigate challenging cases by simulating complex geometries (highly distorted mesh, cylindrical PCM with inner heated tubes) and computationally demanding cases (high Rayleigh numbers), 
 \item simulate the complete melting-solidification cycle of a PCM. 
@@ -239,8 +239,8 @@ The coupled system of momentum and energy equations is integrated in time using 
 All the terms are treated implicitly and the resulting discretized equations are solved using a Newton method \citep{dan-2014-JCP}. 
 
 \noindent The advantage of this formulation is to  permit a straightforward implementation of different types of non-linearities.
-For the space discretization we use Taylor-Hood triangular finite elements, \ie P$_2$ for the velocity and P$_1$ for the pressure. 
-Temperature is discretized using P$_2$ or P$_1$ finite elements. 
+For the space discretization we use Taylor-Hood triangular finite elements, \ie $\PP_2$ for the velocity and $\PP_1$ for the pressure. 
+Temperature is discretized using $\PP_2$ or $\PP_1$ finite elements. 
 Discontinuous variables (latent heat, thermal diffusivity, etc) at the solid-liquid interface are regularized through an intermediate artificial mushy region.
 
 \noindent Single domain methods require a refined mesh near the interface, where large enthalpy gradients have to be correctly resolved. 
@@ -254,7 +254,7 @@ Mesh adaptivity, feature of the current method, offers the possibility to deal w
 \item we improve the metric calculation procedure for mesh adaptivity.
 \end{enumerate}
 
-The programs were built and organized as a toolbox for \ff \citep{hecht-2012-JNM,freefem}, which is a free software (under LGPL license). \ff\footnote{\ff for different OS can be downloaded from \texttt{http://www3.freefem.org/}.} offers a large variety of triangular finite elements  (linear and quadratic Lagrangian elements, discontinuous P$_1$, Raviart-Thomas elements, etc.)  to solve partial differential equations. It is an integrated product with its own high level programming language and a syntax close to mathematical formulations, making the implementation of numerical algorithms very easy. Among the features making \ff an easy-to-use and highly adaptive  software we recall the advanced automatic mesh generator, mesh adaptation, problem description by its variational formulation, automatic interpolation of data, colour display on line, postscript printouts, etc. The \ff programming framework offers the advantage to hide all technical issues related to the implementation of the finite element method. It becomes then easy to  use the present toolbox to code new numerical algorithms for similar problems with phase-change.
+The programs were built and organized as a toolbox for \ff \citep{hecht-2012-JNM,freefem}, which is a free software (under LGPL license). \ff\footnote{\ff for different OS can be downloaded from \texttt{http://www3.freefem.org/}.} offers a large variety of triangular finite elements  (linear and quadratic Lagrangian elements, discontinuous $\PP_1$, Raviart-Thomas elements, etc.)  to solve partial differential equations. It is an integrated product with its own high level programming language and a syntax close to mathematical formulations, making the implementation of numerical algorithms very easy. Among the features making \ff an easy-to-use and highly adaptive  software we recall the advanced automatic mesh generator, mesh adaptation, problem description by its variational formulation, automatic interpolation of data, colour display on line, postscript printouts, etc. The \ff programming framework offers the advantage to hide all technical issues related to the implementation of the finite element method. It becomes then easy to  use the present toolbox to code new numerical algorithms for similar problems with phase-change.
 
 %In this thesis, we use an enthalpy method with a temperature-based formulation using heat source term approach to simulate phase-change systems with convection.
 %The natural convection flow in the liquid phase is simulated by solving the full incompressible Navier-Stokes equations with Boussinesq approximation.

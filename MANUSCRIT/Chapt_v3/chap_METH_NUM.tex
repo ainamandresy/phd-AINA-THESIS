@@ -267,7 +267,7 @@ a\left(\vec{u}^{n+1}, \vec{v}\right)
 %\newpage
  \section{Mesh adaptivity} \label{subs:FEadapt}
 We use the standard mesh adaptivity function (\texttt{adaptmesh}) offered by \ff \citep{hecht-2012-JNM}. The key idea implemented in this function (see also \cite{hecht-1996-missi,hecht-2000-ijnmf,hecht-1997-aiaa,george-1998,frey-george-1999,moham-piron-2000})  is to modify the scalar product used in the automatic mesh generator to evaluate distance and volume.  Equilateral elements are thus constructed, accordingly to the new metric.  The scalar
-product is based on the evaluation of the Hessian $\mathcal{H}$ of the variables of the problem. For example, for a P$_1$ discretization of a
+product is based on the evaluation of the Hessian $\mathcal{H}$ of the variables of the problem. For example, for a $\PP_1$ discretization of a
 variable $\chi$, the interpolation error is bounded by:
 \begin{equation}
 {\cal E } = |\chi - \Pi_h \chi |_0 \leq c \sup_{T\in \mathcal{T}_{h}} \sup_{x,y,z\in T}   |\mathcal{H}(x)|(y-z , y-z),
@@ -506,16 +506,16 @@ The forcing terms that have to be added to the momentum and energy (temperature)
    f_T &=& u_1(x,y) a'(x) b(y) + u_2(x,y) \left( T_h - T_c + a(x) b'(y) \right) \\ \nonumber
    &-& \frac{K}{\Rey \Prd} \left( a''(x)b(y) + a(x) b''(y) \right).
 \end{eqnarray}
-We used the Taylor-Hood finite element (P$_2$ for the velocity and P$_1$ for the pressure)  and tested P$_1$ or P$_2$ finite elements for the temperature.
+We used the Taylor-Hood finite element ($\PP_2$ for the velocity and $\PP_1$ for the pressure)  and tested $\PP_1$ or $\PP_2$ finite elements for the temperature.
 Figs. \ref{fig-conv-burggraf}a and  \ref{fig-conv-burggraf}b illustrate the streamlines and the temperature field, respectively.
-Fig. \ref{fig-conv-burggraf} plots the  discretization error $\varepsilon$  as a function of the grid size $h=\delta x=\delta y$ for the temperature.  Both ${L}^2$ and ${L}^\infty$ norms are displayed. The expected second order accuracy in  ${L}^2$-norm is obtained with  P$_1$ finite elements (Fig. \ref{fig-conv-burggraf}c), while an order exceeding three is 
-observed when  P$_2$ finite elements are used (Fig. \ref{fig-conv-burggraf}d).
+Fig. \ref{fig-conv-burggraf} plots the  discretization error $\varepsilon$  as a function of the grid size $h=\delta x=\delta y$ for the temperature.  Both ${L}^2$ and ${L}^\infty$ norms are displayed. The expected second order accuracy in  ${L}^2$-norm is obtained with  $\PP_1$ finite elements (Fig. \ref{fig-conv-burggraf}c), while an order exceeding three is 
+observed when  $\PP_2$ finite elements are used (Fig. \ref{fig-conv-burggraf}d).
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_2/figsCPC_03} 
 	\end{center}
 	\caption{Burggraf stationary flow with thermal effects used to test the space accuracy of the numerical scheme. Streamlines (a) and temperature contours (b) of the flow field.	
-Global error $\varepsilon$ (cf. Eq. \ref{eq-epsconv}) for  the temperature: (c) P$_1$ and (d) P$_2$ finite elements.}
+Global error $\varepsilon$ (cf. Eq. \ref{eq-epsconv}) for  the temperature: (c) $\PP_1$ and (d) $\PP_2$ finite elements.}
 	\label{fig-conv-burggraf}
 \end{figure}
 
@@ -570,20 +570,20 @@ $U_c = (\delta U_0 + \alpha_u \sin(t)), \,
 Guided by  the results obtained  in Sec. \ref{subsub-conv-burg} for the space accuracy, we fixed the grid size to $h=dx = 0.01$ to ensure small spatial discretization errors.
 For diminishing values of the time step $\delta t$, the solution was evolved in time up to the time instant $t_{max} = \pi$ at which the error Eq. \ref{eq-epsconv} was computed. 
 The time convergence is displayed in Fig. \ref{fig-conv-bdf2} for the temperature variable. 
-The expected second order convergence in time is obtained for both P$_1$ (Fig. \ref{fig-conv-bdf2}a) and P$_2$ (Fig. \ref{fig-conv-bdf2}b) discretizations of the temperature.
+The expected second order convergence in time is obtained for both $\PP_1$ (Fig. \ref{fig-conv-bdf2}a) and $\PP_2$ (Fig. \ref{fig-conv-bdf2}b) discretizations of the temperature.
 
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_2/figsCPC_04} 
 	\end{center}
-	\caption{Time accuracy of the numerical scheme tested using the time-dependent manufactured solution of \cite{nourgaliev2016fully}. Evolution of the global error $\varepsilon$ given in Eq. \ref{eq-epsconv} for  the temperature at $t_{max} = \pi$. Discretizations using: (a) P$_1$ and (b) P$_2$ finite elements.}
+	\caption{Time accuracy of the numerical scheme tested using the time-dependent manufactured solution of \cite{nourgaliev2016fully}. Evolution of the global error $\varepsilon$ given in Eq. \ref{eq-epsconv} for  the temperature at $t_{max} = \pi$. Discretizations using: (a) $\PP_1$ and (b) $\PP_2$finite elements.}
 	\label{fig-conv-bdf2}
 \end{figure}
 
 \newpage
 \section{Domain decomposition method with FreeFem++: FFDDM}
 Solving the Navier-Stokes-Boussinesq systems of Eqs. \ref{eq-weak-all} - \ref{eq-weak-energy} in three-dimensional configurations could generate a large problem size.
-The natural convection of air in a cube of dimensions $[0,1]^3$ with $40 \times 40 \times 40$ uniform grids involves indeed $3$ millions of unknowns (d.o.f.) in the linear system, when a $P_1$ finite element is considered for the temperature.
+The natural convection of air in a cube of dimensions $[0,1]^3$ with $40 \times 40 \times 40$ uniform grids involves indeed $3$ millions of unknowns (d.o.f.) in the linear system, when a $\PP_1$ finite element is considered for the temperature.
 For such a large size of problem, memory lack issue can rapidly arise with sequential algorithms.
 It is thus essential to distribute data among several processors.
 
@@ -643,7 +643,7 @@ Local matrices are defined as:
 
 We assess the strong scalability of the ORAS preconditioner on the 3D differentially heated cube cavity.
 We vary the number of subdomains while the global system size is fixed.
-With a P$_2$ finite element for the temperature, we solve $7.2$ million of unknowns (d.o.f).
+With a $\PP_2$ finite element for the temperature, we solve $7.2$ million of unknowns (d.o.f).
 The subdomain is decomposed into subdomains with \texttt{Metis}, ranging from $48$ to $400$ subdomains.
 Fig. \ref{fig-scalability} illustrates the evolution of the total wall clock time for different subdomains, in which a good speed up is observed.
 From $48$ to $320$ we observe a linear speed up. 
