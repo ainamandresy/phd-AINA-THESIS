@@ -34,8 +34,8 @@ We use a finite-element method that was implemented using the open-source softwa
 FreeFem++  is an integrated product with its own high level programming language and a syntax close to mathematical formulations, making the implementation of numerical algorithms very easy. Among the numerous numerical tools offered by FreeFem++, the use of the powerful mesh adaptivity function proved mandatory in this study to obtain accurate results within reasonable computational time.
 The numerical code was optimized to afford the mesh refinement every time step:  the mesh density was increased around  the phase change interfaces,  offering an optimal resolution of the large gradients of all regularized functions ($S, K, L_f$), while  the mesh was de-refined (larger triangles) in the solid part, where a coarser mesh could be used. A simulation using a globally refined mesh would require a prohibitive computational time for an equivalent accuracy of the melting front resolution. Similar algorithms based on FreeFem++  were successfully used for solving different systems of equations with locally sharp variation of the solution, such as Gross-Pitaevskii equation \citep{dan-2010-JCP,dan-2016-CPC} or  Laplace equations with nonlinear source terms \citep{dan-2013-AMM}. 
 
-The space discretization is based on Taylor-Hood finite elements, approximating  the velocity with $P_{2}$ Lagrange finite elements (piecewise quadratic), and the
-the pressure with the $P_{1}$ finite elements (piecewise linear). The temperature and the enthalpy are discretized using $P_2$ finite elements.  
+The space discretization is based on Taylor-Hood finite elements, approximating  the velocity with $\PP_2$ Lagrange finite elements (piecewise quadratic), and the
+the pressure with the $\PP_{1}$ finite elements (piecewise linear). The temperature and the enthalpy are discretized using $\PP_2$ finite elements.  
 This discretization is second order accurate in space.
 We also use a second order accurate discretization in time.
 \cite{aldbaissy2018full} have compared analytically and numerically the first and second order discretization of the time-dependent Boussinesq problem, and have concluded that the second order scheme is much better than the first order in terms of CPU time with the same precision.
@@ -143,7 +143,7 @@ Eq. \ref{eq-newton-w} can be rewritten as follow when applied to the discretized
 	+ c\left(\vec{u}_{k+1} ; \vec{u}_{k}, \vec{v} \right)
 	&+& c\left(\vec{u}_{k} ; \vec{u}_{k+1}, \vec{v} \right)\\ \nonumber
 	+ 
-	\frac{1}{Re} a\left( \vec{u}_{k+1}, \vec{v}\right)
+	\frac{1}{\Rey} a\left( \vec{u}_{k+1}, \vec{v}\right)
 	- \left(\frac{d A}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{u}_k, \vec{v}\right) 
 	&-& \left(A(\theta_k) \, \vec{u}_{k+1}, \vec{v}\right) + b\left(\vec{v}, p_{k+1}\right)  \\  \nonumber
 	- {\left(\frac{df_B}{d\theta}(\theta_k)\, \theta_{k+1} \, \vec{e}_y, \vec{v}\right)} &=&  
@@ -274,7 +274,7 @@ variable $\chi$, the interpolation error is bounded by:
 \label{eq1}
 \end{equation}
 
-\noindent where $\Pi_h \chi $ is the $P_1$ interpolate  of $\chi$, $ |\mathcal{H}(x)|$ is the  Hessian of $\chi$ at point $x$ after being made positive definite.
+\noindent where $\Pi_h \chi $ is the $\PP_1$ interpolate  of $\chi$, $ |\mathcal{H}(x)|$ is the  Hessian of $\chi$ at point $x$ after being made positive definite.
 Using the Delaunay algorithm (\eg \cite{george-1998}) to generate a  triangular mesh with edges close to the unit length  in the metric  $\mathcal{M} ={|\mathcal{H}| \over (c {\cal{E}})}$ will result in a equally distributed  interpolation error ${\cal E}$ over the edges $a_i$ of the mesh. More precisely, we get
 \begin{equation}
 {1 \over c {\cal E}} a_i^T {\cal M } a_i \le 1.
@@ -285,7 +285,7 @@ The previous approach could be generalized for a vector variable $\chi=[\chi_1, 
 such that the unit ball of $\mathcal{M}$ is included in  the intersection of the two  unit balls  of metrics $\mathcal{M}_{2}$ and $\mathcal{M}_{1}$
 (for details, see the  procedure defined in \cite{frey-george-1999}).
 
-The \texttt{adaptmesh} function offers the possibility to take into account several metrics computed from different variables monitoring the evolution of the phase-change system. For natural convection system, the mesh will be adapted using the values of the two velocity components and the temperature. For phase-change systems, to accurately track the solid-liquid interface we add the variation of the enthalphy source term in the adaptivity criterion. For  water systems (convection or freezing), we also add an extra function tracking the anomalous change of density around $4 {^o}C$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider, for each variable used for adaptivity,  the metrics computed at actual ($t_{n+1}$) and  previous ($t_{n}$) time instants (see also \cite{Belhamadia2004_S}). The anisotropy of the mesh is a parameter of the algorithm and it was set to values close to 1. This is an inevitable limitation since we also impose the minimum edge-length of triangles to avoid too large meshes.
+The \texttt{adaptmesh} function offers the possibility to take into account several metrics computed from different variables monitoring the evolution of the phase-change system. For natural convection system, the mesh will be adapted using the values of the two velocity components and the temperature. For phase-change systems, to accurately track the solid-liquid interface we add the variation of the enthalphy source term in the adaptivity criterion. For  water systems (convection or freezing), we also add an extra function tracking the anomalous change of density around $4 {^o}C$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider, for each variable used for adaptivity,  the metrics computed at actual ($t_{n+1}$) and  previous ($t_{n}$) time instants (see also \cite{Belhamadia2004_S}). The anisotropy of the mesh is a parameter of the algorithm and it was set to have value close to 1. This is an inevitable limitation since we also impose the minimum edge-length of triangles to avoid too large meshes.
 The capabilities of the mesh adaptivity algorithm are illustrated in Chapter \ref{chap-MELTING}.
 
 \newpage

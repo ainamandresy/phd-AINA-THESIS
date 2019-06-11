@@ -3,8 +3,8 @@
 %              \sectionmark{head version}}
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\titcourt{Navier-Stokes-Boussinesq model and Enthalpy-porosity model}
-\def\titlong{Navier-Stokes-Boussinesq model and Enthalpy-porosity model}
+\def\titcourt{Navier-Stokes-Boussinesq and Enthalpy-porosity models}
+\def\titlong{Navier-Stokes-Boussinesq and Enthalpy-porosity models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -147,12 +147,12 @@ The dimensionless system of equations to be solved in both liquid and solid regi
 
 \noindent The linearised Boussinesq buoyancy force ($f_B$), the Reynolds ($Re$) and Prandtl ($\Prd$) numbers are defined as:
 \begin{equation}\label{eq-RePr}
-f_B(\theta) = \frac{\Ray}{\Prd \Rey^2} \theta, \quad \Rey = \frac{\rho V_{ref} H}{\mu_l}=  \frac{V_{ref} H}{\nu_l} , \quad \Prd = \frac{\nu_l}{\alpha_l},
+f_B(\theta) = \frac{\Ray}{\Prd \Rey^2} \theta, \quad \Rey = \frac{\rho V_{ref} L_{ref}}{\mu_l}=  \frac{V_{ref} L_{ref}}{\nu_l} , \quad \Prd = \frac{\nu_l}{\alpha_l},
 \end{equation}
-with $\nu$ the kinematic viscosity and $\alpha = k/(\rho c)$  the thermal diffusivity. In the expression of $f_B$, the Rayleigh number of the flow is defined as:
+with $\alpha = k/(\rho c)$  the thermal diffusivity. In the expression of $f_B$, the Rayleigh number of the flow is defined as:
 \begin{equation}
 \label{eq-Rayleigh}
-\Ray = \frac{g \beta H^3 \delta T}{\nu_l \alpha_l},
+\Ray = \frac{g \beta L_{ref}^3 \delta T}{\nu_l \alpha_l},
 \end{equation}
 with $\beta$ the thermal expansion coefficient and $g$ the gravitational acceleration.
 
@@ -184,7 +184,7 @@ S(\theta)= \frac{s}{s_l} =\left\{
 
 \noindent with $Ste$ the Stefan number.
 
-\noindent Discontinuous step-functions defined in Eqs. \ref{eq-adimKC}  and \ref{eq-adimS} are replaced by continuous and differentiable hyperbolic-tangent functions, generically defined for all $\theta$ by the formula \citep{dan-2014-JCP}:
+\noindent Discontinuous step-functions defined in Eqs. \ref{eq-adimKC}  and \ref{eq-adimS} are replaced by continuous and differentiable hyperbolic-tangent functions, generically defined for all $\theta$ by the formula \citep{dan-2014-JCP}
 \begin{equation}
 F(\theta; a_r, \theta_r, R_r) = f_l + \frac{f_s-f_l}{2}\left\{
 1 + \tanh\left( a_r \left(\frac{\theta_r-\theta}{R_r}\right)\right)
@@ -218,19 +218,13 @@ The well-known equation derived from the Darcy law, the Carman-Kozeny Eq. \ref{c
 	\nabla p = - \frac{\CKC (1 - \lambda)^2}{\lambda^3} \vec u.
 \end{equation}
 
-\noindent Finally $A$ takes the form \citep{Belhamadia2012,kheirabadi2015effect}:
+\noindent Finally $A$ takes the form \citep{Belhamadia2012,kheirabadi2015effect}
 \begin{equation}\label{eq-CK}
 A(\theta) = -\frac{\CKC (1 - L_f(\theta))^2}{L_f(\theta)^3 + b}, 
 \end{equation}
 
 \noindent where $L_f(\theta)$ is the local liquid fraction, which is  $1$ in the fluid region and  $0$ in the solid. $L_f$ is regularized inside the artificial  mushy-region using a hyperbolic-tangent similar to Eq. \ref{eq-Stanh}.
 The Carman-Kozeny constant $\CKC$ is set to a  large value (as discussed below) and  the constant $b=10^{-6}$ is introduced to avoid divisions by zero.
-
-%\begin{equation}\label{eq-CK}
-%A(\theta) = -\frac{\CKC (1 - \varphi(\theta))^2}{\varphi(\theta)^3 + b},
-%\end{equation}
-%where $\varphi(\theta)$ is the phase-change variable, which is  $1$ in the fluid region and $0$ in the solid. Inside the regularization region,  $\varphi(\theta)$ is regularized using a hyperbolic-tangent function similar to Eq. \ref{eq-Stanh}.
-%The constant $\CKC$ is set to a  large value (as discussed below) and  the constant $b=10^{-6}$ is introduced to avoid division by zero.
 
 \section{Boundary layer approximation and scale analysis} \label{sec-bound-scal-anal}
 Either PCM is used for energy storage or for building insulation or for other purposes, one would necessarily assess the heat transfer during the phase-change process.
