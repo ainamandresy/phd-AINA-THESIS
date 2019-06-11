@@ -109,11 +109,11 @@ For more details about these applications see \citep{agyenim2010review}.
 Melting and solidification are also fundamental process in geophysical problem such as Earth's mantle formations, lava lakes \citep{davaille1993thermal}, thermal convection in magma chambers \citep{brandeis1989convective} or ice-melt lakes \citep{polashenski2012mechanisms}. Ice-melt ponds that form during summer season in the Arctic are known for example to display natural convection coupled to a phase-change process on the bottom side \citep{polashenski2012mechanisms,esfahani2018basal}. 
 In that case, Rayleigh-Bénard like convection cells are observed in the liquid phase.
 
-The solid-liquid phase-change phenomenon is a very complex process. 
+The solid-liquid phase-change phenomenon is known to involve tricky processes. 
 It couples the natural convection in the liquid phase induced by the buoyancy force, the non-linear evolution of the phase-change interface and the heat transfer process, which could be different from one configuration to another.
 The coupling of all these physical phenomenons induces strong non-linear process in the solid-liquid problems, difficult to analyse except for simple and ideal test cases.
-Fig. \ref{fig:expe-PCM_Gong} showing the experimental investigation of the melting of n-octadecane inside a transparent brick by \cite{gong2015numerical} displays very well the complexity of the problem.
-The investigated material is heated from the right and melts from the right to the left.
+Fig. \ref{fig:expe-PCM_Gong} showing the experimental investigation of the melting of n-octadecane inside a transparent brick, used as a smart material to control the indoor environment of a building by \cite{gong2015numerical}, displays very well the complexity of the problem.
+The investigated material is heated from the right and melts consequently from the right to the left.
 Figs. \ref{fig:expe-PCM_Gong}a and \ref{fig:expe-PCM_Gong}b indicate the evolution of the liquid fraction and the vector field in the fluid obtained by particle image velocimetry (PIV) method.
 Capturing accurately the non-linear evolution of the solid-liquid interface, due to the strong convection in the melting PCM, is clearly a challenging numerical task.
 Furthermore, the existence of boundary layers near the walls and the interface suggests that the mesh resolution should allow to capture these structures.
@@ -122,21 +122,26 @@ Furthermore, the existence of boundary layers near the walls and the interface s
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/EXPE_GONG_melting}
 	\end{center}
-	\caption{Experimental observation of the melting of n-octadecane within a transparent brick of plexiglas heated vertically from the left by \cite{gong2015numerical}, obtained by particle image velocimetry (PIV) method.}
+	\caption{Experimental observation of the melting of n-octadecane within a transparent brick of plexiglas heated vertically from the left by \cite{gong2015numerical}, obtained by particle image velocimetry (PIV) method (a) melt fraction (b) velocity field in the liquid region.}
 	\label{fig:expe-PCM_Gong}
 \end{figure}
 
-Over the past $30$ years, solid-liquid phase-change has been widely studied. % using either numerical, analytical, or experimental methods.
-Rectangular and cylindrical geometries were the most investigated configuration.
+Solid-liquid phase-change problem have attracted attention since the study of crust formation of earth by \cite{lame1831memoire}  or the ice formation problem by \cite{stefan1889uber}.
+From a mathematical point of view, the phase transition is referred to a moving boundary problem.
+The Stefan problem considers a linear evolution of the interface by assuming conductive heat transfer only in the liquid phase.
+In the frame of such assumption, the existence and the uniqueness of the solution for the one-dimensional problem was proven by \cite{rubinstein1947solution} using constant properties.
+For an historical review detailing the evolution of the Stefan problem and the progressive consideration of convection in the liquid one can refer to \cite{yao1989melting}.
+Over the past $30$ years, solid-liquid phase-change involving natural convection has been widely studied. % using either numerical, analytical, or experimental methods.
+Rectangular and cylindrical geometries were the most investigated configurations.
 \cite{Okada1984,gau1983flow,gong2015numerical} have investigated experimentally the melting of n-octadecane and gallium PCMs inside rectangular containers.
 \cite{ho1984inward,liu2014experimental,omojaro2017study} have studied experimentally the melting of different paraffin within cylindrical enclosures.
 These experimental investigations have been extensively used for numerical validations (see \cite{bertrand1999melting,gobin2000melting,wang2010numerical,dan-2014-JCP,rakotondrandisa2019numerical}) and have permitted a better comprehension of the physical phenomenon that occurs during melting and solidification, mainly the heat transfer process.
 %The experimental results are very often formulated in the form of mathematical correlations.
-Experimental work of \cite{Okada1984} have permitted for example to express correlations of the variation of dimensionless thermal energy stored as latent heat, and the average Nusselt number on the vertical wall with the dimensionless time.
+Experimental work of \cite{Okada1984} have permitted for example to express correlations of the variation of dimensionless thermal energy stored as latent heat. % and the average Nusselt number on the vertical wall with the dimensionless time.
 Later, \cite{ho1984inward} have analyzed the solid-liquid interface position for different configuration and \cite{jany1988scaling} have formulated $N\!u$-$\Ray$ correlation through a scaling analysis.
 \cite{bejan1989analysis} gathered the previous observations and described analytically the solid-liquid melting process in the frame of vertical heating.
-
-Gallium and n-octadecane are the most investigated materials. Experimentals \citep{gau1983flow,Okada1984,campbell1994visualization,gong2015numerical}, numericals \citep{rady1996natural,bertrand1999melting,hannoun2003resolving,Wang2010,dan-2014-JCP,rakotondrandisa2019numerical}, and theoreticals \citep{Okada1984,jany1988scaling,bejan1989analysis,kowalewski2004phase} works were  performed. 
+Gallium and n-octadecane were the most investigated materials. 
+%Experimentals \citep{gau1983flow,Okada1984,campbell1994visualization,gong2015numerical}, numericals \citep{rady1996natural,bertrand1999melting,hannoun2003resolving,Wang2010,dan-2014-JCP,rakotondrandisa2019numerical}, and theoreticals \citep{Okada1984,jany1988scaling,bejan1989analysis,kowalewski2004phase} works were  performed. 
 Besides their physical properties are equal in both liquid and solid phases (differences less than $3 \%$), gallium and n-octadecane melt near room temperature, making them the preferred materials for experimentally investigating melting and solidification of low and high Prandtl-number PCMs respectively.
 %These problems in a rectangular cavity have been also extensively used in the literature for the assessment of phase-change numerical methods
 
