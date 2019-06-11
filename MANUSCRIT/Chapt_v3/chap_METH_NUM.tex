@@ -331,7 +331,7 @@ $\bullet$ {\em Macro$\_$system.idp}: macros identifying the OS and defining spec
 
   
   \noindent The folder structure of each test case is illustrated in Fig. \ref{fig-case-folder}.
-  The obtained solutions are saved in the folder \texttt{OUTPUT/Data}. Depending on the output format selected by the user,  data files are generated in specific folders for being visualized with: Tecplot, Paraview, Gnuplot or Medit. We also provide in the folder \texttt{Figures} ready-made layouts for these visualisation softwares. The user can thus obtain the figures from this paper using  newly generated data. More details about the output structure are given below.
+  The obtained solutions are saved in the folder \texttt{OUTPUT/Data}. Depending on the output format selected by the user,  data files are generated in specific folders for being visualized with: Tecplot, Paraview, Gnuplot or Medit. We also provide in the folder \texttt{Figures} ready-made layouts for these visualisation softwares. The user can thus obtain the figures from the current work using  newly generated data. More details about the output structure are given below.
 \end{enumerate}
 
 \begin{figure}
@@ -472,7 +472,7 @@ with $\Phi_e$ the exact solution and $\phi_h$ the numerical solution. Computatio
 
 The Burggraf manufactured solution  is a time-independent recirculating flow inside a square cavity $[ 0 , 1] \times [ 0 , 1]$. It is similar to the well-known  entrained cavity flow, with the difference that the velocity singularity at the top corners of the cavity is avoided. We added to the classical Burggraf flow \citep{Shih-1989,Lamballais-2009} a manufactured solution for the temperature, with 
 constant temperature imposed at the top and the bottom walls. Vertical walls are assumed to be adiabatic.
-The exact solution of the new flow with thermal effects is:
+The exact solution of the new flow with thermal effects is
 \begin{eqnarray}
 \label{burggraf-u}
    u_1(x,y) &=& \sigma g'(x) h'(y), \\\nonumber
@@ -487,7 +487,7 @@ with $\sigma >0$ a scaling parameter and functions
    a(x) &=& \cos (\pi x), \\ \nonumber
    b(x) &=& y(1-y).
 \end{eqnarray}
-Note that  the velocity at the top border of the cavity is:
+Note that  the velocity at the top border of the cavity is
 \begin{equation}
 u_1(0,1) = 2\sigma (x^4 - 2x^3 + x^2), \quad u_2(x,1) =0,
 \end{equation}

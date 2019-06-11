@@ -22,7 +22,7 @@ We consider a square cavity of height $H$ filled with n-octadecane PCM and pay a
 		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting_basal/Scheme-melt-lat} \\
 		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting_basal/Scheme-melt-basal}
 	\end{center}
-	\caption{Comparison between lateral and basal melting. Sketch of the computational domain, boundary conditions for LM (top) and BM (bottom) cases: streamlines showing the dynamic of the convection flow in the liquid phase (panels b and d) and solid-liquid interfaces (solid red lines).} \label{fig:melt-scheme}
+	\caption{Comparison between lateral and basal melting. Sketch of the computational domain and boundary conditions for LM (top) and BM (bottom) cases. Streamlines (panels b and d) and solid-liquid interfaces (solid red lines).} \label{fig:melt-scheme}
 \end{figure}
 
 Two classes of convective melting systems are of interest in this chapter: \textbf{(i)} lateral melting (LM) or \textbf{(ii)}  basal melting (BM).
@@ -60,7 +60,7 @@ We note that for the range of $\Ray$ and $\Ste$ numbers of interest, the assumpt
 \noindent A second dimensionless time $\tau$ related to the analytical correlation of \cite{jany1988scaling} is introduced:
 \begin{equation}
 \label{eq-adim-tau}
-\tau = \Ste\cdot \mathcal{F}o = \Ste\cdot \frac{\alpha t_{\varphi}}{H^2}  = \frac{\Ste}{\Prd} \cdot t,
+\tau = \Ste \times \mathcal{F}o = \Ste \times \frac{\alpha t_{\varphi}}{H^2}  = \frac{\Ste}{\Prd} \times t,
 \end{equation}
 where $\mathcal{F}o$ is the Fourier number. 
 
@@ -102,7 +102,6 @@ We can easily identify three different regimes describing the time evolution of 
 
 We further analyse each of the three regimes cited previously and identify the proper scales of the phenomenon.
 The (dimensionless) location of the interface will be denoted by $\Gamma_i$.
-
 Immediately after the melting starts (see Fig. \ref{fig:melt-field}a), the melted PCM occupies a thin enclosure of height $H$ and width $\Gamma_i$.
 In such configuration, the temperature varies linearly between the two sidewalls and the heat transfer is essentially ruled by conduction. 
 The fluid phase is almost motionless and the horizontal heat flux across the incipient melting PCM is balanced by the enthalpy absorbed at the interface.
@@ -216,7 +215,7 @@ The regimes described by the shape of the interface in Sec. \ref{subsec-time-evo
 	\item \textbf{The mixed conduction-convection regime}  ($ \Nuss \sim \tau^{-1/2} + \Ray\, \tau^{3/2}$) for $  0.02  \leq \tau \leq 0.05$ (illustrated in  Fig.  \ref{fig:melt-field}b).
 
 	\item \textbf{The convection dominated regime} ($ \Nuss \sim \Ray^{1/4}$) for $\tau > Ra^{-1/2}$  (corresponding to Figs.  \ref{fig:melt-field}c-e).
-	The plateau at the value of $\Ray^{1/4}$ corresponds to the pure convective transfer and is observed in Fig. \ref{fig:Nusselt} for $  0.05 \leq \tau \leq 0.1$. Numerical results show a slight decrease of the $\Nuss$ in the final stage ($\tau \geq 0.1$), when the melting front starts to touch the right wall of the cavity (see Figs.  \ref{fig:melt-field}e-f). The correlation model is not valid for this late evolution of the melting process.
+	The plateau at the value of $\Ray^{1/4}$ corresponds to the pure convective transfer and is observed in Fig. \ref{fig:Nusselt} for $  0.05 \leq \tau \leq 0.1$. Numerical results show a slight decrease of $\Nuss$ in the final stage ($\tau \geq 0.1$), when the melting front starts to touch the right wall of the cavity (see Figs.  \ref{fig:melt-field}e-f). The correlation model is not valid for this late evolution of the melting process.
 \end{enumerate}
 
 \begin{figure}
@@ -254,7 +253,7 @@ We compare in Fig. \ref{fig:Lf}b our numerical results with the predictions base
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting_basal/MELT_cavity_Ra_comp}
 	\end{center}
-	\caption{PCM melting at $L_f = 0.5$. Illustration of the temperature field, the streamlines, and the melting front for three $\Ray$ numbers: (a) $\Ray = 3.27 \cdot 10^5$ , (b) $\Ray = 1.62 \cdot 10^6$, (c) $\Ray = 3.27 \cdot 10^6$.
+	\caption{PCM melting at $L_f = 0.5$. Illustration of the temperature field, the streamlines, and the melting front for three $\Ray$ numbers: (a) $\Ray = 3.27 \cdot 10^5$ , (b) $\Ray = 1.62 \cdot 10^6$, and (c) $\Ray = 3.27 \cdot 10^6$.
 	The $\Prd$ and $\Ste$ numbers are kept constant: $\Prd = 56.2$ and $\Ste = 0.045$.} \label{fig:melt-comp-Ra}
 \end{figure}
 
@@ -274,7 +273,7 @@ According to the Stefan interface condition in Eq. \ref{eq:Ste-condition}, at co
 Figs \ref{fig:Ra-Nusselt-H} and \ref{fig:Ra-Nusselt-deltaT} plot the temporal evolution of the liquid fraction $L_f$ (panel a),  and the average Nusselt number defined at the hot wall (panel b). 
 The same heat transfer regimes described previously are observed for each case: conduction, mixed conduction-convection and convection.
 We note that results are plotted with respect to physical time $t_{\varphi}$ instead of $\tau$, 
-because we compare solutions with different values of $H$, which involves in the definition of the non-dimensional times $t$ and $\tau$, making them not relevant to compare results.
+because we compare solutions with different values of $H$, which involves in the definition of the non-dimensional times $t$ and $\tau$, making them not relevant to compare solutions.
 
 \noindent Fig. \ref{fig:Ra-Nusselt-H}a indicates that increasing the Rayleigh number by keeping $\delta T$ constant induces a slower melting rate.
 This is the expected behaviour since the size of the PCM is increased by a factor of 2, and the velocity $\vec u$ is decreasing to satisfy the condition $\Rey = 1$.

@@ -211,7 +211,7 @@ The temperature distribution in the cavity when the steady-state is reached, for
 The temperature gradient gives rise to a clockwise circulation and when $\Ray$ is increased, vertical thermal boundary layers form distinctly along the differentially heated sidewalls and the obstacle.
 Consequently, 
 higher is the Rayleigh number the more the hot temperature in the center of the domain is advected by the natural convection flow into the cold part of the cavity. 
-Worth noting is the fact that at $\Ray = 10^6$ in panels (c) and (d), a stagnant fluid with a stratified temperature forms in a small portion of the fluid between the cold wall and the obstacle.
+Worth noting is the fact that at $\Ray = 10^6$ in panels (c) and (f), a stagnant fluid with a stratified temperature forms in a small portion of the fluid between the cold wall and the obstacle.
 
 We assess a more accurate validation in panels (d) to (f) of Fig. \ref{fig-obst-2D}.
 The transversal velocity profiles along the x-axis are plotted and compared with the numerical data of \cite{Raluca2013} for each cases. 
@@ -259,7 +259,7 @@ This anomalous thermal variation of water density, is clearly discernible in the
 Two recirculating zones are formed in the flow: a lower (abnormal) recirculation  in the vicinity of the cold wall where $\theta<\theta_m$ and an upper (normal) one where the density decreases with temperature ($\theta>\theta_m$).
 
 Accounting for the foregoing comments, a greater mesh resolution should be applied around $\theta_m$.
-We define thus a P$_1$ function $\Phi(\theta)$ defined by the following hyperbolic-tangent function similar to Eq. \ref{eq-Stanh}:
+We define thus a $\PP_1$ function $\Phi(\theta)$ defined by the following hyperbolic-tangent function similar to Eq. \ref{eq-Stanh}:
 
 \begin{equation}
 \Phi(\theta) =  \frac{1}{2}\left\{
@@ -271,13 +271,13 @@ We define thus a P$_1$ function $\Phi(\theta)$ defined by the following hyperbol
 \noindent with $R_{\Phi}=0.02$. 
 The function $\Phi(\theta)$ and the two components of the velocity are used to compute the metric for the mesh adaptivity.
 $\Phi(\theta)$ is used to track $\theta_m$ and the velocity allows to refine the boundary layer regions.
-To reduce the reduce the impact of the interpolation on the global accuracy, since our algorithm is optimized to afford the mesh refinement every time step, we use both $\Phi(\theta^n)$ and $\Phi(\theta)^{n+1}$ in the adaptivity procedure.
+To reduce the impact of the interpolation on the global accuracy, since our algorithm is optimized to afford the mesh refinement every time step, we use both $\Phi(\theta^n)$ and $\Phi(\theta)^{n+1}$ in the adaptivity procedure.
 
 \noindent The final mesh is displayed in Fig. \ref{fig-T1w-isoT}c.
 The mesh is clearly refined along the line $\theta = \theta_m$ where  the structure and the extent of the two recirculating zones should be captured and along the vertical walls where the heat transfer is dominated by the boundary layer transfer.
 Furthermore, as expected in the relatively stagnant fluid region, a coarser mesh is applied.
 
-A more accurate comparison of the temperature profile along the horizontal symmetry line is given in Fig. \ref{fig-T1w-isoT}b. 
+A more accurate comparison of the temperature profile along the horizontal symmetry line is given in Fig. \ref{fig-T1w-isoT}d. 
 The temperature profile $\theta(x)$ along the horizontal symmetry line of the cavity is in good agreement with the numerical results   of \cite{Kowalewski-2003} obtained with FV and FD codes (FLUENT and FRECONV3V), commonly used in the heat transfer community. Differences are visible in the vicinity of the maximum density line, region where our mesh is well refined to capture the separation line between the two recirculation zones. It should be noted that the FLUENT simulations in \cite{Kowalewski-2003} are performed with a fixed uniform grid with $380\times380$ nodes, while our adapted grid has only 3422 triangles.
 
 \begin{figure}
