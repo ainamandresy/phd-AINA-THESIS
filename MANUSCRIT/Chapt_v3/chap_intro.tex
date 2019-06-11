@@ -166,7 +166,7 @@ With regard to theoretical works, \cite{vasil2011dynamic,favier2019rayleigh} hav
 \section{Purpose of the thesis}
 The purpose of the present work is to investigate numerically solid-liquid phase-change systems.
 The investigation tool used in this thesis is the open-source software FreeFem++ \citep{freefem,hecht-2012-JNM}.
-A high accuracy numerical model using a Newton method with an adaptive finite element is used to simulate phase-change problems involving natural convection.
+A high accuracy numerical model using a Newton method with an adaptive finite element is used to simulate phase-change problems with natural convection.
 
 \noindent A first investigation on the numerical simulation of convective phase-change problems using adaptive finite element method have been carried out by \cite{dan-2014-JCP}.
 The method used consists of solving the Navier-Stokes-Boussinesq equations by the mean of single domain approach using first order scheme.
@@ -185,9 +185,8 @@ A second objective is to extend the program to three-dimensional configurations.
 The two dimensional assumption is indeed no more valid for high Rayleigh problems, especially for basal melting cases.
 Moreover, three dimensional adaptive finite element method for convective melting problem is less investigated in the literature.
 
-A third objective is to provide a thorough analysis of both melting and solidification process using the developed tools.
+\noindent A third objective is to provide a thorough analysis of both melting and solidification process using the developed tools.
 
-\newpage
 \subsection{Existing method for modeling phase-change materials}
 %Solid-liquid phase-change problems are encountered in numerous practical applications, ranging from metal casting and thermal energy storage (phase-change materials) to food freezing and cryosurgery. Melting and solidification are also fundamental processes in geophysical problems, such as Earth's mantle formation, lava lakes or magma chambers. 
 
@@ -310,15 +309,15 @@ Finally, several PCM container geometries are simulated to prove the robustness 
 
 Numerical and scale analysis are investigated in Chapter \ref{chap-MELTING-ANALYSIS}.
 We compare the behavior of the PCM when lateral and basal heating are of interest.
-The melting of octadecane heated from the side is carried out first.
-Then numerical results for the melting from below is performed.
-For  both cases, we provide detailed description of the melting process with scaling analysis to better understanding the heat transfer mechanism.
+The melting of n-octadecane heated from the side is carried out first.
+Then numerical results for the melting from below is then presented.
+For  both cases, we provide comprehensive description of the melting process through a scale analysis for better understanding of the heat transfer mechanism.
 %Accurate comparison is carried out for the differentially heated cavity case, by considering different size of the cavity and different temperature difference between the hot temperature and the temperature of fusion, which are the main parameters monitoring the natural convection in the melting PCM.
 Analysis of the time evolution of some physical parameters, such as the Nusselt number, the liquid fraction, the accumulated heat input and the time evolution of the melting are discussed. %provided in detail through a scaling analysis.
 
 Chapter \ref{chap-SOLIDIFICATION} displays the numerical simulation of a full cycle melting/solidification of a PCM. 
 Two solidification fronts have to be tracked and make the case very challenging.
-A differentially heated cavity case and a circular PCM with inner heated tubes are studied.
+A differentially heated cavity case and a circular PCM with inner cooled tube are studied.
 A comparison on the influence of the Rayleigh number during the melting and the solidification process is emphasized, since both cycles are not driven by the same mechanism.
 
 Chapter \ref{chap-3D-SIMULATION} is devoted for three-dimensional configurations simulated using parallel algorithm.
