@@ -22,7 +22,7 @@ We consider a square cavity of height $H$ filled with n-octadecane PCM and pay a
 		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting_basal/Scheme-melt-lat} \\
 		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting_basal/Scheme-melt-basal}
 	\end{center}
-	\caption{Comparison between lateral and basal melting. Sketch of the computational domain and boundary conditions for LM (top) and BM (bottom) cases. Streamlines (panels b and d) and solid-liquid interfaces (solid red lines).} \label{fig:melt-scheme}
+	\caption{Comparison between lateral and basal melting. Sketch of the computational domain and boundary conditions for LM (top) and BM (bottom) cases. Streamlines (panels b and d) and solid-liquid interface (solid red lines).} \label{fig:melt-scheme}
 \end{figure}
 
 Two classes of convective melting systems are of interest in this chapter: \textbf{(i)} lateral melting (LM) or \textbf{(ii)}  basal melting (BM).
@@ -56,8 +56,7 @@ different height $H$ of the cavity and different value of $\delta T$, to assess 
 The numerical configuration is sketched in Fig. \ref{fig:melt-scheme}a.
 $\Ray$ numbers ranging from $3.27 \cdot 10^5$ to $3.27 \cdot 10^6$ are investigated.
 We note that for the range of $\Ray$ and $\Ste$ numbers of interest, the assumption of $(\beta \times \delta T) \ll 0.01$ is verified.
-
-\noindent A second dimensionless time $\tau$ related to the analytical correlation of \cite{jany1988scaling} is introduced:
+A second dimensionless time $\tau$ related to the analytical correlation of \cite{jany1988scaling} is introduced:
 \begin{equation}
 \label{eq-adim-tau}
 \tau = \Ste \times \mathcal{F}o = \Ste \times \frac{\alpha t_{\varphi}}{H^2}  = \frac{\Ste}{\Prd} \times t,
@@ -66,7 +65,7 @@ where $\mathcal{F}o$ is the Fourier number.
 
 \subsection{Analysis of the time evolution of the melting process} \label{subsec-time-evol-lat}
 
-We start by describing the time evolution of the melting process for the lowest value of the Stefan number $\Ste = 0.045$.
+We start by describing the time evolution of the melting process for the lowest value of the Stefan and Rayleigh numbers, i.e $\Ste = 0.045$ and $\Ray = 3.27 \cdot 10^5$.
 We are interested in a slowly melting of the PCM to capture the transitions between the regimes described by \cite{jany1988scaling}, mainly the onset of the convective regime.
 
 \noindent At $\tau=0$, the material is solid and the initial temperature is set to $\theta_0=-0.01$ everywhere inside the cavity. 
@@ -76,13 +75,13 @@ The material starts to melt, with a melting front (identified by the iso-line $\
 	\begin{center}
 		\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting_basal/MELT_cavity_field}
 	\end{center}
-	\caption{Temperature iso-lines and streamlines in the fluid phase. The solid part is represented in blue and corresponds to the region of temperature $\theta \leq \theta_f=0$. Time instants (panels  a to f): $\tau=0.004; 0.016; 0.032; 0.063; 0.08; 0.2$. $\Ray = 3.27 \cdot 10^5$, $\Prd = 56.2$ and $\Ste = 0.045$.
+	\caption{Temperature iso-lines, streamlines in the fluid phase, and phase-change interface. The solid part is represented in blue and corresponds to the region of temperature $\theta \leq \theta_f=0$. Time instants (panels  a to f): $\tau=0.004; 0.016; 0.032; 0.063; 0.08; 0.2$. $\Ray = 3.27 \cdot 10^5$, $\Prd = 56.2$ and $\Ste = 0.045$.
 		}\label{fig:melt-field}
 \end{figure}
-
-\noindent Snapshots of the time evolution of the phase-change system are given in Fig. \ref{fig:melt-field} for representative time instants.
+Snapshots of the time evolution of the phase-change system are given in Fig. \ref{fig:melt-field} for representative time instants.
 Panels (a) to (f) offer the streamline showing the clockwise recirculation of the fluid, the melting front, and the temperature distribution (the solid phase is denoted by the blue region) for a comprehensive description of the evolution of the system. 
 We can easily identify three different regimes describing the time evolution of the melting process. 
+
 \begin{itemize}
 	\item From $\tau=0$ to $\tau =0.004$ (Fig.  \ref{fig:melt-field}a), we note the vertical shape of the melting front, well predicted by the classical conduction model of \cite{stefan1891theorie}. This indicates that, at this stage, heat transfer is dominated solely by conduction.
 	
@@ -156,7 +155,7 @@ To assess for the convective heat transfer contribution during this mixed regime
 one can define a Rayleigh number based on $y^*$ as $\Ray_{y^*} = \Ray \times y^{*3}$,
 with $y^{*}$ the height of the melted zone altered by the convection flow as shown in Fig. \ref{fig:melt-scheme-regime} (see also  \cite{jany1988scaling}).
 We note that at the bottom part of the cavity, the interface remains vertical by the effect of the conductive heat transfer.
-Since $\Pr \gg 1$, the scaling presented in Eq. \ref{eq-scale-nbd-high-Pr} allows to evaluate the thickness of the thermal boundary layer in the top region as
+Since $\Prd \gg 1$, the scaling presented in Eq. \ref{eq-scale-nbd-high-Pr} allows to evaluate the thickness of the thermal boundary layer in the top region as
  \begin{equation} \label{eq-conv-cond-reg}
  \delta_{\theta}^* \sim y^* \times \Ray_{y^*} ^{-1/4}.
 \end{equation}
@@ -204,7 +203,7 @@ with the constant $c_1 = 0.234$ and the power $0.266$ fitted from the experiment
 The values of the constants were fitted from numerical data: $c_1 = 0.27$, $c_2 = 0.0275$, and $n=-2$. 
 
 \noindent Both of Eqs. \ref{eq-corr-Okada} and \ref{eq-Nu-scale} are compared with our numerical results in Fig. \ref{fig:Nusselt} showing the time evolution of the Nusselt number at the left wall.
-Our results perfectly fit with the theoretical prediction of \cite{jany1988scaling} and are also in good agreement with the correlation of \cite{Okada1984}. 
+Our results perfectly fit with the theoretical prediction of \cite{jany1988scaling} and are also in good agreement with the experimental correlation of \cite{Okada1984}. 
 The gap between the current simulation and the results of \cite{Okada1984} could be explained by the experimental heat loss mentioned by the author and the uncertainties of the experimental measurements.
 The regimes described by the shape of the interface in Sec. \ref{subsec-time-evol-lat} could be featured by the temporal evolution of $\Nuss$:
 \begin{enumerate}
@@ -375,7 +374,7 @@ It results a non-planar front with a peak at the center of each couple of counte
 
 %The time evolution of the melting for $\Ray = 3.27 \times 10^5$ is illustrated in details through panels (a) to (f) of Fig. \ref{fig:T-evol-Ra-3.27e5}.
 Fig. \ref{fig:T-evol-Ra-6.54e6} depicts in detail the time evolution of the melting for $\Ray = 6.54 \cdot 10^6$, during which the effective Rayleigh number increases and influence the dynamic of the flow. 
-The temperature field, the location of the interface, and the streamlines are reported.
+The temperature field, the location of the interface, and the streamlines are reported through panels (a) to (l).
 
 \noindent Before the first instability arises, the melt layer evolves solely by conduction. 
 There is no noticeable fluid flow and the melting front remains straight (panel a).
@@ -387,7 +386,7 @@ The appearance of convection is marked by a change in the shape of the interface
 
 \noindent  As the fluid expands upwards, the effective Rayleigh number increases and we could observe $10$ convective rolls being stretched vertically (panels c to e).
 For $\Ray_e \leq 2 \cdot 10^5$, one can note that the number of rolls is time-independent.
-Such behavior could be compared to the steady convection regime after the onset of primary instability in the Rayleigh-Bénard system (see \cite{chandrasekhar2013hydrodynamic}).
+Such behaviour could be compared to the steady convection regime after the onset of primary instability in the Rayleigh-Bénard system (see \cite{chandrasekhar2013hydrodynamic}).
 This regime will be referred to linear regime in the present study.
 
 %Fig. \ref{fig:T-evol-Ra-6.54e6} illustrates the dynamic of the melting for higher $\Ray$ number.
@@ -401,7 +400,7 @@ At this stage, neither the mushroom form of the plumes nor the periodic distribu
 The essential consequence of this observation is that the melting front is modified.
 The interface is actually shaped by the new flow pattern. 
 %Two peaks are observed but are still periodic at the interface related to the four convective rolls.
-%Finally, after the roll merging and the oscillating behavior observed in panels (d) and (e), 
+%Finally, after the roll merging and the oscillating behaviour observed in panels (d) and (e), 
 %the foregoing steady convection observation is then reached again in panel (f).
 %\begin{figure}
 %	\begin{center}
@@ -423,7 +422,7 @@ The interface is actually shaped by the new flow pattern.
 
 \subsection{Scale analysis} \label{sec-RB-scal-analysis}
 Let us now proceed on a scale analysis for a comprehensive description of the heat transfer processes during the melting.
-The dynamic of the melting for BM case is usually classified into five regimes in the literature: a conductive regime, a linear regime, an oscillating regime, a turbulent regime, and finally an ultimate regime.
+The dynamic of the BM case is usually classified into five regimes in the literature: a conductive regime, a linear regime, an oscillating regime, a turbulent regime, and finally an ultimate regime.
 The simulations performed in the present work cover the first three regimes.
 During the conductive regime, the heat transfer is fully dominated by the conduction. 
 The time evolution of the liquid fraction and the Nusselt number could be approximated by the same scaling obtained in Eq. \ref{eq-Nu-Lf-Corr-Lat}.
@@ -437,7 +436,7 @@ Beyond this regime, due to the important non-linearities of the dynamics, we rel
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{\figpath/Fig_cap_melting_basal/MELT_basal_rolls}
-\caption{Natural convection flow for melting heated from below.}
+\caption{Natural convection flow emerging from melting heated from below.}
 \label{fig:roll-basal-heating}
 \end{figure}
 
@@ -537,7 +536,7 @@ However, our numerical results match better with the Grossmann-Lohse theory \cit
 Furthermore, during the oscillating regime the exponent increases with the Rayleigh number and tends to the empirical exponent of $1/3$.
 
 \noindent Fig. \ref{fig:NU-LF-evol}a plots the temporal evolution of the heat flux, represented by the Nusselt number, and the strength of buoyancy, represented by the Rayleigh number, when the melting evolves.
-The onset of the convection arises around $\Ray_e = 5 \times 10^3$, when a sudden jump in $\Nuss_e$ is observed.
+The onset of the convection arises around $\Ray_e = 2 \times 10^3$, when a sudden jump in $\Nuss_e$ is observed.
 \cite{vasil2011dynamic} have investigated a weakly non-linear stability analysis and have highlighted a superexponentional amplitude growth when the Rayleigh number becomes close to the traditional critical value in the limit of vanishing Stefan number.
 This superexponential growth is moreover followed by a rapid pattern readjustment.
 The trend of $\Nuss_e$ at the onset of convection is in total accordance with this prediction of \cite{vasil2011dynamic}.
@@ -605,7 +604,7 @@ It is obviously expected since the contribution of the convective heat transfer 
 Differences occur from the emergence of the natural convection flow.
 The evolution of $\Nuss$ is relatively smooth for LM case, while the BM case exhibits a sudden increase due to the hydrodynamical instabilities. 
 %The gap between both curves is then followed by a reconnection at $t=40$.
-%Eq. \ref{eq-Nu-scal-basal} describes  as the fluid depth $\bar \delta_H$ increases, the behavior of the heat transfer occurring during BM case should tend to the LM case value, during the linear regime.
+%Eq. \ref{eq-Nu-scal-basal} describes  as the fluid depth $\bar \delta_H$ increases, the behaviour of the heat transfer occurring during BM case should tend to the LM case value, during the linear regime.
 Significant gap between both curves arises during the oscillating regime: $\Nuss$ displays a highly oscillating value for the BM case when the liquid layer expands upward, while the LM case reach an asymptotic value.
 It is worth noting that higher the Rayleigh number is, the higher is the Nusselt number.
 
