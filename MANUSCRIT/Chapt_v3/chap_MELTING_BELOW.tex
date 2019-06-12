@@ -536,14 +536,14 @@ However, our numerical results match better with the Grossmann-Lohse theory \cit
 Furthermore, during the oscillating regime the exponent increases with the Rayleigh number and tends to the empirical exponent of $1/3$.
 
 \noindent Fig. \ref{fig:NU-LF-evol}a plots the temporal evolution of the heat flux, represented by the Nusselt number, and the strength of buoyancy, represented by the Rayleigh number, when the melting evolves.
-The onset of the convection arises around $\Ray_e = 2 \times 10^3$, when a sudden jump in $\Nuss_e$ is observed.
+The onset of the convection arises around $\Ray_e = 2 \times 10^3$, when a sudden jump in the evolution of $\Nuss_e$ is observed.
 \cite{vasil2011dynamic} have investigated a weakly non-linear stability analysis and have highlighted a superexponentional amplitude growth when the Rayleigh number becomes close to the traditional critical value in the limit of vanishing Stefan number.
 This superexponential growth is moreover followed by a rapid pattern readjustment.
 The trend of $\Nuss_e$ at the onset of convection is in total accordance with this prediction of \cite{vasil2011dynamic}.
 The results of \citep{esfahani2018basal,madruga2018dynamic,favier2019rayleigh} exhibit the same trend despite the different boundary conditions (periodic lateral boundary conditions, adiabatic boundary conditions at the top of the cavity, and low value of $\Prd$ for \cite{esfahani2018basal} and \cite{favier2019rayleigh}).
 The rapid growth of $\Nuss_e$ is followed by a power law with averaged exponent $\Nuss \sim \Ray^{0.28}$ for  $10^3 \leq \Ray \leq  10^5$.
-Finally, the transition from steady pattern of the convective rolls to oscillating pattern followed by cell merging, as it is clearly shown in Fig. \ref{fig:T-evol-Ra-6.54e6}(d-f), 
-is also illustrated by a decrease of $\Nuss$ at $\Ray \sim 10^5$ followed by high oscillation in the temporal evolution of the heat transfer.
+Finally, the transition from steady pattern of the convective rolls, to oscillating pattern, followed by cell merging, as it is clearly shown in Fig. \ref{fig:T-evol-Ra-6.54e6}(d-f), 
+is also illustrated by a decrease of $\Nuss$ at $\Ray \sim 10^5$, followed by high oscillation in the temporal evolution of the heat transfer.
 The power-law relation $\Nuss-\Ray$ is bounded in this stage by the average exponent of $1/3$.
 
 \begin{table}[!ht]
@@ -588,7 +588,7 @@ Blue lines denote the LM case and red lines the BM case.
 Different values of the $\Ray$ number, ranging from $\Ray = 3.27 \cdot 10^5$ to $\Ray = 6.54 \cdot 10^6$ are investigated.
 
 The temporal evolution of $L_f$ (left panels) displays similar trend of both curves up to $L_f = 0.6$ for all cases. 
-For $\Ray = 3.27 \cdot 10^5$ (panel a), LM and BM cases evolves at the same rate from $t=0$ to $t=100$, corresponding to $60 \%$ of melted PCM.
+For instance, for $\Ray = 3.27 \cdot 10^5$ (panel a), LM and BM cases evolves at the same rate from $t=0$ to $t=100$, corresponding to $60 \%$ of melted PCM.
 Then, for greater Rayleigh numbers, the gap keep increasing slightly.
 This result agrees with the scaling analysis that predicts the same trend of both systems as long as the number of convective cells is close to one.
 Since the number of roll is increasing with the Rayleigh number, an enhancement of the melting rate is thus consistent.
@@ -608,7 +608,12 @@ The evolution of $\Nuss$ is relatively smooth for LM case, while the BM case exh
 Significant gap between both curves arises during the oscillating regime: $\Nuss$ displays a highly oscillating value for the BM case when the liquid layer expands upward, while the LM case reach an asymptotic value.
 It is worth noting that higher the Rayleigh number is, the higher is the Nusselt number.
 
-The evolution of the accumulated heat input is consistent with the foregoing remarks.
+The evolution of the accumulated heat input $Q_0$ is consistent with the foregoing remarks.
+$Q_0$ is defined as follows:
+\begin{equation}
+    Q_0 = \int_0^{t_{\varphi}} N\!u \, d t_{\varphi},
+    \label{eq-Q0}
+\end{equation}
 The decrease of the heat transfer monitored by the cell merging process in the BM case leads to a lower accumulated heat input.
 %At this stage, the decrease of the heat transfer is correlated by the decrease of the number rolls by the cell merging processes.
 It occurs when the heat transfer is no longer bulk transfer for the BM case.
