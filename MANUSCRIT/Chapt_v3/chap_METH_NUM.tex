@@ -644,7 +644,7 @@ Local matrices are defined as:
 We assess the strong scalability of the ORAS preconditioner on the 3D differentially heated cube cavity.
 We vary the number of subdomains while the global system size is fixed.
 With a $\PP_2$ finite element for the temperature, we solve $7.2$ million of unknowns (d.o.f).
-The subdomain is decomposed into subdomains with \texttt{Metis}, ranging from $48$ to $400$ subdomains.
+The domain is decomposed into subdomains with \texttt{Metis}, ranging from $48$ to $400$ subdomains.
 Fig. \ref{fig-scalability} illustrates the evolution of the total wall clock time for different subdomains, in which a good speed up is observed.
 From $48$ to $320$ we observe a linear speed up. 
 The total runtime passes from $2$ hours for $48$ subdomains to $15$ minutes for $320$ subdomains.
