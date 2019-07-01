@@ -104,19 +104,18 @@ We set for all subsequent simulations $\CKC= 10^6$ and $R_{ck} = \varepsilon$.
 The use of mesh adaptation proved mandatory in the simulation of PCM melting to obtain accurate results within reasonable computational time.
 For the melting case, we used five metrics intersection to adapt the mesh, based on $S^{n+1}, S^{n}, T^{n+1}, T^{n},$ and $\vec{u}^{n+1}$. To reduce the impact of the interpolation on the global accuracy for time-depending problems, we consider the metrics computed from actual (at $t_{n+1}$) and  previous (at $t_{n}$) values, for the same variable used for adaptivity (see also \cite{Belhamadia2004_S}).
 
-The mesh adaptation strategy requires to set  the interpolation error level \texttt{errh}, the minimum edge size \texttt{hmin}, and the \texttt{adaptratio} parameter, which defines the ratio for a prescribed smoothing of the metric.
-We fixe the maximum and the minimum triangle size to avoid generating too large number of nodes, and we impose also the anisotropy of the mesh to have value close to $1$.
-The minimum size of triangles and the interpolation error level are set in order to capture both boundary layers region and phase-change interface.
+The mesh adaptation strategy requires to set  the interpolation error level {\em errh}, the minimum and the maximum edge sizes {\em hmin} and {\em hmax}, and the {\em adaptratio} parameter, which defines the ratio for a prescribed smoothing of the metric.
+The minimum size of triangles and the interpolation error level are set in order to capture both boundary layers region and phase-change interfaces.
 The error level is adapted for each variable on which the metric is computed.
 A default value {\em errh = 0.02} is defined for $T$ and $\vec{u}$, and {\em errh = 0.2} for $S$.
-
-The scale for the thermal boundary layers in natural convection flow along a vertical wall is given by Eqs. \ref{eq-scale-nbd-high-Pr} and \ref{eq-corr-Low-Pr}.
-For high-Prandtl simulations, the thickness of the thermal boundary layer is thinner than the viscous boundary layers. 
-In our simulations, Rayleigh numbers in the range of $10^6$ to $10^8$ corresponding to Prandtl number of order of $50$, lead to a dimensionless thickness of the thermal boundary layer of order of $\delta_\theta \sim 0.01$.
-Conversely, for low-Prandtl simulations the viscous boundary layer is thinner than the thermal boundary layer.
-For the same range of Rayleigh numbers and Prandtl number of order of $0.1$, we have a dimensionless thickness of the viscous boundary layer of $\delta_\nu \sim 0.015$. \\
-The minimum edge-length should be therefore lower than $0.01$.
-Moreover, a minimum of 8 triangles should be included in the mushy zone to ensure an accurate location of the melting interface and a correct resolution of gradients.
+Furthermore, {\em hmin} should be set in order to capture the smaller length scale, mainly the boundary layer structures close to the wall, and to solve accurately the large gradient at the solid-liquid interfaces.
+The scale for boundary layers in natural convection flow along a vertical wall is given by Eqs. \ref{eq-scale-nbd-high-Pr} and \ref{eq-corr-Low-Pr}.
+For high-Prandtl simulations, the thickness of the thermal boundary layer is thinner than the viscous boundary layers, and conversely for low-Prandtl fluid the viscous boundary layer is thinner than the thermal boundary layer.
+In our simulations, Rayleigh numbers in the range of $10^6$ to $10^8$ and Prandtl number of order of $50$, lead to a dimensionless thickness of the thermal boundary layer of order of $\delta_\theta \sim 10^{-3}$.
+%Conversely, for low-Prandtl simulations the viscous boundary layer is thinner than the thermal boundary layer.
+For the same range of Rayleigh numbers and Prandtl number of order of $0.1$, we have a dimensionless thickness of the viscous boundary layer of $\delta_\nu \sim 10^{-2}$. 
+The minimum edge-length is therefore set to $hmin = 10^{-3}$.
+Moreover, we fixe the maximum triangle size to avoid generating too large number of nodes. %, and we impose also the anisotropy of the mesh to have value close to $1$.
 The optimal parameters for the mesh adaptivity are given in Tab. \ref{tab-param-mesh}.
 \begin{table}
    \begin{center}
@@ -129,6 +128,7 @@ The optimal parameters for the mesh adaptivity are given in Tab. \ref{tab-param-
    \caption{Parameters for the mesh adaptivity.}
    \label{tab-param-mesh}
 \end{table}
+%Moreover, a minimum of 8 triangles should be included in the mushy zone to ensure an accurate location of the melting interface and a correct resolution of gradients.
 
 %minimum edge-length is set to $h_{min} = 10^{-3}$ and the maximum edge-lenght to $h_{max} = 0.1$.
 %Two values  \texttt{errh} $= 10^{-1}$ and \texttt{errh} $= 10^{-2}$, are computed and the corresponding meshes at $t=78.8$ are displayed in Fig. (FIG MAILLAGE).
@@ -141,20 +141,30 @@ The optimal parameters for the mesh adaptivity are given in Tab. \ref{tab-param-
 	\label{fig:pcm-mesh}
 \end{figure}
 
-Mesh adaptivity could be performed at each time step and offers a refined discretization of the regularization region where sharp gradients have to be accurately captured.  
+%\begin{figure}
+%	\begin{center}
+%		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting/MESH_analysis_PCM}
+%		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting/NU-LF_MESH_analysis_PCM}
+%	\end{center}
+%	\caption{Adapted mesh during PCM melting. (a) $2,870$ triangles: mesh is refined around the melting front $\theta=0$ and in the fluid where velocity gradients exists. (b) zoom showing the decrease of the mesh size around the temperature isoline $\theta = 0$.}
+%	\label{fig:pcm-mesh}
+%\end{figure}
+
+Mesh adaptivity is performed at each time step and offers a refined discretization of the regularization region where sharp gradients have to be accurately captured.  
+%To ensure that we obtain a grid-converged solution, we perform different mesh resolutions  for the case presented in Fig. \ref{fig:pcm-CK} and test the influence of the number of triangles on the melting front, the Nusselt number, and the liquid fraction.
 Fig. \ref{fig:pcm-mesh} shows the adapted mesh during the melting of gallium PCM in a square cavity.
 The mesh is remarkably refined around the melting front (Fig \ref{fig:pcm-mesh}b), localized by the temperature $\theta = 0$, and in the fluid region around the convection cells, while coarser mesh is applied in the solid.
 The typical number of triangles of the generated adaptive mesh, during the simulation is $4,000$ triangles. 
 Non-adapted grids offering the same spatial resolution everywhere inside the computational domain would have resulted in $N_t=9.94 \cdot 10^{10}$ triangles. 
 Consequently, mesh adaptivity greatly helps in reducing the computational time. 
 
-\noindent The mesh adaptivity capability to capture several interfaces is the striking feature of our method, mainly its capability to track efficiently the two solidification front during PCM solidification or the density inversion interface during the water freezing that will be discussed in Sec. \ref{sec-water-freeze}.
+
+\noindent The mesh adaptivity capability to capture several interfaces is the striking feature of our method, mainly its capability to track efficiently the two solidification front during PCM solidification or the density inversion interface during the water freezing will be discussed in Sec. \ref{sec-water-freeze}.
 
 \subsection{Initialization}
-For the melting process, the PCM is initially solid and the temperature should be set to a cold temperature $\theta_c$ under the temperature of fusion $\theta_f$.
+For the melting process, the PCM is initially solid and the temperature is set to a cold temperature $\theta_c$ under the temperature of fusion $\theta_f$.
 However, increasing abruptly the boundary temperature to a hot temperature $\theta_h$, over the temperature of fusion, in order to initiate the melting process is numerically complicate because of the strong temperature gradient between the wall and the PCM.
-
-A first possibility is setting a very thin fluid layer of thickness $\delta x = 0.01$ with isothermal temperature in the vicinity of the hot wall (see \cite{dan-2014-JCP,Belhamadia2004_S}.
+A first usual approach is setting a very thin fluid layer of thickness $\delta x \sim 0.01$ with isothermal temperature in the vicinity of the hot wall (see \cite{dan-2014-JCP,Belhamadia2004_S}.
 A second approach consist of setting an establishment regime, which will be applied in the current work.
 The temperature is increased smoothly over a small time steps combined with Rayleigh continuation steps.
 This approach has physical significance and is more robust when higher Rayleigh number simulations are performed.
@@ -192,14 +202,27 @@ Three cases are investigated: \\
    \label{tab-param-pcm}
 \end{table}
 
-%For all cases, at $t=0$ the PCM is fully solid at temperature under the temperature of fusion $\theta_h$.
-%Then the left wall is heated smoothly up to dimensionless temperature $\theta_h = 1$, initiating the melting. 
-%The right wall is held at constant dimensionless temperature $\theta_c = -0.01$.
-%The top and the bottom walls are adiabatic and a no-slip velocity boundary condition is used.
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting/MESH_analysis_PCM}
+		\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_melting/NU-LF_MESH_analysis_PCM}
+	\end{center}
+	\caption{Adapted mesh during PCM melting. (a) $2,870$ triangles: mesh is refined around the melting front $\theta=0$ and in the fluid where velocity gradients exists. (b) zoom showing the decrease of the mesh size around the temperature isoline $\theta = 0$.}
+	\label{fig:mesh-convergence-OKADA}
+\end{figure}
+
+To ensure that we obtain a grid-converged solution, we first perform different mesh resolutions and test the influence of the number of triangles on the melting front, the Nusselt number, and the liquid fraction in Fig. \ref{fig:mesh-convergence-OKADA}.
+Panels (a) to (c) 
+
+We present in Fig. \ref{fig:pcm-valid} the computed solution for \textit{Benchmark $\#1$} case.
+The experimental investigation of \cite{Okada1984} consists of a differentially heated square cavity of dimensions $1.5$ cm $\times \, 1.5$ cm.
+The left and the right walls are isothermal and the top and the bottom walls are adiabatic.
+No-slip boundary conditions are prescribed on the velocity over the whole $\partial \Omega$.
+The physical parameters used in our simulations are given in Tab. \ref{tab-param-pcm}.
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{\figpath/Fig_cap_melting/MELT_Okada_valid}
+		\includegraphics[width=0.9\textwidth]{\figpath/Fig_cap_melting/MELT_Okada_valid_2}
 	\end{center}
 	\caption{\textit{Benchmark $\#1$}. 
 	(a) Temperature isoline at $t=78.8$.
@@ -211,12 +234,6 @@ Three cases are investigated: \\
 	}
 	\label{fig:pcm-valid}
 \end{figure}
-
-We present in Fig. \ref{fig:pcm-valid} the computed solution for \textit{Benchmark $\#1$} case.
-The experimental investigation of \cite{Okada1984} consists of a differentially heated square cavity of dimensions $1.5$ cm $\times \, 1.5$ cm.
-The left and the right walls are isothermal and the top and the bottom walls are adiabatic.
-No-slip boundary conditions are prescribed on the velocity over the whole $\partial \Omega$.
-The physical parameters used in our simulations are given in Tab. \ref{tab-param-pcm}.
 
 \noindent Panel (a) shows the temperature distribution of the PCM at dimensionless time $t=78.7$ in the unit square domain $\Omega = (0,1)^2$. 
 The enclosure is heated from the left and the melting expands therefore from the left to the right melting boundary (the blue color denotes the solid region).

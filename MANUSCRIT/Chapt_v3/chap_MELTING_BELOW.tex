@@ -14,7 +14,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We have performed extensive validations of our numerical method in Chapters \ref{chap-NATCONV} and \ref{chap-MELTING}.
-Very good agreements were noticed for all validations against well-known benchmark cases and the robustness of the algorithm was proven by simulating challenging configurations.
+Very good agreements were noticed for all validation tests against well-known benchmark cases and the robustness of the algorithm was proven by simulating challenging configurations.
 We now use the code as an investigation tool to analyse the phase-change process during the melting stage.
 We consider a square cavity of height $H$ filled with n-octadecane PCM and pay a closer attention to the temporal evolution of different physical parameter of the system. 
 \begin{figure}
@@ -43,7 +43,7 @@ such as lava lakes, thermal convection in magma chambers, or ice-melt lakes.
 %Experimental and numerical investigations of the dynamic of the melting could be find in the literature for BM case.
 In contrast with LM case, notwithstanding linear and weakly non-linear instability analysis based on a vanishingly small Stefan number assumption \citep{vasil2011dynamic}, exact expression of $\Nuss$ and $L_f$ from purely theoretical work are not available during the convective regime due to the important non-linearities of the dynamics.
 Some comparisons with theories \citep{malkus1954heat,grossmann2000scaling} made in the frame of Rayleigh-Bénard convection flow have been however carried out \citep{esfahani2018basal,madruga2018dynamic,favier2019rayleigh}.
-The novelty in our contribution is the development of a new scale analysis during the so-called 'linear regime', which occurs between the onset of convective and oscillating flows.
+In this contribution, we develop a scale analysis during the so-called 'linear regime', which occurs between the onset of convective and oscillating flows.
 
 The current contribution is scoped to offer a comprehensive comparison between LM and BM configurations.
 We analyse first the time evolution of the LM process through a scale analysis in Sec. \ref{sec-melting-lateral}.
@@ -139,50 +139,58 @@ At the solid-liquid interface, the energy balance condition which takes into acc
 	\begin{center}
 		\includegraphics[width=.5\textwidth]{\figpath/Fig_cap_melting_basal/MELT_Regime_evol}
 	\end{center}
-	\caption{Illustration of the mixed regime. Solid red line is the solid-liquid interface, $\Gamma_i$ represents the location of the interface and $y^*$ denotes the height of fluid impacted by the emerging convective flow.}\label{fig:melt-scheme-regime}
+	\caption{Illustration of the mixed regime by \cite{jany1988scaling}. Solid red line is the solid-liquid interface, $\Gamma_i$ represents the location of the interface and $y^*$ denotes the height of fluid impacted by the emerging convective flow.}\label{fig:melt-scheme-regime}
 \end{figure}
 
-While the melting continues to expand to the right side of the domain, a natural convection flow emerges from the top of the cavity (see Fig. \ref{fig:melt-scheme-regime}).
-Convection and conduction coexist at this stage and
-the total heat transfer rate is thus the sum of the conductive and the convective heat transfer.
+While the melting continues to expand to the right side of the domain, a natural convection flow emerges from the top of the cavity since we have a clockwise recirculation of the flow in the liquid phase (see Fig. \ref{fig:melt-scheme-regime}).
+%Convection and conduction coexist at this stage and
+%the total heat transfer rate is thus the sum of the conductive and the convective heat transfer.
 Turning back to the energy Eq. \ref{eq-energ} in the liquid phase  (i.e. $C = K = 1$), three distinct effects could be identified:
 \begin{equation}
 	\underbrace{\frac{\delta \theta}{t}}_{Inertia} \quad \underbrace{v \frac{\delta \theta}{H}}_{Convection} \quad \underbrace{\frac{\delta \theta}{\Gamma_i^2}}_{Conduction},
 \end{equation}
 
 \noindent As $t$ increases, the inertia decreases in importance while the convection effect increases since it is proportional to $v$, and the conduction becomes more and more negligible with the increasing value of $\Gamma_i$ with time. 
-To assess for the convective heat transfer contribution during this mixed regime,
-one can define a Rayleigh number based on $y^*$ as $\Ray_{y^*} = \Ray \times y^{*3}$,
-with $y^{*}$ the height of the melted zone altered by the convection flow as shown in Fig. \ref{fig:melt-scheme-regime} (see also  \cite{jany1988scaling}).
-We note that at the bottom part of the cavity, the interface remains vertical by the effect of the conductive heat transfer.
-Since $\Prd \gg 1$, the scaling presented in Eq. \ref{eq-scale-nbd-high-Pr} allows to evaluate the thickness of the thermal boundary layer in the top region as
- \begin{equation} \label{eq-conv-cond-reg}
- \delta_{\theta}^* \sim y^* \times \Ray_{y^*} ^{-1/4}.
-\end{equation}
-
-\noindent A this stage, the thickness $\delta_{\theta}^*$ of the thermal boundary layer is proportional to the thickness of the liquid zone $\Gamma_i$ ($\sim \sqrt{2 \tau}$) resulting that
- \begin{equation}
-	 y^* \sim (2 \tau)^2 \times \Ray. %\quad  \Rightarrow \quad \frac{y^*}{\Gamma_i} \sim (2 \tau)^{3/2} \times \Ray.
- \end{equation}
- 
- \noindent The Nusselt number related to this region is hence
-  \begin{equation}
-   \Nuss= \int_{1-y^*}^{1} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy = \frac{y^*}{\Gamma_i} \sim (2 \tau)^{3/2} \times \Ray.
-\end{equation}
-
-\noindent The total Nusselt number during the mixed conduction-convection regime can therefore be approximated by
+\cite{jany1988scaling} described the convective heat transfer contributing during this regime by defining a Rayleigh number based on $y^*$ as $\Ray_{y^*} = \Ray \times y^{*3}$,
+%To assess for the convective heat transfer contribution during this mixed regime,
+%one can define a Rayleigh number based on $y^*$ as $\Ray_{y^*} = \Ray \times y^{*3}$,
+with $y^{*}$ the height of the melted zone altered by the convection flow as shown in Fig. \ref{fig:melt-scheme-regime}. %(see also  \cite{jany1988scaling}).
+At the bottom part of the cavity, the interface remains vertical by the effect of the conductive heat transfer.
+%Since $\Prd \gg 1$, the scaling presented in Eq. \ref{eq-scale-nbd-high-Pr} allows to evaluate the thickness of the thermal boundary layer in the top region as
+% \begin{equation} \label{eq-conv-cond-reg}
+% \delta_{\theta}^* \sim y^* \times \Ray_{y^*} ^{-1/4}.
+%\end{equation}
+%
+%\noindent A this stage, the thickness $\delta_{\theta}^*$ of the thermal boundary layer is proportional to the thickness of the liquid zone $\Gamma_i$ ($\sim \sqrt{2 \tau}$) resulting that
+% \begin{equation}
+%	 y^* \sim (2 \tau)^2 \times \Ray. %\quad  \Rightarrow \quad \frac{y^*}{\Gamma_i} \sim (2 \tau)^{3/2} \times \Ray.
+% \end{equation}
+% 
+% \noindent The Nusselt number related to this region is hence
+%  \begin{equation}
+%   \Nuss= \int_{1-y^*}^{1} \left. \frac{\partial \theta}{\partial x} \right|_{x=0} dy = \frac{y^*}{\Gamma_i} \sim (2 \tau)^{3/2} \times \Ray.
+%\end{equation}
+%
+%\noindent The total Nusselt number during the mixed conduction-convection regime can therefore be approximated by
+The total Nusselt number during the mixed conduction-convection regime could be therefore approximated by \cite{jany1988scaling} approximation:
 \begin{equation} \label{eq-Nu-conv-cond}
    \Nuss \sim (2 \tau)^{-1/2} + (2 \tau)^{3/2} \times \Ray.
 \end{equation}
 
 \noindent Eq. \ref{eq-Nu-conv-cond} indicates that the contribution of the conduction $\left(\sim 1/\sqrt{2 \tau}\right)$ decreases with the time while the convection one is increasing.
 
-Finally, when the natural convection flow is fully developed and dominates the heat transfer along the vertical heated wall, the dimensionless thickness of thermal boundary layer is $\delta_{\theta} \sim \Ray^{1/4}$ and therefore the Nusselt number scale is
+Finally, when the natural convection flow is fully developed and dominates the heat transfer along the vertical heated wall, with respect to the correlation of \cite{bejan2013convection}, the dimensionless thickness of thermal boundary layer is $\delta_{\theta} \sim \Ray^{1/4}$ and therefore the Nusselt number scale is
 \begin{equation} \label{eq-Nu-Ra-LM}
    \Nuss \sim \Ray^{1/4}
 \end{equation}
 
-\cite{Okada1984} have suggested from his experimental data the following correlation for $\Nuss$ taking into account the foregoing presented regimes:
+\noindent \cite{jany1988scaling} have proposed more general single correlation, combining the regimes described previously:
+\begin{equation} \label{eq-Nu-scale}
+\Nuss(\tau) =  \frac{1}{\sqrt{2 \tau}} + \left[c_1 \Ray^{1/4} - \frac{1}{\sqrt{2 \tau}} \right]  \left[ 1 + \left(c_2 \Ray^{3/4}  \tau^{3/2}\right)^n \right]^{1/n}.
+\end{equation}
+The values of the constants were fitted from numerical data: $c_1 = 0.27$, $c_2 = 0.0275$, and $n=-2$. 
+
+\cite{Okada1984} have also suggested from his experimental data the following correlation for $\Nuss$: %taking into account the foregoing presented regimes:
 \begin{equation} \label{eq-corr-Okada}
 	\Nuss = \left \{
 	      %\begin{array}{ll}
@@ -195,12 +203,6 @@ Finally, when the natural convection flow is fully developed and dominates the h
 	\right.
 \end{equation}
 with the constant $c_1 = 0.234$ and the power $0.266$ fitted from the experimental data, and $\tau_t$ the transition time from conduction to convection as discussed previously.
-
-\noindent \cite{jany1988scaling} have proposed more general single correlation, also combining the regimes described previously:
-\begin{equation} \label{eq-Nu-scale}
-\Nuss(\tau) =  \frac{1}{\sqrt{2 \tau}} + \left[c_1 \Ray^{1/4} - \frac{1}{\sqrt{2 \tau}} \right]  \left[ 1 + \left(c_2 \Ray^{3/4}  \tau^{3/2}\right)^n \right]^{1/n}.
-\end{equation}
-The values of the constants were fitted from numerical data: $c_1 = 0.27$, $c_2 = 0.0275$, and $n=-2$. 
 
 \noindent Both of Eqs. \ref{eq-corr-Okada} and \ref{eq-Nu-scale} are compared with our numerical results in Fig. \ref{fig:Nusselt} showing the time evolution of the Nusselt number at the left wall.
 Our results perfectly fit with the theoretical prediction of \cite{jany1988scaling} and are also in good agreement with the experimental correlation of \cite{Okada1984}. 
