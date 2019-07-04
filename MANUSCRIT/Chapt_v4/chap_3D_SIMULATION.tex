@@ -189,7 +189,7 @@ The computational time is considerably reduced using DDM and 3D simulations beco
 %
 %\clearpage
 %\newpage
-\section{Numerical simulation of the natural convection of water in a cube cavity.} \label{sec-3D-water-convec}
+\section{Numerical simulation of the natural convection of water in a cube cavity} \label{sec-3D-water-convec}
 
 We perform the natural convection of water inside cubic cavity using adaptive mesh in this section.
 The dimensionless parameters are the same that used in Chapter \ref{sec: natconv-water} ($\Ray=2.518084\cdot 10^{6}$ and $\Prd=6.99$).
@@ -233,4 +233,22 @@ Panels (e) and (f) exhibit discrepancies greater than $10 \%$ between both solut
 \label{fig-3D_Water_convec} 
 \end{figure}
 
-\section{3D numerical simulations of melting with convection}
+\section{Numerical simulation of water freezing in a cubic cavity}
+A last validation case for the three-dimensional configuration concerns the challenging case of ice formation inside differentially heated cubic cavity.
+Starting initially from the steady solution at Fig. \ref{fig-3D_Water_convec}, we drop the cold temperature at the right wall from $\theta_c = 0$ to $\theta_c = -1$ under the temperature of fusion (which corresponds to physical temperatures $T = 0 \, ^o C$ and $T = -10 \, ^o C$).
+Solid crust arises thus from the cold wall and expands from towards the left wall.
+
+
+\begin{figure} [!ht]
+\begin{center}
+\begin{minipage}{\linewidth}
+ {\includegraphics[width=0.9\textwidth]{\figpath/Fig_cap_melting/Water_Freezing_3D}}
+\end{minipage}
+\end{center}
+\caption{ "dfqdf" }
+\label{fig-3D_Water_Freeze} 
+\end{figure}
+
+
+
+
