@@ -3,8 +3,8 @@
 %              \sectionmark{head version}}
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\titcourt{Numerical simulation of natural convection flow in 2D square cavity}
-\def\titlong{Numerical simulation of natural convection flow in 2D square cavity}
+\def\titcourt{Numerical simulation of natural convection flow in a 2D square cavity}
+\def\titlong{Numerical simulation of natural convection flow in a 2D square cavity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -13,18 +13,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We first focus on the capability of our code to deal with natural convection flow in square enclosures.
-Internal convection flow is a relevant case to validate rigorously the Navier-Stokes-Boussinesq solver. %since publications related to the subject is very abundant in the literature.
-A large number of benchmark solutions with reference to natural convection problem induced by temperature difference could be found in the literature since 
-it is  central in a long list of engineering (circulations in building applications, double-wall insulations, solar collectors, etc.) and geophysical systems.
+We first focus on the capability of our code to deal with natural convection flows in square enclosures.
+Convection flow is a relevant case to validate rigorously the Navier-Stokes-Boussinesq solver. %since publications related to the subject is very abundant in the literature.
+A large number of benchmarks on natural convection problems induced by temperature difference could be found in the literature, 
+with connection to engineering (circulations in building applications, double-wall insulations, solar collectors, etc.) and geophysical systems.
 
-\noindent In this chapter, we are interested by natural convection of fluid in a square cavity differentially heated from the vertical walls.
-The fluid temperature rises and its density decreases along the heated wall, convecting the fluid up to the point where it reaches the cold wall, during which the reverse process occurs. 
-This two simultaneous opposing effects create a recirculation cell within a stationary zone in the center.
+\noindent In this chapter, we are interested on natural convection of fluid in a square cavity differentially heated from the vertical walls.
+The fluid temperature rises and its density decreases along the heated wall, convecting the fluid up to the point where it reaches the cold wall, along which the reverse process occurs. 
+These two simultaneous opposing effects create a recirculation cell within a stationary zone in the center.
 
-We solve the system of Eqs. \ref{eq-qmvt} - \ref{eq-energ}, with $A(\theta) = 0$ in the momentum equation and $S(\theta) = 0$ in the energy equation.
-Linear and non-linear expressions of the buoyancy force $f_B(T)$ are investigated, by simulating the natural convection of air and water.
-Natural convection of water exhibits actually a non-linear variation of the density with a maximum value around $T=4^o C$, while a linear variation is generally assumed for the natural convection of air in the Boussinesq approximation.
+We solve the system of Eqs. \eqref{eq-qmvt} - \eqref{eq-energ}, with $A(\theta) = 0$ in the momentum equation and $S(\theta) = 0$ in the energy equation.
+Linear and non-linear expressions of the buoyancy force $f_B(T)$ are investigated, by simulating the natural convection of air and water, respectively.
+Natural convection of water exhibits a non-linear variation of the density with a maximum value around $T=4^o C$. 
+A linear variation with temperature is generally assumed for the natural convection of air in the Boussinesq approximation.
 We consider a square enclosure of height $H$. 
 Physical properties of air and water used in our simulations are listed in Tab. \ref{tab-param-phys-air}.
 \begin{table}[!ht]
@@ -42,22 +43,22 @@ Physical properties of air and water used in our simulations are listed in Tab. 
    \label{tab-param-phys-air}
 \end{table}
 
-\noindent Isothermal boundary conditions are applied to the vertical walls and adiabatic boundary conditions to the upper and lower walls.
+\noindent Isothermal boundary conditions are applied at the vertical walls and adiabatic boundary conditions to the upper and lower walls.
 Quantitative and qualitative validations are carried out as following.
 %\begin{enumerate}[label=(\roman*)]
-\textbf{(i)} The velocity profile along symmetry lines, the maximum value of $\vec u$ at mid-domains ($x=0.5$ and $y=0.5$) with locations $x_{max}$ and $y_{max}$ of this maximum and the Nusselt number are compared with the spectral-accurate simulations by \cite{LeQuere91} and  \cite{de1983natural} in Sec. \ref{sub-diff-heated} for natural convection of air within square cavity case.
-\textbf{(ii)} Heated obstacle is included in the center of the domain and transversal velocity profile along the  horizontal symmetry lines is compared with numerical results of \cite{Raluca2013} 
+\textbf{(i)} The velocity profile along symmetry lines, the maximum value of $\vec u$ at mid-domain ($x=0.5$ and $y=0.5$), locations $x_{max}$ and $y_{max}$ of this maximum and the Nusselt number are compared with the spectral-accurate simulations by \cite{LeQuere91} and  \cite{de1983natural} in Sec. \ref{sub-diff-heated} for natural convection of air within square cavity case.
+\textbf{(ii)} A heated obstacle is included in the center of the domain and the transversal velocity profile along the  horizontal symmetry lines is compared with numerical results of \cite{Raluca2013} 
 in Sec. \ref{sub-2D-OBSTACLE}.
-\textbf{(iii)} Temperature profile along the horizontal symmetry line is compared with numerical results of \cite{Kowalewski-2003} in Sec. \ref{sec: natconv-water} for the natural convection of water case.
+\textbf{(iii)} Temperature profile along the horizontal symmetry line is compared with numerical results of \cite{Kowalewski-2003} in Sec. \ref{sec: natconv-water} for the natural convection of water.
 
 %\end{enumerate}
 
 \section{Natural convection of air}\label{sec: natconv-air-2D}
-We start by testing the Newton algorithm in Eq. \ref{eq-newton-C1} with respect to linear expression of $f_B(\theta)$  (see Eq. \ref{eq-RePr}). % by investigating simulations with linear expression of $f_B(\theta)$ as presented in Eq. \ref{eq-RePr}.
-The classical problem of the thermally driven square cavity with adiabatic top and bottom walls is of interest.
+We start by testing the Newton algorithm in Eq. \eqref{eq-newton-C1} with linear expression of $f_B(\theta)$  (see Eq. \eqref{eq-RePr}). % by investigating simulations with linear expression of $f_B(\theta)$ as presented in Eq. \ref{eq-RePr}.
+The classical problem of the thermally driven square cavity with adiabatic top and bottom walls is considered.
 We consider a cavity of height $H = 0.1$ m, initially filled with motionless air and a linear distribution of the temperature. 
 The dimensionless parameters describing the investigated configuration are based on the fluid properties presented in Tab. \ref{tab-param-phys-air}, mainly $\Prd = 0.71$.
-$\Ray$ numbers ranging from $\Ray = 10^4$ to $10^8$ are computed. 
+Rayleigh numbers ranging from $\Ray = 10^4$ to $10^8$ are computed. 
 The characteristic scales of the problem are 
 \begin{equation} \label{eq-scale-air}
 	L_{ref} = H, \quad T_{ref} = \frac{T_h + T_c}{2},
@@ -70,20 +71,20 @@ The characteristic scales of the problem are
    \quad \Longrightarrow \quad \Rey = \sqrt{\frac{\Ray}{\Prd}}.
 \end{equation} 
 
-\noindent The left wall is heated with dimensionless hot temperature $\theta_h = 0.5$ and the right wall is cooled with $\theta_c = -0.5$ (resulting from Eq. \ref{eq-scale-air}). 
+\noindent The left wall is heated with dimensionless hot temperature $\theta_h = 0.5$ and the right wall is cooled with $\theta_c = -0.5$ (resulting from Eq. \eqref{eq-scale-air}). 
 A homogenous Dirichlet boundary condition ($\vec u = 0$) is applied for the velocity.
-It has been shown by \cite{le1998onset} that the solution of the 2-D Boussinesq equation in this configuration becomes unsteady at critical Rayleigh number $\Ray= 1.82 \cdot 10^{8}$ due to instability mode that breaks the usual centrosymmetry of the solution.
-Therefore, steady state can be achieved for the chosen Rayleigh numbers.
+It has been shown by \cite{le1998onset} that the solution of the 2-D Boussinesq equation in this configuration becomes unsteady at critical Rayleigh number $\Ray= 1.82 \cdot 10^{8}$ due to instability mode that breaks the usual central-symmetry of the solution.
+Therefore, a steady state can be achieved for the chosen Rayleigh numbers.
 
-The unsteady  and steady Navier-Stokes-Boussinesq equations, related to algorithms \ref{eq-Newton-algo} and \ref{eq-Newton-steady} are simulated.
+The unsteady  and steady Navier-Stokes-Boussinesq equations, related to algorithms \eqref{eq-Newton-algo} and \eqref{eq-Newton-steady}, are simulated.
 The unsteady case is computed until the steady state with a single convection cell is reached, with a numerical tolerance of $10^{-9}$.
-Besides, the steady case is performed using Rayleigh number continuation:
-a smaller value of the Rayleigh number is set initially, and is then increased smoothly until reaching the correct value.
-At each stage, the computation starts from the solutions obtained from the previous Rayleigh number simulation.
+In parallel, the steady case is performed using Rayleigh number continuation:
+a smaller value of the Rayleigh number is set initially and increased smoothly until reaching the correct value.
+At each stage, the computation starts from the solution obtained from the previous Rayleigh number simulation.
 
-Two cases are carried out: \textbf{ i)} a differentially heated square cavity and \textbf{ ii)} a differentially heated cavity with inner heated obstacle.
+Two cases are carried out: \textbf{ i)} a differentially heated square cavity and \textbf{ ii)} a differentially heated cavity with an inner heated obstacle.
 For each of them, the horizontal and the vertical velocity profiles $u(y)$ and $v(x)$ at mid-domain ($y=0.5$ and $x=0.5$ respectively) are plotted and compared with numerical results by \cite{LeQuere91} and \cite{Raluca2013}. 
-Moreover, for \textit{ i)} the maximum value $u_{max}$ and $v_{max}$ with their location $y$ and $x$, the Nusselt number at the heated (left) wall and  at the mid-domain, and the maximum and the minimum value of the local Nusselt number at $x=0$ with their $y$-location are accurately compared with the benchmark solutions by \cite{de1983natural} and \cite{LeQuere91}.
+Moreover, for \textit{ i)} the maximum value $u_{max}$ and $v_{max}$ with their location $y_{max}$ and $x_{max}$, the Nusselt number at the heated (left) wall and  at the mid-domain, and the maximum and the minimum value of the local Nusselt number at $x=0$ with their $y$-location are compared with the benchmark solutions by \cite{de1983natural} and \cite{LeQuere91}.
 
 \subsection{Differentially heated square cavity} \label{sub-diff-heated}
 
@@ -91,7 +92,7 @@ Moreover, for \textit{ i)} the maximum value $u_{max}$ and $v_{max}$ with their 
 	\begin{center}
 		\includegraphics[width=0.98\textwidth]{\figpath/Fig_cap_natconv/NATCONV_air_valid-WS} 
 	\end{center}
-	\caption{Natural convection of air for $Ra$ ranging from $10^4$ to $10^6$ (from the left to the right) and $\Prd = 0.71$. Temperature fields and streamlines at the steady state. Panels (a) to (c) correspond to the benchmark solution of \cite{Wakashima-2004} (top). Panels (d) to (f) display our numerical results (bottom).}
+	\caption{Natural convection of air for $Ra$ ranging from $10^4$ to $10^6$ (from the left to the right) and $\Prd = 0.71$. Temperature fields and streamlines at the steady state. Panels (a) to (c) correspond to the benchmark solution of \cite{Wakashima-2004}. Panels (d) to (f) display our numerical results.}
 	\label{fig-natconv-field}
 \end{figure}
 
@@ -100,58 +101,36 @@ Moreover, for \textit{ i)} the maximum value $u_{max}$ and $v_{max}$ with their 
 	\begin{center}
 		\includegraphics[width=0.98\textwidth]{\figpath/Fig_cap_natconv/Validation_Uprofile_LQ} 
 	\end{center}
-	\caption{Natural convection of air in a differentially heated cavity for $Ra$ ranging from $10^4$ to $10^6$ and $\Prd = 0.71$. (a) Transversal velocity profile along the  horizontal symmetry lines. (b) Longitudinal velocity profile along the vertical symmetry lines. Numerical results obtained using the present Newton method (symbols) with a mesh resolution of {\em nbseg} $=80$; comparison with the spectral-accurate simulations by \cite{LeQuere91} (solid lines).}
+	\caption{Natural convection of air in a differentially heated cavity for $Ra$ ranging from $10^4$ to $10^6$ and $\Prd = 0.71$. (a) Transversal velocity profile along the  horizontal symmetry line. (b) Longitudinal velocity profile along the vertical symmetry line. Numerical results obtained using the present Newton method (symbols) with a mesh resolution of {\em nbseg} $=80$; comparison with the spectral-accurate simulations by \cite{LeQuere91} (solid lines).}
 	\label{fig-T1-prof}
 \end{figure}
 
 
 
-Fig. \ref{fig-natconv-field} gives a comparison of the current simulation with the numerical results of \cite{Wakashima-2004}, who
-used a fourth-order finite difference method for spatial discretization and third-order backward finite difference scheme for time integration, for $\Ray$ ranging from $10^4$ to $10^6$.
-The temperature distribution and the streamlines at the steady state display good agreements with the Benchmark solution.
-%Our results match qualitatively well with the Benchmark solution.
+Fig. \ref{fig-natconv-field} offers a comparison of the current simulation with the numerical results of \cite{Wakashima-2004}, who
+used a fourth-order finite difference method for the spatial discretization and third-order backward finite difference scheme for the time integration, for $\Ray$ ranging from $10^4$ to $10^6$.
+The temperature distribution and the streamlines at the steady state display a good agreement with the benchmark solution.
 The higher the $\Ray$ number, the stronger is the natural convection flow in the cavity.
 %The natural convection flow in the cavity is enhanced when the $\Ray$ number is increased.
 A single convection cell is observed in the center of the cavity for $\Ray = 10^4$ (Fig. \ref{fig-natconv-field}d) during which the heat transfer is merely bulk heat transfer.
-Figs. \ref{fig-natconv-field}e and \ref{fig-natconv-field}f however exhibit stronger convection with more rolls, when the heat transfer is dominated by boundary layer heat transfer.
+Figures \ref{fig-natconv-field}e and \ref{fig-natconv-field}f however exhibit stronger convection with more rolls, when the heat transfer is dominated by boundary layer heat transfer.
 
-More accurate validation is performed with respect to the spectral-accurate results of \cite{LeQuere91}.
+A more accurate validation is performed with respect to the spectral-accurate results of \cite{LeQuere91}.
 We plot in Fig. \ref{fig-T1-prof} the horizontal (panel a) and the vertical (panel b)  profiles of the velocity and compare the current simulation with data extracted from  \cite{LeQuere91} for each of the three computed $\Ray$ numbers.
-%Fig. \ref{fig-T1-prof} illustrates a comparison of the horizontal (Fig. \ref{fig-T1-prof}a) and the vertical (Fig. \ref{fig-T1-prof}b)  profiles of the velocity with data extracted from  \cite{LeQuere91} for each of the three computed $\Ray$ numbers.
 Results from \cite{LeQuere91} are represented by solid lines and the current simulation by symbols.
 A very good agreement can  be noticed for each case.
-%The influence of the temperature difference $\delta T$ on the boundary layers are well illustrated. %by Fig.  \ref{fig-T1-prof}.
 The thickness of the boundary layer is decreasing with increasing value of the temperature difference $\delta T$.
-%The scale analysis conducted in Sec. \ref{sec-bound-scal-anal} of Chapter \ref{chap-NSB} indicates a decreasing thickness of the boundary layer for an increasing value of $\Ray$ (see Eq. \ref{eq-corr-Low-Pr}). 
 Following the correlation of \cite{bejan2013convection}, a viscous boundary layer with a dimensionless thickness of order of $\delta_\nu \sim 0.02$ should be present close to the vertical walls for $\Ray = 10^6$.
 Accordingly, the mesh resolution should allow to capture these structures.
 We assess the influence of the mesh resolution on the solution in Tab. \ref{tab-mesh-conv-analysis}. 
 We report the L$^2$ and L$^{\infty}$ norms of $\varepsilon_V = |V - V_{LQ}|$ (along $x-$direction)  and $\varepsilon_U = |U - U_{LQ}|$ (along $y-$direction) for different values of {\em nbseg}, from $40$ to $200$. 
 The present simulation is compared with the accurate solutions, $V_{LQ}$ and $U_{LQ}$, of \cite{LeQuere91}.
 Differences decrease when the mesh resolution is increased, validating hence the Newton method.
-We can observe that errors of order of $10^{-5}$ is obtained from $80 \times 80$ grid resolution, with reasonable computational time of $14$ CPU seconds.
+We can observe that errors of order of $10^{-5}$ are obtained for $80 \times 80$ grid resolution, with a reasonable computational time of $14$ seconds.
 All computations in this section are performed with a fixed triangular mesh, generated by the Delaunay algorithm starting with {\em nbseg = 80} points on each side of the square.
 
-Higher $\Ray$ number simulations are performed to test the robustness of our algorithm.
-We depict the temperature isoline at the steady state for $\Ray = 10^7$, $4 \cdot 10^7$, and $10^8$ in Fig. \ref{fig-natconv-T-highRa}.
-One can observe the onset of detached regions along the upper and lower adiabatic walls from $\Ray = 4 \cdot 10^7$, which is in total agreement with observations of \cite{le1985computation}.
-According to \cite{le1985computation}, this phenomenon is in part induced by the Neumann boundary conditions at the horizontal (top and bottom) walls.
-To ensure the steadiness of the solution, we plot in Fig. \ref{fig-natconv-NU-highRa} the time evolution of the Nusselt number $\mathcal{N}\!u_0$ at the heated wall ($x=0$) and $\mathcal{N}\!u_{1/2}$ at the mid-domain ($x=0.5$).
-The Nusselt number in the center region of the cavity is defined as
-\begin{equation}
-	\mathcal{N}\!u_{1/2} =  \left.  \sqrt{\Prd \Ray} \int_0^1 \left( u \theta - \frac{\partial \theta}{\partial x} \right |_{x=0.5} \right) dy.
-\end{equation}
-The Nusselt at the hot wall becomes constant very soon when compared to $\mathcal{N}\!u_{1/2}$ which oscillates during a longer period and tends to the constant value of $\mathcal{N}\!u_{0} = 16.5237$.
 
-%\begin{figure}
-%	\begin{center}
-%		\includegraphics[width=\textwidth]{\figpath/Fig_cap_natconv/Mesh-conv} 
-%	\end{center}
-%	\caption{Natural convection of air. Mesh convergence analysis for $Ra=10^6$ and $\Prd = 0.71$. Comparison with \cite{LeQuere91}.}
-%	\label{fig-mesh-analysis}
-%\end{figure}
-
-\begin{table}
+\begin{table}[!ht]
    \begin{center}
       \begin{tabular}{*{5}{cl}}
          
@@ -164,10 +143,20 @@ The Nusselt at the hot wall becomes constant very soon when compared to $\mathca
         
       \end{tabular}
    \end{center}
-   \caption{Physical parameters of air and water at $T = 300K$ used in our simulations. $\Prd = 0.71$ (for air) and $\Prd = 6.99$ (for water).}
+   \caption{Error associated to the spatial discretization. Comparison with \cite{LeQuere91}.}
    \label{tab-mesh-conv-analysis}
 \end{table}
 
+Higher $\Ray$ number simulations were performed to test the robustness of our algorithm.
+We depict the temperature isolines at the steady state for $\Ray = 10^7$, $4 \cdot 10^7$, and $10^8$ in Fig. \ref{fig-natconv-T-highRa}.
+One can observe the onset of detached regions along the upper and lower adiabatic walls for $\Ray = 4 \cdot 10^7$, which is in agreement with observations of \cite{le1985computation}.
+According to \cite{le1985computation}, this phenomenon is in part induced by the Neumann boundary conditions at the horizontal (top and bottom) walls.
+To assess for the steadiness of the solution, we plot in Fig. \ref{fig-natconv-NU-highRa} the time evolution of the Nusselt number $\mathcal{N}\!u_0$ at the heated wall ($x=0$) and $\mathcal{N}\!u_{1/2}$ at the mid-domain ($x=0.5$).
+The Nusselt number in the center region of the cavity is defined as
+\begin{equation}
+	\mathcal{N}\!u_{1/2} =  \left.  \sqrt{\Prd \Ray} \int_0^1 \left( u \theta - \frac{\partial \theta}{\partial x} \right |_{x=0.5} \right) dy.
+\end{equation}
+The Nusselt at the hot wall becomes constant very soon when compared to $\mathcal{N}\!u_{1/2}$, which oscillates during a longer period and tends to the constant value of $\mathcal{N}\!u_{0} = 16.5237$.
 
 \begin{figure}
 	\begin{center}
@@ -177,20 +166,20 @@ The Nusselt at the hot wall becomes constant very soon when compared to $\mathca
 	\label{fig-natconv-T-highRa}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=0.98\textwidth]{\figpath/Fig_cap_natconv/NU-NATCONV_air_highRA} 
 	\end{center}
-	\caption{Natural convection of air. Time evolution of the Nusselt number at $x=0$ and $x=0.5$ for $\Ray = 1 \cdot 10^7$.}
+	\caption{Natural convection of air. Time evolution of the Nusselt number at $x=0$ and $x=1/2$ for $\Ray = 1 \cdot 10^7$.}
 	\label{fig-natconv-NU-highRa}
 \end{figure}
 
 Tab. \ref{tab-Nu-natconv} offers a more quantitative assessment of the accuracy of the present Newton method. 
-The values of ($u_{max}$, $y_{max}$), ($v_{max}$,$x_{max}$) are compared to reference values from \cite{de1983natural}  and \cite{LeQuere91} for $\Ray$ ranging from $10^4$ to $10^8$.
-The Newton method gives results very identical to references values.
+The values of ($u_{max}$, $y_{max}$), ($v_{max}$, $x_{max}$) are compared to reference values from \cite{de1983natural}  and \cite{LeQuere91} for $\Ray$ ranging from $10^4$ to $10^8$.
+The Newton method gives results identical to reference values.
 Relative errors lower than $0.01 \%$ could be noticed for $\Ray=10^5$ and $10^6$.
 A relative difference of $0.43 \%$ is observed for $\Ray = 10^6$ with respect to the reference solution of \cite{de1983natural}, and a relative difference of $0.003 \%$ with the spectral accurate solution of \cite{LeQuere91}.
-The highest discrepancy is noted for $\Ray = 10^8$, but still offers reasonable agreement with benchmark values, within $0.52 \%$ erro for $u_{max}$  $5.57 \%$ for $v_{max}$.
+The highest discrepancy is noted for $\Ray = 10^8$, but still offers reasonable agreement with benchmark values, within $0.52 \%$ error for $u_{max}$  $5.57 \%$ for $v_{max}$.
 \begin{table}
    \begin{center}
       \begin{tabular}{*{7}{cl}}
@@ -225,55 +214,56 @@ The highest discrepancy is noted for $\Ray = 10^8$, but still offers reasonable 
           
                \end{tabular}
    \end{center}
-   \caption{Average Nusselt number on the vertical boundary of the cavity at $x=0$. Comparison with \cite{de1983natural} and \cite{LeQuere91} for $\Ray= 10^4$ to $10^6$.}
+   \caption{Average Nusselt number at the vertical wall of the cavity at $x=0$. Comparison with the results by \cite{de1983natural} and \cite{LeQuere91} for $\Ray= 10^4$ to $10^6$.}
    \label{tab-Nu-natconv}
 \end{table}
 We compare moreover the average Nusselt number at the left vertical wall (the mean, the max, and the min) and at the mid-domain, 
-since the Nusselt number will be largely used to compare the optimized configuration of a PCM either for melting or solidification cycle in the next chapters.
-It is thus essential to ensure about the accuracy of the computed value of this parameter.
+since the Nusselt number will be largely used to compare the optimized configuration of a PCM, either for melting or solidification cycles in the next chapters.
+It is thus essential to ensure the accuracy of the computed value of this parameter.
 Excellent agreement with \cite{de1983natural} and \cite{LeQuere91} is obtained for all simulated $\Ray$ numbers, with a relative error lower than $0.038 \%$.
 
 
-\subsection{Differentially heated cavity with inner heated square} \label{sub-2D-OBSTACLE}
+\subsection{Differentially heated cavity with an inner heated square} \label{sub-2D-OBSTACLE}
 
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_natconv/STA_validation_obstacle_3} 
 	\end{center}
-	\caption{Natural convection of air in a differentially heated cavity with inner heated square for $\Ray$ ranging from $10^4$ to $10^6$. Temperature field and streamlines (top) and transversal velocity profile along the  horizontal symmetry lines (bottom). Results obtained using the present Newton method (red solid line), with mesh resolution {\em nbseg} $=80$; comparison with the finite difference code of \cite{Raluca2013}.}
+	\caption{Natural convection of air in a differentially heated cavity with an inner heated square for $\Ray$ ranging from $10^4$ to $10^6$. Temperature field and streamlines (top) and transversal velocity profile along the  horizontal symmetry lines (bottom). Results obtained using the present Newton method (red solid line), with mesh resolution {\em nbseg} $=80$; comparison with the finite difference code of \cite{Raluca2013}.}
 	\label{fig-obst-2D}
 \end{figure}
 
-Thermally driven cavity including heated square obstacle is computed in this section.
-We consider the same configuration presented in Sec. \ref{sub-diff-heated} and a square involving isothermal boundary condition is added between the initial set up.
+Thermally driven cavity including a heated square obstacle is computed in this section.
+We consider the same configuration presented in Sec. \ref{sub-diff-heated} and a square domain with isothermal boundary conditions is added in the initial set up.
 This kind of basic configuration could be representative of telecommunication outdoor cabinet applications, in which the use of passive cooling solutions have begun to be more and more investigated.
-Indeed, inside an outdoor cabinet, electronic equipments generate heat when active and the study of the flow structures within the enclosure have attracted some considerations at the example of the experimental and numerical study of \cite{Raluca2013}.
-Simplified model of cavity with rectangular heated obstacles have been investigated by \cite{Raluca2013} and will be reproduced in this section to test the robustness of our numerical algorithm.
+Indeed, inside an outdoor cabinet, electronic equipments generate heat when active. 
+The study of the flow structures within the enclosure with obstacles was studied of the experimentally and numerically by \cite{Raluca2013}.
+The simplified model of cavity with rectangular heated obstacles investigated by \cite{Raluca2013} will be reproduced in this section to test the robustness of our numerical algorithm.
 
 A linear distribution of the temperature is imposed initially in the motionless air inside the cavity.
-The obstacle is maintained at a dimensionless hot temperature $\theta_h = 0.8$ with a no-slip boundary condition for the velocity.
+The obstacle is maintained at a dimensionless hot temperature $\theta_h = 0.8$, with a no-slip boundary condition for the velocity.
 The solutions for $\Ray= 10^4$, $10^5$, $10^6$ and $\Prd = 0.71$ are compared with the result obtained by \cite{Raluca2013}, who used an immersed boundary method with a FD code using high order schemes for time and spatial discretization.
 
-The temperature distribution in the cavity when the steady-state is reached, for each of the three computed $\Ray$ number, are reported in panels (a) to (c) of Fig. \ref{fig-obst-2D}.
+The temperature distribution in the cavity when the steady-state is reached, for each of the three computed $\Ray$ numbers, are reported in panels (a) to (c) of Fig. \ref{fig-obst-2D}.
 The temperature gradient gives rise to a clockwise circulation and when $\Ray$ is increased, vertical thermal boundary layers form distinctly along the differentially heated sidewalls and the obstacle.
 Consequently, 
 higher is the Rayleigh number the more the hot temperature in the center of the domain is advected by the natural convection flow into the cold part of the cavity. 
-Worth noting is the fact that at $\Ray = 10^6$ in panels (c) and (f), a stagnant fluid with a stratified temperature forms in a small portion of the fluid between the cold wall and the obstacle.
-We assess a more accurate validation in panels (d) to (f) of Fig. \ref{fig-obst-2D}.
+It is worth noting that at $\Ray = 10^6$ in panels (c) and (f), a stagnant fluid with a stratified temperature forms in a small portion of the fluid between the cold wall and the obstacle.
+We present a more accurate validation in panels (d) to (f) of Fig. \ref{fig-obst-2D}.
 The transversal velocity profiles along the x-axis are plotted and compared with the numerical data of \cite{Raluca2013} for each cases. 
-A good agreement can be observed with a relatively small differences between the extremum of the velocity while the trends of the velocity profile match well.
+A good agreement can be observed with a relatively small difference between the extremum of the velocity while the trends of the velocity profile match well.
 
 \section{Natural convection of water inside a square cavity}\label{sec: natconv-water}
-We perform in this section the natural convection of water in a differentially heated cavity. 
-A further difficulty is introduced compared to the previous validations by taking into account non-linear variation of the density in the buoyancy force.
-Pure water exhibits actually a non-linear density variation for $T< \celsm{10.2}$ with a maximum at $T_m= \celsm{4.0293}$. 
+We simulate in this section the natural convection of water in a differentially heated cavity. 
+A further difficulty is introduced compared to the previous validations by taking into account the non-linear variation of the density in the buoyancy force.
+Pure water exhibits a non-linear density variation for $T< \celsm{10.2}$ with a maximum at $T_m= \celsm{4.0293}$. 
 We use below the following density-temperature relationship  proposed in \cite{Gebhart1977}:
 \begin{equation}\label{eq-dens-nonlin}
 \rho(T)=\rho_m \left(1 - w \left|T - T_m\right|^q\right),
 \end{equation}
 
 \noindent with $\rho_m=999.972$ [kg/m$^3$], $w=9.2793\cdot 10^{-6}$ [($^\circ C)^{-q}$], and $q=1.894816$.
-The bouyancy term $f_B = g(\rho_\vref-\rho)/\rho_\vref$ appearing in Eq. \ref{eq-momentum-conserv}  becomes after scaling:
+The bouyancy term $f_B = g(\rho_\vref-\rho)/\rho_\vref$ appearing in Eq. \eqref{eq-momentum-conserv}  becomes after scaling:
 \begin{equation}
 f_B(\theta) = \frac{\Ray}{\Prd \, \Rey^2} \frac{1}{\beta \delta T}\, \frac{\rho(\theta_f)-\rho(\theta)}{\rho(\theta_f)},
 \label{eq-fBnonlin}
@@ -283,7 +273,7 @@ f_B(\theta) = \frac{\Ray}{\Prd \, \Rey^2} \frac{1}{\beta \delta T}\, \frac{\rho(
 
 We consider a cavity of height $H = 0.38$ m filled with liquid pure distilled water.
 This problem was investigated experimentally and numerically by \cite{Giangi-2000,Kowalewski-1999,Kowalewski-2003}.
-The height $H$ of the cavity is considered as a length scale of the problem $L_{ref} = H$. 
+The height $H$ of the cavity is considered as a the length scale of the problem, $L_{ref} = H$. 
 We choose $T_{ref} = T_h - T_c = 10 K$ in order to compare our simulation with the numerical results of \cite{Kowalewski-2003},
 and define the following scaling:
 \begin{equation} \label{eq-def-scal-1}
@@ -291,7 +281,7 @@ and define the following scaling:
    \quad \Longrightarrow \quad t_{ref} = \frac{H^2}{\nu_l}
    \quad \Longrightarrow \quad \Rey = 1.
 \end{equation} 
-The non-dimensional parameters describing the problem result from the physical properties of water in Tab. \ref{tab-param-phys-air}: $\Ray=2.518084\cdot 10^{6}$ and $\Prd=6.99$. 
+The non-dimensional parameters describing the problem result from the physical properties of water given in Tab. \ref{tab-param-phys-air}: $\Ray=2.518084\cdot 10^{6}$ and $\Prd=6.99$. 
 
 \noindent The initial temperature is linearly distributed with a hot (non-dimensional) temperature $\theta_h =1$ at the left wall and a cold temperature $\theta_c=0$ at the right wall. 
 The top and the bottom of the cavity are adiabatic and no-slip boundary condition $\vec u = 0$ is applied for the velocity.
@@ -301,8 +291,8 @@ Unlike the natural convection of air, in which two distinct boundary layers alon
 This anomalous thermal variation of water density, is clearly discernible in the streamline of the steady flow in Fig. \ref{fig-T1w-isoT}b.
 Two recirculating zones are formed in the flow: a lower (abnormal) recirculation  in the vicinity of the cold wall where $\theta<\theta_m$ and an upper (normal) one where the density decreases with temperature ($\theta>\theta_m$).
 
-Accounting for the foregoing comments, a greater mesh resolution should be applied around $\theta_m$.
-We define thus a $\PP_1$ function $\Phi(\theta)$ defined by the following hyperbolic-tangent function similar to Eq. \ref{eq-Stanh}:
+Following the above observations, a higher mesh resolution should be applied around $\theta_m$.
+We define thus a $\PP_1$ function $\Phi(\theta)$ defined by the following hyperbolic-tangent function similar to Eq. \eqref{eq-Stanh}:
 
 \begin{equation}
 \Phi(\theta) =  \frac{1}{2}\left\{
@@ -313,11 +303,12 @@ We define thus a $\PP_1$ function $\Phi(\theta)$ defined by the following hyperb
 
 \noindent with $R_{\Phi}=0.02$. 
 The function $\Phi(\theta)$ and the two components of the velocity are used to compute the metric for the mesh adaptivity.
-$\Phi(\theta)$ is used to track $\theta_m$ and the velocity allows to refine the boundary layer regions.
-To reduce the impact of the interpolation on the global accuracy, since our algorithm is optimized to afford the mesh refinement every time step, we use both $\Phi(\theta^n)$ and $\Phi(\theta)^{n+1}$ in the adaptivity procedure.
+$\Phi(\theta)$ is used to track $\theta_m$. 
+The velocity allows to refine the boundary layer regions.
+To reduce the impact of the interpolation on the global accuracy, since our algorithm is optimized to afford the mesh refinement every time step, we use both $\Phi(\theta^n)$ and $\Phi(\theta^{n+1})$ in the adaptivity procedure.
 
 \noindent The final mesh is displayed in Fig. \ref{fig-T1w-isoT}c.
-The mesh is clearly refined along the line $\theta = \theta_m$ where  the structure and the extent of the two recirculating zones should be captured and along the vertical walls where the heat transfer is dominated by the boundary layer transfer.
+The mesh is clearly refined along the line $\theta = \theta_m$, where  the structure and the extent of the two recirculating zones should be captured, and along the vertical walls where the heat transfer is dominated by the boundary layer transfer.
 Furthermore, as expected in the relatively stagnant fluid region, a coarser mesh is applied.
 
 A more accurate comparison of the temperature profile along the horizontal symmetry line is given in Fig. \ref{fig-T1w-isoT}d. 
@@ -327,7 +318,7 @@ The temperature profile $\theta(x)$ along the horizontal symmetry line of the ca
 	\begin{center}
 		\includegraphics[width=0.98\textwidth]{\figpath/Fig_cap_natconv/WATER_convec_valid}
 	\end{center}
-	\caption{Natural convection of water in a differentially heated cavity with non-dimensional parameters: $\Ray=2.518084\cdot 10^{6}$ and $\Prd=6.99$. (a) iso-line of the temperature at the steady state. (b) Streamline of the steady flow. (c) Illustration of the mesh adaptivity: The mesh is refined along the dimensionless temperature iso-line $\theta = \theta_m$ due to the density variation. (d) Temperature profile along the horizontal symmetry line. Comparison with the numerical results of \cite{Kowalewski-2003}.}
+	\caption{Natural convection of water in a differentially heated cavity with non-dimensional parameters: $\Ray=2.518084\cdot 10^{6}$ and $\Prd=6.99$. (a) Iso-lines of the temperature at the steady state. (b) Streamline of the steady flow. (c) Illustration of the mesh adaptivity. The mesh is refined along the dimensionless temperature iso-line $\theta = \theta_m$, due to the density variation. (d) Temperature profile along the horizontal symmetry line. Comparison with the numerical results of \cite{Kowalewski-2003}.}
 	\label{fig-T1w-isoT} % label should be placed after the caption
 \end{figure}
 
@@ -336,17 +327,17 @@ The temperature profile $\theta(x)$ along the horizontal symmetry line of the ca
 
 We can conclude from Secs. \ref{sec: natconv-air-2D} and \ref{sec: natconv-water} that the developed Newton method is able to deal  efficiently with the two-dimensional Navier-Stokes-Boussinesq problem either with linear or non-linear formulations of the buoyancy force.
 
-\noindent The natural convection of air including obstacle or not have proven very good agreement with the numerical solutions of \cite{LeQuere91} and \cite{Raluca2013}.
-Excellent agreement with \cite{de1983natural} and \cite{LeQuere91} have also been observed for the value of the average Nusselt number at the heated wall. 
+\noindent The natural convection of air including or not obstacles are in good agreement with the numerical solutions of \cite{LeQuere91} and \cite{Raluca2013}.
+Excellent agreement with \cite{de1983natural} and \cite{LeQuere91} has also been observed for the value of the average Nusselt number at the heated wall. 
 
 \noindent The challenging case of the natural convection of water have demonstrated the robustness of the 2D code. 
 Good agreement with the numerical simulations of \cite{Kowalewski-2003} was noticed. 
-The influence of the mesh adaptivity was clearly shown by the total grid number differences of order of $40$ between the present simulation and those of \cite{Kowalewski-2003} .
+The advantage of the mesh adaptivity was clearly shown by using a total number of grid points $40$ times lower than in the simulation of \cite{Kowalewski-2003}.
 The refined mesh along the line $\theta_m$ have permitted to solve more accurately the structures and the extent of the two recirculating zones.
 
-The description of the run presented in this chapter are summarized in Tab. \ref{tab-natconv-cases} for highest values of $\Ray$ numbers, mainly $\Ray = 10^6$.
-The interest of solving the steady equation when steady state could be reached is clearly emphasised regarding the number of iterations and the CPU time.
-$1,164$ iterations and $3162.86$ CPU seconds are indeed necessary to achieve the steady state with a tolerance of $10^{-6}$ for the natural convection of water by solving the unsteady equation,
+The properties of the run presented in this chapter are summarized in Tab. \ref{tab-natconv-cases} for the highest value of the $\Ray$ number, $\Ray = 10^6$.
+The interest of solving the steady equation, when steady state could be reached, is clearly emphasised when regarding the number of iterations and the CPU time.
+$1,164$ iterations and $3162.86$ CPU seconds are necessary to achieve the steady state with a tolerance of $10^{-6}$ for the natural convection of water by solving the unsteady equation,
 while only $20$ iterations and $51.1662$ CPU seconds are needed with the steady algorithm.
 
 \begin{table}[!ht]
@@ -365,9 +356,9 @@ while only $20$ iterations and $51.1662$ CPU seconds are needed with the steady 
 
 \bottomrule
  \end{tabular}
-\caption{Description of the run of natural convection cases for $\Ray = 10^6$.}
+\caption{Description of the runs for natural convection cases with $\Ray = 10^6$.}
 \label{tab-natconv-cases}
 \end{table}
 
-We simulate in the next chapter the melting and the solidification of PCM.
-Aside from the non-linear convection terms in the momentum and the energy Eqs. \ref{eq-qmvt} - \ref{eq-energ}, a further difficulty arise from the non-linearity introduced by the source term $\partial (CS)/\partial t$ in Eq. \ref{eq-energ}.
+We simulate in the next chapter the melting and the solidification of a PCM.
+Aside from the non-linear convection terms in the momentum and the energy Eqs. \eqref{eq-qmvt} - \eqref{eq-energ}, a further difficulty will arise from the non-linearity introduced by the source term $\partial (CS)/\partial t$ in Eq. \eqref{eq-energ}.
