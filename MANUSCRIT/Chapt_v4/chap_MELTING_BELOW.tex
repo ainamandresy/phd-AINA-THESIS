@@ -427,7 +427,7 @@ three terms are dominant in Eq. \eqref{eq-mom-rassembly}:
 \end{equation}
 
 \noindent For high-Prandtl fluid, the momentum balance is between buoyancy and friction (see e.g. \cite{bejan2013convection,le1999note}) and we obtain
-\begin{equation}
+\begin{equation}\label{eq-scaleV}
 	v \sim \frac{\Ray L_{r}^2}{\Prd}.
 \end{equation}
 
@@ -449,28 +449,25 @@ When the convection arises, we can identify three distinct effects
 	\underbrace{\frac{1}{t}}_{Inertia} \quad \underbrace{\frac{v}{\bar \delta_H}}_{Convection} \quad \underbrace{\frac{1}{L_r^2 \Prd}}_{Conduction}.
 \end{equation}
 
-There comes an effective time $t_{e}$ where the energy equation expresses a balance between the convection and the conduction heat transfer (see \cite{bejan2013convection}):
+\noindent There comes an effective time $t_{e}$ where the energy equation expresses a balance between the convection and the conduction heat transfer (see \cite{bejan2013convection}):
 
-%When $t$ increases, there comes an effective time $t_{e}$ where the inertia decreases in importance and the energy equation expresses a balance between the convection and the conduction heat transfer,
-%Again, if the assumption $L_r \sim \delta_T$ holds, we obtain:
 \begin{equation} \label{eq-scale-v-deltaH}
 	 \frac{v}{\bar \delta_H} \sim \frac{1}{\delta_{\theta}^2 \Prd}.
 \end{equation}
 
-
-\noindent since $\delta_{\theta}^2 \sim t/\Prd$, Eqs. \eqref{eq-scale-v-deltaH} leads to
+\noindent Equations \eqref{eq-scale-v-deltaH} and \eqref{eq-scaleV} lead to
 
 \begin{equation}
-	\frac{\delta_H}{\delta_{\theta}^2 \Prd} \sim \frac{\Ray L_{r}^2}{\Prd},
+	\frac{\delta_H}{\delta_{\theta}^2 \Prd} \sim \frac{\Ray \delta_{\theta}^2}{\Prd},
 \end{equation}
 
-and,
+\noindent  since $\delta_{\theta}^2 \sim t/\Prd$, we have
 
 \begin{equation}
 	t_{e} \sim \left( \frac{\bar \delta_H}{\Ray_e} \right)^{1/2} \times \Prd.
 \end{equation}
 
-\noindent At this time $t_e$, the thermal layer thickness is:
+\noindent At this effective time $t_e$, during which the inertia becomes negligible, and the convection effects increases, the thermal layer thickness is
 \begin{equation}
 	\delta_{\theta} \sim \left(\frac{t_{e}}{\Prd} \right)^{1/2} \sim \left(\frac{\bar \delta_H}{ \Ray_{e}}\right)^{1/4} \sim \left( \bar \delta_H \right)^{-1/2} \Ray^{-1/4}.
 \end{equation}
@@ -483,7 +480,7 @@ and,
 
 \noindent Equation \eqref{eq-Nu-scal-basal} highlights that the heat transfer through a single convection cell depends on the height of the melted PCM layer during the linear regime.
 Correlations pertaining to basal melting case in the literature do not distinguish between this contribution of the bulk and the boundary layer heat transfers after the onset of convection and relies directly on empirical correlations for turbulent Rayleigh-Bénard flows.
-It should be noted that Eqs. \eqref{eq-Nu-scal-basal} rely on only one cell in the system, and we expect relatively higher exponent when the number of rolls increases.
+It should be noted that Eqs. \eqref{eq-Nu-scal-basal} rely on only one cell in the system. 
 
 \noindent The exponents of the power laws obtained by our numerical simulations for four Rayleigh numbers are given in Tab. \ref{tab-power-expo} during the linear and the oscillating regime.
 An exponent of $0.28$ is observed for the linear regime and decreases with increasing Rayleigh number, which overestimates slightly the predicted scaling exponent of $1/4$.
@@ -517,7 +514,7 @@ The power-law relation $\Nuss-\Ray$ is bounded in this stage by the average expo
    \label{tab-power-expo}
 \end{table}
 
-As far as the temporal evolution of the liquid fraction $L_f$ is concerned, one can introduce the following scaling, from \cite{favier2019rayleigh}:
+As far as the temporal evolution of the liquid fraction $L_f$ is concerned, one can introduce the following scaling, from \cite{favier2019rayleigh}, obtained by a balance between the total rate of change of the enthalpy in the system and the heat fluxes entering and leaving the domain:
 \begin{equation}\label{eq:scal-Lf-RB}
 	L_f(t) = \left[ \sqrt{2 t}^{(2-3 \beta)}+ c \Ray^\beta t \right]^{1/(2-3 \beta)},
 \end{equation}
@@ -586,7 +583,6 @@ Conversely, when the PCM is expected to melt in longer period, LM case is approp
 	\label{fig:NU-LF-Q0-compare}
 \end{figure}
 
-\newpage
 \section{Concluding remarks}
 The high accuracy of our numerical method has permitted to simulate in this chapter lateral and basal melting case.
 Numerical and theoretical comparisons of both cases were performed and have exhibited many differences, mainly on the dynamics of the flow and the heat transfer processes.

@@ -13,86 +13,89 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this thesis, we have addressed the numerical simulations of natural convection with melting boundary problem.
-We have developed numerical tools for simulating $2-$ and $3-$D configurations of solid-liquid phase-change systems involving natural convection, using adaptive finite elements method.
+In this thesis, we have presented numerical simulations of natural convection with melting boundary.
+We have developed numerical tools for simulating $2$ and $3$D configurations of solid-liquid phase-change systems involving natural convection, using adaptive finite elements method.
 
-\noindent The buoyancy-induced fluid motion in the liquid phase was modeled by the incompressible Navier-Stokes equations with Boussinesq approximation, and the phase-change was modeled by an enthalpy-porosity model using temperature-based
+\noindent The buoyancy-induced fluid motion in the liquid phase was modeled by the incompressible Navier-Stokes equations with Boussinesq approximation. 
+The phase-change was modeled by an enthalpy-porosity model using a temperature-based
 formulation for the energy conservation equation.
 A single-domain method, solving the same system of equations in both phases, including a Carman-Kozeny-type penalty term in the momentum equation, was implemented with the \ff software.
 
-\noindent Concerning the numerical approach, the coupled momentum and energy equations was integrated in time using fully implicit second-order GEAR scheme, 
-and the space discretization was based on a Taylor-Hood triangular finite elements, approximating the velocity and the pressure with $\PP_2$ and $\PP_1$ finite elements, respectively.
+\noindent In the numerical approach, the coupled momentum and energy equations were integrated in time using a fully implicit second-order GEAR scheme. 
+The space discretization was based on a Taylor-Hood triangular finite elements, approximating the velocity and the pressure with $\PP_2$ and $\PP_1$ finite elements, respectively.
 Since we noticed from the literature review that the published numerical simulations required considerable high computer resources and CPU time, the main feature of our numerical method was the use of mesh adaptivity algorithm using metrics control to adapt the mesh every time step.
-We have concentrated the grid refinement effort only in regions displaying high gradients of the computed variables, and prescribed coarser meshes in the solid phase and the stagnant region, reducing considerably the degrees of liberty by keeping high accuracy.
-The accuracy of the numerical method was tested using manufactured solutions, and have exhibited as expected a second-order accurate method in both space and time.
+We have concentrated the grid refinement effort only in regions displaying high gradients of the computed variables, and prescribed coarser meshes in the solid phase and stagnant regions, thus reducing considerably the degrees of liberty while keeping high accuracy.
+The accuracy of the numerical method was tested using manufactured solutions: the expected second-order accuracy in both space and time was obtained.
 
 As a first purpose of the study, we have organized the program as a toolbox for the software \ff.
 The toolbox was designed to be an easy-to-use tool to handle phase-change problems.
 All technical issues related to the implementation of the finite element method were hidden, allowing to focus on numerical algorithms and their performance.
 A sequence of validation tests was performed, and presented by increasing gradually the level of complexity.
-In this manner, the user could implement easily similar problem with phase-change.
+Using the provided examples, the user could implement easily similar problems involving phase-change phenomena.
 
 \noindent We first tested the capability of the Navier-Stokes solver to deal with natural convection problems, without enthalpy and porosity terms in the system of equations.
-We started by simulating the natural convection of air and water inside differentially heated square enclosure and validated our results against classical benchmarks of classical convection.
-Rayleigh numbers up to $10^8$, at the limit of the steadiness for the natural convection of air, were performed.
+We started by simulating the natural convection of air and water inside differentially heated square enclosures and validated our results against classical benchmarks of classical convection.
+Rayleigh numbers up to $10^8$, at the limit of the steadiness for the natural convection of air, were considered.
 Additionally, we investigated the thermal driven problem including heated obstacle to assess for the robustness of the code.
 
-\noindent We also performed the natural convection of water case, which considers a non-linear variation of the density in the buoyancy force.
-The comparison with existing numerical data in the literature exhibited very good agreement and the mesh adaptivity algorithm proved very efficient, allowing to capture accurately the anomalous variation of the density around $T = 4 \, ^oC$.
-For all the simulations presented in the frame of natural convection problems, the steady state regimes were reached at most after $50$ CPU seconds of computations.
+\noindent We also computed the natural convection of water, which considers a non-linear variation of the density in the expression of the buoyancy force.
+The comparison with existing numerical data in the literature exhibited very good agreement. 
+The mesh adaptivity algorithm proved very efficient, allowing to capture accurately the anomalous variation of the density around $T = 4 \, ^oC$.
+For all the simulations presented in the frameworks of natural convection problems, the steady state regimes were reached at most after $50$ CPU seconds of computation.
 
-\noindent We then validated extensively the code by simulating the problem of melting and solidification of PCM.
-We first considered the melting of n-octadecane and Gallium cases inside rectangular enclosures vertically heated to compare our simulation with available experimental and numerical results in the literature.
-A mesh convergence test was addressed to ensure that we obtained a grid-converged solution.
-The parameters of the adapted mesh, used for all simulations, exhibited a variation lower than $0.042 \%$ for the location of the solid-liquid interface and the time evolution of the Nusselt number.
+\noindent We then validated extensively the code by simulating the problem of melting and solidification of a PCM.
+We first considered the melting of n-octadecane and Gallium inside rectangular enclosures vertically heated to compare our simulation with available experimental and numerical results in the literature.
+A mesh convergence test was performed to ensure the grid-convergence of the solution.
+The parameters of the adapted mesh, used for all simulations, exhibited a variation lower than $0.042 \%$ for the location of the solid-liquid interface and for the time evolution of the Nusselt number.
 
 \noindent Three Rayleigh numbers ranging from $10^5$ to $10^8$ were considered for the n-octadecane PCM melting, and our simulations were compared with three different benchmarks.
 A good agreement was found for the comparison with existing experimental and numerical results.
-Concerning the controversial melting of Gallium in $2-$D configurations, our simulations exhibited multi-cellular structures of the melted flow and highly oscillating values of the Nusselt number, in agreement with many observations from the literature.
+Concerning the controversial melting of Gallium in $2$D configurations, our simulations exhibited multi-cellular structures of the melted flow and highly oscillating values of the Nusselt number, in agreement with many observations from the literature.
 
 \noindent Moreover, more complex geometries, such as highly distorted domain or cylindrical PCM including inner heated pipes, were also performed.
 For all considered cases, a variable mesh in the vicinity of the walls and along the phase-change front, ensured a good capture of the boundary layer region and the location of the interface.
-The simulation of the melting of Gallium showed that our simulations lasts $245$ times faster when compared with the simulations of \cite{hannoun2003resolving} with a ratio of $185$ for the number of triangles.
+The simulation of the melting of Gallium showed that our simulations run $245$ times faster when compared with the simulations of \cite{hannoun2003resolving}.
 
-\noindent We finally presented the challenging case of water freezing inside differentially heated cavity.
+\noindent We finally presented the challenging case of water freezing inside a differentially heated cavity.
 A qualitative agreement with the experimental image of the solidification front was obtained.
 The efficiency of our numerical algorithm allowed to perform simulations for melting problems, from $45$ minutes for the lowest value of $\Ray$ to $5$ hours for $\Ray = 10^8$.
-After a thorough investigation, we could conclude that our numerical method is validated by providing a good agreement with the benchmarks presented in the literature, for the natural convection of air and water and for the solid-liquid phase change problems including melting and solidification.
+After a thorough investigation, we could conclude that our numerical method was validated by providing a good agreement with the benchmarks presented in the literature, for the natural convection of air and water and for the solid-liquid phase change problems including melting and solidification.
 
 The second purpose of the study was to provide a thorough analysis of the melting and the solidification process and compare with numerical results.
 
-\noindent We first compared the behavior of the melting PCM when the latter is subject to heating from the sides or from below.
+\noindent We first compared the behavior of the melting PCM when the latter is subject to heating from the sides or from below (lateral or basal melting).
 For the lateral melting case, we assessed for the influence of the Rayleigh number on the heat transfer,
 by computing several configurations using different value of $H$ and $\delta T$.
 It was shown that increasing the Rayleigh number by keeping $\delta T$ constant induces a slower melting rate and higher heat transfer.
 However, increasing both Rayleigh and Stefan numbers induced an earlier onset of the convection-dominated regime, improving the efficiency of the PCM for a practical application.
 
-\noindent For the basal melting case, we developed a scale analysis during the linear regime and provided comprehensive description of the heat transfer processes during the melting.
-Differences between lateral and basal melting were drawn, mainly the structure of the flow and the time evolution of the Nusselt number.
+\noindent For the basal melting case, we developed a scale analysis during the linear regime and provided a comprehensive description of the heat transfer processes during the melting.
+Differences between lateral and basal melting were drawn, mainly for the structure of the flow and the time evolution of the Nusselt number.
 A mono-cellular flow was observed for the lateral melting case at any investigated Rayleigh numbers, while natural convection developed in the form of Bénard cells for the basal melting case.
 Moreover, the quasi-steady evolution of $\mathcal{N}\!u$ in the frame of a vertical heating is not observed when the PCM is heated from below since high oscillating evolutions were exhibited.
 
-\noindent Further comprehensive investigation of the solidification process was also addressed by simulating alternate melting and solidification cycles.
-Solidification after either complete or partial melting were performed with an assessment of the melting rate, the heat transfer and the accumulated heat input.
+\noindent Further investigation of the solidification process was also addressed by simulating alternate melting and solidification cycles.
+Solidification after either complete or partial melting were performed, with an assessment of the melting rate, the heat transfer and the accumulated heat input.
 It was observed that convective heat transfer dominated the melting process, enhancing thus the heat transfer, while conduction was the main heat transfer mode during the solidification, resulting to a slower operating process. 
-However, when the discharge temperature was decreased by a factor of 5 the solidification and the melting occur over similar times.
-The challenging task for the mesh adaptivity procedure was to track the two moving interfaces during the solidification cycles.
+However, when the discharge temperature was decreased by a factor of $5$, the solidification and the melting occur over similar time intervals.
+The challenging task for the mesh adaptivity procedure was to track the two moving interfaces during the solidification cycle.
 
-The third purpose of the thesis was to expand the numerical simulation to $3-$D configurations.
-Parallel $3-$D tools for melting or solidification purpose involving natural convection flow, using domain decomposition method has been performed.
+The third purpose of the thesis was to expand the numerical simulation to $3$D configurations.
+Parallel $3$D tools for melting or solidification purpose involving natural convection flow, using domain decomposition method were presented.
 The numerical simulations were carried out using the recent library \texttt{ffddm} in \ff.
 The originality of our numerical approach was the use of 3D adaptive mesh, performed every time steps, using \textit{mmg3d} library.
 We used \textit{Metis} library to split the domain into subdomains.
-The linear system of equations resulting from the Newton linearization was solved using parallel \textit{GMRES} Krylov method
+The linear system of equations resulting from the Newton linearization was solved using parallel \textit{GMRES} Krylov methods.
 
 \noindent We first validated the natural convection of air and water inside cubic enclosures and found good agreement with classical benchmarks.
 We also simulated the melting of n-octadecane PCM and the difficult case of water freezing inside differentially heated cubic cavity.
-The influence of the three-dimensional effects in the flow, that we neglected during the $2-$D simulations, was highlighted by the $3-$D shape of the interface and the iso-surfaces, impacted by the secondary flow in the vicinity of the side walls.
-The adaptive $3-$D mesh procedure proved very efficient to capture several interfaces, at the example of the water freezing case. \\
+The influence of the three-dimensional effects on the flow, that was neglected in $2$D simulations, was highlighted by the $3$D shape of the solid-liquid interface. 
+Iso-surfaces of the temperature were also impacted by the secondary flow in the vicinity of the side walls.
+The adaptive $3$D mesh procedure proved very efficient to capture several interfaces, as in the case of the water freezing. \\
 
 \textbf {Perspectives}\\
 
-One of the major limitation of the present physical model is that we have neglected the undercooling phenomenon, since we assume the temperature of fusion and the temperature of solidification equal for all simulations.
+One of the major limitation of the present physical model is that we neglected the undercooling phenomenon, since we assumed the temperature of fusion and the temperature of solidification equal for all simulations.
 Though, the liquid could solidify at a temperature significantly lower than the melting temperature, because of a  problem of nucleation at the microscopic scale.
 An enthalpy-based formulation of the enthalpy-porosity model should be implemented to this end, since the undercooling problem can not be implemented in the current temperature-based approach.
 Additionally, a microsegregation model and a coupling relationship between thermal and solute equations could be implemented in the code, in order to be able to simulate solidification or melting of binary mixtures.
@@ -108,7 +111,7 @@ Adapting automatically this procedure will increase considerably the efficiency 
 For the solidification problem, new boundary conditions could be further developed by using some models that take into account realistic boundary conditions.
 
 For the parallel algorithm, other preconditionners and solvers should be investigated.
-This is not a difficult task with \ff since the software is interfaced with popular mumps, PETSc, or HPDDM solvers.
+This is not a difficult task with \ff since the software is interfaced with popular MUMPS, PETSc, or HPDDM solvers.
 
 
 

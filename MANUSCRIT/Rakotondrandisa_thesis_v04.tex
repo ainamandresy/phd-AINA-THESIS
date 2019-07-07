@@ -266,8 +266,12 @@ Université de Rouen} \vskip .5 true cm
 % Multilingual abstracts
 
 \begin{abstract}[english]
-%\dummytext
-To be completed at the end
+In this thesis we present a new numerical system using classical finite elements with mesh adaptivity for computing two and three-dimensional liquid-solid phase-change systems involving natural convection.
+%We present and distribute a new numerical system using classical finite elements with mesh adaptivity for computing two-dimensional liquid-solid phase-change systems involving natural convection. 
+%The programs are written  as a toolbox for \ff  (www.freefem.org), a free finite-element software available for all existing operating systems.  
+The code implements a single domain approach. The same set of equations is solved in both liquid and solid phases: the incompressible Navier-Stokes equations with Boussinesq approximation for thermal effects. This model describes naturally the evolution of the liquid flow which is dominated by convection effects. To make it valid also in the solid phase, a Carman-Kozeny-type penalty term is added to the momentum equations. The penalty term brings progressively (through an artificial mushy region) the velocity to zero into the solid. The energy equation is also modified to be valid in both phases using an enthalpy (temperature-transform) model introducing a regularized latent-heat term. 
+Model equations are discretized using Galerkin triangular finite elements. Piecewise quadratic (P2) finite-elements are used for the velocity and piecewise linear (P1) for the pressure. For the temperature both P2 or P1 discretizations are possible. The coupled system of equations is integrated in time using a second-order Gear scheme. Non-linearities are treated implicitly and the resulting discrete equations are solved using a Newton algorithm. An efficient mesh adaptivity algorithm using metrics control is used to adapt the mesh every time step. 
+This allows us to accurately capture multiple solid-liquid interfaces present in the domain, the boundary-layer structure at the walls and the unsteady convection cells in the liquid. We present several validations of the toolbox, by simulating benchmark cases of increasing difficulty: natural convection of air, natural convection of water, melting of a phase-change material, a melting-solidification cycle, and, finally, a water freezing case. Other similar cases could be easily simulated with this toolbox, since the code structure is extremely versatile and the syntax very close to the mathematical formulation of the model.
 \end{abstract}
 
 %%Horizontal rule
