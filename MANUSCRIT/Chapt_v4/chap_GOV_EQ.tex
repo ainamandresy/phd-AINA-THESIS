@@ -204,7 +204,7 @@ The well-known equation derived from the Darcy law is the Carman-Kozeny model:
 	\nabla p = - \frac{\CKC (1 - \lambda)^2}{\lambda^3} \vec u.
 \end{equation}
 
-\noindent Consequently $A$ takes the form \citep{Belhamadia2012,kheirabadi2015effect}
+\noindent Consequently, $A$ takes the form \citep{Belhamadia2012,kheirabadi2015effect}
 \begin{equation}\label{eq-CK}
 A(\theta) = -\frac{\CKC (1 - L_f(\theta))^2}{L_f(\theta)^3 + b}, 
 \end{equation}
@@ -241,7 +241,7 @@ The main consequences of the boundary layer approximation are that:
 \item the thermal and the viscous boundary layer thickness are related by following expression: $\delta_\nu/\delta_\theta = o \left(\Prd^{1/2} \right)$.
 \end{enumerate}
 
-\noindent Scaling laws developed by \cite{bejan2013convection} relying on boundary layer approximation reads
+\noindent Scaling laws developed by \cite{bejan2013convection}, presented in Fig. \ref{fig:min-size-bnd}, relying on boundary layer approximation reads
 
 \begin{equation} \label{eq-bnd-layer-T}
    \delta_T \sim \left\{
@@ -265,9 +265,14 @@ The main consequences of the boundary layer approximation are that:
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=.8\textwidth]{\figpath/Fig_cap_melting/thermal_bnd}
+		\includegraphics[width=.9\textwidth]{\figpath/Fig_cap_melting/thermal_bnd}
 	\end{center}
 	\caption{Thermal and viscous boundary layer thickness function of the Prandtl number \citep{bejan2013convection}.}
 	\label{fig:min-size-bnd}
 \end{figure}
+
+\noindent Correlation \eqref{eq-bnd-layer-T} is useful to estimate the scale of the boundary layer for mesh adaptivity, since the minimum edge length should allow to capture the smaller length scale in the flow.
+For low-Prandtl fluid, the viscous boundary layer is finer than the thermal boundary layer, and conversely, the thermal boundary layer is finer for high-Prandtl fluid.
+
+
 

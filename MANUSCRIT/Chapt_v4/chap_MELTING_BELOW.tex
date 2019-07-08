@@ -106,7 +106,7 @@ At the solid-liquid interface, the energy balance condition which takes into acc
 	\frac{\partial \Gamma_i}{\partial t} &=& - \frac{\Ste}{\Prd} \frac{\partial \theta}{\partial x},
 \end{eqnarray}
 
-\noindent Since the temperature field during the conduction regime is quasi-steady, Eq. \ref{eq:Ste-condition} which is linear could be approximated by
+\noindent Since the temperature field during the conduction regime is quasi-steady, Eq. \eqref{eq:Ste-condition} which is linear could be approximated by
 \begin{equation}
     \frac{\partial \Gamma_i}{\partial t} \approx - \frac{\Ste}{\Prd} \frac{\theta_f - \theta_h}{\Gamma_i} \approx  \frac{\Ste}{\Prd} \frac{1}{\Gamma_i}.
 \end{equation}
@@ -135,7 +135,7 @@ At the solid-liquid interface, the energy balance condition which takes into acc
 \end{figure}
 
 While the melting continues to expand to the right side of the domain, a natural convection flow emerges from the top of the cavity since we have a clockwise recirculation of the flow in the liquid phase (see Fig. \ref{fig:melt-scheme-regime}).
-Turning back to the energy Eq. \ref{eq-energ} in the liquid phase  (i.e. $C = K = 1$), three distinct effects could be identified:
+Turning back to the energy Eq. \eqref{eq-energ} in the liquid phase  (i.e. $C = K = 1$), three distinct effects could be identified:
 \begin{equation}
 	\underbrace{\frac{\delta \theta}{t}}_{Inertia} \quad \underbrace{v \frac{\delta \theta}{H}}_{Convection} \quad \underbrace{\frac{\delta \theta}{\Gamma_i^2}}_{Conduction},
 \end{equation}
@@ -149,7 +149,7 @@ The total Nusselt number during the mixed conduction-convection regime could be 
    \Nuss \sim (2 \tau)^{-1/2} + (2 \tau)^{3/2} \times \Ray.
 \end{equation}
 
-\noindent Eq. \ref{eq-Nu-conv-cond} indicates that the contribution of the conduction $\left(\sim 1/\sqrt{2 \tau}\right)$ decreases with the time while the convection one is increasing.
+\noindent Eq. \eqref{eq-Nu-conv-cond} indicates that the contribution of the conduction $\left(\sim 1/\sqrt{2 \tau}\right)$ decreases with the time while the convection one is increasing.
 
 Finally, when the natural convection flow is fully developed and dominates the heat transfer along the vertical heated wall, with respect to the correlation of \cite{bejan2013convection}, the dimensionless thickness of thermal boundary layer is $\delta_{\theta} \sim \Ray^{1/4}$ (see also \cite{jany1988scaling}) and therefore the Nusselt number scale is
 \begin{equation} \label{eq-Nu-Ra-LM}
@@ -176,7 +176,7 @@ The values of the constants were fitted from numerical data: $c_1 = 0.27$, $c_2 
 \end{equation}
 with the constant $c_1 = 0.234$ and the power $0.266$ fitted from experimental data, and $\tau_t$ the transition time from conduction to convection as discussed previously.
 
-\noindent Predictions of Eqs. \ref{eq-corr-Okada} and \ref{eq-Nu-scale} are compared with our numerical results in Fig. \ref{fig:Nusselt} showing the time evolution of the Nusselt number at the left wall.
+\noindent Predictions of Eqs. \eqref{eq-corr-Okada} and \eqref{eq-Nu-scale} are compared with our numerical results in Fig. \ref{fig:Nusselt} showing the time evolution of the Nusselt number at the left wall.
 Our results perfectly fit with the theoretical prediction of \cite{jany1988scaling} and are also in good agreement with the experimental correlation of \cite{Okada1984}. 
 The gap between the current simulation and the results of \cite{Okada1984} could be explained by the experimental heat loss mentioned by the author and the uncertainties of the experimental measurements.
 The regimes described by the shape of the interface in Sec. \ref{subsec-time-evol-lat} could be featured by the temporal evolution of $\Nuss$:
@@ -195,7 +195,7 @@ The regimes described by the shape of the interface in Sec. \ref{subsec-time-evo
 	\begin{center}
 		\includegraphics[width=.7\textwidth]{\figpath/Fig_cap_melting/fig06}		
 	\end{center}
-	\caption{Complete melting of the PCM. Time evolution of the average Nusselt number defined at the hot (left) wall (cf. Eq. \ref{eq-def-Nu}) (solid line). Comparison with the experimental results of  \cite{Okada1984} (dashed line) and the predictions using the correlation in Eq. \ref{eq-Nu-scale} suggested by \cite{jany1988scaling} (dash-dot line). $\Ray = 3.27 \cdot 10^5$, $\Prd = 56.2$ and $\Ste = 0.045$.}\label{fig:Nusselt}
+	\caption{Complete melting of the PCM. Time evolution of the average Nusselt number defined at the hot (left) wall (cf. Eq. \eqref{eq-def-Nu}) (solid line). Comparison with the experimental results of  \cite{Okada1984} (dashed line) and the predictions using the correlation in Eq. \eqref{eq-Nu-scale} suggested by \cite{jany1988scaling} (dash-dot line). $\Ray = 3.27 \cdot 10^5$, $\Prd = 56.2$ and $\Ste = 0.045$.}\label{fig:Nusselt}
 \end{figure}
 
 
@@ -203,18 +203,18 @@ Another important basic quantity describing the melting process is the liquid fr
 The time evolution of the liquid fraction (Fig. \ref{fig:Lf}a) displays three regimes during the melting process. $L_f$  initially grows as $\tau^{ 1/2}$, which is a typical law for a conduction-dominated heat transfer. Then, a linear temporal evolution is observed, until the melting front reaches the right wall.
 This linear regime corresponds to the quasi-steady state observed in the evolution of the Nusselt number (Fig. \ref{fig:Nusselt}).
 
-\noindent Using the asymptotic limits of Eq. \ref{eq-Nu-scale} for $ \tau \to 0$ (pure conduction) and $ \tau \to \infty$ (pure convection),  \cite{jany1988scaling} suggested the following correlation law for the time evolution of the liquid fraction:
+\noindent Using the asymptotic limits of Eq. \eqref{eq-Nu-scale} for $ \tau \to 0$ (pure conduction) and $ \tau \to \infty$ (pure convection),  \cite{jany1988scaling} suggested the following correlation law for the time evolution of the liquid fraction:
 \begin{equation} \label{eq-Lf-scale}
 L_f(\tau) = \left[\left({\sqrt{2 \tau}} \right)^5 + \left(c_1 \Ray^{1/4}  \tau \right)^{5} \right]^{1/5},
 \end{equation}
-where $c_1=0.27$ is the same constant as in Eq. \ref{eq-Nu-scale}. 
-We compare in Fig. \ref{fig:Lf}b our numerical results with the predictions based on Eq. \ref{eq-Lf-scale} within the validity domain of the analysis, \ie before the melting front reaches the right wall of the cavity. A very good agreement is found with theoretical predictions and also with previously published numerical results \citep{Wang2010}.
+where $c_1=0.27$ is the same constant as in Eq. \eqref{eq-Nu-scale}. 
+We compare in Fig. \ref{fig:Lf}b our numerical results with the predictions based on Eq. \eqref{eq-Lf-scale} within the validity domain of the analysis, \ie before the melting front reaches the right wall of the cavity. A very good agreement is found with theoretical predictions and also with previously published numerical results \citep{Wang2010}.
 
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{\figpath/Fig_cap_melting/fig07}
 	\end{center}
-	\caption{Complete melting of the PCM. (a) Time evolution of the liquid fraction for the complete melting of the PCM. (b) Comparison of our results (solid line) with the numerical results of  \cite{Wang2010} (dashed line) and the predictions using the correlation (\ref{eq-Lf-scale}) suggested by \cite{jany1988scaling} (dash-dot line).}\label{fig:Lf}
+	\caption{Complete melting of the PCM. (a) Time evolution of the liquid fraction for the complete melting of the PCM. (b) Comparison of our results (solid line) with the numerical results of  \cite{Wang2010} (dashed line) and the predictions using the correlation \eqref{eq-Lf-scale} suggested by \cite{jany1988scaling} (dash-dot line).}\label{fig:Lf}
 \end{figure}
 
 
@@ -241,7 +241,7 @@ Snapshots of numerical solutions for $\Ray = 3.27 \cdot 10^5$,  $\Ray = 1.62 \cd
 The colours correspond to the temperature distribution, the  black lines correspond to the streamlines and the white lines correspond to the solid-liquid interface.
 Panels (a) to (c) depict the dynamics of the convective melting flow when half of the initial solid PCM ($L_f = 0.5$) have melted.
 The top part of the interface moves faster while the bottom one is slowed by the increasing value of $\Ray$.
-According to the Stefan interface condition in Eq. \ref{eq:Ste-condition}, at constant $\Ste$ and $\Prd$ numbers, the interface velocity is proportional to $\partial \theta / \partial n$, which is maximum at the top of the cavity because of the clockwise recirculation of the fluid explaining the observed trends.
+According to the Stefan interface condition in Eq. \eqref{eq:Ste-condition}, at constant $\Ste$ and $\Prd$ numbers, the interface velocity is proportional to $\partial \theta / \partial n$, which is maximum at the top of the cavity because of the clockwise recirculation of the fluid explaining the observed trends.
 
 Figures \ref{fig:Ra-Nusselt-H} and \ref{fig:Ra-Nusselt-deltaT} plot the temporal evolution of the liquid fraction $L_f$ (panel a),  and the average Nusselt number defined at the hot wall (panel b). 
 The same heat transfer regimes described previously are observed for each case: conduction, mixed conduction-convection and convection.
@@ -294,8 +294,8 @@ The physical parameters and the numerical configuration are reported in Fig. \re
 We perform two-dimensional numerical simulations, although 
  \cite{gau1983flow} and  \cite{gong1998flow} noticed the existence of three-dimensional convection cells during the very first step of the melting process.
 These three-dimensional convection cells are however usually neglected for relatively moderate $\Ray$ numbers, particularly for $\Ray \leq 10^8$. 
-In this case, three-dimensional cells survive over a very short duration compared to the whole melting process,
-therefore the two-dimensional model is realistic.
+In this case, three-dimensional cells survive over a very short duration compared to the whole melting process.
+Therefore the two-dimensional model is realistic.
 
 \noindent A qualitative description of the dynamics of the natural convection flow and its impact on the melting front is first addressed in Sec. \ref{sec-RB-melt-process}.
 Then, a scale analysis is conducted to describe the heat transfer that occurs during the melting in Sec. \ref{sec-RB-scal-analysis}.
@@ -329,7 +329,7 @@ There is no noticeable fluid flow and the melting front remains straight (panel 
 The temperature is distributed linearly in the vertical direction through the incipient liquid layer.
 The convective onset occurs at $\Ray_e \approx 7 \times 10^3$ when the phase-change interface becomes non-planar (panel b), which is in good agreement with the observation of \cite{esfahani2018basal,favier2019rayleigh}.
 It is worth noting that, in the framework of the classical Rayleigh-Bénard convection flow, the first instability appears at critical Rayleigh number $\Ray_c \approx 1707.76 $, in the limit of vanishing $\Ste$ number \citep{chandrasekhar2013hydrodynamic}.
-This critical value is however higher for greater $\Ste$ numbers.
+This critical value is however higher for greater $\Ste$ numbers \citep{vasil2011dynamic}.
 The appearance of convection is marked by a change in the shape of the interface from straight to nearly periodic curve.
 
 \noindent  As the fluid expands upwards, the effective Rayleigh number increases and we could observe $10$ convective rolls being stretched vertically (panels c to e).
@@ -443,13 +443,14 @@ three terms are dominant in Eq. \eqref{eq-mom-rassembly}:
 	L_r \sim \left( \frac{t}{\Prd} \right)^{1/2}.
 \end{equation}
 
-\noindent At this earlier stage, the thermal layer thickness is of the same order as $L_r$, $\delta_{\theta} \sim L_r$. When the melting evolves (i.e. time increases), the inertia decreases in importance. 
+\noindent At this earlier stage, the thermal layer thickness is of the same order as $L_r$, $\delta_{\theta} \sim L_r$. 
 When the convection arises, we can identify three distinct effects
 \begin{equation}
 	\underbrace{\frac{1}{t}}_{Inertia} \quad \underbrace{\frac{v}{\bar \delta_H}}_{Convection} \quad \underbrace{\frac{1}{L_r^2 \Prd}}_{Conduction}.
 \end{equation}
 
-\noindent There comes an effective time $t_{e}$ where the energy equation expresses a balance between the convection and the conduction heat transfer (see \cite{bejan2013convection}):
+\noindent  When the melting evolves (i.e. time increases), the inertia decreases in importance.
+There comes an effective time $t_{e}$ where the energy equation expresses a balance between the convection and the conduction heat transfer (see \cite{bejan2013convection}):
 
 \begin{equation} \label{eq-scale-v-deltaH}
 	 \frac{v}{\bar \delta_H} \sim \frac{1}{\delta_{\theta}^2 \Prd}.
@@ -458,7 +459,7 @@ When the convection arises, we can identify three distinct effects
 \noindent Equations \eqref{eq-scale-v-deltaH} and \eqref{eq-scaleV} lead to
 
 \begin{equation}
-	\frac{\delta_H}{\delta_{\theta}^2 \Prd} \sim \frac{\Ray \delta_{\theta}^2}{\Prd},
+	 \frac{\bar \delta_H}{\delta_{\theta}^2 \Prd} \sim \frac{\Ray \delta_{\theta}^2}{\Prd},
 \end{equation}
 
 \noindent  since $\delta_{\theta}^2 \sim t/\Prd$, we have
@@ -552,7 +553,7 @@ Linear evolution of $L_f$ is however noticed throughout the basal melting time s
 %One can see a decrease of the slope of the red curve in when the PCM is almost liquid with $L_f = 0.95$.
 
 
-Regarding the time evolution of the heat transfer (middle panels), red and blue curves matche perfectly well during the conductive regime (see for e.g. Fig. \ref{fig:NU-LF-Q0-compare} from $t=0$ to $t=18$ for $\Ray = 3.27 \cdot 10^5$). 
+Regarding the time evolution of the heat transfer (middle panels), red and blue curves match perfectly well during the conductive regime (see for e.g. Fig. \ref{fig:NU-LF-Q0-compare} from $t=0$ to $t=18$ for $\Ray = 3.27 \cdot 10^5$). 
 It is obviously expected since the contribution of the convective heat transfer is still negligible at this stage.
 Differences occur from the emergence of the natural convection flow.
 The evolution of $\Nuss$ is relatively smooth for LM case, while the BM case exhibits a sudden increase due to the hydrodynamical instabilities. 
@@ -562,12 +563,12 @@ It is worth noting that for higher and higher Rayleigh numbers, the Nusselt numb
 The evolution of the accumulated heat input $Q_0$ is consistent with the foregoing remarks.
 $Q_0$ is defined as follows:
 \begin{equation}
-    Q_0 = \int_0^{t_{\varphi}} N\!u \, d t_{\varphi},
+    Q_0 = \int_0^{t} N\!u \, d t,
     \label{eq-Q0}
 \end{equation}
-with $t_{\varphi}$ the physical time.
+%with $t_{\varphi}$ the physical time.
 The decrease of the heat transfer monitored by the cell merging process in the BM case leads to a lower accumulated heat input.
-It occurs when the heat transfer is no longer bulk transfer for the BM case.
+%It occurs when the heat transfer is no longer bulk transfer for the BM case.
 It follows that a more important thermal energy is stored with respect to the LM case.
 
 These observations are of particular importance for PCM design for a specific application.

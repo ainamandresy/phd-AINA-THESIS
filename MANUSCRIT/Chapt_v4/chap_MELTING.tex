@@ -4,7 +4,7 @@
 %\sectionmark{head version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\titcourt{Numerical simulations of phase change material}
-\def\titlong{Numerical simulation of phase change Materials in 2D configurations}
+\def\titlong{Numerical simulations of phase change materials in 2D configurations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[\titlong]{\titlong%
               \chaptermark{\titcourt}}
@@ -15,7 +15,7 @@
 
 %Having proven the accuracy and the efficiency of our numerical method by simulating the Navier-Stokes-Boussinesq equations, we now pay a closer attention to convective phase-change problems.
 The purpose of this chapter is to validate our numerical method by simulating convective phase-change problems.
-A discussion on numerical parameters is given first followed, by a sequence of validations computing different physical and geometrical configurations.
+A discussion on numerical parameters is given first, followed by a sequence of validations computing different physical and geometrical configurations.
 
 The Newton algorithm in Eq. \eqref{eq-newton-C1} is now solved throughout the whole domain containing liquid and solid phases.
 When compared to the previous validation, two new non-linearities are now added: the Carman-Kozeny penalty term in the momentum equation and the enthalpy source term in the energy equation.
@@ -116,7 +116,6 @@ In our simulations, the values of the Rayleigh number, in the range $10^6$ to $1
 For the same range of Rayleigh numbers and Prandtl number of order of $0.1$, we have a dimensionless thickness of the viscous boundary layer of $\delta_\nu \sim 10^{-2}$. 
 The minimum edge-length is therefore set to $hmin = 10^{-3}$.
 Moreover, we fix the maximum triangle size to avoid generating too large triangles. %, and we impose also the anisotropy of the mesh to have value close to $1$.
-
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\figpath/Fig_cap_melting/Mesh_MELT}
@@ -124,7 +123,6 @@ Moreover, we fix the maximum triangle size to avoid generating too large triangl
 	\caption{Adapted mesh during simulation of PCM melting. (a) $4,211$ triangles: the mesh is refined around the melting front $\theta=0$ and in the fluid where velocity gradients exists. (b) zoom showing the variation of the mesh size around the temperature isoline $\theta = 0$.}
 	\label{fig:pcm-mesh}
 \end{figure}
-
 Mesh adaptivity is performed at each time step and offers a refined discretization of the regularization region where sharp gradients have to be accurately captured.  
 Figure \ref{fig:pcm-mesh} shows the adapted mesh during the melting of Gallium PCM in a square cavity.
 The mesh is remarkably refined around the melting front (Fig \ref{fig:pcm-mesh}b), localized by the temperature isoline $\theta = 0$. 
@@ -141,7 +139,7 @@ However, increasing abruptly the boundary temperature to a hot temperature $\the
 A first usual approach consists of setting a very thin fluid layer of thickness $\delta x \sim 0.01$ with isothermal temperature in the vicinity of the hot wall (see \cite{dan-2014-JCP,Belhamadia2004_S}).
 A second approach, is applied in the current work.
 The temperature at the hot wall and the Rayleigh number are increased smoothly over a small time interval to reach the correct values of $\theta_h$ and $\Ray$.
-This approach has physical a significance and is more robust when higher Rayleigh number simulations are performed.
+This approach has a physical significance and is more robust when higher Rayleigh number simulations are performed.
 Concerning the solidification stage, mainly the water freezing case, a 'hot' and a 'cold' restarts are used.
 The first consists of establishing a steady state regime by solving first the steady Eq. \eqref{eq-weak-steady} and dropping then smoothly the temperature of the cold wall below the temperature of fusion.
 The second sets directly $\theta_c$ below the temperature of fusion and considers the motionless fluid, thus inducing huge gradients near the wall, and requiring very small triangles therein.
@@ -375,7 +373,7 @@ To estimate the efficiency of each configuration, we plot in Fig. \ref{fig-Lf-Lu
 By including more heated tubes, the heat transfer is enhanced, inducing a faster melting time.  
 The nine-tube configurations melts $5$ times faster than the reference configuration with one tube.
 A reasonably close match with numerical results of \cite{luo2015lattice} is confirmed in Fig. \ref{fig-Lf-Luo}a.
-We also assess on the effect of tubes arrangements with a fixed number of obstacle. 
+We also assess on the effect of tubes arrangements with a fixed number of obstacles. 
 Three arrangements are simulated with $9$ obstacles and reported in Fig. \ref{fig-Lf-Luo}b: central symmetry, inline, and staggered arrangements.
 The arrangement with central symmetry appears to provide a better heat transfer compared to the others.
 The inline and the staggered arrangements exhibit similar trends, with a slightly faster melting rate of the inline arrangement.
@@ -481,14 +479,14 @@ In the same time, the abnormal recirculation traps the cold liquid water at the 
 \end{figure}
 
 \section{Concluding remarks}
-In this chapter, we demonstrated the capability our numerical method to produce highly accurate solutions of difficult multiphysics problems on several geometrical configurations.
+In this chapter, we demonstrated the capability of our numerical method to produce highly accurate solutions of difficult multiphysics problems on several geometrical configurations.
 The complexity of the problem comes from the non-linear time evolution of the solid-liquid interface that could be highly deformed by the strong convection flow in the fluid phase.
 Linear and non-linear expressions of the buoyancy force were investigated.
 
 \noindent For the linear Boussinesq force $f_B$, melting of pure paraffin (n-octadecane) and metal (Gallium) have been simulated in rectangular cavity heated from the side.
 The choice of these materials is motivated by their physical properties relatively equal in both solid and liquid phases, and the existence of many numerical and experimental investigations in the literature. 
 Also, differences between the time evolution of the heat transfer for high and low $\Prd$ simulations were investigated.
-Comparison with existing benchmarks showed for each case a very good agreement.
+Comparisons with existing benchmarks showed for each case a very good agreement.
 The unsteadiness of the flow for the Gallium was observed in our simulations by the multi-cellular structure of the liquid flow and the high oscillating time evolution of the Nusselt number.
 The performance of the sequential code was also proven by simulating complex geometrical configurations.
 The melting of a cylindrical PCM including inner heated pipes and the solidification of a liquid PCM inside a distorted cavity showed good agreement with existing numerical data.

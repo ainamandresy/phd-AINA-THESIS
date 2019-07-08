@@ -42,11 +42,11 @@ We finally present in Sec. \ref{sec-3D_Water_FREEZING} the challenging numerical
 
 \section{Numerical simulation of the natural convection of air in a cubic cavity}\label{sec: natconv-air-3D}
  Following the same argument of increasing gradually the complexity of computed cases, that was outlined in Chapters \ref{chap-NATCONV} and \ref{chap-MELTING}, we start by presenting the natural convection of air. 
- This case involves a linear buoyancy force $f_B$, and include gradually additional non-linearities.
+ This case involves a linear buoyancy force $f_B$.
 The physical parameters are the same that used in the 2D simulations ($\Prd = 0.71$) and we investigate Rayleigh numbers ranging from $\Ray=10^4$ to $\Ray=10^6$. 
-The walls are rigid and impermeable. The vertical walls at $x=0$ and $x=1$ are isothermal and have different temperatures $\theta_h = 0$ and $\theta_c = 1$, respectively. The remaining walls are considered adiabatic. 
+The walls are rigid and impermeable. The vertical walls at $x=0$ and $x=1$ are isothermal and have different temperatures $\theta_h = 1$ and $\theta_c = 0$, respectively. The remaining walls are considered adiabatic. 
 The fluid is initially at rest and the temperature is linearly distributed from the cold to the hot walls.
-We solve the steady Eq. \eqref{eq-weak-steady} by increasing smoothly the parameter $\alpha$ before the Boussinesq term (which can be assimilated to a Rayleigh continuation step) with a maximum of $6$ steps for $\Ray = 10^6$.
+We solve the steady Eq. \eqref{eq-weak-steady} by increasing smoothly the parameter $\alpha$ in front of the Boussinesq term (which can be assimilated to a Rayleigh continuation step) with a maximum of $6$ steps for $\Ray = 10^6$.
 
 \begin{figure}
 \begin{minipage}{\linewidth}
@@ -54,7 +54,7 @@ We solve the steady Eq. \eqref{eq-weak-steady} by increasing smoothly the parame
  {\includegraphics[width=.95\textwidth]{\figpath/Fig_cap_natconv/Validation_3D_seq_T1}}
 \end{center}
 \end{minipage}
-\caption{Natural convection of air in a differentially heated cavity using $3-$D configurations. Temperature contours at the mid-plane of ($y=0.5$); comparison with the results of \cite{Wakashima-2004} (left images). }
+\caption{Natural convection of air in a $3$D differentially heated cavity. Temperature contours at the mid-plane of ($y=0.5$); comparison with the results of \cite{Wakashima-2004} (left images). }
 \label{fig-3DT} 
 \end{figure}
 We first compare the current simulation with the numerical data of \cite{Wakashima-2004}. 
@@ -72,7 +72,7 @@ A more accurate comparison is addressed in Tab. \ref{tab-3D-locU} between the pr
 \begin{table}[!h]
    \begin{center}
       \begin{tabular}{*{3}{cl}}
-           & $u_{max}$ ($y_{max}$) & $v_{max}$ ($x_{max}$) \\ \toprule
+           & $u_{max}$ ($z_{max}$) & $w_{max}$ ($x_{max}$) \\ \toprule
            $\Ray = 10^4$ & $0.198094$ ($0.826772$) & $0.220973$ ($0.11811$) \\ 
            \cite{Wakashima-2004} & $0.1984$ ($0.8250$) & $0.2216$ ($0.1177$) \\
            \cite{Raluca2013} & $0.1859$ ($0.8230$) & $0.2234$ ($0.1172$) \\ \hline
@@ -87,7 +87,7 @@ A more accurate comparison is addressed in Tab. \ref{tab-3D-locU} between the pr
            
                \end{tabular}
    \end{center}
-   \caption{Natural convection of air in a $3-$D differentially heated cavity. Maximum values $u_{max}$ and $w_{max}$ of the velocity profiles at mid-domain ($x = 0.5$ and $z=0.5$, respectively) and their locations $z_{max}$ and $x_{max}$. Comparison with benchmark solutions of \cite{Wakashima-2004} and numerical data of \cite{Raluca2013} for $\Ray = 10^4$, $\Ray = 10^5$, $\Ray = 10^6$.}
+   \caption{Natural convection of air in a $3$D differentially heated cavity. Maximum values $u_{max}$ and $w_{max}$ of the velocity profiles at mid-domain ($x = 0.5$ and $z=0.5$, respectively) and their locations $z_{max}$ and $x_{max}$. Comparison with benchmark solutions of \cite{Wakashima-2004} and numerical data of \cite{Raluca2013} for $\Ray = 10^4$, $\Ray = 10^5$, $\Ray = 10^6$.}
    \label{tab-3D-locU}
 \end{table}
 
@@ -106,7 +106,7 @@ The number of subdomains varies from $28$ to $70$ for $1.8$ millions of unknowns
 The difference between both algorithms is of order of $10^{-6}$
 and we do not observe a large variation of the error when the number of subdomains is increased.
 The comparison with the sequential algorithm was limited to the $40 \times 40 \times 40$ grid, since the simulations are highly demanding in CPU time.
-For the highest value of the Rayleigh number, the steady state computation required $57$ CPU hours and $3$ runs (restarts) with $120$ Go of memory for the sequential algorithm, . 
+For the highest value of the Rayleigh number, the steady state computation required $57$ CPU hours and $3$ runs (restarts) with $120$ Go of memory for the sequential algorithm. 
 The computational time is considerably reduced using DDM and 3D simulations. This becomes affordable  since only $21$ CPU minutes were necessary with $70$ processors to compute the same case with an error of $6.02152 \cdot 10^{-6}$ on $\vec u$ and $ 4.50094 \cdot 10^{-6} $ on $\theta$.\\
 
 \begin{table}[!h]
@@ -131,7 +131,7 @@ The computational time is considerably reduced using DDM and 3D simulations. Thi
 			& 70 & $6.02152 \cdot 10^{-6}$ & $1.68 \cdot 10^{-5}$ & $ 4.50094 \cdot 10^{-6} $ & $1.8 \cdot 10^{-5}$ \\ \hline
 		\end{tabular}
 	\end{center}
-	\caption {Natural convection of air in a $3-$D  differentially heated cavity. Comparison between sequential and DDM algorithm for uniform grids of $40 \times 40 \times 40$ points. }
+	\caption {Natural convection of air in a $3$D  differentially heated cavity. Comparison between sequential and DDM algorithm for uniform grids of $40 \times 40 \times 40$ points. }
 	\label{tab-T1}
 \end{table}
 
@@ -160,12 +160,12 @@ In many cases, it is convenient to perform two-dimensional numerical simulations
 However, Fig. \ref{fig-3D_Water_convec}b shows that the three-dimensionality of the flow in cube shape cavity affects the topology of the iso-surface $\theta=0.4$.
 \cite{Giangi-2000} assessed on the effect of three-dimensionality in both convection and freezing of water and they noted that only the flow in the symmetry plane can be considered as two-dimensional.
 The no-slip velocity and the adiabatic thermal boundary conditions at the side walls enhance the three-dimensional effect near the walls.
-Furthermore, these authors noted that, even though the temperature profiles at the central cross-section of the cavity match well for both $2$ and $3$D solutions in their numerical simulations, important differences between two and three-dimensional velocity profiles are present. %at some points.
+Furthermore, these authors noted that, even though the temperature profiles at the central cross-section of the cavity match well for both $2$D and $3$D solutions in their numerical simulations, important differences between two and three-dimensional velocity profiles are present. %at some points.
 
 In Figs. \ref{fig-3D_Water_convec}d-f, we plot the velocity profiles along the vertical line passing through the velocity saddle point, where normal and abnormal convection streams collide in the vicinity of the cold wall.
 For the $\vec e_z$ component of the velocity profile, along $z-$ direction at $x = 0.93$, we could compare both two and three-dimensional simulations with available $3$D simulation of \cite{Kowalewski-2003}.
 Triangular symbols denote the reference solution, obtained with a 3D finite difference code using vorticity-vector potential formulation of the Navier-Stokes and energy equations.
-$3$D (red solid line) profile agree well with the benchmark solution with a maximum difference of $3 \%$.
+$3$D (red solid line) profile agrees well with the benchmark solution with a maximum difference of $3 \%$.
 The $2$D (green dashed line) solution exhibits higher discrepancies in the vicinity of the anomalous density variation where the three-dimensional effect is maximum.
 However, as noted by \cite{Giangi-2000} in their experimental observations, larger differences between $2$D and $3$D solutions could be observed at $x=0.1$ and $x=0.5$.
 Panels (e) and (f) exhibit discrepancies greater than $10 \%$ between both solutions in agreement with the foregoing observation.
@@ -186,7 +186,7 @@ We now proceed to the $3$D simulation of solid-liquid phase-change problems, sta
 The three-dimensionality of the fluid flow can lead to major differences between the two-dimensional solution in some configurations, as the example of the melting of Gallium.
 \cite{wittig2012three} showed that the controversial multi-cellular flow occurs only at the beginning of the melting process in two-dimensional simulations.
 Three-dimensional simulations exhibit the absence of a multi-vortex structure at any time step.
-They explained these differences  by the presence of walls in the third direction which, suppress the flow. Also the occurrence of weak turbulence in the bulk of the melt prevents the formation of the long-living multicellular flow pattern known from 2D simulations.
+They explained these differences  by the presence of walls in the third direction which, suppresses the flow. Also the occurrence of weak turbulence in the bulk of the melt prevents the formation of the long-living multicellular flow pattern known from 2D simulations.
 The three-dimensional geometry allows the fluid movement in all directions and the friction effect provided by no-slip walls in transverse direction influences the flow.
 \cite{wittig2012three} have highlighted the existence of a secondary flow in the transverse direction, as shown in Fig.  \ref{fig-3D_PCM_MELTING}, which has its maximal intensity near the side walls.
 
@@ -206,7 +206,7 @@ The shape of the phase-change front at $t = 78.7$ is displayed in Fig. \ref{fig-
 \label{fig-3D_PCM_MELTING} 
 \end{figure}
 
-
+\newpage
 Iso-surfaces of the temperature at $t = 78.8$ are offered in panel (a) of Fig. \ref{fig-isosurface_3D_Melting}.
 The melting front is influenced by the flow which rises along the hot wall and moves down along the solid-liquid interface, where it is cooled.
 The influence of the secondary flow, defined by  \cite{wittig2012three}, is apparent with respect to the curved shape of the interface in the vicinity of the side-walls in the transverse direction.
@@ -229,7 +229,7 @@ These differences are caused by the increase of the velocity in the liquid flow,
 	U_{xyz} = \int_{\Omega} \sqrt{u_1^2 + u_2^2 + u_3^2} \, dV.
 \end{equation}
 In our simulations, at $t = 78.7$, we obtained $U_{xyz} = 0.548208$ for $3$D simulations and $U_{xy} = 0.519576$ for $2$D.
-However, the time evolution of the heat transfer in panel (b) matches well for $2$ and $3$D simulations, with a maximum difference lower than $1 \%$ at the onset of the convection time, and overlap during all the simulation time.
+However, the time evolution of the heat transfer in panel (b) matches well for $2$D and $3$D simulations, with a maximum difference lower than $1 \%$ at the onset of the convection time, and overlap during all the simulation time.
 From an engineering point of view, the latter observation means that if only an assessment of the heat transfer during the phase-change process is sought, a $2$D simulation is enough since it could be performed in a realistic computational time.
 The $3$D simulation required $2$ days CPU with $200$ processors, while $45$ minutes on a personal computer is enough for the $2$D configuration, for the investigated Rayleigh number.
 
@@ -242,7 +242,7 @@ The $3$D simulation required $2$ days CPU with $200$ processors, while $45$ minu
 \end{figure}
 
 \section{Numerical simulation of water freezing in a cubic cavity} \label{sec-3D_Water_FREEZING}
-In this section, we present a $3$D simulation of the challenging case of ice formation inside differentially heated cubic cavity.
+In this section, we present a $3$D simulation of the challenging case of ice formation inside a differentially heated cubic cavity.
 Starting from the steady solution shown in Fig. \ref{fig-3D_Water_convec}, we drop the cold temperature at the right wall from $\theta_c = 0$ to $\theta_c = -1$ under the temperature of fusion (which correspond to physical temperatures $T = 0 \, ^o C$ and $T = -10 \, ^o C$, respectively).
 Solid crust arises thus from the cold wall and expands towards the left wall.
 
@@ -270,5 +270,5 @@ We developed parallel $3$D tools to simulate natural convection flow involving m
 The numerical simulations investigated with the recent library \texttt{ffddm} in \ff showed good agreement with the benchmark solutions and the sequential algorithm for all simulated cases.
 The qualitative behavior and the topology of the interface for phase-change problems, were discussed in detail.
 Three-dimensional effects of the flow were exhibited by the deformed shape of the interface in the transverse direction.
-The adaptive $3$D mesh procedure proved very efficient to capture several interfaces, at in the example of the water freezing case.
+The adaptive $3$D mesh procedure proved very efficient to capture several interfaces, as in the example of the water freezing case.
 Grid refinement effort was concentrated only in regions displaying high gradients of the computed variables, and $10$ larger tetrahedra were applied elsewhere.
