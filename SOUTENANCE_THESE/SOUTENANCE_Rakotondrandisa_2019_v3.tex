@@ -749,7 +749,7 @@ $$ \frac{d \Phi}{dt} = \frac{3 \Phi^{n+1} - 4 \Phi^n + \Phi^{n-1}}{2 \delta t} $
 
 {\footnotesize
 \begin{eqnarray*}
-b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=&
+b\left(\vec{u}^{n+1}, q\right) -  {\color<2>{myred} \gamma (p^{n+1},q)}&=&
 0, \\ \nonumber
 \frac{3}{2 \delta t} \left(\vec{u}^{n+1},\vec{v}\right) + c\left(\vec{u}^{n+1} ; \vec{u}^{n+1}, \vec{v} \right) +
 {a\left(\vec{u}^{n+1}, \vec{v}\right)} & &\\ \nonumber
@@ -766,6 +766,22 @@ b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=&
 \frac{2}{\delta t} \left( \theta^{n}, \phi\right)
 - \frac{1}{2 \delta t} \left( \theta^{n-1}, \phi\right).
 \end{eqnarray*}
+}
+\alt<2>{
+\color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+$\gamma :$ paramètre de régularisation.
+
+\small{
+\begin{table}[]
+\centering
+\begin{tabular}{*{6}{c}}
+ %\toprule
+$\gamma$ & 0 & 0.1 &  $10^{-3}$  $10^{-5}$ & $10^{-7}$ \\
+\bottomrule
+$\vec \nabla \cdot \vec u$ & - & $6.09618 \cdot 10^{-3}$ & $4.7471\cdot 10^{-3}$ & $4.7471 \cdot 10^{-3}$ 
+ \end{tabular}
+\end{table}
+}
 }
 {
 \color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}}

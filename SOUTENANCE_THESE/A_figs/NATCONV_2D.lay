@@ -570,7 +570,7 @@ $!ATTACHTEXT
     LINETHICKNESS = 0.4
     COLOR = CUSTOM40
     }
-  TEXT = '<greek>q</greek><sub>h</sub> = 1'
+  TEXT = '<greek>q</greek><sub>h</sub> = 0.5'
 $!ATTACHTEXT 
   ANCHORPOS
     {
@@ -584,7 +584,7 @@ $!ATTACHTEXT
     LINETHICKNESS = 0.4
     COLOR = CUSTOM46
     }
-  TEXT = '<greek>q</greek><sub>c</sub> = 0'
+  TEXT = '<greek>q</greek><sub>c</sub> = -0.5'
 $!ATTACHTEXT 
   ANCHORPOS
     {
@@ -613,17 +613,24 @@ $!ATTACHTEXT
   ANCHORPOS
     {
     X = 39.39729767542708
-    Y = 41.99896268134034
-    }
-  TEXTSHAPE
-    {
-    ISBOLD = NO
+    Y = 53.23122286530872
     }
   BOX
     {
     LINETHICKNESS = 0.4
     }
-  TEXT = 'Pr = 0.71\n\nRa = 10<sup>5</sup> - 10<sup>8</sup>'
+  TEXT = 'Pr = 0.71\n'
+$!ATTACHTEXT 
+  ANCHORPOS
+    {
+    X = 33.99339684625494
+    Y = 44.34986859395531
+    }
+  BOX
+    {
+    LINETHICKNESS = 0.4
+    }
+  TEXT = 'Ra = 10<sup>5</sup> - 10<sup>8</sup>'
 ### Frame Number 2 ###
 $!CREATENEWFRAME 
 $!READDATASET  '|LFDSFN2|'
@@ -665,9 +672,15 @@ $!GLOBALCONTOUR  1
   DEFNUMLEVELS = 19
   LEGEND
     {
+    SHOW = YES
     XYPOS
       {
-      X = 95
+      X = 100
+      Y = 74.965
+      }
+    BOX
+      {
+      BOXTYPE = NONE
       }
     }
   COLORCUTOFF
@@ -1098,6 +1111,23 @@ $!TWODAXIS
     RANGEMIN = 0
     RANGEMAX = 1
     GRSPACING = 0.2
+    TICKLABEL
+      {
+      TEXTSHAPE
+        {
+        ISBOLD = YES
+        HEIGHT = 4
+        }
+      OFFSET = 2
+      }
+    TITLE
+      {
+      TEXTSHAPE
+        {
+        HEIGHT = 4.6
+        }
+      OFFSET = 6
+      }
     }
 $!TWODAXIS 
   YDETAIL
@@ -1105,6 +1135,23 @@ $!TWODAXIS
     RANGEMIN = 0
     RANGEMAX = 1
     GRSPACING = 0.2
+    TICKLABEL
+      {
+      TEXTSHAPE
+        {
+        ISBOLD = YES
+        HEIGHT = 4
+        }
+      OFFSET = 2
+      }
+    TITLE
+      {
+      TEXTSHAPE
+        {
+        HEIGHT = 4.6
+        }
+      OFFSET = 8
+      }
     }
 $!ISOSURFACEATTRIBUTES  1
   ISOSURFACESELECTION = ONESPECIFICVALUE
@@ -1416,16 +1463,32 @@ $!STREAMATTRIBUTES
       LIGHTINGEFFECT = GOURAUD
       }
     }
-  ADDARROWS = NO
-  CELLFRACTION = 0.2
+  CELLFRACTION = 0.05
+  ARROWHEADSIZE = 1.5
   LINETHICKNESS = 0.4
   MAXSTEPS = 10000
+  ARROWHEADSPACING = 30
 $!FIELDLAYERS 
   SHOWMESH = NO
+  SHOWCONTOUR = YES
   SHOWEDGE = NO
 $!STREAMTRACELAYERS 
   SHOW = YES
-  SHOWARROWHEADS = NO
+$!ATTACHTEXT 
+  ANCHORPOS
+    {
+    X = 13.07815374507233
+    Y = 90.44086727989485
+    }
+  TEXTSHAPE
+    {
+    HEIGHT = 12
+    }
+  BOX
+    {
+    LINETHICKNESS = 0.4
+    }
+  TEXT = 'Ra = 10<sup>6</sup>'
 $!FRAMECONTROL ACTIVATEBYNUMBER
-  FRAME = 1
+  FRAME = 2
 $!SETSTYLEBASE CONFIG

@@ -1,0 +1,2207 @@
+%========================================================================
+%\newcommand*\dsk{D:/A_COMMON}
+%\newcommand*\dsko{D:/A_COMMON_2012}
+
+\newcommand*\dsk{./}
+
+\newcommand*\figpath{\dsk/A_figs}
+\newcommand*\movpathN{\dsk/A_movie}
+\newcommand*\movpathO{\dsko/RECHERCHE/ALL_MOVIES}
+%\newcommand*\movpath{\dsko/RECHERCHE/ALL_MOVIES/danaila_hdr_films}
+%\newcommand*\movhdr{\dsko/RECHERCHE/ALL_MOVIES/danaila_hdr_films}
+%\newcommand*\movall{\dsko/RECHERCHE/ALL_MOVIES}
+\newcommand*\bibpath{\dsk/A_bib}
+\newcommand*\stypath{\dsk/ALL_STYLE}
+\newcommand*\incpath{.}
+%========================================================================
+\pdfminorversion=4
+\documentclass[11pt]{beamer}
+
+%\usetheme{Darmstadt}
+\usetheme{Warsaw}
+%\usetheme{Pittsburgh}
+%\useoutertheme{infolines}
+\usefonttheme{structurebold}
+%\setbeamercovered{dynamic}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+ \setbeamertemplate{headline}{}
+
+\usefonttheme[onlymath]{serif}
+
+
+\usepackage{times}
+%\usepackage[english]{babel}
+\usepackage{pgf,pgfarrows,pgfautomata,pgfheaps}
+\usepackage{amsmath,amssymb}
+\usepackage[latin1]{inputenc}
+
+%\usepackage{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multimedia}
+%\usepackage{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{colors_exemple}
+
+%\usepackage[round]{natbib}
+
+\usepackage[backend=biber]{biblatex}
+%\bibliographystyle{\stypath/plainnat-io}
+\bibliography{\bibpath/bib_thesis_2.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FROM TOURNIER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyvrb}
+\usepackage{color}
+%\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+%\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{stmaryrd}
+\usepackage{float}
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+\usepackage{hyperref}
+\hypersetup{pdfpagemode=UseNone}
+\usepackage{lmodern}
+\usepackage[footnotesize,bf,center,figurename=Fig]{caption}
+\usepackage{subfig}
+\usepackage{cleveref}
+\usepackage{tikz}
+\usepackage{etex}
+\usepackage{pgfplotstable}
+\usetikzlibrary{plotmarks,backgrounds}
+\usepgfplotslibrary{units}
+\usepgfplotslibrary{dateplot}
+\usepackage{multimedia}
+\usepackage{fp}
+\usepackage{bbding}
+\usetikzlibrary{shadows,spy,calc,fixedpointarithmetic,patterns,intersections,arrows,shapes,decorations.text,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,3d}
+\usepackage{siunitx}
+\usepackage{booktabs,colortbl}
+\usepackage{colordvi}
+\usepackage{csquotes}
+\usepackage{listings}
+\usepackage{placeins}
+%\usepackage{enumitem}
+\usepackage{cancel}
+
+\usepackage{pifont}
+\definecolor{green}{rgb}{0.13, 0.55, 0.13}
+\definecolor{mygreen}{rgb}{0.63, 0.95, 0.63}
+%\definecolor{myblue}{rgb}{0.63, 0.63, 0.95}
+\definecolor{myblue}{rgb}{0.0, 0.5, 0.69}
+\definecolor{myblack}{rgb}{0.7,0.7,0.7}
+\definecolor{myred}{rgb}{0.8, 0.2, 0.2}
+
+\newcommand{\cmark}{\textcolor{green}{\ding{51}}}%
+\newcommand{\xmark}{\textcolor{red}{\ding{55}}}%
+
+\usepackage{siunitx}
+
+\usepackage{tikz}
+\usetikzlibrary{fit}
+\tikzset{%
+  highlight/.style={rectangle,rounded corners,fill=red!15,draw,fill opacity=0.3,inner sep=0pt}
+}
+\newcommand{\tikzmark}[2]{\tikz[overlay,remember picture,baseline=(#1.base)] \node (#1) {#2};}
+%
+\newcommand{\Highlight}[2]{%
+    \tikz[overlay,remember picture]{
+    \node[highlight,style={ellipse,rounded corners,fill=red!15,draw,fill opacity=0.3,inner sep=0pt}
+,fit={([shift={(2.2mm,-1.8mm)}]#1.north west) ([shift={(-2.2mm,1.8mm)}]#2.south east)}]{};}
+}
+
+\newcommand{\Highlightt}[2]{%
+    \tikz[overlay,remember picture]{
+    \node[highlight,style={rectangle,rounded corners,fill=green!15,draw,fill opacity=0.2,inner sep=0pt},fit={([shift={(1.3mm,-1mm)}]#1.north west) ([shift={(-1.3mm,1mm)}]#2.south east)}]{};}
+}
+
+\usepackage{eurosym}
+%\usepackage{listings}
+\usepackage{xcolor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \usepackage{enumitem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Lang}[1]{\operatorname{\text{\textsc{#1}}}}
+
+\newcommand{\Class}[1]{\operatorname{\mathchoice
+  {\text{\sf \small #1}}
+  {\text{\sf \small #1}}
+  {\text{\sf #1}}
+  {\text{\sf #1}}}}
+
+\newcommand{\NumSAT}      {\text{\small\#SAT}}
+\newcommand{\NumA}        {\#_{\!A}}
+
+\newcommand{\barA}      {\,\bar{\!A}}
+
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Set}[1]{\{#1\}}
+
+% some shortcuts
+%\def\v{{\vec v}}
+\renewcommand{\vec}[1]{{\mathbf #1}}
+\def\pl{\partial}
+\def\ds{\displaystyle}
+\def\be{\begin{equation}}
+\def\ba{\begin{array}}
+\def\ee{\end{equation}}
+\def\ea{\end{array}}
+\def\beqa{\begin{eqnarray}}
+\def\eeqa{\end{eqnarray}}
+
+\newcommand{\R}{\ensuremath{\mathbb R}}
+\def\IR{\hbox{${\rm I\!R}$}}
+\newcommand{\N}{\ensuremath{\mathbb N}}
+\newcommand{\Z}{\ensuremath{\mathbb Z}}
+\newcommand{\C}{\ensuremath{\mathbb C}}
+
+\def\vrst{\omega_0}
+\def\psiexp{\psi_{{\hbox{\tiny exp}}}}
+\def\Dpartial#1#2{ {\frac{\partial #1}{\partial #2} }}
+
+%%%%%%%%%%========================================================================
+%   --- couleurs
+\definecolor{myred}{rgb}{0.8,0.1,0.1}
+
+\def\textRed{\color{red}}
+\def\textBlack{\color{black}}
+\def\textBlue{\color{blue}}
+\def\Blue#1{{\color{blue}{#1}}}
+\def\Darkred#1{{\color{red}{#1}}}
+\def\Green#1{{\color{green}{#1}}}
+\def\Magenta#1{{\color{magenta}{#1}}}
+\def\colpaper#1{{\color{myred}{#1}}}
+
+
+\newcommand{\Rey}{\mathcal{R}e}
+\newcommand{\Prd}{\mathcal{P}r}
+\newcommand{\Ray}{\mathcal{R}a}
+\newcommand{\Ste}{\mathcal{S} te}
+\newcommand{\vref}{{\small ref}}
+\def\cels#1{#1\, ${^\circ}$C}
+\def\celsm#1{#1\, {^\circ}\mbox{C}}
+%========================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\pgfdeclareimage[height=0.5cm]{university-logo}{\stypath/logo-lmrs125.png}
+%\logo{\pgfuseimage{university-logo}}
+
+\logo{\includegraphics[height=0.5cm]{\stypath/logo-lmrs125}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Modélisation et simulation numérique de matériaux à changement de phase}
+
+
+%\subtitle { \large Simulations num{\'e}riques 3D}
+\author[Aina Rakotondrandisa] % (optional, use only with lots of authors)
+{
+	\textbf{Aina Rakotondrandisa} \\  \vspace{1cm}
+\and Directeur de thèse : Ionut Danaila
+}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[LMRS, Universit{\'e} de Rouen] % (optional, but mostly needed)
+{
+  
+   Laboratoire de Mathématiques Raphaël Salem \\
+   Universit{\'e} de Rouen Normandie
+
+}
+
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[27 septembre 2019]{vendredi 27 septembre 2019}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+
+%\AtBeginSection[]
+%{
+%  \begin{frame}<beamer>
+%    \frametitle{Plan}
+%    \tableofcontents[currentsection]%,currentsubsection]
+%  \end{frame}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\setbeamertemplate{frametitle}[default][left]
+\setbeamertemplate{footline}[frame number]
+
+%************************************
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\part{Main Part}
+
+\section{Problème physique et motivations}
+
+% \begin{frame}
+%\frametitle{Historique du problème de changement de phase}\vspace{-0.1cm} 
+%
+% 
+%\begin{columns}[c]
+%
+%% --------------- COL 1 ---------------------------------------------
+%
+%\column{.5\textwidth}
+%\begin{minipage}{0.99\columnwidth} \begin{center}
+%
+%	   \includegraphics[width=\columnwidth]{\figpath/Lame-Clapeyron-livre} \\
+%	   \tiny{G. Lamé and B. P. Clapeyron, Ann. Chem. Phys. (1831)}\\
+%	   
+%	   \bigbreak
+%
+%	   \includegraphics[width=\columnwidth]{\figpath/PB_Stefan_livre} \\
+%	   \tiny{J. Stefan, Ann. of Phys. and Chem. (1891)} \\ 
+%	   \medbreak
+%	    \tiny{$^*$ \textit{Sur la théorie de la formation de la glace dans les mers polaires}} 
+%\end{center} \end{minipage}
+%\column{.5\textwidth}
+%
+%% ========================================
+%
+%% --------------- COL 2 ---------------------------------------------
+%\uncover<2>{
+%\begin{block}{}
+%\begin{itemize}
+%   \item  {\color{blue} $\bullet$} 1890 : Problème de Stefan
+%   \item  {\color{blue} $\bullet$} 1980 : De nombreux études mathématiques
+%   \item  {\color{blue} $\bullet$} 1990 : Développement de codes
+%   \item  {\color{blue} $\bullet$} Actuellement : Intérêt pour la gestion de l'énergie
+%\end{itemize}
+%\end{block}
+%}
+%% ========================================
+%
+%\end{columns}
+% \end{frame}
+%
+% \begin{frame}
+%\frametitle{Matériaux à changement de phase}\vspace{-0.1cm} 
+%\includegraphics[width=0.99\columnwidth]{\figpath/MT180_2017_Rakotondrandisa_Aina}
+%
+%\end{frame}
+ 
+ 
+
+\begin{frame}
+\frametitle{Problème physique et motivation}\vspace{-0.7cm} 
+ 
+ \begin{block}{}
+ Matériaux à changement de phase (MCP)
+ \end{block}
+ \vspace{0.2cm}
+ \begin{center}
+ {\includegraphics[width=\textwidth]{\figpath/manip200t.jpg}}\\
+ \Magenta{\it Orange, Lannion, France.}
+ \end{center}
+
+ \end{frame}
+ 
+ 
+\begin{frame}
+\frametitle{Applications des matériaux à changement de phase}\vspace{-0.1cm} 
+
+ 
+\begin{columns}[c]
+
+% --------------- COL 1 ---------------------------------------------
+
+\column{.5\textwidth}
+\begin{minipage}{0.99\columnwidth} \begin{center}
+	   \visible<3->{
+	   \includegraphics[width=0.99\columnwidth]{\figpath/PCM_tablette} \\
+	   \tiny{D. Groulx, {\textit TFESC} (2015)}\\
+	   }
+	   \medbreak
+
+	   \includegraphics[width=0.99\columnwidth]{\figpath/PCM_wall} \\
+	   \tiny{X. Kong et. al, \textit{Energy and Buildings} (2014).}
+	   
+\end{center} \end{minipage}
+
+
+% ========================================
+
+% --------------- COL 2 ---------------------------------------------
+\column{.5\textwidth}
+\vspace{-0.3cm}
+\begin{block}{Domaines d'applications}
+\begin{itemize}
+   \item <+-> {\color{blue} $\bullet$} isolation thermique,
+   \item <+-> {\color{blue} $\bullet$} stockage d'énergie,
+   \item <+-> {\color{blue} $\bullet$} refroidissement passif.
+   
+\end{itemize}
+
+\end{block}
+
+\vspace{0.2cm}
+\begin{minipage}{0.99\columnwidth} \begin{center}
+	   \visible<2->{
+	   \includegraphics[width=\columnwidth]{\figpath/large-2} \\
+	   \tiny{T. Nomura et. al, {\textit ISIJ} (2010)}\\
+	   }
+	   
+\end{center} \end{minipage}
+% ========================================
+
+\end{columns}
+ \end{frame}
+
+ 
+ \begin{frame}
+ \frametitle{Contexte de la thèse}\vspace{-0.7cm} 
+ 
+ \begin{columns}[c]
+ 
+ \column{.4\textwidth}
+ \begin{exampleblock}{\textit{[Danaila et. al, JCP (2014)]}}
+ \begin{itemize}
+ 	\item ${\color{green} \bullet}$ Code éléments finis. 
+	\item ${\color{green} \bullet}$ Méthode mono-domaine.
+	\item ${\color{green} \bullet}$ Pénalisation par viscosité variable.
+	\item ${\color{green} \bullet}$ Schéma implicite d'ordre 1.
+	\item ${\color{green} \bullet}$ Adaptation de maillage.	
+ \end{itemize}
+ \end{exampleblock}
+ 
+  \column{.6\textwidth}
+  \vspace{0.3cm}
+  \begin{block}{Apports pendant la thèse}
+ \begin{itemize}
+ 	\item ${\color{blue} \bullet}$ Implémentation d'un schéma en temps d'ordre 2.
+	\item ${\color{blue} \bullet}$ Pénalisation basée sur le modèle de Carman-Kozeny.
+	%\item ${\color{blue} \bullet}$ Amélioration de la procédure d'adaptation de maillage.
+	\item ${\color{blue} \bullet}$ Continuation sur $\mathcal{R}a$ pour les cas stationnaires.
+	\item ${\color{blue} \bullet}$ Amélioration des conditions initiales.
+	\item ${\color{blue} \bullet}$ Simulation de configurations compliquées.
+	\item ${\color{blue} \bullet}$ Configuration 3D.
+	\item ${\color{blue} \bullet}$ Réalisation d'une toolbox.
+ \end{itemize}
+ \end{block}
+ 
+ \end{columns}
+ \end{frame}
+ 
+
+\begin{frame}
+  \frametitle{Plan de la thèse}\vspace{-0.1cm}
+
+\alt<2>{
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_B1}
+}
+{
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN}
+}
+\end{frame}
+
+\section{Résolution numérique des équations de Navier-Stokes-Boussinesq}
+
+\begin{frame}
+  \frametitle{Equations de Navier-Stokes-Boussinesq}\vspace{-0.1cm} 
+
+\begin{block}{}
+Conservation de la masse / conservation de la quantité de mouvement / conservation de l'énergie.
+\end{block}
+\vspace{-0.2cm} 
+\begin{eqnarray*}\nonumber
+\nabla\cdot \vec{u}&=&0, \\
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{\Rey} \nabla^2 \vec{u}
+ - \colpaper{f_B(\theta) \, \vec{e}_y} &=& 0, \\
+ \frac{\pl  \theta}{\pl t} + \nabla \cdot\left(  \theta \vec{u}\right) -
+ \frac{K}{Pr \ \Rey} \nabla^2 \theta  &=& 0.
+\label{eq-energ}
+\end{eqnarray*}
+
+\visible<2>{
+{
+\color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}} \vspace{-0.7cm}
+
+  
+  \begin{equation*}
+\vec{x} \rightarrow \frac{\tilde{\vec{x}}}{h}, \,  \vec{u} \rightarrow \frac{\tilde{\vec{u}}}{V_{ref}}, \,  \theta = \frac{T-T_c}{\delta T}, \,  t \rightarrow \frac{V_{ref}}{h} t_{\varphi}, \,  \delta T = T_h - T_c,
+\label{eq-adim}
+ \end{equation*}
+  
+  \begin{equation*}
+	\Rey = \frac{V_{ref} h}{\nu_{l}} , \quad \Prd = \frac{\nu_{l}}{\alpha_{l}},\quad  \mathcal{G}r  = \frac{g \beta h^3 \delta T }{\nu_{l}^2}, \quad  \Ray = \mathcal{G}r \times \Prd.
+  \end{equation*}
+ \small{$\Rey :$ nombre de Reynolds, $\Prd :$ nombre de Prandtl, $\mathcal{G}r :$ nombre de Grashof, $\Ray :$ nombre de Rayleigh}
+
+} %END COLOR
+}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modèle de Boussinesq}\vspace{-0.1cm} 
+
+\begin{block}{}
+Linéarisation de la force de flottabilité autour d'une masse volumique de référence.
+\end{block}
+\vspace{-0.3cm} 
+\begin{eqnarray*}\nonumber
+\nabla\cdot \vec{u}&=&0, \\
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+ - \colpaper{f_B(\theta) \, \vec{e}_y} &=& 0, \\
+ \frac{\pl  \theta}{\pl t} + \nabla \cdot\left(  \theta \vec{u}\right) -
+ \frac{K}{Pr \ \Rey} \nabla^2 \theta  &=& 0.
+\label{eq-energ}
+\end{eqnarray*}
+
+
+\color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}} %\vspace{-0.7cm}
+
+%\alt<2>
+%{
+%\begin{block}{}
+% Convection naturelle de l'eau :
+% \end{block}
+%
+%\begin{equation*}\label{eq-dens-nonlin}
+%^{(*)} \rho(T)=\rho_m \left(1 - w \left|T - T_m\right|^q\right),
+%\end{equation*}
+%{\color{black} $\rho_m=999.972$ [kg/m$^3$], $w=9.2793\cdot 10^{-6}$ [($^\circ C)^{-q}$], $q=1.894816$.}
+%
+%\begin{equation*}
+%	f_B(\theta) = \frac{\Ray}{\Prd \, \Rey^2} \frac{1}{\beta \delta T}\, \frac{\rho(\theta_f)-\rho(\theta)}{\rho(\theta_f)}
+%\end{equation*}
+%
+%\tiny{$^{(*)}$ \cite{Gebhart and Mollendorf, DSR (1977)}.}
+%}
+{
+\begin{exampleblock}{}
+ Convection naturelle de l'air :
+ \end{exampleblock}
+
+\begin{equation*}
+	f_{B}(\theta)  = \frac{\mathcal{R}a}{\mathcal{R}e^2 \mathcal{P}r} \theta
+\end{equation*}
+}
+\end{frame}
+
+
+%\subsection{Méthode numérique et implémentation}
+\begin{frame}
+\frametitle{Méthode numérique}\vspace{-0.1cm}
+
+\begin{exampleblock}{}
+\begin{itemize}
+\item <+-> {\color{green} $\bullet$}  \textbf{Discrétisation temporelle} : schéma implicite d'ordre deux BDF2 (GEAR).
+\item <+-> {\color{green} $\bullet$}  \textbf{Discrétisation spatiale} : éléments finis de Taylor Hood. $\mathbb{P}_2$ pour la vitesse et $\mathbb{P}_1$ pour la pression. $\mathbb{P}_2$ pour la température.
+%\item <1-> {\color{green} $\bullet$} Algorithme de Newton.
+%\item <2-> {\color{green} $\bullet$} Solveur directe pour 2D, et \texttt{GMRES} pour 3D.
+\end{itemize}
+\end{exampleblock} \vspace{0.2cm}
+
+
+$$ \frac{d \Phi}{dt} = \frac{3 \Phi^{n+1} - 4 \Phi^n + \Phi^{n-1}}{2 \delta t} $$
+
+ \vspace{0.2cm}
+{
+\color{gray} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+
+\begin{eqnarray*}\nonumber
+\nabla\cdot \vec{u}&=&0, \\
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+ - f_B(\theta) \, \vec{e}_y &=& 0, \\
+ \frac{\pl \theta }{\pl t} + \nabla \cdot\left(  \theta \vec{u}\right) -
+ \frac{K}{Pr \ \Rey} \nabla^2 \theta  &=& 0.
+\label{eq-energ}
+\end{eqnarray*}
+}
+
+
+\end{frame}
+
+
+%\subsection{Formulation variationnelle}   
+\begin{frame}
+   \frametitle{Formulation variationnelle}\vspace{-0.4cm}
+
+{\footnotesize
+\begin{eqnarray*}
+b\left(\vec{u}^{n+1}, q\right) -  {\color<2>{myred} \gamma (p^{n+1},q)}&=&
+0, \\ \nonumber
+\frac{3}{2 \delta t} \left(\vec{u}^{n+1},\vec{v}\right) + c\left(\vec{u}^{n+1} ; \vec{u}^{n+1}, \vec{v} \right) +
+{a\left(\vec{u}^{n+1}, \vec{v}\right)} & &\\ \nonumber
+%{\left(\frac{1}{Re} \nabla \vec{u}^{n+1}, \nabla \vec{v}\right)} & &\\ \nonumber
++ b\left(\vec{v}, p^{n+1}\right)
+- {\left(f_B(\theta^{n+1}) \, \vec{e}_y,\vec{v}\right)}
+&=& \\ \nonumber
+\frac{2}{\delta t} \left(\vec{u}^{n},\vec{v}\right) 
+- \frac{1}{2 \delta t} \left(\vec{u}^{n-1},\vec{v}\right), \\  \nonumber
+\frac{3}{2 \delta t} \left(\theta^{n+1}, \phi\right)
+-\left(\vec{u}^{n+1} \cdot \nabla \phi, \theta^{n+1}
+\right) +
+\left( \frac{K}{Re Pr} \nabla \theta^{n+1}, \nabla \phi \right) &=& \\  \nonumber
+\frac{2}{\delta t} \left( \theta^{n}, \phi\right)
+- \frac{1}{2 \delta t} \left( \theta^{n-1}, \phi\right).
+\end{eqnarray*}
+}
+\alt<2>{
+\color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+$\gamma :$ paramètre de pénalisation. Renforcer la diagonale de la matrice de pression.
+
+\small{
+\begin{table}[]
+\centering
+\begin{tabular}{*{5}{c}}
+ %\toprule
+$\gamma$ & 0.1 &  $10^{-3}$ & \colpaper{$10^{-7}$} & $10^{-10}$ \\
+\bottomrule
+$\int \vec \nabla \cdot \vec u$ & $1.27 \cdot 10^{-17}$  & $6.70\cdot 10^{-18}$ &  \colpaper{ $5.61\cdot 10^{-18}$} & $3.54 \cdot 10^{-18}$ \\
+$\int p$ & $1.15 \cdot 10^{-16}$ & $5.40 \cdot 10^{-14}$ & \colpaper{$4.61 \cdot 10^{-10}$} & $4.37 \cdot 10^{-7}$
+ \end{tabular}
+\end{table}
+
+%\begin{table}[]
+%\centering
+%\begin{tabular}{*{5}{c}}
+% %\toprule
+%$\gamma$ & 0.1 &  $10^{-3}$ & $10^{-7}$ & $10^{-10}$ \\
+%\bottomrule
+%$\int \vec \nabla \cdot \vec u$ & $1.27988 \cdot 10^{-17}$  & $6.70786\cdot 10^{-18}$ &   $5.61209 \cdot 10^{-18}$ & $3.54995 \cdot 10^{-18}$ \\
+%$\int p$ & 1.1563e-16 & 5.40255e-14 & 4.61381e-10 & 4.37377e-07 
+% \end{tabular}
+%\end{table}
+
+%\begin{table}[]
+%\centering
+%\begin{tabular}{*{4}{c}}
+% %\toprule
+% $10^{-3}$  & $10^{-7}$ & $10^{-10}$ & $10^{-20}$  \\
+%\bottomrule
+% $6.70786\cdot 10^{-18}$ & $5.61209 \cdot 10^{-18}$ & $3.54995 \cdot 10^{-18}$ & div \\
+% \end{tabular}
+%\end{table}
+}
+}
+{
+\color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+\vspace{-0.5cm}
+\tiny{
+	\begin{eqnarray*}\nonumber
+		a &:& \vec{V} \times \vec{V} \rightarrow \R, \, \vec{V} = H_0^1(\Omega), {a(\vec{u},\vec{v})= \int_{\Omega}  
+			 \vec{D}(\vec{u}) : \vec{D}(\vec{v}) = \int_{\Omega}   \sum_{i,j=1}^2{D}_{ij}(\vec{u}) {D}_{ij}(\vec{v})},\\ 
+		b &:& \vec{V} \times Q \rightarrow \R, Q = \left\{ q \, \epsilon \, L^2(\Omega) \mid \int_{\Omega} q = 0 \right\},   b(\vec{u},q) = -\int_{\Omega}\nabla \cdot\vec{u}\, q =
+		-\sum_{i=1}^2\int_{\Omega}\pl_i u_i\cdot q \\ \nonumber
+		c &:& \vec{V} \times \vec{V} \times \vec{V} \rightarrow \R, c(\vec{w}; \vec{z}, \vec{v})=\int_{\Omega} \left[\left(\vec{w} \cdot \nabla\right) \vec{z}\right] \cdot\vec{v}
+		=\sum_{i,j=1}^2\int_{\Omega} w_j (\pl_j z_i) v_i.
+	\end{eqnarray*}
+}
+}
+  \end{frame}  
+
+\begin{frame}
+\frametitle{Méthode numérique}\vspace{-0.1cm}
+
+\begin{exampleblock}{}
+\begin{itemize}
+\item  {\color{green} $\bullet$}  Discrétisation temporelle : schéma implicite d'ordre deux BDF2 (GEAR).
+\item  {\color{green} $\bullet$}  Discrétisation spatiale :  éléments finis de Taylor Hood. $\mathbb{P}_2$ pour la vitesse et $\mathbb{P}_1$ pour la pression. $\mathbb{P}_2$ pour la température.
+\item  {\color{green} $\bullet$} Algorithme de Newton.
+\item  {\color{green} $\bullet$} Résolution par une méthode directe à chaque itération de Newton jusqu'à convergence.
+\end{itemize}
+\end{exampleblock} \vspace{0.2cm}
+
+ \vspace{0.2cm}
+{
+\color{gray} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+}
+%{\tiny
+%\begin{eqnarray*}
+%b\left(\vec{u}^{n+1}, q\right) - \gamma (p^{n+1},q)&=&
+%0, \\ \nonumber
+%\frac{3}{2 \delta t} \left(\vec{u}^{n+1},\vec{v}\right) + c\left(\vec{u}^{n+1} ; \vec{u}^{n+1}, \vec{v} \right) +
+%{a\left(\vec{u}^{n+1}, \vec{v}\right)} & &\\ \nonumber
+%%{\left(\frac{1}{Re} \nabla \vec{u}^{n+1}, \nabla \vec{v}\right)} & &\\ \nonumber
+%+ b\left(\vec{v}, p^{n+1}\right)
+%- {\left(f_B(\theta^{n+1}) \, \vec{e}_y,\vec{v}\right)}
+%&=& \\ \nonumber
+%\frac{2}{\delta t} \left(\vec{u}^{n},\vec{v}\right) 
+%- \frac{1}{2 \delta t} \left(\vec{u}^{n-1},\vec{v}\right), \\  \nonumber
+%\frac{3}{2 \delta t} \left(\theta^{n+1}, \phi\right)
+%-\left(\vec{u}^{n+1} \cdot \nabla \phi, \theta^{n+1}
+%\right) +
+%\left( \frac{K}{Re Pr} \nabla \theta^{n+1}, \nabla \phi \right) &=& \\  \nonumber
+%\frac{2}{\delta t} \left( \theta^{n}, \phi\right)
+%- \frac{1}{2 \delta t} \left( \theta^{n-1}, \phi\right).
+%\end{eqnarray*}
+%}
+
+\begin{block}{}
+Résoudre ${\cal F}(w) = 0$ avec $w = (u,p,\theta)$.
+\end{block} %\vspace{0.1cm}
+
+\begin{equation*}
+D_w{\cal F} (w_k ) w_{k+1} = D_w{\cal F}(w_k) w_k -  {\cal F}(w_k).
+\label{eq-newton-w}
+\end{equation*}
+
+ \vspace{0.2cm}
+
+\begin{block}{}
++ CL : Dirichlet homogènes pour la vitesse.
+\end{block}
+
+
+
+\end{frame}
+
+
+
+%\subsection{Algorithme de Newton}   
+%\begin{frame}
+%   \frametitle{Résolution avec l'algorithme de Newton}\vspace{-0.1cm}
+%
+%%Résolution des équations implicites avec Newton.\\
+%\begin{block}{}
+%Avancement de $t^{n}$ à $t^{n+1}$ par un algorithme de Newton.
+%\end{block}
+%%{\footnotesize
+%%\begingroup \small{
+%%	\begin{eqnarray*} \label{eq-newton-C1}
+%%	b\left(\vec{u}^{k+1}, q\right) - \gamma (p^{k+1},q) &=& 0, \\ \nonumber
+%%	\frac{3}{2 \delta t} \left(\vec{u}^{k+1},\vec{v}\right)
+%%	+ c\left(\vec{u}^{k+1} ; \vec{u}^{k}, \vec{v} \right)
+%%	&+& c\left(\vec{u}^{k} ; \vec{u}^{k+1}, \vec{v} \right)\\ \nonumber
+%%	+ 
+%%	%\left(\frac{1}{Re} \nabla \vec{u}^{k+1}, \nabla \vec{v}\right)
+%%	a\left( \vec{u}^{k+1}, \vec{v}\right)
+%%	%- \left(\frac{d A}{d\theta}(\theta^k)\, \theta^{k+1} \, \vec{u}^k, \vec{v}\right)
+%%	&+&  b\left(\vec{v}, p^{k+1}\right)  \\ \nonumber
+%%	- {\left(\frac{df_B}{d\theta}(\theta_k)\, \theta^{k+1} \, \vec{e}_y, \vec{v}\right)} &=&  
+%%	\frac{1}{\delta t} \left( 2 \vec{u}^n - \frac{1}{2} \vec{u}^{n-1},\vec{v}\right) \\ \nonumber
+%%	&+& c\left(\vec{u}^k ; \vec{u}^{k}, \vec{v} \right), \,\,\, \\  \nonumber
+%%	\frac{3}{2\delta t} \left(\theta^{k+1}, \phi\right)
+%%	-\left(\vec{u}^{k} \cdot \nabla \phi, \theta^{k+1}  \right)
+%%	&-&\left(\vec{u}^{k+1} \cdot \nabla \phi, \theta^k\right)\\ \nonumber
+%%	+\left( \frac{K}{Re Pr} \nabla \theta^{k+1}, \nabla \phi \right) 
+%%	%+ \frac{1.5}{\delta t} \left(\frac{dS}{d\theta}(\theta^k)\, \theta^{k+1},\, \phi\right)
+%%	&=&
+%%	\frac{2}{\delta t} \left(\theta^n , \phi\right)  \\ \nonumber
+%%	-\left(\vec{u}^{k} \cdot \nabla \phi, \theta^k\right)
+%%	&-& \frac{1}{2 \delta t} \left(\theta^{n-1},\, \phi\right).\,\,\,
+%%	\end{eqnarray*}
+%%} \endgroup
+%%}
+%
+%\begin{equation*}
+%D_w{\cal F} (w_k ) w_{k+1} = D_w{\cal F}(w_k) w_k -  {\cal F}(w_k).
+%\label{eq-newton-w}
+%\end{equation*}
+%
+%\begin{exampleblock}{}
+%+ CL : Dirichlet homogène pour la vitesse.
+%\end{exampleblock} \vspace{0.2cm}
+%
+%\end{frame}  
+%
+\begin{frame}  
+\frametitle{Implémentation}\vspace{-0.1cm}
+
+\begin{exampleblock}{}
+\begin{itemize}
+\item <1-> {\color{green} $\bullet$}  Implémentation avec le logiciel éléments finis FreeFem++.
+\item <1-> {\color{green} $\bullet$}  Adaptation de maillage à chaque pas de temps.
+\item <2-> {\color{green} $\bullet$}  3D : librairie \texttt{FFDDM}. Décomposition de domaine.
+\item <3-> {\color{green} $\bullet$}  Adaptation de maillage 3D : \texttt{MMG3D} et \texttt{MSHMET}.
+\end{itemize}
+\end{exampleblock} \vspace{0.7cm}
+
+\vspace{0.5cm}
+
+\begin{columns}[c]
+\column{.3\textwidth}
+\begin{center}
+\includegraphics[width=0.75\columnwidth]{\figpath/freefem} \\
+www.freefem.org
+\end{center}
+\column{.3\textwidth}
+
+\visible<2->{
+\begin{block}{Collaborations}
+{\color{myblue} $\bullet$}  G. Sadaka $^{(1)}$ \\
+{\color{myblue} $\bullet$}  P-H. Tournier $^{(2)}$ \\
+{\color{myblue} $\bullet$}  F. Luddens $^{(1)}$ \\
+{\color{myblue} $\bullet$}  C. Lothodé $^{(1)}$
+\end{block}
+}
+\column{.3\textwidth}
+\visible<3>{
+\begin{center}
+\includegraphics[width=0.75\columnwidth]{\figpath/MMG3D}
+www.mmgtools.org
+\end{center}
+}
+\end{columns}
+
+\vspace{0.7cm}
+
+\visible<2->{
+\tiny{$^{1}$ LMRS, Université de Rouen Normandie} \\
+\tiny{$^{2}$ LJLL, Sorbonne Université} \\
+}
+
+\end{frame}
+ 
+\subsection{Test de convergence}     
+
+%\begin{frame}  
+%\frametitle{Test de convergence}\vspace{-0.1cm}
+
+%\begin{exampleblock}{}
+%\begin{itemize}
+%\item  {\color{green} $\bullet$}  Convergence en espace : Burggraf.
+%\end{itemize}
+%\end{exampleblock}
+
+
+%\end{frame}
+
+\begin{frame}
+  \frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_B2}
+\end{frame}
+
+
+% ------------------------------------------------------------------------------------------------------------
+
+\begin{frame}  
+\frametitle{Test de convergence}\vspace{-0.1cm}
+
+\begin{exampleblock}{}
+\begin{itemize}
+\item  {\color{green} $\bullet$}  Convergence en espace : écoulement de Burggraf.
+\item  {\color{green} $\bullet$}  Convergence en temps : solution manufacturée.
+\end{itemize}
+\end{exampleblock}
+
+\end{frame}
+
+% ------------------------------------------------------------------------------------------------------------
+
+\begin{frame}
+ \frametitle{Écoulement de Burggraf}\vspace{-0.2cm}
+ 
+ \begin{block}{}
+Cavité entraînée régularisée
+\end{block}
+ \vspace{-0.4cm}
+\begin{columns}[c]
+\column{.5\textwidth}
+\begin{center}
+\small{Fonction de courant}
+	    \includegraphics[width=0.72\columnwidth]{\figpath/figsCPC_03_1_a}
+\end{center}
+\column{.5\textwidth}
+\begin{center}
+\small{Isolignes de température}
+	    \includegraphics[width=0.7\columnwidth]{\figpath/figsCPC_03_1_b}
+\end{center}
+
+\end{columns}
+
+%\vspace{-0.1cm}
+{
+\color{gray} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+}
+\vspace{-1.2cm}
+\begin{columns}[c]
+
+\column{.6\textwidth}  
+\small{
+\begin{flushleft}
+\begin{eqnarray*}
+   u_1(x,y) &=& \sigma g'(x) h'(y), \\\nonumber
+   u_2(x,y) &=& - \sigma g''(x) h(y), \\\nonumber
+   p(x,y)     &=& \frac{\sigma}{\Rey} \left( h^{(3)}(y) g(x) + g''(x)h'(y) \right) \\
+   	        &+& \frac{\sigma^2}{2} g'(x)^2 \left( h(y)h''(y)-h'(y)^2 \right),\\ \nonumber
+   T(x,y)    &=& T_{c} + (T_{h} - T_{c}) y + a(x) b(y).
+\end{eqnarray*}
+\end{flushleft}
+}% END SMALL
+
+
+\column{.4\textwidth}  
+\small{
+\begin{flushright}
+\begin{eqnarray*}
+   g(x) &=& \frac{x^5}{5} - \frac{x^4}{2} + \frac{x^3}{3}, \\ \nonumber
+   h(y) &=& y^4 - y^2, \\ \nonumber
+   a(x) &=& \cos (\pi x), \\ \nonumber
+   b(y) &=& y(1-y).
+\end{eqnarray*}
+\end{flushright}
+}
+
+\end{columns}
+
+\end{frame}  
+
+
+\begin{frame}
+ \frametitle{Écoulement de Burggraf : convergence en espace}\vspace{-0.2cm}
+%\begin{block}{}
+%Convergence en espace
+%\end{block}
+%\vspace{-0.1cm}
+
+\begin{columns}[c]
+\column{.5\textwidth}
+\begin{center}
+\begin{exampleblock}{}
+${\color{green} \bullet}$ $\mathbb{P}_1$ pour la température
+\end{exampleblock}
+	    \includegraphics[width=0.9\columnwidth]{\figpath/figsCPC_03_3_a}
+\end{center}
+\column{.5\textwidth}
+\begin{center}
+\begin{exampleblock}{}
+${\color{green} \bullet}$ $\mathbb{P}_2$ pour la température
+\end{exampleblock}
+	    \includegraphics[width=0.9\columnwidth]{\figpath/figsCPC_03_3_b}
+\end{center}
+
+\end{columns}
+
+\vspace{0.4cm}
+{
+\color{gray} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+}
+\vspace{-0.6cm}
+\begin{eqnarray*}
+	|| \varepsilon ||_{\infty} & = & || u_{exact} - u ||_{\infty} \\
+	|| \varepsilon ||_{2} & = &  || u_{exact} - u ||_{2}
+\end{eqnarray*}
+
+\end{frame}
+
+
+% ------------------------------------------------------------------------------------------------------------
+\begin{frame}
+ \frametitle{Solution manufacturée \textit{[Nourgaliev et. al (2016)]}}\vspace{-0.6cm}
+
+
+\begin{columns}[c]
+\column{.5\textwidth}
+\begin{center}
+\begin{exampleblock}{}
+${\color{green} \bullet}$ Erreur sur la température
+\end{exampleblock}
+	    \includegraphics[width=0.7\columnwidth]{\figpath/figsCPC_03_3_1}
+\end{center}
+\column{.5\textwidth}
+\begin{center}
+\begin{exampleblock}{}
+${\color{green} \bullet}$ Erreur sur la vitesse
+\end{exampleblock}
+	    \includegraphics[width=0.7\columnwidth]{\figpath/figsCPC_03_3_2}
+\end{center}
+
+\end{columns}
+
+\vspace{0.2cm}
+{
+\color{gray} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+}
+\vspace{-0.6cm}
+
+\small{
+\begin{align*}
+	u_1(x,y,t) &=& \left( \delta U_0 + \alpha_u \, \sin(t) \right) \, \cos(x+ \gamma_1 t) \, \sin(y+ \gamma_2 t), \\ \nonumber
+	u_2(x,y,t) &=& - \left( \delta U_0 + \alpha_u \sin(t) \right) \, \sin(x+ \gamma_1 t) \, \cos(y+ \gamma_2 t), \\ \nonumber
+	T(x,y,t) &=& \bar{T} + \left( \delta T_0 + \alpha_t \sin(t) \right) \, \cos(x+ \gamma_1 t) \, \sin(y+ \gamma_2 t), \\ \nonumber
+	p(x,y,t) &=& \bar{P} + \left(\delta P_0 + \alpha_p \sin(t) \right) \, \sin(x+ \gamma_1 t) \, \cos(y+ \gamma_2 t), 
+\end{align*}
+}
+\vspace{-0.4cm}
+
+{\color{gray} \tiny{
+\begin{table}[]
+\centering
+\begin{tabular}{*{10}{c}}
+ % \toprule
+  $\gamma_1$ & $\gamma_2$ & $\bar{P}$ & $\bar{T}$ & $\delta P_0$ & $\delta T_0$ & $\delta U_0$ & $\alpha_p$ & $\alpha_u$ & $\alpha_t$\\
+   \midrule
+  $0.1$ & $0.1$ & $0$ & $1.0$ &  $0.1$ & $1.0$ & $1.0$ & $0.05$ & $0.4$ & $0.1$ \\
+ % \bottomrule
+ \end{tabular}
+\end{table}
+}
+}
+\end{frame}  
+
+% ------------------------------------------------------------------------------------------------------------
+
+%\subsection{Simulation numérique de la convection naturelle de l'air}  
+
+\begin{frame}
+  \frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_B3}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Convection naturelle de l'air en 2D}\vspace{-0.2cm}
+
+\begin{exampleblock}{}
+${\color{green} \bullet}$ Cavité carrée differentiellement chauffée
+\end{exampleblock}
+
+\begin{center}
+	   \includegraphics[width=\columnwidth]{\figpath/NATCONV_2D}
+\end{center}\vspace{0.7cm}  
+
+\end{frame} 
+
+\begin{frame}
+  \frametitle{Validation du solveur de Navier-Stokes-Boussinesq}\vspace{-0.2cm}
+
+Comparaison avec un code spectral {\color{myblue} \textbf{ \textit{[Le Quéré, CF (1990)]}}}. \\
+$u_{max}:$ valeur maximale de la vitesse à la ligne $y = 0.5$.
+
+\alt<2>{
+\small{
+\begin{table}
+   \begin{center}
+      \begin{tabular}{*{7}{cl}}
+          & $u_{max}$ & (err $\%$)  & $x_{max}$ & & {$\mathcal{N}\!u$}  &  \\ \toprule
+              
+          $\Ray = 10^6$ & $6.48369$ & {\color{myred}($0.038$)} & $0.850394$ & {\color{myred}($0.046$)} & $17.5344$ &  {\color{myred}($0.009$)} \\ 
+          % &  & &  &  &  &   \\ 
+         \rowcolor{myblue} \textbf{ \textit{[Le Quéré]}} & $6.48344$ & & $0.850000$  &  & $17.5360$ &   \\ \hline
+          &  & &  &  &  &   \\ 
+          $\Ray = 10^7$ & $4.69349$ & {\color{myred}($0.10$)} & $0.88189$ & {\color{myred}($0.32$)} & $39.3455$ & {\color{myred}($0.12$)}  \\
+         % &  & &  &  &  &   \\ 
+          \rowcolor{myblue} \textbf{ \textit{[Le Quéré]}} & $4.69862$ &  & $0.879$ &  & $39.3947$ &   \\ \hline
+	  &  & &  &  &  &   \\ 
+          $\Ray = 10^8$ & $3.20182$ & {\color{myred}($0.52$)} & $0.929134$ & {\color{myred}($0.12$)} & $87.3469$ & {\color{myred}($0.127$)} \\
+          %&  & &  &  &  &   \\ 
+          \rowcolor{myblue} \textbf{ \textit{[Le Quéré]}} & $3.21875$ &  & $0.928$ &  & $87.2355$ &   \\ \bottomrule
+          
+               \end{tabular}
+   \end{center}
+ %  \caption{Average Nusselt number at the vertical wall of the cavity at $x=0$. Comparison with the results by \cite{de1983natural} and \cite{LeQuere91} for $\Ray= 10^4$ to $10^6$.}
+   \label{tab-Nu-natconv}
+\end{table}
+
+$$ \mathcal{N}\!u = \left. - \int_0^1 \frac{\partial \theta}{\partial x} \right|_{x=0} dy $$
+
+}
+}% END VISIBLE
+{
+
+\begin{columns}[c]
+\column{.5\textwidth}
+\begin{exampleblock}{}
+\begin{center}
+Profil de la vitesse à $y = 0.5$
+\end{center}
+\end{exampleblock}
+	    \includegraphics[width=\columnwidth]{\figpath/Mesh-conv_b}
+\column{.5\textwidth}
+\begin{exampleblock}{}
+\begin{center}
+Erreur : $ \varepsilon_v = || V_{{\hbox{\tiny LQ}}} - V(x,0) ||_2 $
+\end{center}
+\end{exampleblock}
+	    \includegraphics[width=\columnwidth]{\figpath/Mesh-conv_a}
+
+\end{columns}
+
+\vspace{0.4cm}
+
+
+%\begin{center}
+%\begin{figure}
+%	   \includegraphics[width=.8\columnwidth]{\figpath/Mesh-conv}
+%\end{figure} \vspace{-0.5cm} 
+
+%\end{center}
+}
+
+\end{frame} 
+
+% ------------------------------------------------------------------------------------------------------------
+\begin{frame}
+ \frametitle{Convection naturelle en 3D}\vspace{-0.2cm}
+ \begin{block}{}
+ \begin{itemize}
+ \item ${\color{blue} \bullet}$ Convection naturelle de l'air dans une cavité cubique $[0,1]^3.$
+ \item ${\color{blue} \bullet}$ Problème de mémoire pour les méthodes directes.
+ \visible<2> { 
+ \item ${\color{blue} \bullet}$ Méthode de décomposition de domaine : FFDDM.
+ \item ${\color{blue} \bullet}$ Solveur itératif GMRES.
+ }
+ \end{itemize}
+ \end{block}
+
+\alt<2>{
+\begin{center}
+	   \includegraphics[width=.5\columnwidth]{\figpath/figs_3D_DOMAIN_ddm} \\
+	   Décomposition en 8 domaines avec \texttt{METIS}
+\end{center}
+}{
+\begin{center}
+	   \includegraphics[width=.6\columnwidth]{\figpath/figs_3D_NATCONV_ddm} 
+\end{center}
+}
+
+\end{frame}  
+
+
+
+\begin{frame}
+\frametitle{Comparaison des codes séquentiel et parallèle}\vspace{-0.2cm}
+
+\begin{exampleblock}{}
+	Comparaison des champs de vitesse longitudinale et de température dans le plan $y=0.5$.
+\end{exampleblock}
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{|*{4}{c|}}
+			\hline
+			 $\Ray$ & \em{nb proc }  & $||u||_{2}$  & $||\theta||_{2}$  \\ \hline \hline
+			\multirow{4}{*}{$10^6$} & 28 & $6.61804 \cdot 10^{-6}$ &  $ 3.46504\cdot 10^{-6} $ \\% \hline
+			\cline{2-4}
+			& 42 & $5.93966 \cdot 10^{-6}$ & $ 3.98082 \cdot 10^{-6} $ \\ \cline{2-4} %\hline 
+			& 56 & $7.05144 \cdot 10^{-6}$  & $ 5.0044 \cdot 10^{-6} $ \\ \cline{2-4} %\hline
+			& 70 & $6.02152 \cdot 10^{-6}$ & $ 4.50094 \cdot 10^{-6} $ \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\end{frame}  
+
+
+\begin{frame}
+ \frametitle{Test de scalabilité forte}\vspace{-0.2cm}
+
+\begin{block}{}
+${\color{blue} \bullet}$ Taille du problème fixe pour différents nombres de sous-domaines. \\
+${\color{blue} \bullet}$ 1 sous-domaine = 1 processeur. \\
+${\color{blue} \bullet}$ 7.2 millions d'inconnues.
+\end{block}
+
+\begin{center}
+	   \includegraphics[width=0.6\columnwidth]{\figpath/scalabilite_ffddm_3D} 
+\end{center}
+
+\end{frame}  
+
+
+\begin{frame}
+\frametitle{Validation du code 3D}\vspace{-0.2cm}
+
+\begin{block}{}
+Comparaison de $u_{max}$ et $w_{max}$ dans le plan $y=0.5$, avec \textbf{\textit{[Wakashima  (2004)]}} (DF) et \textbf{\textit{[Moglan (2013)]}} (DF).
+\end{block}
+
+\begin{center}
+\begin{table}
+
+      \begin{tabular}{*{4}{cl}}
+           & $u_{max}$ ($z_{max}$) & $w_{max}$ ($x_{max}$) & (err $\%$) \\ \toprule
+           $\Ray = 10^4$ & $0.198094$ ($0.8267$) & $0.220973$ ($0.11811$) & {\color{myred} $0.28$}\\ 
+            \rowcolor{myblue} \textbf{\textit{[Wakashima]}} & $0.198400$ ($0.8250$) & $0.221600$ ($0.11770$) &  \\
+           \textbf{\textit{[Moglan]}} & $0.185900$ ($0.8230$) & $0.223400$ ($0.11720$) & \\ \hline
+           
+           $\Ray = 10^5$ & $0.140367$ ($0.8503$) & $0.245454$ ($0.0629$) & {\color{myred} $0.20$}\\ 
+            \rowcolor{myblue} \textbf{\textit{[Wakashima]}} & $0.141600$ ($0.8500$) & $0.246400$ ($0.0677$) & \\
+           \textbf{\textit{[Moglan]}} & $0.146100$ ($0.8540$) & $0.245900$ ($0.0703$) & \\ \hline
+           
+           $\Ray = 10^6$ & $0.080924$ ($0.8582$) & $0.257719$ ($0.03937$) & {\color{myred} $0.22$} \\ 
+            \rowcolor{myblue} \textbf{\textit{[Wakashima]}} & $0.081110$ ($0.8603$) & $0.258300$ ($0.03230$) &  \\ 
+           \textbf{\textit{[Moglan]}} & $0.083000$ ($0.8550$) & $0.255300$ ($0.03905$) & \\ \bottomrule       
+           
+               \end{tabular}
+\end{table}
+\end{center}
+
+\end{frame}  
+
+% -----------------------------------------------------------------------------------------------------------
+\section{Résolution numérique des équations de Navier-Stokes-Boussinesq + Enthalpie}
+ 
+ \begin{frame}
+   \frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_BE1}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Méthodes de résolutions des problèmes de changement de phase}\vspace{-0.2cm} 
+ 
+ \alt<2>{
+   \begin{block}{}
+ Méthode mono-domaine : Résolution des mêmes systèmes d'équations dans tout le domaine.
+ \end{block}
+ \begin{center}
+ \includegraphics[width=.5\textwidth]{\figpath/Scheme_Different_method_ONE}
+ \end{center}
+} % END BLOCK 1
+{
+\begin{block}{}
+ Méthode de suivi d'interface.
+ \end{block}
+ 
+ \begin{center}
+ {\includegraphics[width=\textwidth]{\figpath/Scheme_Different_method}}
+ \end{center}
+ Condition de Stefan:
+\begin{eqnarray*}\nonumber
+U_i = \frac{\Ste}{\Pr} (\vec \nabla \theta_s - \vec \nabla \theta_l) \cdot \vec n
+\end{eqnarray*}
+}% END BLOCK 2
+ \end{frame} 
+
+%\begin{frame}
+%  \frametitle{Changement de phase solide/liquide}\vspace{-0.1cm} 
+%
+%{
+%\begin{block}{}
+%${\color{gray} \bullet}$ Dans le liquide :
+%\end{block}
+%\vspace{-0.5cm} 
+%\begin{eqnarray*}\nonumber
+%\nabla\cdot \vec{u}&=&0, \\
+% \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+% - f_B(\theta) \, \vec{e}_y &=& 0, \\
+% \frac{\pl \theta}{\pl t} + \nabla \cdot\left( \theta \vec{u}\right) -
+% \frac{K}{Pr \ \Rey} \nabla^2 \theta  &=& 0.
+%\label{eq-energ}
+%\end{eqnarray*}
+%}
+%\visible<2->
+%{
+%\begin{block}{}
+%${\color{gray} \bullet}$ Dans le solide :
+%\end{block}
+%\vspace{-0.5cm} 
+%\begin{eqnarray*}\nonumber
+% \frac{\pl  \theta}{\pl t} -
+% \frac{K}{Pr \ \Rey} \nabla^2 \theta  &=& 0.
+%\label{eq-energ}
+%\end{eqnarray*}
+%}
+%\visible<3>
+%{
+%\begin{block}{}
+%${\color{gray} \bullet}$ À l'interface solide/liquide ${\Gamma_i}$ : \color{myred}{\textbf{condition de Stefan}}
+%\end{block}
+%\vspace{-0.5cm} 
+%\begin{eqnarray*}\nonumber
+%U_i = \frac{\Ste}{\Pr} (\vec \nabla \theta_s - \vec \nabla \theta_l) \cdot \vec n
+%\label{eq-energ}
+%\end{eqnarray*}
+%}
+%
+%\end{frame}
+%
+ 
+
+%\subsection{Navier-Stokes-Boussinesq + Enthalpie}
+
+
+\begin{frame}
+   \frametitle{Méthode d'enthalpie}\vspace{-0.2cm} 
+
+\begin{exampleblock}{}
+Equation d'énergie écrite pour l'enthalpie totale.
+\end{exampleblock}
+
+$^{(*)} H = c (s+T) $ : chaleur latente + chaleur sensible. 
+
+
+\colpaper{
+\begin{equation*}
+S(\theta)=\frac{1}{\mathcal{S}te} - \frac{2}{\mathcal{S}te}\left\{
+1 + \tanh\left(-\frac{\theta}{R_{s}}\right)
+\right\}.
+\end{equation*} 
+}
+
+\begin{eqnarray*}\nonumber
+%\nabla\cdot \vec{u}&=&0, \\
+% \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+% - f_B(\theta) \, \vec{e}_y &=& A\!(\theta) \vec u, \\
+\frac{\pl \left(C \theta\right)}{\pl t} +  \colpaper{\cancel{\nabla \cdot\left( C S \vec{u}\right)}} + \nabla \cdot\left( C \theta \vec{u}\right) -
+ \frac{K}{Pr \ \Rey} \nabla^2 \theta +   \colpaper{\frac{\pl \left(C S\right)}{\pl t}} &=& 0.
+\end{eqnarray*}
+
+%{
+%\color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+%
+%}
+
+
+\begin{block}{}
+{\color{myblue} $\bullet$} Dans le liquide : $\nabla \cdot\left( C S \vec{u}\right) = C S \nabla \cdot \vec{u} = 0$. \\
+{\color{myblue} $\bullet$} Dans le solide : $S(\theta) = 0$. \\
+{\color{myblue} $\bullet$} Dans la zone de régularisation : $u=0$.
+\end{block}
+
+\vspace{0.6cm}
+
+$^{(*)} $ \tiny{ \cite{Voller, IJHMT (1987)}}
+
+    \end{frame}     
+%********************************************************************************************************
+ 
+
+
+
+\begin{frame}
+  \frametitle{Navier-Stokes-Boussinesq + Enthalpie}\vspace{-0.1cm} 
+
+{\color{myred} Approche mono-domaine :} 
+
+{
+\begin{eqnarray*}\nonumber
+\nabla\cdot \vec{u}&=&0, \\
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+ - f_B(\theta) \, \vec{e}_y &=& \colpaper{A\!(\theta) \vec u}, \\
+ \frac{\pl \left(C \theta\right)}{\pl t} + \nabla \cdot\left( C \theta \vec{u}\right) -
+ \frac{K}{Pr \ \Rey} \nabla^2 \theta +  \colpaper{\frac{\pl \left(C S\right)}{\pl t}} &=& 0.
+\label{eq-energ}
+\end{eqnarray*}
+} % END VISIBLE 2
+
+\begin{block}{}
+\begin{itemize}
+\item ${\color{myblue} +}$  terme source $S$ dans l'équation d'énergie.
+\item ${\color{myblue} +}$  terme de pénalisation $A$ dans l'équation de quantité de mouvement.
+\item ${\color{myblue} \bullet}$ Interface solide-liquide = isoligne de température $\theta = 0$.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+%\subsection{Modèle de Carman-Kozeny}
+\begin{frame}
+   \frametitle{Modèle de Carman-Kozeny}\vspace{-0.2cm} 
+
+\begin{exampleblock}{}
+La vitesse doit être ramenée à zéro dans le solide.
+\end{exampleblock}
+
+
+\begin{eqnarray*}\nonumber
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+ - f_B(\theta) \, \vec{e}_y &=& \colpaper{A\!(\theta) \vec u} \\
+\end{eqnarray*}
+
+ \hbox{\rule[1ex]{\textwidth}{.01cm}}
+
+\begin{columns}[c]
+\visible<3>{
+\column{.4\textwidth}  
+   \includegraphics[width=\textwidth]{\figpath/A_variation_2}
+ }
+\column{.6\textwidth}  
+\visible<2,3>{
+  \small \Magenta{
+	\begin{eqnarray*}
+	    A(\theta) &=& - C_{{\hbox{\tiny CK}}} \frac{(1 - L_f(\theta))^2}{L_f(\theta)^3+b}, \\
+	   L_f(\theta) &=& 1 + \frac{1}{2} \left\{
+	   1 + \tanh\left(\frac{\theta_f-\theta}{R_{f}}\right)
+   	   \right\},
+\end{eqnarray*} 
+}
+
+{
+\color{blue}
+
+ $C_{{\hbox{\tiny CK}}}$ : constante de Carman-Kozeny,\\ 
+ $L_f$ : fraction liquide.\\
+ $\, b = 10^{-7}$ \\
+ % $C_{{\hbox{\tiny CK}}} = 10^6$.
+
+} %END COLOR
+}
+
+\end{columns}
+\visible<3>{
+\begin{block}{}
+Adaptation de maillage : maillage fin le long de l'interface.
+\end{block}
+}
+\end{frame}
+
+ \begin{frame}
+\frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_BE2}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fusion d'un matériau à changement de phase}\vspace{-0.1cm}
+
+%\begin{exampleblock}{}
+%\begin{itemize}
+%\item <1->  {\color{green} $\bullet$}  Prise en compte du phénomène de changement de phase.
+%\item <1->  {\color{green} $\bullet$}  Rajout de terme non-linéaire supplémentaire.
+%\item <2->  {\color{green} $\bullet$}  Adaptation de maillage à chaque pas de temps.
+
+%\end{itemize}
+%
+%\end{exampleblock} \vspace{0.2cm}
+
+
+
+
+\begin{columns}[c]
+
+\column{.4\textwidth}  
+
+\begin{minipage}{0.99\columnwidth} \begin{center}
+	   \includegraphics[width=\columnwidth]{\figpath/case_melting_2}
+\end{center} \end{minipage}\vspace{0.7cm}
+
+\center \Magenta{\it \'{E}tude expérimentale de \\ \cite{Okada, IJHMT (1984)}. }   \\
+avec $\theta_h = 1$ et $\theta_c = -0.01$.\\
+
+\column{.6\textwidth}  
+\begin{minipage}{\columnwidth} \begin{center}
+\movie[width=\columnwidth,height=\columnwidth,loop]{\includegraphics[width=\textwidth,height=\textwidth]{\movpathN/affiche_melt}}{\movpathN/MELTING_cavity_mesh.avi}
+\end{center} \end{minipage}
+
+\end{columns}
+%
+%{
+% \vspace{-0.2cm}
+%{
+%\color{gray} %\hbox{\rule[1ex]{\textwidth}{.01cm}}
+%
+%{\footnotesize
+%\begingroup \tiny{
+%	\begin{eqnarray*} \label{eq-newton-C1}
+%	b\left(\vec{u}^{k+1}, q\right) - \gamma (p^{k+1},q) &=& 0, \\ \nonumber
+%	\frac{3}{2 \delta t} \left(\vec{u}^{k+1},\vec{v}\right)
+%	+ c\left(\vec{u}^{k+1} ; \vec{u}^{k}, \vec{v} \right)
+%	&+& c\left(\vec{u}^{k} ; \vec{u}^{k+1}, \vec{v} \right)\\ \nonumber
+%	+ 
+%	%\left(\frac{1}{Re} \nabla \vec{u}^{k+1}, \nabla \vec{v}\right)
+%	a\left( \vec{u}^{k+1}, \vec{v}\right)
+%	- \colpaper{\left(\frac{d A}{d\theta}(\theta^k)\, \theta^{k+1} \, \vec{u}^k, \vec{v}\right)}
+%	&-& \colpaper{\left(A(\theta^k) \, \vec{u}^{k+1}, \vec{v}\right)} + b\left(\vec{v}, p^{k+1}\right)  \\ \nonumber
+%	- {\left(\frac{df_B}{d\theta}(\theta_k)\, \theta^{k+1} \, \vec{e}_y, \vec{v}\right)} &=&  
+%	\frac{1}{\delta t} \left( 2 \vec{u}^n - \frac{1}{2} \vec{u}^{n-1},\vec{v}\right) \\ \nonumber
+%	+ c\left(\vec{u}^k ; \vec{u}^{k}, \vec{v} \right) 
+%	&-& \colpaper{\left(\frac{d A}{d\theta}(\theta^k)\, \theta^{k} \, \vec{u}^k, \vec{v}\right)}, \,\,\, \\  \nonumber
+%	\frac{3}{2\delta t} \left(\theta^{k+1} + \colpaper{\frac{dS}{d\theta}(\theta^k)\, \theta^{k+1}}, \phi\right)
+%	-\left(\vec{u}^{k} \cdot \nabla \phi, \theta^{k+1}  \right)
+%	&-&\left(\vec{u}^{k+1} \cdot \nabla \phi, \theta^k\right)\\ \nonumber
+%	+\left( \frac{K}{Re Pr} \nabla \theta^{k+1}, \nabla \phi \right) 
+%	%+ \frac{1.5}{\delta t} \left(\frac{dS}{d\theta}(\theta^k)\, \theta^{k+1},\, \phi\right)
+%	&=&
+%	\frac{2}{\delta t} \left(\theta^n + \colpaper{S(\theta^n)} , \phi\right)  \\ \nonumber
+%	-\left(\vec{u}^{k} \cdot \nabla \phi, \theta^k\right)
+%	+ \frac{1.5}{\delta t} \colpaper{ \left(\frac{dS}{d\theta}(\theta^k)\, \theta^{k}  - S(\theta^n) ,\, \phi\right) }
+%	&-& \frac{1}{2 \delta t} \left(\theta^{n-1} + \colpaper{S(\theta^{n-1})},\, \phi\right).\,\,\,
+%	\end{eqnarray*}
+%} \endgroup
+%}
+%}
+%}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Position de l'interface solide-liquide}\vspace{-0.4cm}
+
+\begin{columns}[c]
+
+\column{.5\textwidth}
+\begin{exampleblock}{}
+\begin{center}
+Maillage adapté à $t=78.7$
+\end{center} 
+\end{exampleblock}
+	   \includegraphics[width=0.9\columnwidth]{\figpath/figsCPC_07_a}          
+
+\column{.5\textwidth}
+\begin{exampleblock}{}
+\begin{center}
+Isoligne de température $\theta = 0$
+\end{center} 
+\end{exampleblock}
+	   \includegraphics[width=0.98\columnwidth]{\figpath/figsCPC_07_b}          
+
+\end{columns}
+
+\begin{block}{}
+\begin{itemize}
+\item ${\Blue \bullet}$ Maillage : $h_{min} = 10^{-3}$, $h_{max} = 10^{-1}$.
+\item ${\Blue \bullet}$  $C_{{\hbox{\tiny CK}}} = 10^{6}$.
+\item ${\Blue \bullet}$ Comparaison avec les résultats expérimentaux de \textbf{\textit{[Okada, IJHFF (1984)]}}
+\end{itemize}
+\end{block}
+
+%\begin{block}{}
+%\small{ \textit{Comparaison avec les résultats expérimentaux de \cite{Okada, IJHFF (1984)}}.}
+%\end{block}
+\end{frame}  
+
+ \begin{frame}
+\frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_BE3}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Influence du modèle de Carman-Kozeny}\vspace{-0.1cm} 
+
+{
+\begin{block}{}
+${\color{gray} \bullet}$ Dans la zone de régularisation :
+\end{block}
+\vspace{-0.5cm} 
+\begin{eqnarray*}\nonumber
+ \frac{\partial \vec{u}}{\partial t}  &=& A \vec u. 
+\label{eq-energ}
+\end{eqnarray*}
+}
+
+{
+\begin{block}{}
+${\color{gray} \bullet}$ Solution :
+\end{block}
+\vspace{-0.5cm} 
+\begin{eqnarray*}\nonumber
+ \vec u &=& u_0 \times \exp(A  t).
+\label{eq-energ}
+\end{eqnarray*}
+}
+
+
+avec $  A(\theta) = - C_{{\hbox{\tiny CK}}} \frac{(1 - L_f(\theta))^2}{L_f(\theta)^3+b} < 0$. \\
+{
+\vspace{0.2cm}
+\color{gray} \hbox{\rule[1ex]{\textwidth}{.01cm}}
+}
+\vspace{0.2cm}
+\small{
+\begin{table}[]
+\centering
+\begin{tabular}{*{5}{c}}
+ % \toprule
+  $C_{{\hbox{\tiny CK}}} $ & $A_{max}$ & $u_{solide}$ & $v_{solide}$ \\
+   \midrule
+  $10^6$ & $1.62935 \cdot 10^{11}$ & $-9.8058\cdot 10^{-14}$ & $-3.20216 \cdot 10^{-10}$\\
+  $10^{10}$ & $1.62937 \cdot 10^{15}$ & $1.09832\cdot 10^{-17}$ & $-3.23176 \cdot 10^{-14}$\\
+  $10^{20}$ & $1.62935 \cdot 10^{25}$ & $2.7011\cdot 10^{-26}$ & $-3.18493 \cdot 10^{-24}$\\
+ % \bottomrule
+ \end{tabular}
+\end{table}
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Influence de la constante de Carman-Kozeny}\vspace{-0.1cm}
+
+\begin{columns}
+
+\column{.5\textwidth}
+\begin{center}
+\begin{block}{}
+{\color{myblue} $\bullet$} Position de l'interface
+\end{block}
+	   \includegraphics[width=\columnwidth]{\figpath/MELT_cavity_CK_1}
+\end{center}
+
+\column{.5\textwidth}
+
+\begin{center}
+\begin{block}{}
+{\color{myblue} $\bullet$} Variation de U sur $y=0.9$
+\end{block}
+	   \includegraphics[width=\columnwidth]{\figpath/MELT_cavity_CK_3}
+\end{center}
+
+
+\end{columns}
+
+\vspace{0.4cm}
+
+\begin{equation*}
+U = \sqrt{u^2 + v^2}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Influence de la longueur caractéristique de régularisation}\vspace{-0.9cm}
+
+\begin{block}{}
+Position de l'interface solide-liquide à $t = 78.7$.
+\end{block}
+
+\vspace{0.8cm}
+
+\begin{columns}[c]
+\column{.33\textwidth}
+\includegraphics[width=\columnwidth]{\figpath/MELT_cavity_C_effect_PRES_THESIS_a}
+
+\column{.33\textwidth}
+\includegraphics[width=\columnwidth]{\figpath/MELT_cavity_C_effect_PRES_THESIS_b}
+
+\column{.33\textwidth}
+\includegraphics[width=\columnwidth]{\figpath/MELT_cavity_C_effect_PRES_THESIS_c}
+
+\end{columns}
+
+\begin{exampleblock}{}
+$C_{{\hbox{\tiny CK}}} = 10^6$, $R_s = 0.01$.
+\end{exampleblock}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Influence du maillage adapté}\vspace{-0.2cm}
+  
+
+\begin{columns}[c]
+\column{.3\textwidth}
+\begin{block}{}
+\begin{center}  
+$h_{min} = 10^{-3}$ \\
+$h_{max} = 10^{-1}$ 
+\end{center}
+\end{block}
+
+
+
+\begin{block}{}
+\begin{itemize}
+\item $A_r = 1.2$ \\
+\item $A_r = 1.5$ \\
+\item $A_r = 1.8$ 
+\end{itemize}
+\end{block}
+
+\begin{block}{Métriques}
+\begin{itemize}
+\item Calculées par rapport à $u$, $\theta$, $S(\theta)$.
+\end{itemize}
+\end{block}
+
+
+\column{.7\textwidth}  
+{
+\begin{center}
+	   \includegraphics[width=\columnwidth]{\figpath/MESH_analysis_PCM_2}
+\end{center}
+}
+\end{columns}
+
+\end{frame} 
+
+
+\begin{frame}
+  \frametitle{Influence du maillage adapté}\vspace{-0.4cm}
+
+\begin{columns}[c]
+
+\column{.3\textwidth}
+\begin{center}
+	   \includegraphics[width=.9\columnwidth]{\figpath/MESH_analysis_PCM_2_a}
+\end{center}
+\column{.3\textwidth}
+\begin{center}
+	   \includegraphics[width=.9\columnwidth]{\figpath/MESH_analysis_PCM_2_b}
+\end{center}
+\column{.3\textwidth}
+\begin{center}
+	   \includegraphics[width=.9\columnwidth]{\figpath/MESH_analysis_PCM_2_c}
+\end{center}
+
+\end{columns}
+
+
+
+\alt<2>{
+\vspace{0.9cm}
+
+\begin{table}[]
+\centering
+\begin{tabular}{*{5}{c}}
+ % \toprule
+  $h_{min}$ & $h_{max}$ & $A_r$ & $\varepsilon_h$ & n.d.o.f \\
+   \midrule
+  $10^{-3}$ & $10^{-1}$ & $1.5$  & $10^{-2}$ & $18 974$\\
+ % \bottomrule
+ \end{tabular}
+\end{table}
+
+}
+{
+\vspace{-0.4cm}
+\begin{columns}[c]
+ 
+\column{.5\textwidth} 
+\begin{center}
+\begin{block}{}
+Position de l'interface
+\end{block}
+	   \includegraphics[width=.85\columnwidth]{\figpath/NU-LF_MESH_analysis_PCM_1}
+\end{center}
+
+ \column{.5\textwidth} 
+\begin{center}
+\begin{block}{}
+Evolution du nombre de Nusselt
+\end{block}
+	   \includegraphics[width=.85\columnwidth]{\figpath/NU-LF_MESH_analysis_PCM_2}
+\end{center}
+
+\end{columns}
+}
+\end{frame} 
+
+
+
+%\subsection{Influence de la constante de Carman-Kozeny}     
+
+
+%\begin{frame}
+%  \frametitle{Influence de la constante de Carman-Kozeny}\vspace{-0.2cm}
+%
+%\begin{center}
+%	   \includegraphics[width=.5\columnwidth]{\figpath/PCM_ck_compare}
+%\end{center}
+%
+%
+%  \begin{eqnarray*}\nonumber
+% \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+% - f_B(\theta) \, \vec{e}_y &=& \Magenta{A\!(\theta) \vec u} ,
+%\end{eqnarray*}
+%  \small \Magenta{
+%	\begin{equation*}
+%	    A(\theta) = - C_{{\hbox{\tiny CK}}} \frac{(1 - L_f(\theta))^2}{L_f(\theta)^3+b}
+%\end{equation*} 
+%}
+%
+%\end{frame} 
+
+%\subsection{Validation du code : Fusion d'un MCP octadecane}     
+
+\begin{frame}
+  \frametitle{Fusion d'un MCP : $\mathcal{R}a = 10^8$}\vspace{-0.2cm}
+
+\begin{columns}[c]
+\column{.2\textwidth}
+
+\begin{table}[]
+\centering
+\begin{tabular}{*{2}{c}}
+ % \toprule
+  $C_{{\hbox{\tiny CK}}} $ & $10^6$ \\ \hline
+   \rowcolor{gray} $h_{min}$ &   $10^{-3}$ \\ \hline
+  $h_{max}$ & $10^{-1}$ \\ \hline
+  \rowcolor{gray} $A_r$ & $1.5$  \\ \hline
+  $\varepsilon_h$ & $10^{-2}$  \\ \hline
+  \rowcolor{gray}  n.d.o.f & $31 065$ \\ \hline
+ % \bottomrule
+ \end{tabular}
+\end{table}
+
+\column{.8\textwidth}
+\begin{center}
+	   \includegraphics[width=.8\columnwidth]{\figpath/fig03_2}      
+\end{center}
+
+\end{columns}
+
+\begin{block}{}
+Comparaison avec \cite{Bertrand et. al, IJTS (1999)}.
+\end{block}
+
+\end{frame}  
+
+\begin{frame}
+  \frametitle{Fusion d'un MCP : $\mathcal{R}a = 10^8$}\vspace{-0.7cm}
+
+\begin{columns}[c]
+
+\column{.5\textwidth}
+\begin{center}
+\begin{exampleblock}{}
+Nusselt à la paroi chaude
+\end{exampleblock}
+	   \includegraphics[width=\columnwidth]{\figpath/Lf-Nu_Bertrand_2_a}      
+\end{center}
+
+\column{.5\textwidth}
+\begin{center}
+\begin{exampleblock}{}
+Évolution de la fraction liquide
+\end{exampleblock}
+	   \includegraphics[width=\columnwidth]{\figpath/Lf-Nu_Bertrand_2_b}      
+\end{center}
+
+\end{columns}
+
+\begin{equation*}
+^{(*)} \mathcal{N}\!u (\tau) =  \frac{1}{\sqrt{2 \tau}} + \left[0.33 \Ray^{1/4} - \frac{1}{\sqrt{2 \tau}} \right]  \left[ 1 + \left(0.0175  \Ray^{3/4}  \tau^{3/2}\right)^{-2} \right]^{2}.
+\end{equation*}
+
+\vspace{0.6cm}
+\tiny{$^{(*)}$ \textbf{\textit{[P. Jany and A. Bejan, IJHMT (1988)]}.}}
+
+\end{frame}  
+
+\begin{frame}
+ \frametitle{Fusion d'une paraffine en 3D} \vspace{-0.2cm}
+ 
+% \begin{exampleblock}{}
+%Fusion d'une paraffine dans une cavité cubique différentiellement chauffée
+%\end{exampleblock}
+ 
+ \begin{columns}[c]
+\column{.4\textwidth}  
+
+\begin{block}{Paramètres}
+{\color{gray} $\bullet$} $\mathcal{R}a = 3.27 \times 10^5$ \\
+{\color{gray} $\bullet$} $\mathcal{P}r = 56.2$ \\
+{\color{gray} $\bullet$} $\mathcal{S}te = 0.045$ \\
+\end{block}
+
+\begin{block}{}
+{\color{myblue} $\bullet$} Adaptation de maillage : \texttt{MMG3D}. \\
+{\color{myblue} $\bullet$} Solveur : \texttt{GMRES}. \\
+{\color{myblue} $\bullet$} Préconditionneur : \texttt{ORAS}. \\
+\end{block}
+
+\column{.6\textwidth}  
+\vspace{-0.9cm}
+
+\movie[width=\textwidth,height=\textwidth,showcontrols=false,
+autostart,loop]{\includegraphics[width=\textwidth,height=\textwidth]{\movpathN/affiche_3D_Okada}}{\movpathN/3D_MELTING_OKADA.avi}
+
+\end{columns}
+
+\end{frame} 
+
+
+\begin{frame}
+ \frametitle{Comparaison des résultats 2D et 3D} \vspace{-0.9cm}
+
+\begin{exampleblock}{}
+Comparaison de la position de l'interface à $t = 78.7$
+\end{exampleblock}
+
+\vspace{0.5cm}
+
+\begin{columns}[c]
+
+\column{.5\textwidth}
+\begin{center}
+ \includegraphics[width=\columnwidth]{\figpath/3D_config_Okada.jpg}  
+\end{center}
+
+\column{.5\textwidth}
+\begin{center}
+	 \includegraphics[width=\columnwidth]{\figpath/3D_valid_Okada}   
+\end{center}	
+
+\end{columns}
+
+\end{frame} 
+
+\section{Simulation d'un cycle complet fusion/solidification}  
+
+ \begin{frame}
+ \frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_BEA1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cycle complet fusion/solidification}\vspace{-0.9cm}
+
+%\begin{exampleblock}{}
+%Fusion d'un MCP suivie d'une re-solidification après une fusion partielle ou totale
+%\end{exampleblock}
+
+\begin{columns}[c]
+
+\column{.33\textwidth}
+\begin{block}{}
+\begin{center}
+Solide
+\end{center}
+\end{block}
+	   \includegraphics[width=\columnwidth]{\figpath/MELT_cavity_toolb_a}      
+
+\column{.33\textwidth}
+\begin{block}{}
+\begin{center}
+Fusion
+\end{center}
+\end{block}
+	   \includegraphics[width=\columnwidth]{\figpath/MELT_cavity_toolb_b}      
+
+\column{.33\textwidth}
+\begin{block}{}
+\begin{center}
+Re-solidification
+\end{center}
+\end{block}
+	   \includegraphics[width=\columnwidth]{\figpath/MELT_cavity_toolb_c}      
+
+
+\end{columns}
+\end{frame}  
+
+\begin{frame}
+  \frametitle{Solidification après fusion partielle}\vspace{-0.9cm}
+
+$$\colpaper{\Prd = 56.2 \quad ; \quad \Ray = 3.27 \times 10^5 \quad ; \quad \Ste = 0.045 }$$
+
+
+ \begin{columns}[c]
+
+\column{.6\textwidth}  
+\vspace{0.4cm}
+
+\movie[width=\textwidth,height=\textwidth,
+autostart,loop]{\includegraphics[width=\textwidth,height=\textwidth]{\movpathN/affiche_cycle}}{\movpathN/MELTING_cavity_T.avi}
+
+\column{.4\textwidth}
+
+\begin{block}{Fusion}
+\begin{itemize}
+\item ${\color{blue} \bullet}$ $\delta T = T_h - T_f$ 
+\item ${\color{blue} \bullet}$ $V_{ref} = \nu / H$
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{Solidification}
+\begin{itemize}
+\item ${\color{green} \bullet}$ $\delta T = T_f - T_c$ 
+\item ${\color{green} \bullet}$ $V_{ref} = \alpha / H$
+%\item \begin{eqnarray*}
+\item $r_{\delta} = \frac{(T_f - T_c)}{(T_h - T_f)} $
+ \item $\mathcal{R}a_{co} = r_{\delta} \times \mathcal{R}a$
+ %\end{eqnarray*}
+\end{itemize}
+\end{exampleblock}
+
+\end{columns}
+
+\end{frame} 
+
+
+\begin{frame}
+\frametitle{Evolution temporelle de la fraction liquide}\vspace{-0.2cm}
+
+\begin{columns}[c]
+
+\column{.5\textwidth}
+\begin{block}{}
+\begin{center}
+Fusion totale
+\end{center}
+\end{block}
+	   \includegraphics[width=\columnwidth]{\figpath/Lf_SOLIDIF_cycle_2D_1}      
+
+\column{.5\textwidth}
+\begin{block}{}
+\begin{center}
+Fusion partielle
+\end{center}
+\end{block}
+	   \includegraphics[width=\columnwidth]{\figpath/Lf_SOLIDIF_cycle_2D_2}      
+
+\end{columns}
+
+\end{frame}  
+
+%\section{Simulation de la fusion d'un MCP par chauffage vertical}
+
+ \begin{frame}
+ \frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_BEA2}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fusion verticale d'un MCP}\vspace{-0.1cm}
+
+\begin{block}{}
+ \begin{itemize}
+ 	\item ${\color{gray} \bullet}$ Chauffage par le bas.
+	\item ${\color{gray} \bullet}$ Présence de cellules de Rayleigh-Bénard.
+ \end{itemize}
+\end{block}
+
+\begin{columns}[c]
+
+\column{.5\textwidth}
+\begin{center}
+	   \includegraphics[width=\columnwidth]{\figpath/Scheme-melt-basal_2}      
+\end{center}
+
+\column{.5\textwidth}
+\vspace{0.3cm}
+\begin{center}
+	   \includegraphics[width=.92\columnwidth]{\figpath/Scheme-melt-basal_1}      
+\end{center}
+%\begin{minipage}{0.99\columnwidth} \begin{center}
+%$\mathcal{R}a = 3.27 \times 10^6$ \\
+%\movie[width=.99\textwidth,height=.88\textwidth,
+%autostart,loop,poster]{}{\movpathN/T_Ra-3.27e6.avi}
+%\end{center} \end{minipage}
+
+\end{columns}
+
+\end{frame}  
+
+\begin{frame}
+\frametitle{Fusion verticale d'un MCP}\vspace{-1.2cm}
+
+
+\begin{columns}[c]
+
+\column{.6\textwidth}
+
+\vspace{0.5cm}
+
+\begin{minipage}{.99\columnwidth} \begin{center}
+
+\begin{block}{}
+$\mathcal{R}a = 3.27 \times 10^5$ 
+\end{block}
+
+\vspace{0.3cm}
+
+\movie[width=\textwidth,height=\textwidth,
+autostart,loop,poster]{\includegraphics[width=\textwidth,height=\textwidth]{\movpathN/affiche_BM}}{\movpathN/T_Ra-3.27e5.avi}
+\end{center} \end{minipage}
+
+\column{.4\textwidth}
+
+\begin{exampleblock}{3 régimes}
+{\color{green} $\bullet$} \textbf{Conductif} : interface rectiligne. \\
+{\color{green} $\bullet$} \textbf{Linéaire} : apparition des cellules convectives. \\
+{\color{green} $\bullet$} \textbf{Oscillatoire} : regroupement des cellule de convections.
+\end{exampleblock}
+\end{columns}
+
+\end{frame}  
+
+
+\begin{frame}
+  \frametitle{Chauffage vertical d'un MCP}\vspace{-1.2cm}
+
+\begin{exampleblock}{}
+Evolution temporelle du nombre de Nusselt effectif
+\end{exampleblock}
+\vspace{0.9cm}
+
+ \begin{columns}[c]
+
+\column{.5\textwidth}  
+
+\begin{center}
+\includegraphics[width=\columnwidth]{\figpath/Nu_BASAL_MELTING}   
+\end{center}
+
+\column{.5\textwidth}  
+
+\begin{center}
+\begin{eqnarray*}
+	\Ray_e &=& \Ray \times \delta_H^3(t) \\
+	\mathcal{N}u_e &=& \mathcal{N}u \times \delta_H(t)
+\end{eqnarray*}
+
+$\delta_H$ :  hauteur du MCP fondu.
+\end{center}
+
+\end{columns}
+
+\end{frame} 
+
+
+
+%\section{Simulation de la solidification de l'eau}
+
+ \begin{frame}
+ \frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_BENL1}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solidification de l'eau}\vspace{-0.1cm} 
+
+\begin{block}{}
+Variation anormale de la masse volumique autour de $4^o C$
+\end{block}
+\vspace{-0.3cm} 
+\begin{eqnarray*}\nonumber
+\nabla\cdot \vec{u}&=&0, \\
+ \frac{\partial \vec{u}}{\partial t} + {(\vec{u}\cdot\nabla) \vec{u}} +\nabla p -\frac{1}{Re} \nabla^2 \vec{u}
+ - \colpaper{f_B(\theta) \, \vec{e}_y} &=& A\!(\theta) \vec u, \\
+ \frac{\pl \left(C \theta\right)}{\pl t} + \nabla \cdot\left( C \theta \vec{u}\right) -
+ \frac{K}{Pr \ \Rey} \nabla^2 \theta +  \frac{\pl \left(C S\right)}{\pl t} &=& 0.
+\label{eq-energ}
+\end{eqnarray*}
+
+{
+\color{blue} \hbox{\rule[1ex]{\textwidth}{.01cm}} %\vspace{-0.7cm}
+
+\begin{equation*}\label{eq-dens-nonlin}
+^{(*)} \rho(T)=\rho_m \left(1 - w \left|T - T_m\right|^q\right),
+\end{equation*}
+{\color{black} $\rho_m=999.972$ [kg/m$^3$], $w=9.2793\cdot 10^{-6}$ [($^\circ C)^{-q}$], $q=1.894816$.}
+
+\begin{equation*}
+	f_B(\theta) = \frac{\Ray}{\Prd \, \Rey^2} \frac{1}{\beta \delta T}\, \frac{\rho(\theta_f)-\rho(\theta)}{\rho(\theta_f)}
+\end{equation*}
+}
+\tiny{$^{(*)}$ \cite{Gebhart and Mollendorf, DSR (1977)}.}
+
+
+\end{frame}
+
+ \begin{frame}
+ \frametitle{Plan de la thèse}\vspace{-0.1cm}
+  \includegraphics[width=0.99\columnwidth]{\figpath/thesis_chart_PLAN_BENL2}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solidification de l'eau dans une cavité cubique}\vspace{-0.2cm}
+
+\begin{columns}[c]
+
+\column{.5\textwidth}
+
+\begin{exampleblock}{}
+\begin{center}
+Maillage adapté
+\end{center} 
+\end{exampleblock}
+ \includegraphics[width=\columnwidth]{\figpath/Water_Freezing_3D_1}
+
+\column{.5\textwidth}
+\vspace{-0.4cm}
+\begin{exampleblock}{}
+\begin{center}
+Champ de vecteurs et isosurfaces de température $\theta = 0$ et $\theta = 0.4$
+\end{center}
+\end{exampleblock}
+ \includegraphics[width=.9\columnwidth]{\figpath/Water_Freezing_3D_2}
+
+\end{columns}
+
+\end{frame} 
+
+\section{Conclusion et perspectives}
+
+\begin{frame}
+\frametitle{Conclusion}
+
+ \begin{center}
+ {\includegraphics[width=\textwidth]{\figpath/thesis_chart}}\\
+ \end{center}
+
+\begin{itemize}
+\item {\color{blue} $\bullet$}  Méthode mono-domaine.
+\item  {\color{blue} $\bullet$} Pénalisation de la vitesse par le modèle de Carman-Kozeny.
+\item {\color{blue} $\bullet$}  Test de convergence : ordre 2 en temps et ordre 3 en espace.
+\item {\color{blue} $\bullet$}  Adaptation du maillage à chaque pas de temps en 2D et 3D.
+\item {\color{blue} $\bullet$}  Validation du solveur N-S-B
+\item  {\color{blue} $\bullet$} Validation du solveur N-S-B + Enthalpie.
+\item {\color{blue} $\bullet$}  Simulations de configurations compliquées.
+\item {\color{blue} $\bullet$}  Réalisation d'une Toolbox : papier en phase de révision.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Perspectives}
+
+\begin{exampleblock}{Amélioration du modèle physique}
+\begin{itemize}
+\item {\color{green} $\bullet$}  Prise en compte de la surfusion
+\item {\color{green} $\bullet$}  Modélisation de mélanges binaires
+\item {\color{green} $\bullet$}  Masse volumique variable
+\end{itemize}
+\end{exampleblock} \vspace{0.7cm}
+
+\begin{block}{Amélioration du système numérique}
+\begin{itemize}
+\item {\color{blue} $\bullet$}  Algorithme à pas de temps variable
+\item {\color{blue} $\bullet$}  Tester d'autres préconditionneurs
+\end{itemize}
+\end{block} \vspace{0.7cm}
+
+\end{frame}
+
+%%============================================================================
+
+\begin{frame}
+
+\begin{center}
+\huge{Merci pour votre attention !}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fusion par le bas}
+
+\begin{columns}[c]
+
+\column{.5\textwidth}
+\includegraphics[width=\textwidth]{\figpath/MELT_basal_rolls}
+	
+\column{.5\textwidth}
+
+\begin{equation*}
+	\sim \underbrace{\frac{\partial ^2 v}{\partial x \partial t}}_{inertia}; \quad \sim \underbrace{ \frac{\partial^3v}{\partial x^3}}_{friction}; \quad \sim \underbrace{\frac{\Ray}{\Prd} \frac{\partial \theta}{\partial x}}_{buoyancy}.
+\end{equation*}
+
+
+Echelle : $x \sim L_{r}$, et $y \sim \bar \delta_H$.
+
+
+\begin{equation*}
+	\sim \underbrace{\frac{v}{L_{r} t}}_{inertia}; \quad \sim \underbrace{\frac{v}{L_{r}^3}}_{friction}; \quad \sim \underbrace{\frac{\Ray}{\Prd} \frac{\delta \theta}{L_{r}}}_{buoyancy},
+\end{equation*}
+
+\end{columns}
+\end{frame}
+
+
+
+
+\end{document}
